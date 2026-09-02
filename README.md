@@ -1,16 +1,37 @@
-# React + Vite
+# Gözde İnşaat Web Projesi
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Gözde İnşaat için modern, hızlı ve duyarlı (responsive) bir web uygulaması.
 
-Currently, two official plugins are available:
+## 🚀 Teknolojiler
+- **Framework:** React
+- **Build Aracı:** Vite
+- **Tasarım:** Modern, minimalist ve kurumsal inşaat firması teması.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🎨 Tema Renkleri
+- **Ana Renk:** Kiremit Kırmızısı (`#C1502E`)
+- **İkincil Renk:** Altın Sarı (`#D98B2B`)
+- **Arka Plan:** Kırık Beyaz (`#F7F6F3`)
+- **Metin:** Siyah (`#1A1D21`)
 
-## React Compiler
+## 🔤 Tipografi
+- **Başlıklar:** Anton
+- **Gövde Metni:** Inter
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Kurulum ve Çalıştırma
 
-## Expanding the ESLint configuration
+Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyin:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Bağımlılıkları yükleyin:
+   ```bash
+   npm install
+   ```
+
+2. Geliştirme sunucusunu başlatın:
+   ```bash
+   npm run dev
+   ```
+
+3. Üretim (production) sürümünü oluşturmak için:
+   ```bash
+   npm run build
+   ```
