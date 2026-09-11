@@ -1,497 +1,368 @@
 import React, { useState, useMemo } from "react";
-import { MapPin, Search, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Helmet } from "react-helmet-async";
-import { COLORS, FONT, pageWrap } from "../theme";
 import Badge from "../components/Badge";
+import ScrollReveal from "../components/ScrollReveal";
 import { REFERENCES, FIELD_FILTERS, CITY_LIST } from "../data/references";
+import { 
+  MagnifyingGlass, 
+  TennisBall, 
+  Basketball, 
+  Volleyball, 
+  SoccerBall, 
+  SquaresFour, 
+  MapPin, 
+  ArrowRight,
+  SortAscending,
+  Funnel
+} from "@phosphor-icons/react";
 
-const PER_PAGE = 25;
-
-const FIELD_COLORS = {
-  "Tenis Kortu": COLORS.rust,
-  "Basketbol Sahası": COLORS.orange,
-  "Voleybol Sahası": COLORS.blue,
-  "Halı Saha": "#5A9E6F",
-  "Çim Saha": "#5A9E6F",
-  "Çok Amaçlı Spor Sahası": "#7E5EBF",
-  "Çocuk Oyun Parkı": "#9E7A5A",
+const getFieldIcon = (field) => {
+  switch (field) {
+    case "Tenis Kortu": return <TennisBall size={14} weight="fill" />;
+    case "Basketbol Sahası": return <Basketball size={14} weight="fill" />;
+    case "Voleybol Sahası": return <Volleyball size={14} weight="fill" />;
+    case "Halı Saha": return <SoccerBall size={14} weight="fill" />;
+    case "Çim Saha": return <SoccerBall size={14} weight="regular" />;
+    case "Çok Amaçlı Spor Sahası": return <SquaresFour size={14} weight="fill" />;
+    default: return null;
+  }
 };
 
-function FieldDot({ label }) {
-  const color = FIELD_COLORS[label] || COLORS.lineDim;
-  return (
-    <span
-      title={label}
-      style={{
-        display: "inline-block",
-        fontSize: 10,
-        fontFamily: FONT.mono,
-        background: color + "22",
-        color: color,
-        border: `1px solid ${color}44`,
-        borderRadius: 4,
-        padding: "2px 6px",
-        whiteSpace: "nowrap",
-      }}
-    >
-      {label}
-    </span>
-  );
-}
+const getAvatarStyle = () => {
+  return {
+    background: "rgba(0, 168, 89, 0.1)", // var(--color-primary) with 10% opacity
+    color: "var(--color-primary)",
+  };
+};
 
 export default function References() {
-  const [search, setSearch] = useState("");
-  const [activeField, setActiveField] = useState(null);
-  const [activeCity, setActiveCity] = useState(null);
-  const [page, setPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [fieldFilter, setFieldFilter] = useState("Tümü");
+  const [cityFilter, setCityFilter] = useState("Tümü");
+  const [sortBy, setSortBy] = useState("az");
+  const [visibleCount, setVisibleCount] = useState(12);
 
-  const filtered = useMemo(() => {
-    setPage(1);
-    return REFERENCES.filter((r) => {
-      const q = search.toLowerCase();
-      const matchSearch =
-        !q ||
-        r.name.toLowerCase().includes(q) ||
-        r.city.toLowerCase().includes(q) ||
-        r.district.toLowerCase().includes(q);
-      const matchField = !activeField || r.fields.includes(activeField);
-      const matchCity = !activeCity || r.city === activeCity;
+  // Filter all refs
+  const filteredRefs = useMemo(() => {
+    let result = REFERENCES.filter((r) => {
+      const matchSearch = r.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          r.district.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchField = fieldFilter === "Tümü" || r.fields.includes(fieldFilter);
+      const matchCity = cityFilter === "Tümü" || r.city === cityFilter;
       return matchSearch && matchField && matchCity;
     });
-  }, [search, activeField, activeCity]);
 
-  const totalPages = Math.ceil(filtered.length / PER_PAGE);
-  const paginated = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE);
+    // Sort
+    if (sortBy === "az") {
+      result.sort((a, b) => a.name.localeCompare(b.name, "tr"));
+    } else if (sortBy === "za") {
+      result.sort((a, b) => b.name.localeCompare(a.name, "tr"));
+    } else if (sortBy === "city") {
+      result.sort((a, b) => a.city.localeCompare(b.city, "tr"));
+    }
 
-  function clearFilters() {
-    setSearch("");
-    setActiveField(null);
-    setActiveCity(null);
-  }
+    return result;
+  }, [searchQuery, fieldFilter, cityFilter, sortBy]);
 
-  const hasFilters = search || activeField || activeCity;
+  // Handle Load More
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + 12);
+  };
 
-  const stats = useMemo(() => {
-    const cities = new Set(REFERENCES.map((r) => r.city));
-    return { total: REFERENCES.length, cities: cities.size };
-  }, []);
+  // Get field counts
+  const getFieldCount = (f) => {
+    if (f === "Tümü") return REFERENCES.length;
+    return REFERENCES.filter(r => r.fields.includes(f)).length;
+  };
 
   return (
     <>
       <Helmet>
-        <title>108+ Referans | Spor Sahası İnşaatı | Gözde İnşaat</title>
+        <title>Referanslarımız | Gözde İnşaat</title>
         <meta
           name="description"
-          content="Gözde İnşaat'in 1988'den bu yana Türkiye'nin 17 farklı şehirinde tamamladığı 108+ spor sahası projesi. Belediyeler, üniversiteler, oteller ve özel siteler dahil."
+          content="Gözde İnşaat'ın tenis kortu, basketbol sahası ve çok amaçlı saha inşaatı alanındaki referansları. İstanbul, Kocaeli, Sakarya ve Türkiye geneli projeler."
         />
         <link rel="canonical" href="https://www.gozdeinsaat.com/referanslar" />
       </Helmet>
 
-      {/* HERO — kompakt */}
-      <section
-        style={{
-          background: COLORS.bgSoft,
-          borderBottom: `1px solid ${COLORS.border}`,
-          padding: "48px 32px 40px",
-        }}
-      >
-        <div style={{ maxWidth: 1180, margin: "0 auto" }}>
+      <section className="page-wrap" style={{ paddingTop: 80, paddingBottom: 100 }}>
+        <ScrollReveal>
+          <Badge>Referanslarımız</Badge>
+          <h1 style={{ fontSize: "clamp(36px, 5vw, 48px)", margin: "24px 0 20px", lineHeight: 1.1, letterSpacing: "-0.01em" }}>
+            TÜRKİYE GENELİNDE YÜZLERCE PROJE
+          </h1>
+          <p style={{ color: "var(--color-line-dim)", fontSize: 16, maxWidth: 640, marginBottom: 64, lineHeight: 1.8 }}>
+            1988'den bugüne okul, üniversite, belediye, otel ve özel siteler için
+            inşa ettiğimiz tesislerle spor altyapısına değer katıyoruz.
+          </p>
+        </ScrollReveal>
+
+        {/* FİLTRELEME ALANI */}
+        <ScrollReveal delay={0.1}>
           <div
             style={{
+              paddingBottom: 24,
+              borderBottom: "1px solid var(--color-border)",
+              marginBottom: 40,
               display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-end",
-              flexWrap: "wrap",
+              flexDirection: "column",
               gap: 24,
             }}
           >
-            <div>
-              <Badge color={COLORS.rust}>Referanslar</Badge>
-              <h1
-                style={{
-                  fontFamily: FONT.display,
-                  fontSize: 44,
-                  margin: "12px 0 10px",
-                  lineHeight: 1.02,
-                }}
-              >
-                REFERANSLARIMIZ
-              </h1>
-              <p
-                style={{
-                  color: COLORS.lineDim,
-                  fontSize: 14,
-                  lineHeight: 1.6,
-                  maxWidth: 460,
-                }}
-              >
-                1988'den bu yana Türkiye'nin {stats.cities} farklı şehrinde{" "}
-                <span style={{ color: COLORS.line, fontWeight: 600 }}>
-                  {stats.total}+ firmaya
-                </span>{" "}
-                spor sahası inşa ettik.
-              </p>
-            </div>
-
-            {/* Stat kutuları */}
-            <div style={{ display: "flex", gap: 20 }}>
-              {[
-                { v: stats.total + "+", l: "Referans" },
-                { v: stats.cities, l: "Şehir" },
-                { v: "35+", l: "Yıl" },
-              ].map((s) => (
-                <div
-                  key={s.l}
-                  style={{
-                    background: COLORS.card,
-                    border: `1px solid ${COLORS.border}`,
-                    borderRadius: 10,
-                    padding: "16px 22px",
-                    textAlign: "center",
-                    minWidth: 80,
+            {/* Üst Satır: Arama ve Sıralama */}
+            <div style={{ display: "flex", gap: 16, flexWrap: "wrap", alignItems: "center", justifyContent: "space-between" }}>
+              <div style={{ position: "relative", flex: "1 1 300px", maxWidth: 500 }}>
+                <MagnifyingGlass 
+                  size={20} 
+                  style={{ position: "absolute", left: 16, top: "50%", transform: "translateY(-50%)", color: "var(--color-line-dim)" }} 
+                />
+                <input 
+                  type="text" 
+                  placeholder="Kurum adı veya ilçe ara..." 
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setVisibleCount(12); // Reset pagination on search
                   }}
-                >
-                  <div
+                  style={{
+                    width: "100%",
+                    padding: "14px 16px 14px 48px",
+                    borderRadius: "var(--radius-sm)",
+                    border: "1px solid var(--color-border)",
+                    background: "var(--color-card)",
+                    color: "var(--color-line)",
+                    fontSize: 15,
+                    outline: "none",
+                    boxShadow: "var(--shadow-sm)",
+                    transition: "border-color 0.2s",
+                  }}
+                  onFocus={(e) => e.target.style.borderColor = "var(--color-primary)"}
+                  onBlur={(e) => e.target.style.borderColor = "var(--color-border)"}
+                />
+              </div>
+
+              <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <MapPin size={18} color="var(--color-line-dim)" />
+                  <select
+                    value={cityFilter}
+                    onChange={(e) => { setCityFilter(e.target.value); setVisibleCount(12); }}
                     style={{
-                      fontFamily: FONT.display,
-                      fontSize: 30,
-                      color: COLORS.rust,
+                      padding: "12px 16px",
+                      borderRadius: "var(--radius-sm)",
+                      border: "1px solid var(--color-border)",
+                      background: "var(--color-card)",
+                      color: "var(--color-line)",
+                      fontSize: 14,
+                      outline: "none",
+                      cursor: "pointer",
                     }}
                   >
-                    {s.v}
-                  </div>
-                  <div style={{ fontSize: 12, color: COLORS.lineDim, marginTop: 2 }}>
-                    {s.l}
-                  </div>
+                    <option value="Tümü">Tüm Şehirler</option>
+                    {CITY_LIST.map((c) => (
+                      <option key={c} value={c}>{c}</option>
+                    ))}
+                  </select>
                 </div>
+                
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <SortAscending size={18} color="var(--color-line-dim)" />
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    style={{
+                      padding: "12px 16px",
+                      borderRadius: "var(--radius-sm)",
+                      border: "1px solid var(--color-border)",
+                      background: "var(--color-card)",
+                      color: "var(--color-line)",
+                      fontSize: 14,
+                      outline: "none",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <option value="az">A'dan Z'ye</option>
+                    <option value="za">Z'den A'ya</option>
+                    <option value="city">Şehre Göre</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            {/* Alt Satır: Kategori Filtreleri */}
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <button
+                onClick={() => { setFieldFilter("Tümü"); setVisibleCount(12); }}
+                style={{
+                  padding: "8px 16px",
+                  borderRadius: "var(--radius-pill)",
+                  fontSize: 13,
+                  border: `1px solid ${fieldFilter === "Tümü" ? "var(--color-primary)" : "var(--color-border)"}`,
+                  background: fieldFilter === "Tümü" ? "var(--color-primary)" : "transparent",
+                  color: fieldFilter === "Tümü" ? "#fff" : "var(--color-line-dim)",
+                  fontWeight: fieldFilter === "Tümü" ? 600 : 500,
+                  transition: "all 0.2s",
+                  cursor: "pointer",
+                }}
+              >
+                Tümü ({getFieldCount("Tümü")})
+              </button>
+              {FIELD_FILTERS.map((f) => (
+                <button
+                  key={f}
+                  onClick={() => { setFieldFilter(f); setVisibleCount(12); }}
+                  style={{
+                    padding: "8px 16px",
+                    borderRadius: "var(--radius-pill)",
+                    fontSize: 13,
+                    border: `1px solid ${fieldFilter === f ? "var(--color-primary)" : "var(--color-border)"}`,
+                    background: fieldFilter === f ? "var(--color-primary)" : "transparent",
+                    color: fieldFilter === f ? "#fff" : "var(--color-line-dim)",
+                    fontWeight: fieldFilter === f ? 600 : 500,
+                    transition: "all 0.2s",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 6,
+                  }}
+                >
+                  <span style={{ opacity: fieldFilter === f ? 1 : 0.6 }}>{getFieldIcon(f)}</span>
+                  {f} <span style={{ opacity: 0.6, fontSize: 12 }}>({getFieldCount(f)})</span>
+                </button>
               ))}
             </div>
           </div>
-        </div>
-      </section>
+        </ScrollReveal>
 
-      {/* FİLTRELER + TABLO */}
-      <section style={{ ...pageWrap, paddingTop: 32 }}>
-        {/* Filtre satırı */}
-        <div
-          style={{
-            display: "flex",
-            gap: 10,
-            flexWrap: "wrap",
-            marginBottom: 20,
-            alignItems: "center",
-          }}
-        >
-          {/* Arama */}
-          <div style={{ position: "relative", flex: "1 1 220px", maxWidth: 280 }}>
-            <Search
-              size={14}
-              color={COLORS.lineDim}
-              style={{
-                position: "absolute",
-                left: 10,
-                top: "50%",
-                transform: "translateY(-50%)",
-              }}
-            />
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Firma veya şehir ara..."
-              style={{
-                width: "100%",
-                background: COLORS.card,
-                border: `1px solid ${COLORS.border}`,
-                borderRadius: 7,
-                padding: "9px 12px 9px 32px",
-                color: COLORS.line,
-                fontSize: 13,
-                boxSizing: "border-box",
-                outline: "none",
-              }}
-            />
-          </div>
-
-          {/* Saha tipi */}
-          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-            {FIELD_FILTERS.map((f) => {
-              const active = activeField === f;
-              const color = FIELD_COLORS[f] || COLORS.rust;
-              return (
-                <button
-                  key={f}
-                  onClick={() => setActiveField(active ? null : f)}
-                  style={{
-                    background: active ? color : "transparent",
-                    color: active ? "#fff" : COLORS.lineDim,
-                    border: `1px solid ${active ? color : COLORS.border}`,
-                    borderRadius: 6,
-                    padding: "6px 12px",
-                    fontSize: 12,
-                    cursor: "pointer",
-                    transition: "all 0.15s",
-                    fontFamily: FONT.body,
-                  }}
-                >
-                  {f}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Şehir */}
-          <select
-            value={activeCity || ""}
-            onChange={(e) => setActiveCity(e.target.value || null)}
-            style={{
-              background: COLORS.card,
-              border: `1px solid ${COLORS.border}`,
-              borderRadius: 7,
-              padding: "8px 12px",
-              color: activeCity ? COLORS.line : COLORS.lineDim,
-              fontSize: 12,
-              cursor: "pointer",
-              outline: "none",
-              fontFamily: FONT.body,
-            }}
-          >
-            <option value="">Tüm Şehirler</option>
-            {CITY_LIST.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
-
-          {hasFilters && (
-            <button
-              onClick={clearFilters}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 4,
-                background: "transparent",
-                border: `1px solid ${COLORS.border}`,
-                borderRadius: 6,
-                padding: "6px 11px",
-                color: COLORS.lineDim,
-                fontSize: 12,
-                cursor: "pointer",
-                fontFamily: FONT.body,
-              }}
+        {/* LİSTE */}
+        {filteredRefs.length === 0 ? (
+          <div style={{ textAlign: "center", padding: "80px 0", color: "var(--color-line-dim)", background: "var(--color-bg-soft)", borderRadius: "var(--radius)" }}>
+            <Funnel size={48} style={{ opacity: 0.2, margin: "0 auto 16px" }} />
+            <p style={{ fontSize: 16 }}>Bu arama ve filtrelere uygun sonuç bulunamadı.</p>
+            <button 
+              onClick={() => { setSearchQuery(""); setFieldFilter("Tümü"); setCityFilter("Tümü"); }}
+              style={{ marginTop: 16, color: "var(--color-primary)", fontWeight: 600, background: "none", border: "none", cursor: "pointer", textDecoration: "underline" }}
             >
-              <X size={12} /> Temizle
+              Filtreleri Temizle
             </button>
-          )}
-
-          <span
-            style={{
-              marginLeft: "auto",
-              fontSize: 12,
-              color: COLORS.lineDim,
-              fontFamily: FONT.mono,
-              whiteSpace: "nowrap",
-            }}
-          >
-            {filtered.length} sonuç
-          </span>
-        </div>
-
-        {/* Tablo */}
-        <div
-          style={{
-            border: `1px solid ${COLORS.border}`,
-            borderRadius: 12,
-            overflow: "hidden",
-          }}
-        >
-          {/* Başlık satırı */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "2fr 3fr 1.2fr",
-              background: COLORS.bgSoft,
-              borderBottom: `1px solid ${COLORS.border}`,
-              padding: "10px 20px",
-            }}
-          >
-            {["Firma / Kurum", "Yapılan Sahalar", "Konum"].map((h) => (
-              <div
-                key={h}
-                style={{
-                  fontSize: 11,
-                  fontFamily: FONT.mono,
-                  color: COLORS.lineDim,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.06em",
-                }}
-              >
-                {h}
-              </div>
-            ))}
           </div>
-
-          {/* Satırlar */}
-          {paginated.length === 0 ? (
+        ) : (
+          <>
             <div
               style={{
-                padding: "48px 20px",
-                textAlign: "center",
-                color: COLORS.lineDim,
-                fontSize: 14,
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+                gap: 16,
               }}
             >
-              Arama kriterlerinize uygun referans bulunamadı.
+              {filteredRefs.slice(0, visibleCount).map((r, i) => {
+                const initial = r.name.charAt(0).toUpperCase();
+                const avatarStyle = getAvatarStyle();
+                
+                return (
+                  <ScrollReveal key={`${r.name}-${i}`} delay={(i % 12) * 0.03}>
+                    <div
+                      style={{
+                        background: "var(--color-card)",
+                        border: "1px solid var(--color-border)",
+                        borderRadius: "var(--radius)",
+                        padding: 24,
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                        transition: "border-color 0.2s, background 0.2s",
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.borderColor = "var(--color-primary)"}
+                      onMouseLeave={(e) => e.currentTarget.style.borderColor = "var(--color-border)"}
+                    >
+                      <div style={{ display: "flex", alignItems: "flex-start", gap: 16, marginBottom: 20 }}>
+                        <div 
+                          style={{ 
+                            width: 48, 
+                            height: 48, 
+                            borderRadius: "var(--radius-sm)", 
+                            background: avatarStyle.background, 
+                            color: avatarStyle.color, 
+                            display: "flex", 
+                            alignItems: "center", 
+                            justifyContent: "center",
+                            fontSize: 20,
+                            fontWeight: 700,
+                            flexShrink: 0
+                          }}
+                        >
+                          {initial}
+                        </div>
+                        <div>
+                          <h3 style={{ fontSize: 16, fontWeight: 600, marginBottom: 6, color: "var(--color-line)", lineHeight: 1.4 }}>{r.name}</h3>
+                          <div style={{ fontSize: 13, color: "var(--color-line-dim)", display: "flex", alignItems: "center", gap: 4 }}>
+                            <MapPin size={14} /> {r.district} / <span style={{ fontWeight: 600, color: "var(--color-line)" }}>{r.city}</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: "auto" }}>
+                        {r.fields.map((f) => (
+                          <span
+                            key={f}
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 6,
+                              background: "var(--color-bg-soft)",
+                              border: "1px solid var(--color-border)",
+                              padding: "4px 10px",
+                              borderRadius: "var(--radius-sm)",
+                              fontSize: 12,
+                              color: "var(--color-line-dim)",
+                            }}
+                          >
+                            <span style={{ color: "var(--color-primary)", opacity: 0.8 }}>{getFieldIcon(f)}</span>
+                            {f}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                )
+              })}
             </div>
-          ) : (
-            paginated.map((ref, i) => (
-              <div
-                key={i}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "2fr 3fr 1.2fr",
-                  padding: "13px 20px",
-                  borderBottom:
-                    i < paginated.length - 1
-                      ? `1px solid ${COLORS.border}`
-                      : "none",
-                  alignItems: "center",
-                  background: i % 2 === 0 ? COLORS.card : "transparent",
-                  transition: "background 0.12s",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.background = COLORS.bgSoft)
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.background =
-                    i % 2 === 0 ? COLORS.card : "transparent")
-                }
-              >
-                {/* Firma adı */}
-                <div
+
+            {visibleCount < filteredRefs.length && (
+              <div style={{ textAlign: "center", marginTop: 24 }}>
+                <button
+                  onClick={handleLoadMore}
                   style={{
-                    fontSize: 13,
+                    background: "var(--color-card)",
+                    border: "1px solid var(--color-border)",
+                    color: "var(--color-line)",
+                    padding: "14px 32px",
+                    borderRadius: "var(--radius-pill)",
+                    fontSize: 15,
                     fontWeight: 600,
-                    color: COLORS.line,
-                    paddingRight: 12,
-                  }}
-                >
-                  {ref.name}
-                </div>
-
-                {/* Sahalar */}
-                <div
-                  style={{ display: "flex", flexWrap: "wrap", gap: 5, paddingRight: 12 }}
-                >
-                  {ref.fields.map((f) => (
-                    <FieldDot key={f} label={f} />
-                  ))}
-                </div>
-
-                {/* Konum */}
-                <div
-                  style={{
-                    display: "flex",
+                    cursor: "pointer",
+                    display: "inline-flex",
                     alignItems: "center",
-                    gap: 5,
-                    fontSize: 12,
-                    color: COLORS.lineDim,
-                    fontFamily: FONT.mono,
+                    gap: 8,
+                    boxShadow: "var(--shadow-sm)",
+                    transition: "all 0.2s",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = "var(--color-primary)";
+                    e.currentTarget.style.color = "var(--color-primary)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = "var(--color-border)";
+                    e.currentTarget.style.color = "var(--color-line)";
                   }}
                 >
-                  <MapPin size={11} color={COLORS.rust} />
-                  <span>
-                    {ref.district}
-                    <br />
-                    <span style={{ color: COLORS.line, fontWeight: 600 }}>
-                      {ref.city}
-                    </span>
-                  </span>
-                </div>
+                  Daha Fazla Göster ({filteredRefs.length - visibleCount} kaldı) <ArrowRight size={16} />
+                </button>
               </div>
-            ))
-          )}
-        </div>
-
-        {/* Sayfalama */}
-        {totalPages > 1 && (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: 8,
-              marginTop: 28,
-            }}
-          >
-            <button
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
-              disabled={page === 1}
-              style={{
-                background: "transparent",
-                border: `1px solid ${COLORS.border}`,
-                borderRadius: 6,
-                padding: "7px 12px",
-                color: page === 1 ? COLORS.border : COLORS.lineDim,
-                cursor: page === 1 ? "not-allowed" : "pointer",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <ChevronLeft size={15} />
-            </button>
-
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-              <button
-                key={p}
-                onClick={() => setPage(p)}
-                style={{
-                  background: p === page ? COLORS.rust : "transparent",
-                  border: `1px solid ${p === page ? COLORS.rust : COLORS.border}`,
-                  borderRadius: 6,
-                  padding: "7px 13px",
-                  color: p === page ? "#fff" : COLORS.lineDim,
-                  cursor: "pointer",
-                  fontSize: 13,
-                  fontFamily: FONT.mono,
-                  minWidth: 36,
-                }}
-              >
-                {p}
-              </button>
-            ))}
-
-            <button
-              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-              disabled={page === totalPages}
-              style={{
-                background: "transparent",
-                border: `1px solid ${COLORS.border}`,
-                borderRadius: 6,
-                padding: "7px 12px",
-                color: page === totalPages ? COLORS.border : COLORS.lineDim,
-                cursor: page === totalPages ? "not-allowed" : "pointer",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <ChevronRight size={15} />
-            </button>
-          </div>
+            )}
+          </>
         )}
-
-        <p
-          style={{
-            textAlign: "center",
-            marginTop: 12,
-            fontSize: 12,
-            color: COLORS.lineDim,
-            fontFamily: FONT.mono,
-          }}
-        >
-          Sayfa {page} / {totalPages} &nbsp;·&nbsp; Toplam {filtered.length} referans
-        </p>
       </section>
     </>
   );

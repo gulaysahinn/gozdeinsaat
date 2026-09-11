@@ -12,6 +12,34 @@ export const SERVICES = [
     detail:
       "Çevre hatıl betonu, mıçır dolgu ve asfalt katmanlarının ardından seçilen zemin uygulanır. Kort çevresi tel örgü ve LED aydınlatma sistemiyle tamamlanır.",
     to: "/tenis-kortu-yapimi",
+    forWho: "Kulüp · Otel · Okul · Site",
+    deliveryTime: "3–4 hafta",
+    floors: [
+      {
+        name: "Akrilik Zemin",
+        image: "/images/hizmetler/akrilikZeminTenisKortu.jpeg",
+        badges: ["Ekonomik", "Kolay Bakım", "UV Dayanıklı"],
+        badgeColors: ["accent", "warm", "blue"],
+        forWho: "Okul, belediye, açık kort",
+        desc: "Beton veya asfalt üzerine uygulanan, çabuk kuruyan UV dayanıklı sistem. Standart ve Cushion (amortisörlü) olmak üzere iki çeşidi mevcuttur.",
+      },
+      {
+        name: "Tartan (EPDM) Zemin",
+        image: "/images/hizmetler/tartanZeminTenisKortu.jpg",
+        badges: ["Uzun Ömürlü", "Esnek", "Profesyonel"],
+        badgeColors: ["accent", "warm", "warm"],
+        forWho: "Kulüp, otel, kapalı salon",
+        desc: "8mm SBR + 5mm EPDM kauçuk katmanlardan oluşan, yüksek esneklikte sentetik zemin. Renk çeşitliliği ve dayanıklılığıyla tercih edilen premium seçenek.",
+      },
+      {
+        name: "Suni Çim Zemin",
+        image: "/images/hizmetler/tenisKortuYapimi.jpg",
+        badges: ["Çok Amaçlı", "Uygun Maliyet", "Kolay Bakım"],
+        badgeColors: ["blue", "accent", "accent"],
+        forWho: "Okul, site, amatör kullanım",
+        desc: "15mm–30mm hav boyunda kum dolgulu suni çim halı. Tenis kortunda genellikle 26mm model tercih edilir. Hem açık hem kapalı alanlarda uygulanabilir.",
+      },
+    ],
   },
   {
     tag: "Basketbol",
@@ -24,10 +52,38 @@ export const SERVICES = [
     detail:
       "Açık sahalar tel örgü ile çevrilir, kapalı sahalar spor salonu veya çelik konstrüksiyon olarak inşa edilir. Parke zemin profesyonel kapalı saha uygulamaları için idealdir.",
     to: "/basketbol-sahasi-yapimi",
+    forWho: "Okul · Site · Spor Kulübü · Belediye",
+    deliveryTime: "2–4 hafta",
+    floors: [
+      {
+        name: "Akrilik Zemin",
+        image: "/images/hizmetler/akrilikZeminTenisKortu.jpeg",
+        badges: ["Ekonomik", "UV Dayanıklı", "Hızlı Kurulum"],
+        badgeColors: ["accent", "blue", "warm"],
+        forWho: "Açık sahalar, okul ve site",
+        desc: "Açık basketbol sahaları için en ekonomik ve yaygın tercih. 2mm veya 3mm kalınlıkta, çabuk kuruyan, her hava koşuluna dayanıklı akrilik kaplama.",
+      },
+      {
+        name: "Tartan (EPDM) Zemin",
+        image: "/images/hizmetler/tartanZeminTenisKortu.jpg",
+        badges: ["Şok Emici", "Uzun Ömürlü", "Profesyonel"],
+        badgeColors: ["warm", "accent", "warm"],
+        forWho: "Kulüp, kapalı ve açık saha",
+        desc: "SBR + EPDM kauçuk katmanlardan oluşan şok emici zemin. Sporcu sakatlanmalarını azaltır. Okullar ve kulüpler için tercih edilen güvenli seçenek.",
+      },
+      {
+        name: "Parke (Ahşap) Zemin",
+        image: "/images/hizmetler/zemin.jpg",
+        badges: ["Profesyonel", "FIBA Standartı", "Uzun Ömürlü"],
+        badgeColors: ["warm", "blue", "accent"],
+        forWho: "Kapalı spor salonları",
+        desc: "FIBA standartlarına uygun profesyonel ahşap parke zemin. Enerji geri kazanımı ve mükemmel top sekme özelliğiyle kapalı salon uygulamaları için en üst düzey seçenek.",
+      },
+    ],
   },
   {
     tag: "Voleybol",
-    color: COLORS.blue,
+    color: "#3B82F6",
     title: "Voleybol ve hentbol sahası",
     spec: "18 × 9 m",
     image: "/images/hizmetler/zemin.jpg",
@@ -36,6 +92,26 @@ export const SERVICES = [
     detail:
       "Sert zemin veya kum dolgulu seçeneklerle, kulüb ve okul ihtiyaçlarına uygun ölçülendirme yapılır.",
     to: "/voleybol-sahasi-yapimi",
+    forWho: "Okul · Site · Kulüp · Spor Salonu",
+    deliveryTime: "2–3 hafta",
+    floors: [
+      {
+        name: "Akrilik Zemin",
+        image: "/images/hizmetler/akrilikZeminTenisKortu.jpeg",
+        badges: ["Ekonomik", "Kolay Bakım", "Dayanıklı"],
+        badgeColors: ["accent", "accent", "blue"],
+        forWho: "Okul, site, açık saha",
+        desc: "Açık voleybol sahaları için en uygun maliyet seçeneği. Hava koşullarına dayanıklı, standart voleybol çizgileriyle teslim edilir.",
+      },
+      {
+        name: "Tartan (EPDM) Zemin",
+        image: "/images/hizmetler/tartanZeminTenisKortu.jpg",
+        badges: ["Şok Emici", "Esnek", "Uzun Ömürlü"],
+        badgeColors: ["warm", "warm", "accent"],
+        forWho: "Kulüp, kapalı salon",
+        desc: "Oyuncu konforunu maksimuma çıkaran esnek kauçuk zemin. Özellikle sık kullanımlı profesyonel salonlar için tercih edilir.",
+      },
+    ],
   },
   {
     tag: "Çok amaçlı",
@@ -48,6 +124,26 @@ export const SERVICES = [
     detail:
       "Okullar, siteler ve toplu konutlar için tek bir sahada birden fazla branşın oynanmasına imkân tanır.",
     to: "/cok-amacli-saha-yapimi",
+    forWho: "Okul · Site · Toplu Konut · Belediye",
+    deliveryTime: "3–5 hafta",
+    floors: [
+      {
+        name: "Suni Çim Zemin",
+        image: "/images/hizmetler/tenisKortuSahaZemin.jpeg",
+        badges: ["Çok Amaçlı", "Uygun Maliyet", "Kolay Bakım"],
+        badgeColors: ["blue", "accent", "accent"],
+        forWho: "Okul, site, toplu konut",
+        desc: "18×36m boyutlarında, üzerine tenis, basketbol ve voleybol çizgilerinin birlikte uygulandığı suni çim zemin. 20mm model en çok tercih edilendir.",
+      },
+      {
+        name: "Tartan (EPDM) Zemin",
+        image: "/images/hizmetler/tartanZeminTenisKortu.jpg",
+        badges: ["Uzun Ömürlü", "Renkli Seçenek", "Profesyonel"],
+        badgeColors: ["accent", "warm", "warm"],
+        forWho: "Kapalı spor salonları, kulüp",
+        desc: "EPDM kauçuk yüzey, farklı branş çizgileriyle çok renkli çok amaçlı saha yapımına uygundur. Kapalı spor salonlarında da tercih edilir.",
+      },
+    ],
   },
   {
     tag: "Halı Saha",
@@ -60,6 +156,34 @@ export const SERVICES = [
     detail:
       "Kum + SBR granül dolgu veya EPDM granül dolgulu sentetik çim seçenekleri; aydınlatma, çevre file ve tel örgü dahil eksiksiz teslimat.",
     to: "/hali-saha-yapimi",
+    forWho: "Kulüp · Tesis · Okul · Belediye",
+    deliveryTime: "4–6 hafta",
+    floors: [
+      {
+        name: "Açık Halı Saha",
+        image: "/images/hizmetler/haliSaha.jpg",
+        badges: ["LED Aydınlatma", "Tel Örgü Dahil", "Gece Maçı"],
+        badgeColors: ["warm", "accent", "blue"],
+        forWho: "Ticari tesis, kulüp",
+        desc: "6-7m yüksekliğinde tel örgü çevreli, LED projektörlü açık halı saha. 55mm suni çim kullanılır. Gece saatlerinde de kullanıma uygundur.",
+      },
+      {
+        name: "Kapalı Halı Saha",
+        image: "/images/hizmetler/tenisKortuSahaZemin.jpeg",
+        badges: ["Her Mevsim", "Rüzgar Geçirmez", "Çelik Konstrüksiyon"],
+        badgeColors: ["accent", "blue", "warm"],
+        forWho: "Kış ayları için ticari tesis",
+        desc: "Çelik konstrüksiyon üzerine branda, saç veya PVC kaplama ile kapatılmış, yıl boyu kullanılabilir kapalı halı saha. Soğuk bölgelerde saç kaplama önerilir.",
+      },
+      {
+        name: "Profesyonel Sentetik Çim",
+        image: "/images/hizmetler/haliSaha.jpg",
+        badges: ["FIFA Onaylı", "Turnuva Standardı", "EPDM Granül"],
+        badgeColors: ["warm", "warm", "accent"],
+        forWho: "Profesyonel kulüp, federasyon",
+        desc: "FIFA 1 Star / FIFA 2 Star belgeli, 55–60mm monofilament suni çim ve yüksek yoğunluklu EPDM granül dolguyla resmi maçlara uygun halı saha.",
+      },
+    ],
   },
 ];
 
@@ -89,11 +213,72 @@ export const PROCESS = [
 // NOT: Aşağıdaki projeler temsili örneklerdir.
 // Gerçek referanslarınızı ekleyecekseniz bu diziyi kendi proje
 // isim / şehir / fotoğraflarınızla güncelleyin.
+// İlk kayıt "öne çıkan" (featured) olarak büyük formatta gösterilir.
 export const PROJECTS = [
-  { name: "Belediye Spor Kompleksi", city: "İstanbul", type: "Tenis", size: "4 kort", color: COLORS.rust },
-  { name: "Özel Site Sahası", city: "İstanbul", type: "Basketbol", size: "1 saha", color: COLORS.orange },
-  { name: "Okul Spor Alanı", city: "Kocaeli", type: "Çok amaçlı", size: "2 saha", color: COLORS.lineDim },
-  { name: "Kulüp Tesisi", city: "İstanbul", type: "Voleybol", size: "3 saha", color: COLORS.blue },
-  { name: "Kurumsal Tesis", city: "Sakarya", type: "Tenis", size: "2 kort", color: COLORS.rust },
-  { name: "Gençlik Merkezi", city: "İstanbul", type: "Basketbol", size: "1 saha", color: COLORS.orange },
+  { 
+    name: "Galatasaray Spor Kulübü Altyapı Tesisleri", 
+    city: "İstanbul", 
+    type: "Halı Saha", 
+    size: "11'e 11 Saha", 
+    color: "#5A9E6F",
+    image: "/images/hizmetler/haliSaha.jpg",
+    date: "Mayıs 2021",
+    desc: "Altyapı maçlarına uygun, FIFA Quality onaylı monofilament sentetik çim, yüksek yoğunluklu aydınlatma ve dijital skorboard donanımı ile eksiksiz teslim.",
+    chips: ["FIFA Quality Pro", "LED Aydınlatma", "Suni Çim", "Anahtar Teslim"]
+  },
+  { 
+    name: "Kadıköy Belediyesi Kalamış Spor Tesisleri", 
+    city: "İstanbul", 
+    type: "Tenis", 
+    size: "4 kort", 
+    color: COLORS.rust,
+    image: "/images/hizmetler/akrilikZeminTenisKortu.jpeg",
+    date: "Ağustos 2023",
+    desc: "ITF standartlarında 4 adet açık akrilik zeminli kortun altyapı, aydınlatma ve çevre düzenlemesiyle birlikte anahtar teslim inşası.",
+    chips: ["ITF Standartları", "Akrilik Zemin", "Tel Örgü", "LED Aydınlatma"]
+  },
+  { 
+    name: "Sinpaş Aqua City Basketbol Sahası", 
+    city: "İstanbul", 
+    type: "Basketbol", 
+    size: "1 saha", 
+    color: COLORS.orange,
+    image: "/images/hizmetler/basketbolSahasi.jpg",
+    date: "Ekim 2022",
+    desc: "Site sakinleri için özel olarak tasarlanmış, FIBA onaylı potalar ve şok emici esnek tartan zemin sistemine sahip açık basketbol sahası.",
+    chips: ["FIBA Onaylı", "Tartan Zemin", "Açık Alan"]
+  },
+  { 
+    name: "Özyeğin Üniversitesi Kampüs Alanı", 
+    city: "İstanbul", 
+    type: "Çok amaçlı", 
+    size: "2 saha", 
+    color: COLORS.lineDim,
+    image: "/images/hizmetler/tenisKortuSahaZemin.jpeg",
+    date: "Eylül 2023",
+    desc: "Öğrencilerin basketbol, voleybol ve tenis oynamasına imkan sağlayan, suni çim zeminli, çift pota ve seyyar fileli entegre tesis.",
+    chips: ["3 Branş", "Suni Çim", "Seyyar File"]
+  },
+  { 
+    name: "Sapanca Elite World Resort", 
+    city: "Sakarya", 
+    type: "Tenis", 
+    size: "2 kort", 
+    color: COLORS.rust,
+    image: "/images/hizmetler/tartanZeminTenisKortu.jpg",
+    date: "Haziran 2020",
+    desc: "Otel konukları için doğa ile iç içe, ekolojik EPDM dökme tartan zemin üzerine uygulanan iki adet elit tenis kortu.",
+    chips: ["EPDM Tartan", "Ekolojik", "VIP Tesis"]
+  },
+  { 
+    name: "Kocaeli Büyükşehir Belediyesi Gençlik Merkezi", 
+    city: "Kocaeli", 
+    type: "Basketbol", 
+    size: "Kapalı Salon", 
+    color: COLORS.orange,
+    image: "/images/hizmetler/zemin.jpg",
+    date: "Nisan 2022",
+    desc: "Uluslararası turnuvalara ev sahipliği yapabilecek standartta, FIBA onaylı profesyonel ahşap parke kaplı kapalı spor salonu.",
+    chips: ["FIBA Onaylı", "Ahşap Parke", "Kapalı Salon", "Turnuva Standardı"]
+  },
 ];

@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, ArrowUpRight } from "lucide-react";
-import { COLORS, FONT } from "../theme";
+import { Phone, Envelope, MapPin, ArrowUpRight } from "@phosphor-icons/react";
 
 const SERVICES_LINKS = [
   { label: "Tenis Kortu Yapımı", to: "/tenis-kortu-yapimi" },
@@ -20,14 +19,12 @@ const QUICK_LINKS = [
   { label: "İletişim", to: "/iletisim" },
 ];
 
-const linkStyle = {
-  color: COLORS.lineDim,
+const footerLinkStyle = {
+  color: "var(--color-line-dim)",
   textDecoration: "none",
   fontSize: 13,
-  lineHeight: "1.9",
-  display: "flex",
-  alignItems: "center",
-  gap: 4,
+  lineHeight: "2",
+  display: "block",
   transition: "color 0.15s",
 };
 
@@ -35,41 +32,43 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: COLORS.bgSoft,
-        borderTop: `1px solid ${COLORS.border}`,
+        background: "var(--color-bg-soft)",
+        borderTop: "1px solid var(--color-border)",
         marginTop: "auto",
       }}
     >
       {/* Main grid */}
       <div
         style={{
-          maxWidth: 1180,
+          maxWidth: 1200,
           margin: "0 auto",
           padding: "56px 32px 40px",
           display: "grid",
           gridTemplateColumns: "1.6fr 1fr 1fr 1.4fr",
           gap: 40,
         }}
+        className="grid-responsive"
       >
         {/* Brand column */}
         <div>
           <Link
             to="/"
             style={{
-              fontFamily: FONT.display,
-              fontSize: 26,
-              color: COLORS.line,
+              fontSize: 22,
+              fontWeight: 800,
+              color: "var(--color-line)",
               textDecoration: "none",
               display: "inline-block",
               marginBottom: 14,
+              letterSpacing: "-0.01em",
             }}
           >
-            GÖZDE<span style={{ color: COLORS.rust }}>İNŞAAT</span>
+            GÖZDE <span style={{ color: "var(--color-accent)" }}>İNŞAAT</span>
           </Link>
           <p
             style={{
               fontSize: 13,
-              color: COLORS.lineDim,
+              color: "var(--color-line-dim)",
               lineHeight: 1.8,
               maxWidth: 280,
               margin: "0 0 20px",
@@ -79,23 +78,22 @@ export default function Footer() {
             voleybol sahası ve çok amaçlı spor alanları inşaatında güvenilir
             çözüm ortağınız.
           </p>
-          {/* Accent badge */}
           <span
             style={{
               display: "inline-flex",
               alignItems: "center",
               gap: 6,
-              background: COLORS.rust + "14",
-              border: `1px solid ${COLORS.rust}33`,
-              borderRadius: 20,
+              background: "var(--color-accent-light)",
+              border: "1px solid var(--color-accent)",
+              borderRadius: 8,
               padding: "5px 12px",
               fontSize: 11,
-              color: COLORS.rust,
-              fontFamily: FONT.mono,
-              letterSpacing: 1,
+              fontWeight: 600,
+              color: "var(--color-accent)",
+              letterSpacing: "0.04em",
             }}
           >
-            ● ANAHTAR TESLİM HİZMET
+            ANAHTAR TESLİM HİZMET
           </span>
         </div>
 
@@ -103,24 +101,28 @@ export default function Footer() {
         <div>
           <div
             style={{
-              fontFamily: FONT.mono,
-              fontSize: 10,
-              color: COLORS.rust,
-              letterSpacing: 2,
+              fontSize: 12,
+              fontWeight: 700,
+              color: "var(--color-line)",
+              letterSpacing: "0.06em",
               marginBottom: 16,
               textTransform: "uppercase",
             }}
           >
             Hizmetler
           </div>
-          <nav style={{ display: "flex", flexDirection: "column" }}>
+          <nav>
             {SERVICES_LINKS.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
-                style={linkStyle}
-                onMouseEnter={(e) => (e.currentTarget.style.color = COLORS.line)}
-                onMouseLeave={(e) => (e.currentTarget.style.color = COLORS.lineDim)}
+                style={footerLinkStyle}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.color = "var(--color-accent)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.color = "var(--color-line-dim)")
+                }
               >
                 {l.label}
               </Link>
@@ -132,24 +134,28 @@ export default function Footer() {
         <div>
           <div
             style={{
-              fontFamily: FONT.mono,
-              fontSize: 10,
-              color: COLORS.rust,
-              letterSpacing: 2,
+              fontSize: 12,
+              fontWeight: 700,
+              color: "var(--color-line)",
+              letterSpacing: "0.06em",
               marginBottom: 16,
               textTransform: "uppercase",
             }}
           >
-            Hızlı Linkler
+            Sayfalar
           </div>
-          <nav style={{ display: "flex", flexDirection: "column" }}>
+          <nav>
             {QUICK_LINKS.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
-                style={linkStyle}
-                onMouseEnter={(e) => (e.currentTarget.style.color = COLORS.line)}
-                onMouseLeave={(e) => (e.currentTarget.style.color = COLORS.lineDim)}
+                style={footerLinkStyle}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.color = "var(--color-accent)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.color = "var(--color-line-dim)")
+                }
               >
                 {l.label}
               </Link>
@@ -161,10 +167,10 @@ export default function Footer() {
         <div>
           <div
             style={{
-              fontFamily: FONT.mono,
-              fontSize: 10,
-              color: COLORS.rust,
-              letterSpacing: 2,
+              fontSize: 12,
+              fontWeight: 700,
+              color: "var(--color-line)",
+              letterSpacing: "0.06em",
               marginBottom: 16,
               textTransform: "uppercase",
             }}
@@ -172,66 +178,88 @@ export default function Footer() {
             İletişim
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
             <a
               href="tel:+902163110994"
               style={{
-                ...linkStyle,
-                color: COLORS.lineDim,
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                color: "var(--color-line-dim)",
                 textDecoration: "none",
+                fontSize: 13,
+                transition: "color 0.15s",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = COLORS.line)}
-              onMouseLeave={(e) => (e.currentTarget.style.color = COLORS.lineDim)}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = "var(--color-accent)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = "var(--color-line-dim)")
+              }
             >
               <span
                 style={{
                   width: 32,
                   height: 32,
                   borderRadius: 8,
-                  background: COLORS.rust + "14",
-                  border: `1px solid ${COLORS.rust}22`,
+                  background: "var(--color-accent-light)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   flexShrink: 0,
                 }}
               >
-                <Phone size={13} color={COLORS.rust} />
+                <Phone size={14} weight="bold" color="var(--color-accent)" />
               </span>
               <div>
-                <div style={{ fontSize: 11, color: COLORS.lineDim, marginBottom: 1 }}>Telefon</div>
-                <div style={{ fontSize: 13, color: COLORS.line }}>0 (216) 311 09 94</div>
+                <div style={{ fontSize: 11, color: "var(--color-line-dim)", marginBottom: 1 }}>
+                  Telefon
+                </div>
+                <div style={{ fontSize: 13, color: "var(--color-line)" }}>
+                  0 (216) 311 09 94
+                </div>
               </div>
             </a>
 
             <a
               href="mailto:info@gozdeinsaat.com"
               style={{
-                ...linkStyle,
-                color: COLORS.lineDim,
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                color: "var(--color-line-dim)",
                 textDecoration: "none",
+                fontSize: 13,
+                transition: "color 0.15s",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = COLORS.line)}
-              onMouseLeave={(e) => (e.currentTarget.style.color = COLORS.lineDim)}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = "var(--color-accent)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = "var(--color-line-dim)")
+              }
             >
               <span
                 style={{
                   width: 32,
                   height: 32,
                   borderRadius: 8,
-                  background: COLORS.rust + "14",
-                  border: `1px solid ${COLORS.rust}22`,
+                  background: "var(--color-accent-light)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   flexShrink: 0,
                 }}
               >
-                <Mail size={13} color={COLORS.rust} />
+                <Envelope size={14} weight="bold" color="var(--color-accent)" />
               </span>
               <div>
-                <div style={{ fontSize: 11, color: COLORS.lineDim, marginBottom: 1 }}>E-posta</div>
-                <div style={{ fontSize: 13, color: COLORS.line }}>info@gozdeinsaat.com</div>
+                <div style={{ fontSize: 11, color: "var(--color-line-dim)", marginBottom: 1 }}>
+                  E-posta
+                </div>
+                <div style={{ fontSize: 13, color: "var(--color-line)" }}>
+                  info@gozdeinsaat.com
+                </div>
               </div>
             </a>
 
@@ -241,8 +269,7 @@ export default function Footer() {
                   width: 32,
                   height: 32,
                   borderRadius: 8,
-                  background: COLORS.rust + "14",
-                  border: `1px solid ${COLORS.rust}22`,
+                  background: "var(--color-accent-light)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -250,11 +277,19 @@ export default function Footer() {
                   marginTop: 2,
                 }}
               >
-                <MapPin size={13} color={COLORS.rust} />
+                <MapPin size={14} weight="bold" color="var(--color-accent)" />
               </span>
               <div>
-                <div style={{ fontSize: 11, color: COLORS.lineDim, marginBottom: 1 }}>Adres</div>
-                <div style={{ fontSize: 13, color: COLORS.line, lineHeight: 1.6 }}>
+                <div style={{ fontSize: 11, color: "var(--color-line-dim)", marginBottom: 1 }}>
+                  Adres
+                </div>
+                <div
+                  style={{
+                    fontSize: 13,
+                    color: "var(--color-line)",
+                    lineHeight: 1.6,
+                  }}
+                >
                   Sancaktepe, İstanbul
                 </div>
               </div>
@@ -264,21 +299,10 @@ export default function Footer() {
           {/* CTA */}
           <Link
             to="/iletisim"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              marginTop: 20,
-              background: COLORS.rust,
-              color: "#fff",
-              padding: "10px 16px",
-              borderRadius: 8,
-              fontSize: 13,
-              fontWeight: 600,
-              textDecoration: "none",
-            }}
+            className="btn-primary"
+            style={{ marginTop: 20, fontSize: 13 }}
           >
-            Ücretsiz Teklif Al <ArrowUpRight size={14} />
+            Ücretsiz Teklif Al <ArrowUpRight size={14} weight="bold" />
           </Link>
         </div>
       </div>
@@ -286,9 +310,9 @@ export default function Footer() {
       {/* Bottom bar */}
       <div
         style={{
-          borderTop: `1px solid ${COLORS.border}`,
+          borderTop: "1px solid var(--color-border)",
           padding: "16px 32px",
-          maxWidth: 1180,
+          maxWidth: 1200,
           margin: "0 auto",
           display: "flex",
           justifyContent: "space-between",
@@ -296,12 +320,14 @@ export default function Footer() {
           flexWrap: "wrap",
           gap: 8,
           fontSize: 12,
-          color: COLORS.lineDim,
+          color: "var(--color-line-dim)",
         }}
       >
-        <span>© {new Date().getFullYear()} Gözde İnşaat. Tüm hakları saklıdır.</span>
-        <span style={{ fontFamily: FONT.mono, fontSize: 11 }}>
-          Tenis Kortu · Basketbol Sahası · Voleybol Sahası · Halı Saha
+        <span>
+          © {new Date().getFullYear()} Gözde İnşaat. Tüm hakları saklıdır.
+        </span>
+        <span style={{ fontSize: 11, fontWeight: 500 }}>
+          Tenis Kortu | Basketbol Sahası | Voleybol Sahası | Halı Saha
         </span>
       </div>
     </footer>

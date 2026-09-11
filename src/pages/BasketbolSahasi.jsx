@@ -40,21 +40,25 @@ export default function BasketbolSahasi() {
           name: "Akrilik Zemin",
           pros: "Dayanıklı, kayma direnci yüksek, bakım kolaylığı, çeşitli renk seçenekleri.",
           cons: "Sert zeminin uzun vadede eklem üzerinde etkisi olabilir.",
+          image: "/images/hizmetler/akrilikZeminTenisKortu.jpeg",
         },
         {
           name: "Suni Çim",
           pros: "Yumuşak yüzey, estetik görünüm, çocuk tesisleri için güvenli.",
           cons: "Profesyonel kullanımda akriliğe kıyasla daha fazla bakım gerektirir.",
+          image: "/images/hizmetler/sentetikCimTenisKortu.jpg",
         },
         {
           name: "Tartan (EPDM / SBR)",
           pros: "Amortisörlü yapı, sporcuların eklem sağlığını korur, uzun ömürlü.",
           cons: "Diğer zemin tiplerine göre ilk yatırım maliyeti biraz daha yüksektir.",
+          image: "/images/hizmetler/tartanZeminTenisKortu.jpg",
         },
         {
           name: "Parke (Kapalı Salon)",
           pros: "Profesyonel kullanım için ideal, FIBA A sertifikalı seçenekler mevcut.",
           cons: "Yalnızca kapalı alanlarda uygulanabilir, açık hava kullanımına uygun değil.",
+          image: "/images/hizmetler/zemin.jpg",
         },
       ]}
       factors={[

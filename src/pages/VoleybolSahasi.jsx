@@ -6,14 +6,14 @@ export default function VoleybolSahasi() {
   return (
     <ServicePage
       meta={{
-        title: "Voleybol Sahası Yapımı ve Fiyatları | Gözde İnşaat",
+        title: "Voleybol ve Hentbol Sahası Yapımı | Gözde İnşaat",
         description:
           "18x9m standart ölçüde voleybol ve hentbol sahası yapımı. Sert zemin veya kum dolgulu seçenekler, file direği sistemi. Ücretsiz keşif ve teklif.",
         canonical: "https://www.gozdeinsaat.com/voleybol-sahasi-yapimi",
       }}
-      badge="Voleybol Sahası"
+      badge="Voleybol ve Hentbol Sahası"
       badgeColor={COLORS.blue}
-      h1="VOLEYBOL SAHASI YAPIMI"
+      h1="VOLEYBOL VE HENTBOL SAHASI YAPIMI"
       intro="Voleybol ve hentbol sahası yapımında uluslararası federasyon standartlarını
       esas alıyoruz. Okullar, belediyeler ve spor tesisleri için kapalı ya da açık,
       sert zemin ya da kum dolgulu seçeneklerle; file direği sistemleri dahil
@@ -39,16 +39,19 @@ export default function VoleybolSahasi() {
           name: "Akrilik Zemin (Sert Zemin)",
           pros: "Dayanıklı, yüksek kayma direnci, hem kapalı hem açık alanlarda uygulanabilir.",
           cons: "Sert yapısı uzun süre oynayan sporcuların eklemlerini zorlayabilir.",
+          image: "/images/hizmetler/akrilikZeminTenisKortu.jpeg",
         },
         {
           name: "Kum Dolgulu Zemin",
           pros: "Plaj voleybolu için ideal, yumuşak düşüş yüzeyi.",
           cons: "Açık alanlarda uygulanır, kapalı salon için uygun değil.",
+          image: "/images/hizmetler/zemin.jpg",
         },
         {
           name: "Suni Çim",
           pros: "Çok amaçlı sahalarla kombine edilebilir, estetik görünüm.",
           cons: "Profesyonel turnuva standardı gerektirmeyen tesisler için uygundur.",
+          image: "/images/hizmetler/sentetikCimTenisKortu.jpg",
         },
       ]}
       factors={[

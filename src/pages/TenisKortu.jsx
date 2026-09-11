@@ -40,16 +40,19 @@ export default function TenisKortu() {
           name: "Akrilik Zemin",
           pros: "Uzun ömürlü, düşük bakım maliyeti, ITF sertifikalı, renk seçeneği çeşitli.",
           cons: "Yüzeyi sert olduğundan uzun süre oyunda eklem zorlanması yaşanabilir.",
+          image: "/images/hizmetler/akrilikZeminTenisKortu.jpeg",
         },
         {
           name: "Tartan (EPDM / SBR)",
           pros: "Amortisörlü yapısı sayesinde dizlere daha az yük biner; kapalı kortlarda ideal.",
           cons: "Doğrudan güneş altında renk solması olabilir, UV dayanımlı kaplama önerilir.",
+          image: "/images/hizmetler/tartanZeminTenisKortu.jpg",
         },
         {
           name: "Suni Çim",
           pros: "Estetik görünüm, yumuşak zemin, okul ve site projelerinde çok tercih edilir.",
           cons: "Profesyonel turnuva standardı gerektiren projelerde tercih edilmez.",
+          image: "/images/hizmetler/sentetikCimTenisKortu.jpg",
         },
       ]}
       factors={[

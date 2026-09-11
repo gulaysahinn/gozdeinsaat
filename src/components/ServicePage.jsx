@@ -1,22 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { CheckCircle2, ChevronRight, Ruler, ChevronDown, ChevronUp, BookOpen, List, Info, Wrench, Layers } from "lucide-react";
-import { COLORS, FONT, pageWrap } from "../theme";
+import { CheckCircle, CaretRight, CaretDown, CaretUp, BookOpen, List, Info, Wrench, SquaresFour, Ruler } from "@phosphor-icons/react";
 import Badge from "../components/Badge";
 import QuoteForm from "../components/QuoteForm";
+import ScrollReveal from "../components/ScrollReveal";
 import { PROCESS } from "../data/content";
-import { useState } from "react";
 
 /* ── ICON MAP ────────────────────────────────────────────────────────────── */
-const SECTION_ICONS = { intro: Info, steps: Wrench, grid: Layers, highlight: List };
+const SECTION_ICONS = { intro: Info, steps: Wrench, grid: SquaresFour, highlight: List };
 
 /**
  * DetailSection — renders a single section of detailedSections based on its type.
- *   'intro'    → title + body paragraph with left accent bar
- *   'steps'    → numbered step cards in a single column
- *   'grid'     → items rendered as compact icon-cards in a 2-col grid
- *   'highlight'→ items in pill/tag chips row
  */
 function DetailSection({ sec, color }) {
   const Icon = SECTION_ICONS[sec.type] ?? Info;
@@ -24,10 +19,11 @@ function DetailSection({ sec, color }) {
   return (
     <div
       style={{
-        background: COLORS.card,
-        border: `1px solid ${COLORS.border}`,
-        borderRadius: 14,
+        background: "var(--color-card)",
+        border: "1px solid var(--color-border)",
+        borderRadius: "var(--radius)",
         overflow: "hidden",
+        boxShadow: "var(--shadow-card)",
       }}
     >
       {/* Header bar */}
@@ -38,8 +34,8 @@ function DetailSection({ sec, color }) {
           display: "flex",
           alignItems: "center",
           gap: 12,
-          borderBottom: `1px solid ${COLORS.border}`,
-          background: color + "0A",
+          borderBottom: "1px solid var(--color-border)",
+          background: "var(--color-bg-soft)",
         }}
       >
         <div
@@ -47,22 +43,19 @@ function DetailSection({ sec, color }) {
             width: 32,
             height: 32,
             borderRadius: 8,
-            background: color + "22",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             flexShrink: 0,
           }}
         >
-          <Icon size={15} color={color} />
+          <Icon size={18} color={color} weight="fill" />
         </div>
         <h3
           style={{
-            fontFamily: FONT.display,
             fontSize: 18,
             margin: 0,
-            color: COLORS.line,
-            letterSpacing: 0.5,
+            color: "var(--color-line)",
           }}
         >
           {sec.title}
@@ -70,26 +63,23 @@ function DetailSection({ sec, color }) {
       </div>
 
       {/* Body */}
-      <div style={{ padding: "22px 24px" }}>
-        {/* Optional prose */}
+      <div style={{ padding: "24px" }}>
         {sec.body && (
           <p
             style={{
-              fontSize: 14,
-              color: COLORS.lineDim,
-              lineHeight: 1.85,
-              marginBottom: sec.items?.length ? 20 : 0,
-              borderLeft: `2px solid ${color}44`,
-              paddingLeft: 14,
+              fontSize: 15,
+              color: "var(--color-line-dim)",
+              lineHeight: 1.8,
+              marginBottom: sec.items?.length ? 24 : 0,
             }}
           >
             {sec.body}
           </p>
         )}
 
-        {/* Items — steps */}
+        {/* Items — steps (no numbers, just cards) */}
         {sec.type === "steps" && sec.items && (
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             {sec.items.map((item, i) => (
               <div
                 key={i}
@@ -97,81 +87,62 @@ function DetailSection({ sec, color }) {
                   display: "flex",
                   gap: 14,
                   alignItems: "flex-start",
-                  background: COLORS.bgSoft,
-                  border: `1px solid ${COLORS.border}`,
-                  borderRadius: 8,
-                  padding: "12px 16px",
+                  background: "var(--color-bg-soft)",
+                  border: "1px solid var(--color-border)",
+                  borderRadius: "var(--radius-sm)",
+                  padding: "16px",
                 }}
               >
-                <div
-                  style={{
-                    width: 26,
-                    height: 26,
-                    borderRadius: 6,
-                    background: color + "22",
-                    border: `1px solid ${color}44`,
-                    color: color,
-                    fontSize: 12,
-                    fontFamily: FONT.mono,
-                    fontWeight: 700,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                    marginTop: 1,
-                  }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </div>
-                <span style={{ fontSize: 14, color: COLORS.lineDim, lineHeight: 1.7 }}>{item}</span>
+                <div style={{ width: 6, height: 6, background: color, borderRadius: "50%", marginTop: 8, flexShrink: 0 }} />
+                <span style={{ fontSize: 14, color: "var(--color-line-dim)", lineHeight: 1.7 }}>{item}</span>
               </div>
             ))}
           </div>
         )}
 
-        {/* Items — grid (2-col icon chips) */}
+        {/* Items — grid */}
         {sec.type === "grid" && sec.items && (
           <div
             style={{
               display: "grid",
               gridTemplateColumns: `repeat(${sec.cols ?? 2}, 1fr)`,
-              gap: 10,
+              gap: 12,
             }}
+            className="grid-responsive"
           >
             {sec.items.map((item, i) => (
               <div
                 key={i}
                 style={{
                   display: "flex",
-                  gap: 10,
+                  gap: 12,
                   alignItems: "flex-start",
-                  background: COLORS.bgSoft,
-                  border: `1px solid ${COLORS.border}`,
-                  borderRadius: 8,
-                  padding: "12px 14px",
+                  background: "var(--color-bg-soft)",
+                  border: "1px solid var(--color-border)",
+                  borderRadius: "var(--radius-sm)",
+                  padding: "14px",
                 }}
               >
-                <CheckCircle2 size={14} color={color} style={{ flexShrink: 0, marginTop: 2 }} />
-                <span style={{ fontSize: 13, color: COLORS.lineDim, lineHeight: 1.6 }}>{item}</span>
+                <CheckCircle size={16} color={color} weight="fill" style={{ flexShrink: 0, marginTop: 2 }} />
+                <span style={{ fontSize: 14, color: "var(--color-line)", lineHeight: 1.6, fontWeight: 500 }}>{item}</span>
               </div>
             ))}
           </div>
         )}
 
-        {/* Items — highlight (pill chips) */}
+        {/* Items — highlight */}
         {sec.type === "highlight" && sec.items && (
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
             {sec.items.map((item, i) => (
               <span
                 key={i}
                 style={{
-                  background: color + "14",
-                  border: `1px solid ${color}33`,
-                  borderRadius: 20,
-                  padding: "6px 14px",
+                  background: "var(--color-bg-soft)",
+                  border: "1px solid var(--color-border)",
+                  borderRadius: "var(--radius-pill)",
+                  padding: "8px 16px",
                   fontSize: 13,
-                  color: color,
-                  fontFamily: FONT.body,
+                  color: "var(--color-line)",
                 }}
               >
                 {item}
@@ -184,33 +155,10 @@ function DetailSection({ sec, color }) {
   );
 }
 
-
-/**
- * Ortak hizmet sayfası bileşeni — tüm hizmet alt sayfaları bu bileşeni kullanır.
- *
- * Props:
- *  meta      : { title, description, canonical }
- *  badge     : string
- *  badgeColor: string
- *  h1        : string
- *  intro     : string          – kısa tanım paragrafı
- *  forWhom   : string[]        – kimin için (okul, site, belediye…)
- *  dimensions: { label, value }[]  – ölçü tablosu satırları
- *  floors    : { name, pros, cons }[]  – zemin seçenekleri
- *  factors   : string[]        – fiyatı etkileyen faktörler
- *  faqs      : { q, a }[]     – SSS
- *  relatedServices: { label, to }[]  – ilgili hizmet linkleri
- *  detailedSections: { type, title, body?, items? }[]  – Modern SEO içerik blokları
- *    type: 'intro' | 'steps' | 'grid' | 'highlight'
- *    title: string
- *    body?: string           – açıklama paragrafı
- *    items?: string[]        – adım veya madde listesi
- *    cols?: number           – grid için sütun sayısı (varsayılan 2)
- */
 export default function ServicePage({
   meta,
   badge,
-  badgeColor,
+  badgeColor = "var(--color-accent)",
   h1,
   intro,
   forWhom,
@@ -232,218 +180,194 @@ export default function ServicePage({
       </Helmet>
 
       {/* HERO */}
-      <section
-        style={{
-          ...pageWrap,
-          paddingTop: 64,
-          paddingBottom: 60,
-          borderBottom: `1px solid ${COLORS.border}`,
-        }}
-      >
-        <Badge color={badgeColor}>{badge}</Badge>
-        <h1
-          style={{
-            fontFamily: FONT.display,
-            fontSize: 52,
-            margin: "14px 0 18px",
-            lineHeight: 1.02,
-          }}
-        >
-          {h1}
-        </h1>
-        <p
-          style={{
-            color: COLORS.lineDim,
-            fontSize: 15,
-            lineHeight: 1.85,
-            maxWidth: 680,
-            marginBottom: 32,
-          }}
-        >
-          {intro}
-        </p>
+      <section className="page-wrap" style={{ paddingTop: 80, paddingBottom: 80 }}>
+        <ScrollReveal>
+          <Badge color={badgeColor}>{badge}</Badge>
+          <h1
+            style={{
+              fontSize: "clamp(40px, 5vw, 56px)",
+              margin: "24px 0 24px",
+              lineHeight: 1.05,
+              letterSpacing: "-0.01em"
+            }}
+          >
+            {h1}
+          </h1>
+          <p
+            style={{
+              color: "var(--color-line-dim)",
+              fontSize: 16,
+              lineHeight: 1.8,
+              maxWidth: 720,
+              marginBottom: 40,
+            }}
+          >
+            {intro}
+          </p>
 
-        {/* Kimin için */}
-        {forWhom?.length > 0 && (
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-            {forWhom.map((f) => (
-              <span
-                key={f}
-                style={{
-                  background: badgeColor + "18",
-                  color: badgeColor,
-                  border: `1px solid ${badgeColor}33`,
-                  borderRadius: 6,
-                  padding: "5px 12px",
-                  fontSize: 13,
-                }}
-              >
-                {f}
-              </span>
-            ))}
-          </div>
-        )}
+          {/* Kimin için */}
+          {forWhom?.length > 0 && (
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+              {forWhom.map((f) => (
+                <span
+                  key={f}
+                  style={{
+                    border: "1px solid var(--color-border)",
+                    background: "var(--color-card)",
+                    borderRadius: "var(--radius-pill)",
+                    padding: "6px 14px",
+                    fontSize: 13,
+                    color: "var(--color-line)",
+                    fontWeight: 500
+                  }}
+                >
+                  {f}
+                </span>
+              ))}
+            </div>
+          )}
+        </ScrollReveal>
       </section>
 
       {/* ÖLÇÜLER + ZEMİN SEÇENEKLERİ */}
       <section
         style={{
-          background: COLORS.bgSoft,
-          padding: "56px 32px",
-          borderBottom: `1px solid ${COLORS.border}`,
+          background: "var(--color-bg-soft)",
+          padding: "80px 32px",
+          borderTop: "1px solid var(--color-border)",
+          borderBottom: "1px solid var(--color-border)",
         }}
       >
         <div
           style={{
-            maxWidth: 1180,
+            maxWidth: 1200,
             margin: "0 auto",
             display: "grid",
             gridTemplateColumns: "1fr 1.8fr",
-            gap: 48,
+            gap: 60,
           }}
+          className="grid-responsive"
         >
           {/* Ölçüler */}
-          <div>
-            <h2
-              style={{
-                fontFamily: FONT.display,
-                fontSize: 26,
-                marginBottom: 20,
-                display: "flex",
-                alignItems: "center",
-                gap: 10,
-              }}
-            >
-              <Ruler size={20} color={badgeColor} /> STANDART ÖLÇÜLER
-            </h2>
-            <div
-              style={{
-                border: `1px solid ${COLORS.border}`,
-                borderRadius: 10,
-                overflow: "hidden",
-              }}
-            >
-              {dimensions.map((d, i) => (
-                <div
-                  key={d.label}
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
-                    padding: "12px 16px",
-                    background: i % 2 === 0 ? COLORS.card : "transparent",
-                    borderBottom:
-                      i < dimensions.length - 1
-                        ? `1px solid ${COLORS.border}`
-                        : "none",
-                  }}
-                >
-                  <span style={{ fontSize: 13, color: COLORS.lineDim }}>{d.label}</span>
-                  <span
-                    style={{
-                      fontSize: 13,
-                      fontFamily: FONT.mono,
-                      color: COLORS.line,
-                      fontWeight: 600,
-                    }}
-                  >
-                    {d.value}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Zemin Seçenekleri */}
-          <div>
-            <h2
-              style={{ fontFamily: FONT.display, fontSize: 26, marginBottom: 20 }}
-            >
-              ZEMİN SEÇENEKLERİ
-            </h2>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              {floors.map((f) => (
-                <div
-                  key={f.name}
-                  style={{
-                    background: COLORS.card,
-                    border: `1px solid ${COLORS.border}`,
-                    borderRadius: 10,
-                    padding: "16px 20px",
-                  }}
-                >
+          <ScrollReveal>
+            <div>
+              <h2
+                style={{
+                  fontSize: 28,
+                  marginBottom: 24,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 12,
+                }}
+              >
+                <Ruler size={24} color={badgeColor} /> STANDART ÖLÇÜLER
+              </h2>
+              <div
+                style={{
+                  border: "1px solid var(--color-border)",
+                  borderRadius: "var(--radius)",
+                  overflow: "hidden",
+                  background: "var(--color-card)",
+                }}
+              >
+                {dimensions.map((d, i) => (
                   <div
-                    style={{
-                      fontWeight: 600,
-                      fontSize: 14,
-                      marginBottom: 8,
-                      color: badgeColor,
-                    }}
-                  >
-                    {f.name}
-                  </div>
-                  <div
+                    key={d.label}
                     style={{
                       display: "grid",
                       gridTemplateColumns: "1fr 1fr",
-                      gap: 12,
-                      fontSize: 13,
-                      color: COLORS.lineDim,
+                      padding: "16px 20px",
+                      borderBottom:
+                        i < dimensions.length - 1
+                          ? "1px solid var(--color-border)"
+                          : "none",
                     }}
                   >
-                    <div>
-                      <div style={{ color: COLORS.success, fontSize: 11, marginBottom: 4, fontFamily: FONT.mono }}>
-                        ARTILARI
-                      </div>
-                      {f.pros}
+                    <span style={{ fontSize: 14, color: "var(--color-line-dim)" }}>{d.label}</span>
+                    <span
+                      style={{
+                        fontSize: 14,
+                        fontFamily: "var(--font-mono)",
+                        color: "var(--color-line)",
+                        fontWeight: 600,
+                      }}
+                    >
+                      {d.value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Zemin Seçenekleri */}
+          <ScrollReveal delay={0.1}>
+            <div>
+              <h2 style={{ fontSize: 28, marginBottom: 24 }}>ZEMİN SEÇENEKLERİ</h2>
+              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                {floors.map((f) => (
+                  <div
+                    key={f.name}
+                    style={{
+                      background: "var(--color-card)",
+                      border: "1px solid var(--color-border)",
+                      borderRadius: "var(--radius)",
+                      padding: 24,
+                      boxShadow: "var(--shadow-card)",
+                    }}
+                  >
+                    {f.image && (
+                      <img
+                        src={f.image}
+                        alt={f.name}
+                        style={{
+                          width: "100%",
+                          height: 180,
+                          objectFit: "cover",
+                          borderRadius: "var(--radius)",
+                          marginBottom: 16,
+                          border: "1px solid var(--color-border)",
+                        }}
+                      />
+                    )}
+                    <div
+                      style={{
+                        fontWeight: 600,
+                        fontSize: 16,
+                        marginBottom: 16,
+                        color: badgeColor,
+                      }}
+                    >
+                      {f.name}
                     </div>
-                    <div>
-                      <div style={{ color: COLORS.danger, fontSize: 11, marginBottom: 4, fontFamily: FONT.mono }}>
-                        EKSİLERİ
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1fr",
+                        gap: 20,
+                        fontSize: 14,
+                        color: "var(--color-line-dim)",
+                      }}
+                      className="grid-responsive"
+                    >
+                      <div>
+                        <div style={{ color: "var(--color-success)", fontSize: 12, marginBottom: 6, fontFamily: "var(--font-mono)", fontWeight: 600 }}>
+                          ARTILARI
+                        </div>
+                        <div style={{ lineHeight: 1.6 }}>{f.pros}</div>
                       </div>
-                      {f.cons}
+                      <div>
+                        <div style={{ color: "var(--color-danger)", fontSize: 12, marginBottom: 6, fontFamily: "var(--font-mono)", fontWeight: 600 }}>
+                          EKSİLERİ
+                        </div>
+                        <div style={{ lineHeight: 1.6 }}>{f.cons}</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* YAPIM AŞAMALARI */}
-      <section style={pageWrap}>
-        <h2
-          style={{ fontFamily: FONT.display, fontSize: 30, marginBottom: 28 }}
-        >
-          YAPIM AŞAMALARI
-        </h2>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: 20,
-          }}
-        >
-          {PROCESS.map((p) => (
-            <div key={p.n}>
-              <div
-                style={{
-                  fontFamily: FONT.mono,
-                  color: badgeColor,
-                  fontSize: 13,
-                  marginBottom: 8,
-                }}
-              >
-                {p.n}
+                ))}
               </div>
-              <h3 style={{ fontSize: 16, fontWeight: 600, marginBottom: 6 }}>
-                {p.title}
-              </h3>
-              <p style={{ fontSize: 14, color: COLORS.lineDim, lineHeight: 1.6 }}>
-                {p.desc}
-              </p>
             </div>
-          ))}
+          </ScrollReveal>
         </div>
       </section>
 
@@ -451,40 +375,39 @@ export default function ServicePage({
       {detailedSections?.length > 0 && (
         <section
           style={{
-            background: COLORS.bg,
-            borderTop: `1px solid ${COLORS.border}`,
-            borderBottom: `1px solid ${COLORS.border}`,
-            padding: "72px 32px",
+            padding: "80px 32px",
           }}
         >
           <div style={{ maxWidth: 1080, margin: "0 auto" }}>
-            {/* Section header */}
-            <div style={{ marginBottom: 52, display: "flex", alignItems: "center", gap: 14 }}>
-              <div
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: 10,
-                  background: badgeColor + "18",
-                  border: `1px solid ${badgeColor}33`,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexShrink: 0,
-                }}
-              >
-                <BookOpen size={18} color={badgeColor} />
+            <ScrollReveal>
+              <div style={{ marginBottom: 40, display: "flex", alignItems: "center", gap: 16 }}>
+                <div
+                  style={{
+                    width: 48,
+                    height: 48,
+                    borderRadius: "var(--radius-sm)",
+                    background: "var(--color-bg-soft)",
+                    border: "1px solid var(--color-border)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                  }}
+                >
+                  <BookOpen size={24} color={badgeColor} weight="fill" />
+                </div>
+                <div>
+                  <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: badgeColor, letterSpacing: "0.1em", marginBottom: 4, fontWeight: 600 }}>DETAYLI BİLGİ</div>
+                  <h2 style={{ fontSize: 32, margin: 0, lineHeight: 1 }}>TEKNİK DOKÜMAN</h2>
+                </div>
               </div>
-              <div>
-                <div style={{ fontFamily: FONT.mono, fontSize: 11, color: badgeColor, letterSpacing: 2, marginBottom: 4 }}>DETAYLI BİLGİ</div>
-                <h2 style={{ fontFamily: FONT.display, fontSize: 28, margin: 0, lineHeight: 1 }}>TEKNİK DOKÜMAN</h2>
-              </div>
-            </div>
+            </ScrollReveal>
 
-            {/* Sections */}
             <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
               {detailedSections.map((sec, idx) => (
-                <DetailSection key={idx} sec={sec} color={badgeColor} />
+                <ScrollReveal key={idx} delay={0.05}>
+                  <DetailSection sec={sec} color={badgeColor} />
+                </ScrollReveal>
               ))}
             </div>
           </div>
@@ -494,130 +417,118 @@ export default function ServicePage({
       {/* FİYATI ETKİLEYEN FAKTÖRLER */}
       <section
         style={{
-          background: COLORS.bgSoft,
-          padding: "56px 32px",
-          borderTop: `1px solid ${COLORS.border}`,
-          borderBottom: `1px solid ${COLORS.border}`,
+          background: "var(--color-bg-soft)",
+          padding: "80px 32px",
+          borderTop: "1px solid var(--color-border)",
+          borderBottom: "1px solid var(--color-border)",
         }}
       >
-        <div style={{ maxWidth: 1180, margin: "0 auto" }}>
-          <h2
-            style={{ fontFamily: FONT.display, fontSize: 30, marginBottom: 8 }}
-          >
-            FİYATI ETKİLEYEN FAKTÖRLER
-          </h2>
-          <p
-            style={{
-              color: COLORS.lineDim,
-              fontSize: 14,
-              marginBottom: 28,
-              maxWidth: 540,
-            }}
-          >
-            Net maliyet, aşağıdaki değişkenlere göre şekillenir. Kesin fiyat
-            için ücretsiz keşif talebinde bulunabilirsiniz.
-          </p>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <ScrollReveal>
+            <h2 style={{ fontSize: 32, marginBottom: 16 }}>FİYATI ETKİLEYEN FAKTÖRLER</h2>
+            <p
+              style={{
+                color: "var(--color-line-dim)",
+                fontSize: 16,
+                marginBottom: 40,
+                maxWidth: 600,
+              }}
+            >
+              Net maliyet, aşağıdaki değişkenlere göre şekillenir. Kesin fiyat
+              için ücretsiz keşif talebinde bulunabilirsiniz.
+            </p>
+          </ScrollReveal>
+          
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-              gap: 12,
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: 16,
             }}
           >
             {factors.map((f, i) => (
-              <div
-                key={i}
-                style={{
-                  background: COLORS.card,
-                  border: `1px solid ${COLORS.border}`,
-                  borderRadius: 8,
-                  padding: "14px 18px",
-                  display: "flex",
-                  gap: 10,
-                  alignItems: "flex-start",
-                }}
-              >
-                <CheckCircle2
-                  size={16}
-                  color={badgeColor}
-                  style={{ flexShrink: 0, marginTop: 2 }}
-                />
-                <span style={{ fontSize: 14, color: COLORS.lineDim }}>{f}</span>
-              </div>
+              <ScrollReveal key={i} delay={i * 0.05}>
+                <div
+                  style={{
+                    background: "var(--color-card)",
+                    border: "1px solid var(--color-border)",
+                    borderRadius: "var(--radius)",
+                    padding: "16px 20px",
+                    display: "flex",
+                    gap: 12,
+                    alignItems: "center",
+                    boxShadow: "var(--shadow-card)"
+                  }}
+                >
+                  <CheckCircle
+                    size={20}
+                    color={badgeColor}
+                    weight="fill"
+                    style={{ flexShrink: 0 }}
+                  />
+                  <span style={{ fontSize: 15, color: "var(--color-line)" }}>{f}</span>
+                </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* SSS */}
-      <section style={pageWrap}>
-        <h2
-          style={{ fontFamily: FONT.display, fontSize: 30, marginBottom: 28 }}
-        >
-          SIK SORULAN SORULAR
-        </h2>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 8,
-            maxWidth: 720,
-          }}
-        >
+      <section className="page-wrap" style={{ paddingTop: 80, paddingBottom: 80 }}>
+        <ScrollReveal>
+          <h2 style={{ fontSize: 32, marginBottom: 40 }}>SIK SORULAN SORULAR</h2>
+        </ScrollReveal>
+        
+        <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 800 }}>
           {faqs.map((faq, i) => (
-            <div
-              key={i}
-              style={{
-                background: COLORS.card,
-                border: `1px solid ${
-                  openFaq === i ? badgeColor + "55" : COLORS.border
-                }`,
-                borderRadius: 10,
-                overflow: "hidden",
-                transition: "border-color 0.2s",
-              }}
-            >
-              <button
-                onClick={() => setOpenFaq(openFaq === i ? null : i)}
+            <ScrollReveal key={i} delay={i * 0.05}>
+              <div
                 style={{
-                  width: "100%",
-                  background: "transparent",
-                  border: "none",
-                  padding: "16px 20px",
-                  textAlign: "left",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  cursor: "pointer",
-                  gap: 12,
+                  background: "var(--color-card)",
+                  border: `1px solid ${openFaq === i ? badgeColor : "var(--color-border)"}`,
+                  borderRadius: "var(--radius)",
+                  overflow: "hidden",
+                  transition: "border-color 0.2s, box-shadow 0.2s",
+                  boxShadow: openFaq === i ? "var(--shadow-md)" : "var(--shadow-card)",
                 }}
               >
-                <span
-                  style={{ fontSize: 14, fontWeight: 600, color: COLORS.line }}
-                >
-                  {faq.q}
-                </span>
-                {openFaq === i ? (
-                  <ChevronUp size={16} color={badgeColor} style={{ flexShrink: 0 }} />
-                ) : (
-                  <ChevronDown size={16} color={COLORS.lineDim} style={{ flexShrink: 0 }} />
-                )}
-              </button>
-              {openFaq === i && (
-                <div
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   style={{
-                    padding: "0 20px 18px",
-                    fontSize: 14,
-                    color: COLORS.lineDim,
-                    lineHeight: 1.7,
-                    borderTop: `1px solid ${COLORS.border}`,
-                    paddingTop: 14,
+                    width: "100%",
+                    background: "transparent",
+                    padding: "20px 24px",
+                    textAlign: "left",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: 16,
                   }}
                 >
-                  {faq.a}
-                </div>
-              )}
-            </div>
+                  <span style={{ fontSize: 15, fontWeight: 600, color: "var(--color-line)" }}>
+                    {faq.q}
+                  </span>
+                  {openFaq === i ? (
+                    <CaretUp size={18} color={badgeColor} style={{ flexShrink: 0 }} />
+                  ) : (
+                    <CaretDown size={18} color="var(--color-line-dim)" style={{ flexShrink: 0 }} />
+                  )}
+                </button>
+                {openFaq === i && (
+                  <div
+                    style={{
+                      padding: "0 24px 24px",
+                      fontSize: 15,
+                      color: "var(--color-line-dim)",
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            </ScrollReveal>
           ))}
         </div>
       </section>
@@ -626,105 +537,116 @@ export default function ServicePage({
       {relatedServices?.length > 0 && (
         <section
           style={{
-            background: COLORS.bgSoft,
-            padding: "40px 32px",
-            borderTop: `1px solid ${COLORS.border}`,
-            borderBottom: `1px solid ${COLORS.border}`,
+            background: "var(--color-bg-soft)",
+            padding: "60px 32px",
+            borderTop: "1px solid var(--color-border)",
+            borderBottom: "1px solid var(--color-border)",
           }}
         >
-          <div style={{ maxWidth: 1180, margin: "0 auto" }}>
-            <p
-              style={{
-                fontSize: 13,
-                color: COLORS.lineDim,
-                marginBottom: 14,
-                fontFamily: FONT.mono,
-              }}
-            >
-              İLGİLİ HİZMETLER
-            </p>
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-              {relatedServices.map((s) => (
-                <Link
-                  key={s.to}
-                  to={s.to}
-                  style={{
-                    background: COLORS.card,
-                    border: `1px solid ${COLORS.border}`,
-                    borderRadius: 7,
-                    padding: "9px 16px",
-                    fontSize: 14,
-                    color: COLORS.lineDim,
-                    textDecoration: "none",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 6,
-                    transition: "color 0.15s, border-color 0.15s",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = COLORS.line;
-                    e.currentTarget.style.borderColor = badgeColor + "55";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = COLORS.lineDim;
-                    e.currentTarget.style.borderColor = COLORS.border;
-                  }}
-                >
-                  {s.label} <ChevronRight size={13} />
-                </Link>
-              ))}
-            </div>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            <ScrollReveal>
+              <p
+                style={{
+                  fontSize: 12,
+                  color: "var(--color-line-dim)",
+                  marginBottom: 16,
+                  fontFamily: "var(--font-mono)",
+                  fontWeight: 600,
+                  letterSpacing: "0.05em",
+                  textTransform: "uppercase"
+                }}
+              >
+                İLGİLİ HİZMETLER
+              </p>
+              <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+                {relatedServices.map((s) => (
+                  <Link
+                    key={s.to}
+                    to={s.to}
+                    style={{
+                      background: "var(--color-card)",
+                      border: "1px solid var(--color-border)",
+                      borderRadius: "var(--radius-sm)",
+                      padding: "10px 18px",
+                      fontSize: 14,
+                      color: "var(--color-line)",
+                      fontWeight: 500,
+                      textDecoration: "none",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 8,
+                      transition: "all 0.2s",
+                      boxShadow: "var(--shadow-sm)"
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = badgeColor;
+                      e.currentTarget.style.color = badgeColor;
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = "var(--color-border)";
+                      e.currentTarget.style.color = "var(--color-line)";
+                      e.currentTarget.style.transform = "translateY(0)";
+                    }}
+                  >
+                    {s.label} <CaretRight size={14} weight="bold" />
+                  </Link>
+                ))}
+              </div>
+            </ScrollReveal>
           </div>
         </section>
       )}
 
       {/* TEKLIF FORMU */}
-      <section style={{ ...pageWrap, paddingTop: 64, paddingBottom: 80 }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1.5fr",
-            gap: 48,
-            alignItems: "flex-start",
-          }}
-        >
-          <div>
-            <Badge color={badgeColor}>Ücretsiz Keşif</Badge>
-            <h2
-              style={{
-                fontFamily: FONT.display,
-                fontSize: 36,
-                margin: "14px 0 12px",
-                lineHeight: 1.05,
-              }}
-            >
-              ÜCRETSİZ
-              <br />
-              TEKLİF AL
-            </h2>
-            <p
-              style={{
-                color: COLORS.lineDim,
-                fontSize: 14,
-                lineHeight: 1.8,
-                maxWidth: 300,
-              }}
-            >
-              Bilgilerinizi bırakın, ekibimiz 24 saat içinde sizi arasın.
-              İsterseniz doğrudan da ulaşabilirsiniz.
-            </p>
-          </div>
+      <section className="page-wrap" style={{ paddingTop: 100, paddingBottom: 120 }}>
+        <ScrollReveal>
           <div
             style={{
-              background: COLORS.card,
-              border: `1px solid ${COLORS.border}`,
-              borderRadius: 14,
-              padding: 32,
+              display: "grid",
+              gridTemplateColumns: "1fr 1.2fr",
+              gap: 60,
+              alignItems: "flex-start",
             }}
+            className="grid-responsive"
           >
-            <QuoteForm />
+            <div>
+              <Badge color={badgeColor}>Ücretsiz Keşif</Badge>
+              <h2
+                style={{
+                  fontSize: "clamp(32px, 4vw, 44px)",
+                  margin: "24px 0 16px",
+                  lineHeight: 1.1,
+                }}
+              >
+                ÜCRETSİZ
+                <br />
+                TEKLİF AL
+              </h2>
+              <p
+                style={{
+                  color: "var(--color-line-dim)",
+                  fontSize: 16,
+                  lineHeight: 1.8,
+                  maxWidth: 400,
+                }}
+              >
+                Bilgilerinizi bırakın, uzman ekibimiz en geç 24 saat içinde detaylı bilgi ve ücretsiz keşif için sizi arasın.
+              </p>
+            </div>
+            <div
+              style={{
+                background: "var(--color-card)",
+                border: "1px solid var(--color-border)",
+                borderRadius: "var(--radius)",
+                padding: 40,
+                boxShadow: "var(--shadow-lg)"
+              }}
+            >
+              <QuoteForm />
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
     </>
   );

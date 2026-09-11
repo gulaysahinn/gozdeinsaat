@@ -1,165 +1,104 @@
 import React, { useState } from "react";
-import { CheckCircle2, ChevronRight } from "lucide-react";
-import { COLORS, labelStyle, inputStyle } from "../theme";
-
-function Field({ label, name, value, onChange, error, placeholder }) {
-  return (
-    <div>
-      <label style={labelStyle}>{label}</label>
-      <input
-        name={name}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        style={{
-          ...inputStyle,
-          borderColor: error ? COLORS.rust : COLORS.border,
-        }}
-      />
-      {error && (
-        <div style={{ color: COLORS.danger, fontSize: 12, marginTop: 4 }}>
-          {error}
-        </div>
-      )}
-    </div>
-  );
-}
+import { CheckCircle, WarningCircle } from "@phosphor-icons/react";
 
 export default function QuoteForm() {
-  const [form, setForm] = useState({
-    ad: "",
-    telefon: "",
-    email: "",
-    sahaTipi: "Tenis kortu",
-    konum: "",
-    not: "",
-  });
-  const [errors, setErrors] = useState({});
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState("idle");
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setForm((f) => ({ ...f, [name]: value }));
-    if (errors[name]) setErrors((er) => ({ ...er, [name]: undefined }));
-  }
-
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const nextErrors = {};
-    if (!form.ad.trim()) nextErrors.ad = "Ad soyad gerekli";
-    if (!form.telefon.trim()) nextErrors.telefon = "Telefon gerekli";
-    if (!form.konum.trim()) nextErrors.konum = "Şehir / ilçe gerekli";
-    if (Object.keys(nextErrors).length) {
-      setErrors(nextErrors);
-      return;
-    }
-    // Gerçek kullanımda burada bir servise (EmailJS, Formspree
-    // veya kendi backend API'niz) istek atılır.
-    setSent(true);
-  }
+    setStatus("loading");
+    // Simulate network request
+    setTimeout(() => {
+      setStatus("success");
+      e.target.reset();
+      setTimeout(() => setStatus("idle"), 3000);
+    }, 1200);
+  };
 
-  if (sent) {
-    return (
-      <div
-        style={{
+  return (
+    <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      {status === "success" && (
+        <div style={{
+          padding: 14,
+          background: "var(--color-accent-light)",
+          border: "1px solid var(--color-accent)",
+          borderRadius: "var(--radius-sm)",
           display: "flex",
           alignItems: "center",
           gap: 10,
-          color: COLORS.success,
-          fontSize: 15,
-          padding: "16px 0",
-        }}
-      >
-        <CheckCircle2 size={20} />
-        Talebiniz alındı. En kısa sürede sizinle iletişime geçeceğiz.
-      </div>
-    );
-  }
+          color: "var(--color-accent)",
+          fontSize: 13,
+          fontWeight: 500
+        }}>
+          <CheckCircle size={18} weight="fill" />
+          Talebiniz alındı. 24 saat içinde dönüş yapacağız.
+        </div>
+      )}
+      
+      {status === "error" && (
+        <div style={{
+          padding: 14,
+          background: "rgba(192, 57, 43, 0.1)",
+          border: "1px solid var(--color-danger)",
+          borderRadius: "var(--radius-sm)",
+          display: "flex",
+          alignItems: "center",
+          gap: 10,
+          color: "var(--color-danger)",
+          fontSize: 13,
+          fontWeight: 500
+        }}>
+          <WarningCircle size={18} weight="fill" />
+          Bir hata oluştu. Lütfen tekrar deneyin.
+        </div>
+      )}
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
-        <Field
-          label="Ad soyad"
-          name="ad"
-          value={form.ad}
-          onChange={handleChange}
-          error={errors.ad}
-          placeholder="Adınız Soyadınız"
-        />
-        <Field
-          label="Telefon"
-          name="telefon"
-          value={form.telefon}
-          onChange={handleChange}
-          error={errors.telefon}
-          placeholder="05xx xxx xx xx"
-        />
-      </div>
-
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginTop: 14 }}>
-        <Field
-          label="E-posta (opsiyonel)"
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-          placeholder="ornek@eposta.com"
-        />
-        <Field
-          label="Şehir / ilçe"
-          name="konum"
-          value={form.konum}
-          onChange={handleChange}
-          error={errors.konum}
-          placeholder="İstanbul / Sancaktepe"
-        />
+      <div>
+        <label htmlFor="quote-name">Ad Soyad / Kurum</label>
+        <input type="text" id="quote-name" name="name" required placeholder="Adınız veya Kurumunuz" />
       </div>
 
-      <div style={{ marginTop: 14 }}>
-        <label style={labelStyle}>Saha tipi</label>
-        <select
-          name="sahaTipi"
-          value={form.sahaTipi}
-          onChange={handleChange}
-          style={inputStyle}
-        >
-          <option>Tenis kortu</option>
-          <option>Basketbol sahası</option>
-          <option>Voleybol sahası</option>
-          <option>Çok amaçlı saha</option>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }} className="grid-responsive">
+        <div>
+          <label htmlFor="quote-phone">Telefon</label>
+          <input type="tel" id="quote-phone" name="phone" required placeholder="0 (5XX) XXX XX XX" />
+        </div>
+        <div>
+          <label htmlFor="quote-city">Şehir / İlçe</label>
+          <input type="text" id="quote-city" name="city" required placeholder="Örn: İstanbul / Sancaktepe" />
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="quote-service">İlgilendiğiniz Hizmet</label>
+        <select id="quote-service" name="service" required style={{ appearance: "none" }}>
+          <option value="" disabled defaultValue>Seçiniz</option>
+          <option value="tenis">Tenis Kortu</option>
+          <option value="basketbol">Basketbol Sahası</option>
+          <option value="voleybol">Voleybol Sahası</option>
+          <option value="hali_saha">Halı Saha</option>
+          <option value="cok_amacli">Çok Amaçlı Saha</option>
+          <option value="diger">Diğer / Kararsızım</option>
         </select>
       </div>
 
-      <div style={{ marginTop: 14 }}>
-        <label style={labelStyle}>Notunuz (opsiyonel)</label>
-        <textarea
-          name="not"
-          value={form.not}
-          onChange={handleChange}
-          rows={3}
-          placeholder="Saha büyüklüğü, arazi durumu vb."
-          style={{ ...inputStyle, resize: "vertical" }}
-        />
+      <div>
+        <label htmlFor="quote-details">Ek Detaylar (İsteğe Bağlı)</label>
+        <textarea id="quote-details" name="details" rows={3} placeholder="Yaklaşık alan büyüklüğü, zemin tercihi vb."></textarea>
       </div>
 
-      <button
-        type="submit"
-        style={{
-          marginTop: 20,
-          background: COLORS.rust,
-          color: COLORS.line,
-          border: "none",
-          borderRadius: 6,
-          padding: "13px 22px",
-          fontWeight: 600,
-          fontSize: 14,
-          cursor: "pointer",
-          display: "inline-flex",
-          alignItems: "center",
-          gap: 8,
+      <button 
+        type="submit" 
+        className="btn-primary" 
+        disabled={status === "loading"}
+        style={{ 
+          marginTop: 8, 
+          justifyContent: "center",
+          opacity: status === "loading" ? 0.7 : 1,
+          cursor: status === "loading" ? "not-allowed" : "pointer"
         }}
       >
-        Teklif Talebini Gönder <ChevronRight size={16} />
+        {status === "loading" ? "Gönderiliyor..." : "Keşif ve Fiyat İste"}
       </button>
     </form>
   );
