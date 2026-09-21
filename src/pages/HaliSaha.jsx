@@ -1,5 +1,3 @@
-import React from "react";
-import { COLORS } from "../theme";
 import ServicePage from "../components/ServicePage";
 
 const GREEN = "#5A9E6F";

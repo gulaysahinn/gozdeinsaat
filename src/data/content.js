@@ -161,7 +161,7 @@ export const SERVICES = [
     floors: [
       {
         name: "Açık Halı Saha",
-        image: "/images/hizmetler/haliSaha.jpg",
+        image: "/images/hizmetler/acikhalisaha.jpg",
         badges: ["LED Aydınlatma", "Tel Örgü Dahil", "Gece Maçı"],
         badgeColors: ["warm", "accent", "blue"],
         forWho: "Ticari tesis, kulüp",
@@ -169,19 +169,19 @@ export const SERVICES = [
       },
       {
         name: "Kapalı Halı Saha",
-        image: "/images/hizmetler/tenisKortuSahaZemin.jpeg",
+        image: "/images/hizmetler/kapalihalisaha.jpg",
         badges: ["Her Mevsim", "Rüzgar Geçirmez", "Çelik Konstrüksiyon"],
         badgeColors: ["accent", "blue", "warm"],
         forWho: "Kış ayları için ticari tesis",
         desc: "Çelik konstrüksiyon üzerine branda, saç veya PVC kaplama ile kapatılmış, yıl boyu kullanılabilir kapalı halı saha. Soğuk bölgelerde saç kaplama önerilir.",
       },
       {
-        name: "Profesyonel Sentetik Çim",
-        image: "/images/hizmetler/haliSaha.jpg",
-        badges: ["FIFA Onaylı", "Turnuva Standardı", "EPDM Granül"],
+        name: "Saha Yapım Aşaması",
+        image: "/images/hizmetler/kapalihalisahayapilirken.jpg",
+        badges: ["Anahtar Teslim", "Çelik Montaj", "Altyapı"],
         badgeColors: ["warm", "warm", "accent"],
-        forWho: "Profesyonel kulüp, federasyon",
-        desc: "FIFA 1 Star / FIFA 2 Star belgeli, 55–60mm monofilament suni çim ve yüksek yoğunluklu EPDM granül dolguyla resmi maçlara uygun halı saha.",
+        forWho: "Profesyonel kulüp, belediye",
+        desc: "Halı saha yapımında zemin etüdünden çelik konstrüksiyon montajına kadar tüm aşamaları titizlikle uyguluyoruz.",
       },
     ],
   },
@@ -216,69 +216,36 @@ export const PROCESS = [
 // İlk kayıt "öne çıkan" (featured) olarak büyük formatta gösterilir.
 export const PROJECTS = [
   { 
-    name: "Galatasaray Spor Kulübü Altyapı Tesisleri", 
-    city: "İstanbul", 
-    type: "Halı Saha", 
-    size: "11'e 11 Saha", 
-    color: "#5A9E6F",
-    image: "/images/hizmetler/haliSaha.jpg",
-    date: "Mayıs 2021",
-    desc: "Altyapı maçlarına uygun, FIFA Quality onaylı monofilament sentetik çim, yüksek yoğunluklu aydınlatma ve dijital skorboard donanımı ile eksiksiz teslim.",
-    chips: ["FIFA Quality Pro", "LED Aydınlatma", "Suni Çim", "Anahtar Teslim"]
-  },
-  { 
-    name: "Kadıköy Belediyesi Kalamış Spor Tesisleri", 
-    city: "İstanbul", 
-    type: "Tenis", 
-    size: "4 kort", 
-    color: COLORS.rust,
-    image: "/images/hizmetler/akrilikZeminTenisKortu.jpeg",
-    date: "Ağustos 2023",
-    desc: "ITF standartlarında 4 adet açık akrilik zeminli kortun altyapı, aydınlatma ve çevre düzenlemesiyle birlikte anahtar teslim inşası.",
-    chips: ["ITF Standartları", "Akrilik Zemin", "Tel Örgü", "LED Aydınlatma"]
-  },
-  { 
-    name: "Sinpaş Aqua City Basketbol Sahası", 
+    name: "İstanbul Çevre Koleji", 
     city: "İstanbul", 
     type: "Basketbol", 
-    size: "1 saha", 
+    size: "Okul Sahası", 
     color: COLORS.orange,
-    image: "/images/hizmetler/basketbolSahasi.jpg",
-    date: "Ekim 2022",
-    desc: "Site sakinleri için özel olarak tasarlanmış, FIBA onaylı potalar ve şok emici esnek tartan zemin sistemine sahip açık basketbol sahası.",
-    chips: ["FIBA Onaylı", "Tartan Zemin", "Açık Alan"]
+    image: "/images/projeler/istanbulcevrekoleji.jpg",
+    date: "Ağustos 2026",
+    desc: "Öğrencilerin spor aktivitelerini yapabilmesi için yenilenen, dayanıklı ve güvenli okul spor sahası.",
+    chips: ["Okul Projesi", "Anahtar Teslim"]
   },
   { 
-    name: "Özyeğin Üniversitesi Kampüs Alanı", 
+    name: "Ankara İncek Doğa Koleji", 
+    city: "Ankara", 
+    type: "Çok amaçlı", 
+    size: "Okul Sahası", 
+    color: COLORS.lineDim,
+    image: "/images/projeler/ankaraincekdogakoleji.jpg",
+    date: "Eylül 2026",
+    desc: "Öğrencilerin çeşitli spor aktivitelerini güvenle yapabilmesi için özel olarak tasarlanmış, anahtar teslim çok amaçlı okul spor sahası projesi.",
+    chips: ["Okul Projesi", "Çok Amaçlı Saha", "Anahtar Teslim"]
+  },
+  { 
+    name: "Acarkent Doğa Koleji", 
     city: "İstanbul", 
     type: "Çok amaçlı", 
-    size: "2 saha", 
+    size: "Okul Sahası", 
     color: COLORS.lineDim,
-    image: "/images/hizmetler/tenisKortuSahaZemin.jpeg",
-    date: "Eylül 2023",
-    desc: "Öğrencilerin basketbol, voleybol ve tenis oynamasına imkan sağlayan, suni çim zeminli, çift pota ve seyyar fileli entegre tesis.",
-    chips: ["3 Branş", "Suni Çim", "Seyyar File"]
-  },
-  { 
-    name: "Sapanca Elite World Resort", 
-    city: "Sakarya", 
-    type: "Tenis", 
-    size: "2 kort", 
-    color: COLORS.rust,
-    image: "/images/hizmetler/tartanZeminTenisKortu.jpg",
-    date: "Haziran 2020",
-    desc: "Otel konukları için doğa ile iç içe, ekolojik EPDM dökme tartan zemin üzerine uygulanan iki adet elit tenis kortu.",
-    chips: ["EPDM Tartan", "Ekolojik", "VIP Tesis"]
-  },
-  { 
-    name: "Kocaeli Büyükşehir Belediyesi Gençlik Merkezi", 
-    city: "Kocaeli", 
-    type: "Basketbol", 
-    size: "Kapalı Salon", 
-    color: COLORS.orange,
-    image: "/images/hizmetler/zemin.jpg",
-    date: "Nisan 2022",
-    desc: "Uluslararası turnuvalara ev sahipliği yapabilecek standartta, FIBA onaylı profesyonel ahşap parke kaplı kapalı spor salonu.",
-    chips: ["FIBA Onaylı", "Ahşap Parke", "Kapalı Salon", "Turnuva Standardı"]
+    image: "/images/projeler/acarkentdogakolejiistanbul_1.jpg",
+    date: "Ekim 2026",
+    desc: "Acarkent Doğa Koleji kampüsüne özel inşa edilen, yenilenmiş ve dayanıklı zeminli okul spor sahası.",
+    chips: ["Okul Projesi", "Anahtar Teslim", "Çok Amaçlı Saha"]
   },
 ];

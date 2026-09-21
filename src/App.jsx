@@ -1,6 +1,4 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { COLORS, FONT } from "./theme";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
@@ -17,6 +15,9 @@ import BasketbolSahasi from "./pages/BasketbolSahasi";
 import VoleybolSahasi from "./pages/VoleybolSahasi";
 import CokAmacliSaha from "./pages/CokAmacliSaha";
 import HaliSaha from "./pages/HaliSaha";
+import GizlilikPolitikasi from "./pages/GizlilikPolitikasi";
+
+import FloatingContact from "./components/FloatingContact";
 
 export default function App() {
   return (
@@ -38,7 +39,9 @@ export default function App() {
         <Route path="/voleybol-sahasi-yapimi" element={<VoleybolSahasi />} />
         <Route path="/cok-amacli-saha-yapimi" element={<CokAmacliSaha />} />
         <Route path="/hali-saha-yapimi" element={<HaliSaha />} />
+        <Route path="/gizlilik-politikasi" element={<GizlilikPolitikasi />} />
       </Routes>
+      <FloatingContact />
       <Footer />
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { MapPin, Ruler, CalendarBlank, ArrowRight } from "@phosphor-icons/react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
@@ -88,7 +88,6 @@ function ProjectCard({ p }) {
         borderRadius: "var(--radius)",
         overflow: "hidden",
         height: "100%",
-        boxShadow: "var(--shadow-sm)",
         transition: "transform 0.3s, box-shadow 0.3s",
         transform: hovered ? "translateY(-4px)" : "translateY(0)",
         boxShadow: hovered ? "var(--shadow-md)" : "var(--shadow-sm)",

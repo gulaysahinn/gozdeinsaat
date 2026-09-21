@@ -1,20 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 
 export function useInView(options = { threshold: 0.3 }) {
-  const [isInView, setIsInView] = useState(false);
+  const [isInView, setIsInView] = useState(() => {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  });
   const ref = useRef(null);
 
   useEffect(() => {
     const element = ref.current;
-    if (!element) return;
-
-    // Check if user prefers reduced motion
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (mediaQuery.matches) {
-      // If they prefer reduced motion, consider it immediately in view
-      setIsInView(true);
-      return;
-    }
+    if (!element || isInView) return;
 
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
@@ -29,7 +23,8 @@ export function useInView(options = { threshold: 0.3 }) {
     return () => {
       if (element) observer.unobserve(element);
     };
-  }, [options.threshold, options.rootMargin]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [options.threshold, options.rootMargin, isInView]);
 
   return [ref, isInView];
 }

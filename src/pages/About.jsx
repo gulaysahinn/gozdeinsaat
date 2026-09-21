@@ -1,4 +1,3 @@
-import React from "react";
 import { 
   CheckCircle, 
   TennisBall, 
@@ -259,7 +258,7 @@ export default function About() {
                     { value: "35+", label: "Yıllık deneyim" },
                     { value: "500+", label: "Tamamlanan saha" },
                     { value: "8", label: "Farklı zemin seçeneği" },
-                  ].map((stat, i) => (
+                  ].map((stat) => (
                     <div
                       key={stat.label}
                       style={{

@@ -1,28 +1,23 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle, Buildings, GraduationCap, TreePalm } from "@phosphor-icons/react";
+import { ArrowRight, CheckCircle, Buildings, } from "@phosphor-icons/react";
 
 // Badge renk eşleşmesi — tema token'larına bağlı
 const BADGE_STYLES = {
+  neutral: {
+    bg: "var(--color-bg-soft)",
+    color: "var(--color-line-dim)",
+    border: "var(--color-border)",
+  },
   accent: {
     bg: "var(--color-accent-light, #E8F5EE)",
     color: "var(--color-accent, #1A6B4C)",
     border: "var(--color-accent, #1A6B4C)",
   },
-  warm: {
-    bg: "#FEF3C7",
-    color: "#B45309",
-    border: "#D97706",
-  },
-  blue: {
-    bg: "#EFF6FF",
-    color: "#1D4ED8",
-    border: "#3B82F6",
-  },
 };
 
-function Badge({ label, colorKey = "accent" }) {
-  const style = BADGE_STYLES[colorKey] || BADGE_STYLES.accent;
+function Badge({ label, colorKey = "neutral" }) {
+  const style = BADGE_STYLES[colorKey] || BADGE_STYLES.neutral;
   return (
     <span
       style={{
@@ -30,7 +25,7 @@ function Badge({ label, colorKey = "accent" }) {
         alignItems: "center",
         gap: 4,
         padding: "3px 10px",
-        fontSize: 11,
+        fontSize: 10,
         fontWeight: 600,
         fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
         letterSpacing: "0.06em",
@@ -38,7 +33,7 @@ function Badge({ label, colorKey = "accent" }) {
         background: style.bg,
         color: style.color,
         border: `1px solid ${style.border}`,
-        borderRadius: 4,
+        borderRadius: 2,
         whiteSpace: "nowrap",
       }}
     >
@@ -48,7 +43,7 @@ function Badge({ label, colorKey = "accent" }) {
   );
 }
 
-function FloorCard({ floor, index, serviceLink }) {
+function FloorCard({ floor, index }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -68,6 +63,25 @@ function FloorCard({ floor, index, serviceLink }) {
         flexDirection: "column",
       }}
     >
+      {/* Sıra numarası - Görsel dışına taşındı */}
+      <div
+        style={{
+          fontFamily: "var(--font-mono)",
+          fontSize: 10,
+          fontWeight: 700,
+          color: "var(--color-line-dim)",
+          background: "var(--color-bg-soft)",
+          borderBottom: "1px solid var(--color-border)",
+          padding: "6px 12px",
+          letterSpacing: "0.1em",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <span>ZEM·0{index + 1}</span>
+      </div>
+
       {/* Zemin fotoğrafı */}
       <div
         style={{
@@ -90,24 +104,6 @@ function FloorCard({ floor, index, serviceLink }) {
             filter: "grayscale(10%)",
           }}
         />
-        {/* Sıra numarası */}
-        <div
-          style={{
-            position: "absolute",
-            top: 12,
-            left: 12,
-            fontFamily: "var(--font-mono)",
-            fontSize: 11,
-            fontWeight: 700,
-            color: "var(--color-line, #1B1F23)",
-            background: "var(--color-card, #fff)",
-            border: "1px solid var(--color-border)",
-            padding: "2px 8px",
-            letterSpacing: "0.08em",
-          }}
-        >
-          ZEM·0{index + 1}
-        </div>
       </div>
 
       {/* Kart içeriği */}
@@ -128,11 +124,16 @@ function FloorCard({ floor, index, serviceLink }) {
 
         {/* Badge'ler */}
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-          {floor.badges.map((badge, bi) => (
+          {floor.badges.map((badge) => (
             <Badge
               key={badge}
               label={badge}
-              colorKey={floor.badgeColors?.[bi] || "accent"}
+              colorKey={
+                badge.toLowerCase().includes("profesyonel") ||
+                badge.toLowerCase().includes("fiba")
+                  ? "accent"
+                  : "neutral"
+              }
             />
           ))}
         </div>

@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { CheckCircle, CaretRight, CaretDown, CaretUp, BookOpen, List, Info, Wrench, SquaresFour, Ruler } from "@phosphor-icons/react";
 import Badge from "../components/Badge";
 import QuoteForm from "../components/QuoteForm";
 import ScrollReveal from "../components/ScrollReveal";
-import { PROCESS } from "../data/content";
 
 /* ── ICON MAP ────────────────────────────────────────────────────────────── */
 const SECTION_ICONS = { intro: Info, steps: Wrench, grid: SquaresFour, highlight: List };

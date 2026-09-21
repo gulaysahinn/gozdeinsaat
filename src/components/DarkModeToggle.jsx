@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Sun, Moon } from "@phosphor-icons/react";
 
 export default function DarkModeToggle() {

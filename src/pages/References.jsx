@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import Badge from "../components/Badge";
 import ScrollReveal from "../components/ScrollReveal";

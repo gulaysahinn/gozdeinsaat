@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ArrowRight, MapPin, Ruler, Buildings, GraduationCap, Bank } from "@phosphor-icons/react";
@@ -373,7 +373,7 @@ export default function Home() {
                 padding: 4
               }}>
                 <img 
-                  src={`https://picsum.photos/seed/project-${i}/600/400`} 
+                  src={p.image} 
                   alt={`${p.name} projesi sahadan bir kesit`}
                   style={{ width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(15%)" }} 
                 />

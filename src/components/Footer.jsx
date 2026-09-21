@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { Phone, Envelope, MapPin, ArrowUpRight } from "@phosphor-icons/react";
 
@@ -324,7 +323,10 @@ export default function Footer() {
         }}
       >
         <span>
-          © {new Date().getFullYear()} Gözde İnşaat. Tüm hakları saklıdır.
+          © {new Date().getFullYear()} Gözde İnşaat. Tüm hakları saklıdır. {" | "}
+          <Link to="/gizlilik-politikasi" style={{ color: "var(--color-line-dim)", textDecoration: "none" }}>
+            Gizlilik Politikası (KVKK)
+          </Link>
         </span>
         <span style={{ fontSize: 11, fontWeight: 500 }}>
           Tenis Kortu | Basketbol Sahası | Voleybol Sahası | Halı Saha
