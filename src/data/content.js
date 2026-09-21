@@ -216,36 +216,135 @@ export const PROCESS = [
 // İlk kayıt "öne çıkan" (featured) olarak büyük formatta gösterilir.
 export const PROJECTS = [
   { 
-    name: "İstanbul Çevre Koleji", 
-    city: "İstanbul", 
-    type: "Basketbol", 
-    size: "Okul Sahası", 
+    name: "Kapalı Halı Saha", 
+    city: "Anahtar Teslim", 
+    type: "Futbol", 
+    size: "İstenen Ölçülerde", 
     color: COLORS.orange,
-    image: `${import.meta.env.BASE_URL}images/projeler/istanbulcevrekoleji.jpg`,
-    date: "Ağustos 2026",
-    desc: "Öğrencilerin spor aktivitelerini yapabilmesi için yenilenen, dayanıklı ve güvenli okul spor sahası.",
-    chips: ["Okul Projesi", "Anahtar Teslim"]
+    image: `${import.meta.env.BASE_URL}images/hizmetler/kapalihalisaha.jpg`,
+    date: "Her Mevsim",
+    desc: "Yılın 365 günü hava şartlarından etkilenmeden futbol keyfi yaşatan, dayanıklı çelik konstrüksiyonlu kapalı halı sahalar.",
+    chips: ["Çelik Konstrüksiyon", "Suni Çim", "Aydınlatma"]
   },
   { 
-    name: "Ankara İncek Doğa Koleji", 
-    city: "Ankara", 
-    type: "Çok amaçlı", 
-    size: "Okul Sahası", 
+    name: "Açık Halı Saha", 
+    city: "Anahtar Teslim", 
+    type: "Futbol", 
+    size: "İstenen Ölçülerde", 
+    color: COLORS.lineDim,
+    image: `${import.meta.env.BASE_URL}images/hizmetler/acikhalisaha.jpg`,
+    date: "Her Mevsim",
+    desc: "Yüksek dayanımlı sentetik çim kullanılarak tasarlanan, tel örgü ve LED aydınlatma sistemi tamamlanmış açık halı sahalar.",
+    chips: ["Sentetik Çim", "Tel Örgü", "Dış Mekan"]
+  },
+  { 
+    name: "Profesyonel Basketbol Sahası", 
+    city: "Anahtar Teslim", 
+    type: "Basketbol", 
+    size: "Uluslararası Standart", 
+    color: COLORS.lineDim,
+    image: `${import.meta.env.BASE_URL}images/hizmetler/basketbolSahasi.jpg`,
+    date: "Her Mevsim",
+    desc: "Kaymaz zemin kaplamaları ve profesyonel ekipmanlarla kurulan, sakatlanma riskini en aza indiren yüksek performanslı basketbol sahaları.",
+    chips: ["Akrilik Zemin", "Tartan Zemin", "Pota Ekipmanları"]
+  },
+  { 
+    name: "Kapalı Basketbol Sahası", 
+    city: "Spor Salonu", 
+    type: "Basketbol", 
+    size: "Kapalı Alan", 
+    color: COLORS.lineDim,
+    image: `${import.meta.env.BASE_URL}images/hizmetler/kapalibasketsahasi.jpg`,
+    date: "Her Mevsim",
+    desc: "Her türlü hava koşuluna uygun, ahşap veya poliüretan zemin kullanılarak inşa edilmiş profesyonel kapalı spor salonları.",
+    chips: ["Kapalı Saha", "Poliüretan", "Ahşap Parke"]
+  },
+  { 
+    name: "Akrilik Zemin Tenis Kortu", 
+    city: "Anahtar Teslim", 
+    type: "Tenis", 
+    size: "Uluslararası Standart", 
+    color: COLORS.lineDim,
+    image: `${import.meta.env.BASE_URL}images/hizmetler/akrilikZeminTenisKortu.jpeg`,
+    date: "Açık Alan",
+    desc: "Uluslararası tenis turnuvaları standartlarında, yüksek top sekme performansına sahip akrilik zeminli kort.",
+    chips: ["Akrilik Zemin", "ITF Onaylı", "Açık Kort"]
+  },
+  { 
+    name: "Sentetik Çim Tenis Kortu", 
+    city: "Özel Proje", 
+    type: "Tenis", 
+    size: "Standart Ölçüler", 
+    color: COLORS.lineDim,
+    image: `${import.meta.env.BASE_URL}images/hizmetler/sentetikCimTenisKortu.jpg`,
+    date: "Her Mevsim",
+    desc: "Özellikle eklem sağlığını koruyan, yavaş top hızı sunan konforlu sentetik çim tenis kortu projesi.",
+    chips: ["Suni Çim", "Konfor", "Güvenlik"]
+  },
+  { 
+    name: "Tartan Zemin Tenis Kortu", 
+    city: "Profesyonel", 
+    type: "Tenis", 
+    size: "Uluslararası Standart", 
+    color: COLORS.lineDim,
+    image: `${import.meta.env.BASE_URL}images/hizmetler/tartanZeminTenisKortu.jpg`,
+    date: "Dayanıklı",
+    desc: "Şok emici özelliği sayesinde sporcu sağlığını ön planda tutan, EPDM kauçuk tabanlı tartan kortlar.",
+    chips: ["Tartan Zemin", "EPDM Kauçuk", "Şok Emici"]
+  },
+  { 
+    name: "Çok Amaçlı Okul Sahası", 
+    city: "Kurumsal Proje", 
+    type: "Çok Amaçlı", 
+    size: "Geniş Alan", 
     color: COLORS.lineDim,
     image: `${import.meta.env.BASE_URL}images/projeler/ankaraincekdogakoleji.jpg`,
-    date: "Eylül 2026",
-    desc: "Öğrencilerin çeşitli spor aktivitelerini güvenle yapabilmesi için özel olarak tasarlanmış, anahtar teslim çok amaçlı okul spor sahası projesi.",
-    chips: ["Okul Projesi", "Çok Amaçlı Saha", "Anahtar Teslim"]
+    date: "Eğitim",
+    desc: "Öğrencilerin aynı alanda hem basketbol hem de voleybol oynayabilmesi için tasarlanmış, akrilik zeminli okul spor sahası.",
+    chips: ["Çok Amaçlı", "Okul Projesi", "Akrilik"]
   },
   { 
-    name: "Acarkent Doğa Koleji", 
-    city: "İstanbul", 
-    type: "Çok amaçlı", 
-    size: "Okul Sahası", 
+    name: "Kapsamlı Spor Kompleksi", 
+    city: "Özel Site", 
+    type: "Çok Amaçlı", 
+    size: "Proje Bazlı", 
     color: COLORS.lineDim,
-    image: `${import.meta.env.BASE_URL}images/projeler/acarkentdogakolejiistanbul_1.jpg`,
-    date: "Ekim 2026",
-    desc: "Acarkent Doğa Koleji kampüsüne özel inşa edilen, yenilenmiş ve dayanıklı zeminli okul spor sahası.",
-    chips: ["Okul Projesi", "Anahtar Teslim", "Çok Amaçlı Saha"]
+    image: `${import.meta.env.BASE_URL}images/projeler/sahalar.jpg`,
+    date: "Açık Alan",
+    desc: "Site içi sosyal tesislerde yer alan; voleybol, basketbol ve tenis gibi farklı spor branşlarını destekleyen ortak kullanım alanları.",
+    chips: ["Sosyal Tesis", "Karma Spor", "Uzun Ömürlü"]
+  },
+  { 
+    name: "Çocuk Oyun Parkı Zemin Kaplaması", 
+    city: "Belediye Projesi", 
+    type: "Çocuk Parkı", 
+    size: "Özel Tasarım", 
+    color: COLORS.lineDim,
+    image: `${import.meta.env.BASE_URL}images/hizmetler/cocukparki1.jpg`,
+    date: "Güvenlik",
+    desc: "Düşme ve çarpmalara karşı maksimum güvenlik sağlayan, renkli ve desenli dökme kauçuk oyun parkı zeminleri.",
+    chips: ["Dökme Kauçuk", "Güvenlik", "Esnek Zemin"]
+  },
+  { 
+    name: "Modern Çocuk Oyun Alanı", 
+    city: "Site İçi", 
+    type: "Çocuk Parkı", 
+    size: "Özel Alan", 
+    color: COLORS.lineDim,
+    image: `${import.meta.env.BASE_URL}images/hizmetler/cocukparki4.jpg`,
+    date: "Estetik",
+    desc: "Çocukların güvenle oynayabilmesi için hijyenik, uzun ömürlü ve hava koşullarına dayanıklı kauçuk kaplama uygulaması.",
+    chips: ["Kauçuk Kaplama", "Site Projesi", "Çevre Dostu"]
+  },
+  { 
+    name: "Tribünlü Kampüs Sahası", 
+    city: "Üniversite", 
+    type: "Çok Amaçlı", 
+    size: "Seyircili", 
+    color: COLORS.lineDim,
+    image: `${import.meta.env.BASE_URL}images/projeler/istanbulcevrekoleji.jpg`,
+    date: "Eğitim Tesisi",
+    desc: "Turnuvalar ve okul maçları için tasarlanan, çevresi tel örgüyle kapatılmış, yüksek standartlarda kampüs sahası.",
+    chips: ["Üniversite", "Tribün", "Akrilik"]
   },
 ];
