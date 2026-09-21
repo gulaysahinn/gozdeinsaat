@@ -38,19 +38,19 @@ export default function VoleybolSahasi() {
           name: "Akrilik Zemin (Sert Zemin)",
           pros: "Dayanıklı, yüksek kayma direnci, hem kapalı hem açık alanlarda uygulanabilir.",
           cons: "Sert yapısı uzun süre oynayan sporcuların eklemlerini zorlayabilir.",
-          image: "/images/hizmetler/akrilikZeminTenisKortu.jpeg",
+          image: `${import.meta.env.BASE_URL}images/hizmetler/akrilikZeminTenisKortu.jpeg`,
         },
         {
           name: "Kum Dolgulu Zemin",
           pros: "Plaj voleybolu için ideal, yumuşak düşüş yüzeyi.",
           cons: "Açık alanlarda uygulanır, kapalı salon için uygun değil.",
-          image: "/images/hizmetler/zemin.jpg",
+          image: `${import.meta.env.BASE_URL}images/hizmetler/zemin.jpg`,
         },
         {
           name: "Suni Çim",
           pros: "Çok amaçlı sahalarla kombine edilebilir, estetik görünüm.",
           cons: "Profesyonel turnuva standardı gerektirmeyen tesisler için uygundur.",
-          image: "/images/hizmetler/sentetikCimTenisKortu.jpg",
+          image: `${import.meta.env.BASE_URL}images/hizmetler/sentetikCimTenisKortu.jpg`,
         },
       ]}
       factors={[

@@ -38,19 +38,19 @@ export default function CokAmacliSaha() {
           name: "Akrilik Zemin",
           pros: "En yaygın tercih, farklı renk kombinasyonlarıyla çizgiler net ayrılır, dayanıklı.",
           cons: "Güneşte ısınma olabilir; açık alanlarda hafif renkler tercih edilebilir.",
-          image: "/images/hizmetler/akrilikZeminTenisKortu.jpeg",
+          image: `${import.meta.env.BASE_URL}images/hizmetler/akrilikZeminTenisKortu.jpeg`,
         },
         {
           name: "Suni Çim",
           pros: "Estetik ve yeşil görünüm, özellikle futbol çizgisi de eklenecekse ideal.",
           cons: "Voleybol ve tenis için resmi turnuva standardı gerektirmeyen tesisler için uygundur.",
-          image: "/images/hizmetler/sentetikCimTenisKortu.jpg",
+          image: `${import.meta.env.BASE_URL}images/hizmetler/sentetikCimTenisKortu.jpg`,
         },
         {
           name: "Tartan (EPDM)",
           pros: "Amortisörlü yapı, farklı sporlar için uygun zemin sertliği.",
           cons: "Diğer seçeneklere kıyasla biraz daha yüksek başlangıç maliyeti.",
-          image: "/images/hizmetler/tartanZeminTenisKortu.jpg",
+          image: `${import.meta.env.BASE_URL}images/hizmetler/tartanZeminTenisKortu.jpg`,
         },
       ]}
       factors={[

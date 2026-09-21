@@ -112,7 +112,7 @@ export default function About() {
               }}
             >
               <img 
-                src="/images/hizmetler/tenisKortuYapimi.jpg" 
+                src={`${import.meta.env.BASE_URL}images/hizmetler/tenisKortuYapimi.jpg`} 
                 alt="Gözde İnşaat Ekibi Sahada"
                 style={{
                   position: "absolute",

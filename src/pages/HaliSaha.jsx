@@ -39,19 +39,19 @@ export default function HaliSaha() {
           name: "Sentetik Çim — Kum + SBR Granül Dolgulu",
           pros: "FIFA One Star / Two Star uyumlu, doğal çim hissi, uzun ömürlü.",
           cons: "Yaz aylarında yüzey ısınabilir; düzenli sulama ve bakım gerektirir.",
-          image: "/images/hizmetler/haliSaha.jpg",
+          image: `${import.meta.env.BASE_URL}images/hizmetler/haliSaha.jpg`,
         },
         {
           name: "Sentetik Çim — Kum Dolgulu (Kısa Hav)",
           pros: "Daha düşük maliyet, az bakım, hızlı kurulum.",
           cons: "Top yuvarlanma performansı granül dolgulu sistemlere göre biraz daha düşük olabilir.",
-          image: "/images/hizmetler/sentetikCimTenisKortu.jpg",
+          image: `${import.meta.env.BASE_URL}images/hizmetler/sentetikCimTenisKortu.jpg`,
         },
         {
           name: "Sentetik Çim — EPDM Granül Dolgulu",
           pros: "Amortisörlü zemin, sporcu güvenliği için ideal, renk seçeneği çeşitli.",
           cons: "SBR granüle kıyasla ilk yatırım maliyeti daha yüksektir.",
-          image: "/images/hizmetler/zemin.jpg",
+          image: `${import.meta.env.BASE_URL}images/hizmetler/zemin.jpg`,
         },
       ]}
       factors={[

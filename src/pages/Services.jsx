@@ -540,7 +540,7 @@ export default function Services() {
                 }}
               >
                 <img
-                  src="/images/hizmetler/cocukparki1.jpg"
+                  src={`${import.meta.env.BASE_URL}images/hizmetler/cocukparki1.jpg`}
                   alt="Çocuk oyun parkı zemin kaplama ve kurulumu"
                   loading="lazy"
                   style={{

@@ -6,7 +6,7 @@ export const SERVICES = [
     color: COLORS.rust,
     title: "Tenis kortu",
     spec: "18 × 36 m",
-    image: "/images/hizmetler/tenisKortuYapimi.jpg",
+    image: `${import.meta.env.BASE_URL}images/hizmetler/tenisKortuYapimi.jpg`,
     imageAlt: "İstanbul tenis kortu yapımı — Gözde İnşaat",
     desc: "Akrilik, tartan (EPDM) ve suni çim zemin seçenekleri, ITF standartlarında açık ve çelik konstrüksiyon kapalı kort yapımı.",
     detail:
@@ -17,7 +17,7 @@ export const SERVICES = [
     floors: [
       {
         name: "Akrilik Zemin",
-        image: "/images/hizmetler/akrilikZeminTenisKortu.jpeg",
+        image: `${import.meta.env.BASE_URL}images/hizmetler/akrilikZeminTenisKortu.jpeg`,
         badges: ["Ekonomik", "Kolay Bakım", "UV Dayanıklı"],
         badgeColors: ["accent", "warm", "blue"],
         forWho: "Okul, belediye, açık kort",
@@ -25,7 +25,7 @@ export const SERVICES = [
       },
       {
         name: "Tartan (EPDM) Zemin",
-        image: "/images/hizmetler/tartanZeminTenisKortu.jpg",
+        image: `${import.meta.env.BASE_URL}images/hizmetler/tartanZeminTenisKortu.jpg`,
         badges: ["Uzun Ömürlü", "Esnek", "Profesyonel"],
         badgeColors: ["accent", "warm", "warm"],
         forWho: "Kulüp, otel, kapalı salon",
@@ -33,7 +33,7 @@ export const SERVICES = [
       },
       {
         name: "Suni Çim Zemin",
-        image: "/images/hizmetler/tenisKortuYapimi.jpg",
+        image: `${import.meta.env.BASE_URL}images/hizmetler/tenisKortuYapimi.jpg`,
         badges: ["Çok Amaçlı", "Uygun Maliyet", "Kolay Bakım"],
         badgeColors: ["blue", "accent", "accent"],
         forWho: "Okul, site, amatör kullanım",
@@ -46,7 +46,7 @@ export const SERVICES = [
     color: COLORS.orange,
     title: "Basketbol sahası",
     spec: "28 × 15 m",
-    image: "/images/hizmetler/basketbolSahasi.jpg",
+    image: `${import.meta.env.BASE_URL}images/hizmetler/basketbolSahasi.jpg`,
     imageAlt: "Basketbol sahası yapımı — Gözde İnşaat",
     desc: "Akrilik, suni çim ve tartan zemin seçenekleri; 500'den fazla tamamlanmış sahayla açık ve kapalı uygulama.",
     detail:
@@ -57,7 +57,7 @@ export const SERVICES = [
     floors: [
       {
         name: "Akrilik Zemin",
-        image: "/images/hizmetler/akrilikZeminTenisKortu.jpeg",
+        image: `${import.meta.env.BASE_URL}images/hizmetler/akrilikZeminTenisKortu.jpeg`,
         badges: ["Ekonomik", "UV Dayanıklı", "Hızlı Kurulum"],
         badgeColors: ["accent", "blue", "warm"],
         forWho: "Açık sahalar, okul ve site",
@@ -65,7 +65,7 @@ export const SERVICES = [
       },
       {
         name: "Tartan (EPDM) Zemin",
-        image: "/images/hizmetler/tartanZeminTenisKortu.jpg",
+        image: `${import.meta.env.BASE_URL}images/hizmetler/tartanZeminTenisKortu.jpg`,
         badges: ["Şok Emici", "Uzun Ömürlü", "Profesyonel"],
         badgeColors: ["warm", "accent", "warm"],
         forWho: "Kulüp, kapalı ve açık saha",
@@ -73,7 +73,7 @@ export const SERVICES = [
       },
       {
         name: "Parke (Ahşap) Zemin",
-        image: "/images/hizmetler/zemin.jpg",
+        image: `${import.meta.env.BASE_URL}images/hizmetler/zemin.jpg`,
         badges: ["Profesyonel", "FIBA Standartı", "Uzun Ömürlü"],
         badgeColors: ["warm", "blue", "accent"],
         forWho: "Kapalı spor salonları",
@@ -86,7 +86,7 @@ export const SERVICES = [
     color: "#3B82F6",
     title: "Voleybol ve hentbol sahası",
     spec: "18 × 9 m",
-    image: "/images/hizmetler/zemin.jpg",
+    image: `${import.meta.env.BASE_URL}images/hizmetler/zemin.jpg`,
     imageAlt: "Voleybol sahası yapımı — Gözde İnşaat",
     desc: "Amatör ve profesyonel branşlar için uluslararası standartlarda file direği ve zemin sistemleri.",
     detail:
@@ -97,7 +97,7 @@ export const SERVICES = [
     floors: [
       {
         name: "Akrilik Zemin",
-        image: "/images/hizmetler/akrilikZeminTenisKortu.jpeg",
+        image: `${import.meta.env.BASE_URL}images/hizmetler/akrilikZeminTenisKortu.jpeg`,
         badges: ["Ekonomik", "Kolay Bakım", "Dayanıklı"],
         badgeColors: ["accent", "accent", "blue"],
         forWho: "Okul, site, açık saha",
@@ -105,7 +105,7 @@ export const SERVICES = [
       },
       {
         name: "Tartan (EPDM) Zemin",
-        image: "/images/hizmetler/tartanZeminTenisKortu.jpg",
+        image: `${import.meta.env.BASE_URL}images/hizmetler/tartanZeminTenisKortu.jpg`,
         badges: ["Şok Emici", "Esnek", "Uzun Ömürlü"],
         badgeColors: ["warm", "warm", "accent"],
         forWho: "Kulüp, kapalı salon",
@@ -118,7 +118,7 @@ export const SERVICES = [
     color: COLORS.lineDim,
     title: "Çok amaçlı saha",
     spec: "Zemine özel ölçü",
-    image: "/images/hizmetler/tenisKortuSahaZemin.jpeg",
+    image: `${import.meta.env.BASE_URL}images/hizmetler/tenisKortuSahaZemin.jpeg`,
     imageAlt: "Çok amaçlı spor sahası — Gözde İnşaat",
     desc: "Suni çim zemin üzerine tenis, basketbol ve voleybol çizgilerinin birlikte uygulandığı kombine sahalar.",
     detail:
@@ -129,7 +129,7 @@ export const SERVICES = [
     floors: [
       {
         name: "Suni Çim Zemin",
-        image: "/images/hizmetler/tenisKortuSahaZemin.jpeg",
+        image: `${import.meta.env.BASE_URL}images/hizmetler/tenisKortuSahaZemin.jpeg`,
         badges: ["Çok Amaçlı", "Uygun Maliyet", "Kolay Bakım"],
         badgeColors: ["blue", "accent", "accent"],
         forWho: "Okul, site, toplu konut",
@@ -137,7 +137,7 @@ export const SERVICES = [
       },
       {
         name: "Tartan (EPDM) Zemin",
-        image: "/images/hizmetler/tartanZeminTenisKortu.jpg",
+        image: `${import.meta.env.BASE_URL}images/hizmetler/tartanZeminTenisKortu.jpg`,
         badges: ["Uzun Ömürlü", "Renkli Seçenek", "Profesyonel"],
         badgeColors: ["accent", "warm", "warm"],
         forWho: "Kapalı spor salonları, kulüp",
@@ -150,7 +150,7 @@ export const SERVICES = [
     color: "#5A9E6F",
     title: "Halı saha",
     spec: "5'e5 / 7'ye7 / 11'e11",
-    image: "/images/hizmetler/haliSaha.jpg",
+    image: `${import.meta.env.BASE_URL}images/hizmetler/haliSaha.jpg`,
     imageAlt: "Halı saha yapımı sentetik çim — Gözde İnşaat",
     desc: "FIFA kalite standartlarında sentetik çim halı saha yapımı. 5'e 5'ten 11'e 11'e farklı formatlarda anahtar teslim uygulama.",
     detail:
@@ -161,7 +161,7 @@ export const SERVICES = [
     floors: [
       {
         name: "Açık Halı Saha",
-        image: "/images/hizmetler/acikhalisaha.jpg",
+        image: `${import.meta.env.BASE_URL}images/hizmetler/acikhalisaha.jpg`,
         badges: ["LED Aydınlatma", "Tel Örgü Dahil", "Gece Maçı"],
         badgeColors: ["warm", "accent", "blue"],
         forWho: "Ticari tesis, kulüp",
@@ -169,7 +169,7 @@ export const SERVICES = [
       },
       {
         name: "Kapalı Halı Saha",
-        image: "/images/hizmetler/kapalihalisaha.jpg",
+        image: `${import.meta.env.BASE_URL}images/hizmetler/kapalihalisaha.jpg`,
         badges: ["Her Mevsim", "Rüzgar Geçirmez", "Çelik Konstrüksiyon"],
         badgeColors: ["accent", "blue", "warm"],
         forWho: "Kış ayları için ticari tesis",
@@ -177,7 +177,7 @@ export const SERVICES = [
       },
       {
         name: "Saha Yapım Aşaması",
-        image: "/images/hizmetler/kapalihalisahayapilirken.jpg",
+        image: `${import.meta.env.BASE_URL}images/hizmetler/kapalihalisahayapilirken.jpg`,
         badges: ["Anahtar Teslim", "Çelik Montaj", "Altyapı"],
         badgeColors: ["warm", "warm", "accent"],
         forWho: "Profesyonel kulüp, belediye",
@@ -221,7 +221,7 @@ export const PROJECTS = [
     type: "Basketbol", 
     size: "Okul Sahası", 
     color: COLORS.orange,
-    image: "/images/projeler/istanbulcevrekoleji.jpg",
+    image: `${import.meta.env.BASE_URL}images/projeler/istanbulcevrekoleji.jpg`,
     date: "Ağustos 2026",
     desc: "Öğrencilerin spor aktivitelerini yapabilmesi için yenilenen, dayanıklı ve güvenli okul spor sahası.",
     chips: ["Okul Projesi", "Anahtar Teslim"]
@@ -232,7 +232,7 @@ export const PROJECTS = [
     type: "Çok amaçlı", 
     size: "Okul Sahası", 
     color: COLORS.lineDim,
-    image: "/images/projeler/ankaraincekdogakoleji.jpg",
+    image: `${import.meta.env.BASE_URL}images/projeler/ankaraincekdogakoleji.jpg`,
     date: "Eylül 2026",
     desc: "Öğrencilerin çeşitli spor aktivitelerini güvenle yapabilmesi için özel olarak tasarlanmış, anahtar teslim çok amaçlı okul spor sahası projesi.",
     chips: ["Okul Projesi", "Çok Amaçlı Saha", "Anahtar Teslim"]
@@ -243,7 +243,7 @@ export const PROJECTS = [
     type: "Çok amaçlı", 
     size: "Okul Sahası", 
     color: COLORS.lineDim,
-    image: "/images/projeler/acarkentdogakolejiistanbul_1.jpg",
+    image: `${import.meta.env.BASE_URL}images/projeler/acarkentdogakolejiistanbul_1.jpg`,
     date: "Ekim 2026",
     desc: "Acarkent Doğa Koleji kampüsüne özel inşa edilen, yenilenmiş ve dayanıklı zeminli okul spor sahası.",
     chips: ["Okul Projesi", "Anahtar Teslim", "Çok Amaçlı Saha"]
