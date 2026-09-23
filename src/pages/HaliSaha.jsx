@@ -1,139 +1,78 @@
+import { SERVICES } from "../data/content";
 import ServicePage from "../components/ServicePage";
 
-const GREEN = "#5A9E6F";
-
 export default function HaliSaha() {
+  const service = SERVICES.find((s) => s.tag === "Halı Saha");
+
+  if (!service) return null;
+
   return (
     <ServicePage
-      meta={{
-        title: "Halı Saha Yapımı ve Fiyatları | Gözde İnşaat",
-        description:
-          "5'e 5, 7'ye 7 ve 11'e 11 formatlarda sentetik çim halı saha yapımı. FIFA kalite standartlarında, aydınlatma ve çevre sistemi dahil anahtar teslim hizmet.",
-        canonical: "https://www.gozdeinsaat.com/hali-saha-yapimi",
-      }}
-      badge="Halı Saha"
-      badgeColor={GREEN}
-      h1="HALI SAHA YAPIMI"
-      intro="Halı saha yapımında uzun yıllık deneyimimizle; 5'e 5, 7'ye 7 ve 11'e 11 farklı
-      formatlarda, FIFA onaylı sentetik çim sistemleriyle tesisler inşa ediyoruz.
-      Zemin hazırlığından sentetik çim seçimine, aydınlatma sistemi montajından
-      çevre file ve tel örgüye kadar tüm süreci kendi ekibimizle yönetiyoruz."
-      forWhom={[
-        "Halı saha işletmecileri",
-        "Spor kulüpleri",
-        "Belediyeler & gençlik merkezleri",
-        "Okul ve üniversiteler",
-        "Tatil köyleri & oteller",
-      ]}
-      dimensions={[
-        { label: "5'e 5 format (uzunluk)", value: "25–30 m" },
-        { label: "5'e 5 format (genişlik)", value: "16–18 m" },
-        { label: "7'ye 7 format (uzunluk)", value: "45–50 m" },
-        { label: "7'ye 7 format (genişlik)", value: "30–35 m" },
-        { label: "11'e 11 format (uzunluk)", value: "90–120 m" },
-        { label: "11'e 11 format (genişlik)", value: "45–90 m" },
-        { label: "Kale ağzı çizgisi (standart)", value: "5 × 5 m" },
-      ]}
-      floors={[
-        {
-          name: "Sentetik Çim — Kum + SBR Granül Dolgulu",
-          pros: "FIFA One Star / Two Star uyumlu, doğal çim hissi, uzun ömürlü.",
-          cons: "Yaz aylarında yüzey ısınabilir; düzenli sulama ve bakım gerektirir.",
-          image: `${import.meta.env.BASE_URL}images/hizmetler/haliSaha.jpg`,
-        },
-        {
-          name: "Sentetik Çim — Kum Dolgulu (Kısa Hav)",
-          pros: "Daha düşük maliyet, az bakım, hızlı kurulum.",
-          cons: "Top yuvarlanma performansı granül dolgulu sistemlere göre biraz daha düşük olabilir.",
-          image: `${import.meta.env.BASE_URL}images/hizmetler/sentetikCimTenisKortu.jpg`,
-        },
-        {
-          name: "Sentetik Çim — EPDM Granül Dolgulu",
-          pros: "Amortisörlü zemin, sporcu güvenliği için ideal, renk seçeneği çeşitli.",
-          cons: "SBR granüle kıyasla ilk yatırım maliyeti daha yüksektir.",
-          image: `${import.meta.env.BASE_URL}images/hizmetler/zemin.jpg`,
-        },
-      ]}
-      factors={[
-        "Saha formatı (5'e 5 / 7'ye 7 / 11'e 11)",
-        "Sentetik çim hav yüksekliği ve dolgu tipi",
-        "Alt zemin durumu ve beton/asfalt hazırlığı",
-        "LED aydınlatma sistemi (direk sayısı ve yüksekliği)",
-        "Çevre file ağı yüksekliği ve tipi",
-        "Soyunma odası ve tesis yapımı dahil mi?",
-        "Yapım yapılacak ilin uzaklığı",
-      ]}
-      faqs={[
-        {
-          q: "Halı saha kaç yılda bir yenilenmesi gerekir?",
-          a: "Kaliteli sentetik çim, düzenli bakım ve sulama ile 8-12 yıl sorunsuz kullanılabilir. Ticari yoğun kullanımda bu süre 6-8 yıla inebilir.",
-        },
-        {
-          q: "Halı saha için zemin şartı nedir?",
-          a: "Beton veya asfalt alt zemin üzerine uygulama yapılır. Mevcut zemin yoksa önce zemin hazırlığı (hatıl betonu + asfalt) yapılması gerekir.",
-        },
-        {
-          q: "FIFA onaylı sentetik çim mi kullanılır?",
-          a: "Evet, FIFA Quality veya FIFA Quality Pro sertifikalı sentetik çim sistemleri kullanıyoruz. Sertifika gerektiren tesisler için belgeli çim seçenekleri sunulmaktadır.",
-        },
-        {
-          q: "Halı saha aydınlatması için kaç watt projektör gerekir?",
-          a: "5'e 5 format için genellikle 4 × 500-1000W LED projektör yeterlidir. 7'ye 7 ve 11'e 11 formatlarda direk yüksekliği ve sayısı ihtiyaca göre artırılır.",
-        },
-        {
-          q: "Halı saha yapımı ne kadar sürer?",
-          a: "Alt zemin hazır ise sentetik çim uygulaması ve çevre sistemi dahil ortalama 2-3 hafta içinde tamamlanır. Alt zemin hazırlığı gerekiyorsa bu süre uzar.",
-        },
-      ]}
+      service={service}
       relatedServices={[
-        { label: "Çok Amaçlı Saha Yapımı", to: "/cok-amacli-saha-yapimi" },
-        { label: "Tenis Kortu Yapımı", to: "/tenis-kortu-yapimi" },
-        { label: "Basketbol Sahası Yapımı", to: "/basketbol-sahasi-yapimi" },
+        {
+          name: "Tenis Kortu",
+          to: "/hizmetler/tenis-kortu-yapimi",
+          image: `${import.meta.env.BASE_URL}images/hizmetler/tenisKortuYapimi.jpg`,
+          spec: "18 × 36 m (ITF Normu)",
+          desc: "Akrilik ve EPDM zeminli açık ve çelik konstrüksiyon kapalı tenis kortları.",
+        },
+        {
+          name: "Basketbol Sahası",
+          to: "/hizmetler/basketbol-sahasi-yapimi",
+          image: `${import.meta.env.BASE_URL}images/hizmetler/basketbolSahasi.jpg`,
+          spec: "28 × 15 m (FIBA Normu)",
+          desc: "Akrilik ve EPDM kauçuk zeminli, hidrolik potalı açık ve kapalı basketbol sahaları.",
+        },
+        {
+          name: "Çok Amaçlı Saha",
+          to: "/hizmetler/cok-amacli-saha-yapimi",
+          image: `${import.meta.env.BASE_URL}images/hizmetler/tenisKortuSahaZemin.jpeg`,
+          spec: "Kombine Branşlar",
+          desc: "Tenis, basketbol ve voleybol çizgilerini tek alanda birleştiren yüksek verimli saha.",
+        },
+        {
+          name: "Voleybol Sahası",
+          to: "/hizmetler/voleybol-sahasi-yapimi",
+          image: `${import.meta.env.BASE_URL}images/projeler/ankaraincekdogakoleji.jpg`,
+          spec: "18 × 9 m (FIVB Normu)",
+          desc: "Teleskopik yüksekliği ayarlanabilir direkler ve elastik zeminli voleybol kortları.",
+        },
       ]}
       detailedSections={[
         {
-          type: "highlight",
-          title: "Halı Saha Çeşitleri",
-          items: [
-            "Açık Halı Saha Yapımı",
-            "Brandalı Kapalı Halı Saha",
-            "Sac Kaplama Kapalı Halı Saha",
-            "PVC Kaplama Kapalı Halı Saha",
-            "Profesyonel Suni Çim (FIFA Star)",
-          ],
-        },
-        {
-          type: "intro",
-          title: "Açık Halı Saha Yapımı",
-          body: "Özellikle yaz aylarında sıkça tercih edilen spor alanlardan birisi de açık halı sahalardır. Etrafı 6-7m yüksekliğinde, 3,5mm kalınlığında PVC kaplama tel örgü ile çevrilmiş olan ve özel halı saha aydınlatmalarının kullanıldığı bu alanlarda gece saatlerinde de maç yapılması sağlanmaktadır. Halı saha aydınlatmaları 400W halide projektör veya 150-200W LED projektör olarak tercih edilebilmektedir. Açık halı sahalarda 55mm suni çim tercih edilir.",
-        },
-        {
-          type: "intro",
-          title: "Kapalı Halı Saha Yapımı",
-          body: "En çok tercih edilen sistemlerden birisidir. Kardan, yağmurdan veya soğuktan korunmanız amacıyla kış aylarında tercih edebileceğiniz kapalı spor alanlarıdır. Halı sahanın üstünün tamamen kapatıldığı bu alanlarda rüzgarın da geçmeyeceğini görebilirsiniz. Karlı bölgelerde sac kaplama kapalı halı saha yapımını öneriyoruz. Kapalı halı saha yapımı için statik hesabı yapılmış çelik konstrüksiyon kullanılmalıdır.",
-        },
-        {
-          type: "grid",
-          title: "FIFA Star Profesyonel Çim Özellikleri",
-          items: [
-            "60mm Monofilament halı kullanılır",
-            "Monofilament halı omurgalı olmalıdır",
-            "Halı altına keçe yerine şokped serilir",
-            "Granül miktarı 14-15 kg/m² civarında olmalıdır",
-            "Yeşil veya gri EPDM granül kullanılır",
-            "FIFA 1 Star ve FIFA 2 Star belgesi alınabilir",
-          ],
-          cols: 2,
-        },
-        {
           type: "steps",
-          title: "Halı Saha Suni Çim Bakımı",
+          title: "Halı Saha Yapım Aşamaları",
           items: [
-            "Suni çim zeminin periyodik olarak fırçalanması (motorlu fırçalama veya manuel fırçalama)",
-            "Ortalama 6 ayda bir eksildikçe granül eklenmesi ve fırçalanması",
-            "Sıcak günlerde gün batımından sonra sulama işlemi yapılması",
-            "Saha içerisinde bulunan cam parçaları, sigara izmaritleri, yapraklar, çakıl gibi yabancı maddelerden temizlenme",
+            "Hafriyat ve Drenaj Altyapısı: Saha alanının hafriyatı, balıksırtı drenaj kanalları ve künk boru döşemesi.",
+            "Hatıl Beton ve Ankrajlar: Çelik kolon ve tel çit dikmeleri için çevre hatıl betonu dökümü.",
+            "Mıcır Taban ve Taş Tozu Serimi: 1 ve 2 numara kırmataş mıcır tabakasının silindirle sıkıştırılması ve taş tozu tesviyesi.",
+            "Sentetik Çim Halı Serimi: 55 mm omurgalı monofilament sentetik çimin serilerek ek yerlerinin yapıştırılması.",
+            "Kum ve SBR/EPDM Granül Dolgu: Metrekareye 30 kg fırınlanmış silis kumu ve 8–10 kg granül dolgunun özel makinelerle fırçalanması.",
+            "Çelik Konstrüksiyon, Ağ ve Projektörler: 6–7 m yüksekliğinde daldırma galvanizli tel örgü, tavan ağı, kale direkleri ve 400W halide projektör veya 150–200W LED aydınlatma montajı.",
           ],
+        },
+      ]}
+      faq={[
+        {
+          q: "Ticari bir halı saha için en ideal ölçü nedir?",
+          a: "Ticari işletmelerde en çok tercih edilen format 30.00 × 50.00 m (1.500 m² - 7'ye 7) veya 20.00 × 40.00 m (800 m² - 5'e 5 / 6'ya 6) ölçüleridir. Arazinizin durumuna göre özel boyutlandırma da yapılabilmektedir.",
+        },
+        {
+          q: "Kapalı halı saha çeşitleri nelerdir ve karlı bölgelerde hangi tip önerilir?",
+          a: "Kapalı halı sahalar statik hesabı yapılmış çelik konstrüksiyon üzerine Brandalı, Sac kaplama veya PVC kaplama olarak üçe ayrılır. En yaygın ve uygun maliyetli tür brandalı sahalar olmakla birlikte; karlı ve sert kış koşullarına sahip bölgelerde çökme riskini önlemek için sac kaplama kapalı halı saha yapımını öneriyoruz.",
+        },
+        {
+          q: "FIFA standartlarında kaliteli bir sentetik çim hangi teknik özelliklere sahip olmalıdır?",
+          a: "FIFA 1 Star ve FIFA 2 Star standartlarında en üst düzey sahalarda; 60mm monofilament ve omurgalı halı yapısı, halı altına keçe yerine şokped serimi, metrekare başına 14–15 kg/m² granül dolgusu ve güneş ışınlarına dayanıklı yeşil veya gri EPDM granül kullanımı gerekmektedir.",
+        },
+        {
+          q: "Sipariş edilen sentetik çim ne kadar sürede teslim edilir?",
+          a: "Gözde İnşaat güvencesiyle sipariş edilen sentetik çim maksimum 2 hafta içinde teslim edilir. Bu süreçte altyapı hazırlığı ve çevre hatıl imalatı tamamlanarak zaman kaybı önlenir.",
+        },
+        {
+          q: "Halı saha sentetik çim bakımı nasıl yapılır?",
+          a: "Sentetik çim zeminin ömrünü uzatmak için periyodik fırçalama (manuel veya motorlu) yapılmalı, ortalama 6 ayda bir eksildikçe granül eklenip fırçalanmalıdır. Sıcak yaz günlerinde gün batımından sonra sulama yapılmalı; saha cam kırıkları, taş, ağaç yaprakları ve sigara izmariti gibi yabancı maddelerden düzenli olarak arındırılmalıdır.",
         },
       ]}
     />

@@ -371,3 +371,104 @@ img {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* ── Service Page Responsive Grids ── */
+.floor-cards-responsive {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+@media (max-width: 900px) {
+  .floor-cards-responsive {
+    grid-template-columns: 1fr;
+  }
+}
+
+.quote-grid-responsive {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+@media (max-width: 900px) {
+  .quote-grid-responsive {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Ana Sayfa Bento & Timeline Responsive Grids ── */
+.home-hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+@media (max-width: 960px) {
+  .home-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.services-bento-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 24px;
+}
+@media (max-width: 960px) {
+  .services-bento-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.services-subgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 600px) {
+  .services-subgrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.process-timeline-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 64px;
+  align-items: flex-start;
+}
+@media (max-width: 960px) {
+  .process-timeline-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.references-home-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 960px) {
+  .references-home-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .references-home-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Projects Hero Equal-Height Grid Responsive */
+@media (max-width: 540px) {
+  .projects-hero-grid {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+  }
+  .projects-hero-grid > div {
+    height: 190px !important;
+  }
+}
+
+

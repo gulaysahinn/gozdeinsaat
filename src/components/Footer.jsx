@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import { Phone, Envelope, MapPin, ArrowUpRight } from "@phosphor-icons/react";
 
 const SERVICES_LINKS = [
-  { label: "Tenis Kortu Yapımı", to: "/tenis-kortu-yapimi" },
-  { label: "Basketbol Sahası Yapımı", to: "/basketbol-sahasi-yapimi" },
-  { label: "Voleybol Sahası Yapımı", to: "/voleybol-sahasi-yapimi" },
-  { label: "Çok Amaçlı Saha Yapımı", to: "/cok-amacli-saha-yapimi" },
-  { label: "Halı Saha Yapımı", to: "/hali-saha-yapimi" },
+  { label: "Tenis Kortu Yapımı", to: "/hizmetler/tenis-kortu-yapimi" },
+  { label: "Basketbol Sahası Yapımı", to: "/hizmetler/basketbol-sahasi-yapimi" },
+  { label: "Voleybol Sahası Yapımı", to: "/hizmetler/voleybol-sahasi-yapimi" },
+  { label: "Çok Amaçlı Saha Yapımı", to: "/hizmetler/cok-amacli-saha-yapimi" },
+  { label: "Halı Saha Yapımı", to: "/hizmetler/hali-saha-yapimi" },
 ];
 
 const QUICK_LINKS = [
@@ -74,7 +74,7 @@ export default function Footer() {
             }}
           >
             1988'den bu yana Türkiye genelinde tenis kortu, basketbol sahası,
-            voleybol sahası ve çok amaçlı spor alanları inşaatında güvenilir
+            voleybol sahası, halı saha ve çok amaçlı spor alanları inşaatında güvenilir
             çözüm ortağınız.
           </p>
           <span
@@ -324,12 +324,12 @@ export default function Footer() {
       >
         <span>
           © {new Date().getFullYear()} Gözde İnşaat. Tüm hakları saklıdır. {" | "}
-          <Link to="/gizlilik-politikasi" style={{ color: "var(--color-line-dim)", textDecoration: "none" }}>
+          <Link to="/hizmetler/gizlilik-politikasi" style={{ color: "var(--color-line-dim)", textDecoration: "none" }}>
             Gizlilik Politikası (KVKK)
           </Link>
         </span>
         <span style={{ fontSize: 11, fontWeight: 500 }}>
-          Tenis Kortu | Basketbol Sahası | Voleybol Sahası | Halı Saha
+          Tenis Kortu | Basketbol Sahası | Voleybol Sahası | Halı Saha | Çok Amaçlı Saha
         </span>
       </div>
     </footer>

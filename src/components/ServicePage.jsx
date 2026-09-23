@@ -1,594 +1,1210 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { CheckCircle, CaretRight, CaretDown, CaretUp, BookOpen, List, Info, Wrench, SquaresFour, Ruler } from "@phosphor-icons/react";
-import Badge from "../components/Badge";
-import QuoteForm from "../components/QuoteForm";
-import ScrollReveal from "../components/ScrollReveal";
+import {
+  CheckCircle,
+  CaretRight,
+  CaretDown,
+  CaretUp,
+  PhoneCall,
+  ShieldCheck,
+  MapPin,
+  Stack,
+  Drop,
+  Lightbulb,
+  Trophy,
+  ArrowRight,
+  SealCheck,
+  Clock
+} from "@phosphor-icons/react";
+import QuoteForm from "./QuoteForm";
+import FloorComparisonCards from "./FloorComparisonCards";
+import SportCourtDiagram from "./SportCourtDiagram";
+import ScrollReveal from "./ScrollReveal";
 
-/* ── ICON MAP ────────────────────────────────────────────────────────────── */
-const SECTION_ICONS = { intro: Info, steps: Wrench, grid: SquaresFour, highlight: List };
+// Mimari Süreç / Zaman Çizelgesi (Saha Yapım Aşamaları)
+function ProcessTimeline({ items, color, serviceTitle = "Spor Sahası", federation = "Uluslararası" }) {
+  const stepsData = [
+    {
+      stage: "01. Aşama",
+      title: "Hafriyat, Tesviye & Zemin Etüdü",
+      desc: "Arazi kotları lazerli nivo ile alınır, bitkisel toprak sıyrılır ve yağmur suyu tahliyesi için %0.5–%0.8 tek yöne meyil verilir.",
+    },
+    {
+      stage: "02. Aşama",
+      title: "Çevre Hatıl Betonu & Drenaj",
+      desc: "Saha çevresine 30×50 cm ebadında demir donatılı çevre hatıl betonu dökülür ve su tahliyesi için künk drenaj boruları döşenir.",
+    },
+    {
+      stage: "03. Aşama",
+      title: "Mıcır Sıkıştırma & Asfalt / Beton",
+      desc: "Silindir ile mekanik mıcır tabakası sıkıştırılır. Üzerine çift kat sıcak asfalt veya C25/30 perdahlı helikopterli beton tabanı serilir.",
+    },
+    {
+      stage: "04. Aşama",
+      title: "Sertifikalı Zemin Kaplama Uygulaması",
+      desc: "Primer astar, resurfacer dolgu katmanı, talebe göre darbe emici Cushion/EPDM kauçuk ve UV dayanımlı akrilik/çim katmanları uygulanır.",
+    },
+    {
+      stage: "05. Aşama",
+      title: "Çevre Tel Çit & LED Aydınlatma",
+      desc: "4.00 m yüksekliğinde daldırma galvaniz boru konstrüksiyonu, PVC kaplı helezon örgü tel ve asimetrik LED projektörler bağlanır.",
+    },
+    {
+      stage: "06. Aşama",
+      title: `Nizami Çizgiler, Ekipman & Devreye Alma`,
+      desc: `${serviceTitle} için resmi ${federation} normlarında oyun çizgileri çizilir, pota/direk/kale ekipmanları monte edilerek anahtar teslim devreye alınır.`,
+    },
+  ];
 
-/**
- * DetailSection — renders a single section of detailedSections based on its type.
- */
-function DetailSection({ sec, color }) {
-  const Icon = SECTION_ICONS[sec.type] ?? Info;
+  const effectiveSteps = Array.isArray(items) && items.length > 0
+    ? items.map((it, idx) => {
+        const parts = it.split(":");
+        return {
+          stage: `${idx + 1}. Aşama`,
+          title: parts[0]?.trim() || `Adım ${idx + 1}`,
+          desc: parts[1]?.trim() || it,
+        };
+      })
+    : stepsData;
 
   return (
-    <div
-      style={{
-        background: "var(--color-card)",
-        border: "1px solid var(--color-border)",
-        borderRadius: "var(--radius)",
-        overflow: "hidden",
-        boxShadow: "var(--shadow-card)",
-      }}
-    >
-      {/* Header bar */}
+    <div style={{ position: "relative", paddingLeft: "clamp(24px, 4vw, 40px)" }}>
+      {/* Sol Dikey Zaman Çizgisi Hattı */}
       <div
+        aria-hidden="true"
         style={{
-          borderLeft: `4px solid ${color}`,
-          padding: "18px 24px",
-          display: "flex",
-          alignItems: "center",
-          gap: 12,
-          borderBottom: "1px solid var(--color-border)",
-          background: "var(--color-bg-soft)",
+          position: "absolute",
+          left: 11,
+          top: 10,
+          bottom: 10,
+          width: 2,
+          background: "var(--color-border)",
         }}
-      >
-        <div
-          style={{
-            width: 32,
-            height: 32,
-            borderRadius: 8,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexShrink: 0,
-          }}
-        >
-          <Icon size={18} color={color} weight="fill" />
-        </div>
-        <h3
-          style={{
-            fontSize: 18,
-            margin: 0,
-            color: "var(--color-line)",
-          }}
-        >
-          {sec.title}
-        </h3>
-      </div>
+      />
 
-      {/* Body */}
-      <div style={{ padding: "24px" }}>
-        {sec.body && (
-          <p
-            style={{
-              fontSize: 15,
-              color: "var(--color-line-dim)",
-              lineHeight: 1.8,
-              marginBottom: sec.items?.length ? 24 : 0,
-            }}
-          >
-            {sec.body}
-          </p>
-        )}
+      <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+        {effectiveSteps.map((step, i) => (
+          <div key={i} style={{ position: "relative" }}>
+            {/* Zaman Noktası */}
+            <div
+              style={{
+                position: "absolute",
+                left: "clamp(-35px, -4vw, -51px)",
+                top: 4,
+                width: 24,
+                height: 24,
+                borderRadius: "50%",
+                background: "var(--color-card)",
+                border: `3px solid ${color}`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 0 0 4px var(--color-bg)",
+              }}
+            />
 
-        {/* Items — steps (no numbers, just cards) */}
-        {sec.type === "steps" && sec.items && (
-          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            {sec.items.map((item, i) => (
+            <div
+              style={{
+                background: "var(--color-card)",
+                border: "1px solid var(--color-border)",
+                padding: "20px 24px",
+                borderRadius: "var(--radius)",
+                boxShadow: "var(--shadow-card)",
+              }}
+            >
               <div
-                key={i}
                 style={{
-                  display: "flex",
-                  gap: 14,
-                  alignItems: "flex-start",
-                  background: "var(--color-bg-soft)",
-                  border: "1px solid var(--color-border)",
-                  borderRadius: "var(--radius-sm)",
-                  padding: "16px",
+                  fontSize: 12,
+                  fontWeight: 700,
+                  color: color,
+                  letterSpacing: "0.04em",
+                  marginBottom: 6,
                 }}
               >
-                <div style={{ width: 6, height: 6, background: color, borderRadius: "50%", marginTop: 8, flexShrink: 0 }} />
-                <span style={{ fontSize: 14, color: "var(--color-line-dim)", lineHeight: 1.7 }}>{item}</span>
+                {step.stage}
               </div>
-            ))}
-          </div>
-        )}
-
-        {/* Items — grid */}
-        {sec.type === "grid" && sec.items && (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: `repeat(${sec.cols ?? 2}, 1fr)`,
-              gap: 12,
-            }}
-            className="grid-responsive"
-          >
-            {sec.items.map((item, i) => (
-              <div
-                key={i}
+              <h4
                 style={{
-                  display: "flex",
-                  gap: 12,
-                  alignItems: "flex-start",
-                  background: "var(--color-bg-soft)",
-                  border: "1px solid var(--color-border)",
-                  borderRadius: "var(--radius-sm)",
-                  padding: "14px",
-                }}
-              >
-                <CheckCircle size={16} color={color} weight="fill" style={{ flexShrink: 0, marginTop: 2 }} />
-                <span style={{ fontSize: 14, color: "var(--color-line)", lineHeight: 1.6, fontWeight: 500 }}>{item}</span>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Items — highlight */}
-        {sec.type === "highlight" && sec.items && (
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-            {sec.items.map((item, i) => (
-              <span
-                key={i}
-                style={{
-                  background: "var(--color-bg-soft)",
-                  border: "1px solid var(--color-border)",
-                  borderRadius: "var(--radius-pill)",
-                  padding: "8px 16px",
-                  fontSize: 13,
+                  fontFamily: "'General Sans', sans-serif",
+                  fontSize: "1.15rem",
+                  fontWeight: 700,
                   color: "var(--color-line)",
+                  margin: "0 0 8px",
                 }}
               >
-                {item}
-              </span>
-            ))}
+                {step.title}
+              </h4>
+              <p
+                style={{
+                  fontSize: 14,
+                  lineHeight: 1.65,
+                  color: "var(--color-line-dim)",
+                  margin: 0,
+                }}
+              >
+                {step.desc}
+              </p>
+            </div>
           </div>
-        )}
+        ))}
       </div>
     </div>
   );
 }
 
 export default function ServicePage({
-  meta,
-  badge,
-  badgeColor = "var(--color-accent)",
-  h1,
-  intro,
-  forWhom,
-  dimensions,
-  floors,
-  factors,
-  faqs,
-  relatedServices,
-  detailedSections,
+  service,
+  relatedServices = [],
+  detailedSections = [],
+  factors = [],
+  comparisonTable = null,
+  faq = [],
 }) {
-  const [openFaq, setOpenFaq] = useState(null);
+  const [openFaq, setOpenFaq] = useState(-1);
+
+  if (!service) return null;
+  const cAccent = service.color || "var(--color-accent)";
+
+  // Branş ve Federasyon Tespiti
+  const tag = (service.tag || "").toLowerCase();
+  const title = (service.title || "").toLowerCase();
+
+  let federation = "ITF";
+  let diagramIntro = "Uluslararası Tenis Federasyonu (ITF) kurallarına göre bir tenis kortunun sadece oyun alanı değil, yan ve arka kaçış alanlarının da eksiksiz projelendirilmesi gerekir.";
+
+  if (tag.includes("basketbol") || title.includes("basketbol")) {
+    federation = "FIBA";
+    diagramIntro = "Uluslararası Basketbol Federasyonu (FIBA) standartlarına göre nizami bir basketbol sahası 28×15 m oyun alanı ve en az 2.00 m çevre güvenlik koridoru gerektirir.";
+  } else if (tag.includes("voleybol") || title.includes("voleybol")) {
+    federation = "FIVB";
+    diagramIntro = "Uluslararası Voleybol Federasyonu (FIVB) standartlarına göre nizami voleybol sahası 18×9 m oyun alanı ve çevre serbest güvenlik bölgesiyle inşa edilir.";
+  } else if (tag.includes("halı") || title.includes("halı")) {
+    federation = "FIFA";
+    diagramIntro = "FIFA kalite standartlarına göre ticari halı sahalar 5'e 5 (20×40 m) veya 7'ye 7 (30×50 m) formatlarında, oyuncu konforunu sağlayan kaçış alanlarıyla projelendirilir.";
+  } else if (tag.includes("çok") || title.includes("çok")) {
+    federation = "Çoklu Branş";
+    diagramIntro = "Tek bir alanda tenis, basketbol ve voleybol sporlarının oynanabilmesi için 18×36 m ebadında, renk kodlu nizami çizgilerle projelendirilir.";
+  }
+
+  // Doğal hedef kitle cümlesi (noktalı dizilimden temizlenmiş)
+  const naturalForWho = service.forWho
+    ? service.forWho.replace(/\s*·\s*/g, ", ")
+    : "Spor kulüpleri, butik oteller, eğitim kurumları ve prestijli site projeleri";
+
+  // Faktörler için branşa özel ikon ve açıklama listesi
+  const factorItems = [
+    {
+      title: "Zemin Tipi & Katman Kalınlığı",
+      desc: "Akrilik sert kaplama, 13 mm EPDM kauçuk tartan veya 55 mm sentetik çim sistem seçimi.",
+      Icon: Stack,
+    },
+    {
+      title: "Altyapı Drenajı & Lazerli Eğim",
+      desc: "Yağmur suyunun hızla tahliyesi için lazer kontrollü %0.5–%0.8 tek yöne meyil ve çevre hatıl drenajı.",
+      Icon: Drop,
+    },
+    {
+      title: "Asimetrik LED Aydınlatma (Lux)",
+      desc: "Gece maçlarında göz kamaşmasını önleyen, 300–500 Lux homojen dağılımlı spor aydınlatma projektörleri.",
+      Icon: Lightbulb,
+    },
+    {
+      title: "Çevre Tel Çit & Koruma Donanımı",
+      desc: "4.00–6.00 metre yüksekliğinde daldırma galvaniz boru konstrüksiyon ve PVC kaplı örgü tel.",
+      Icon: ShieldCheck,
+    },
+    {
+      title: `Uluslararası ${federation} Standart Uyumu`,
+      desc: `Resmi ${federation} federasyon normlarına, nizami kaçış paylarına ve sertifikalı zemin kriterlerine tam uygunluk.`,
+      Icon: Trophy,
+    },
+  ];
 
   return (
-    <>
+    <div style={{ background: "var(--color-bg)", color: "var(--color-line)" }}>
       <Helmet>
-        <title>{meta.title}</title>
-        <meta name="description" content={meta.description} />
-        <link rel="canonical" href={meta.canonical} />
+        <title>{service.title} Yapımı ve Fiyatları | Gözde İnşaat</title>
+        <meta
+          name="description"
+          content={`${service.title} yapımında 1988'den beri anahtar teslim mühendislik. ${service.desc}`}
+        />
       </Helmet>
 
-      {/* HERO */}
-      <section className="page-wrap" style={{ paddingTop: 80, paddingBottom: 80 }}>
-        <ScrollReveal>
-          <Badge color={badgeColor}>{badge}</Badge>
-          <h1
-            style={{
-              fontSize: "clamp(40px, 5vw, 56px)",
-              margin: "24px 0 24px",
-              lineHeight: 1.05,
-              letterSpacing: "-0.01em"
-            }}
-          >
-            {h1}
-          </h1>
-          <p
-            style={{
-              color: "var(--color-line-dim)",
-              fontSize: 16,
-              lineHeight: 1.8,
-              maxWidth: 720,
-              marginBottom: 40,
-            }}
-          >
-            {intro}
-          </p>
-
-          {/* Kimin için */}
-          {forWhom?.length > 0 && (
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-              {forWhom.map((f) => (
-                <span
-                  key={f}
-                  style={{
-                    border: "1px solid var(--color-border)",
-                    background: "var(--color-card)",
-                    borderRadius: "var(--radius-pill)",
-                    padding: "6px 14px",
-                    fontSize: 13,
-                    color: "var(--color-line)",
-                    fontWeight: 500
-                  }}
-                >
-                  {f}
-                </span>
-              ))}
-            </div>
-          )}
-        </ScrollReveal>
-      </section>
-
-      {/* ÖLÇÜLER + ZEMİN SEÇENEKLERİ */}
+      {/* ── 1. HERO BÖLÜMÜ ──────────────────────────────────────────────── */}
       <section
         style={{
+          position: "relative",
+          paddingTop: "clamp(80px, 9vw, 110px)",
+          paddingBottom: "clamp(50px, 7vw, 80px)",
           background: "var(--color-bg-soft)",
-          padding: "80px 32px",
-          borderTop: "1px solid var(--color-border)",
           borderBottom: "1px solid var(--color-border)",
+          overflow: "hidden",
         }}
       >
+        {/* Arka Plan Mimari Blueprint Deseni */}
         <div
+          aria-hidden="true"
           style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "1fr 1.8fr",
-            gap: 60,
+            position: "absolute",
+            inset: 0,
+            opacity: 0.35,
+            pointerEvents: "none",
+            backgroundImage: `
+              radial-gradient(circle at 80% 20%, rgba(31, 107, 74, 0.08) 0%, transparent 50%),
+              linear-gradient(to right, rgba(222, 218, 209, 0.6) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(222, 218, 209, 0.6) 1px, transparent 1px)
+            `,
+            backgroundSize: "100% 100%, 40px 40px, 40px 40px",
           }}
-          className="grid-responsive"
-        >
-          {/* Ölçüler */}
+        />
+
+        <div className="page-wrap" style={{ position: "relative", zIndex: 2 }}>
           <ScrollReveal>
-            <div>
-              <h2
-                style={{
-                  fontSize: 28,
-                  marginBottom: 24,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 12,
-                }}
-              >
-                <Ruler size={24} color={badgeColor} /> STANDART ÖLÇÜLER
-              </h2>
-              <div
-                style={{
-                  border: "1px solid var(--color-border)",
-                  borderRadius: "var(--radius)",
-                  overflow: "hidden",
-                  background: "var(--color-card)",
-                }}
-              >
-                {dimensions.map((d, i) => (
-                  <div
-                    key={d.label}
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "1fr 1fr",
-                      padding: "16px 20px",
-                      borderBottom:
-                        i < dimensions.length - 1
-                          ? "1px solid var(--color-border)"
-                          : "none",
-                    }}
-                  >
-                    <span style={{ fontSize: 14, color: "var(--color-line-dim)" }}>{d.label}</span>
-                    <span
-                      style={{
-                        fontSize: 14,
-                        fontFamily: "var(--font-mono)",
-                        color: "var(--color-line)",
-                        fontWeight: 600,
-                      }}
-                    >
-                      {d.value}
-                    </span>
-                  </div>
-                ))}
-              </div>
+            {/* Breadcrumb */}
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 20, fontSize: 13 }}>
+              <Link to="/" style={{ color: "var(--color-line-dim)", textDecoration: "none" }}>Ana Sayfa</Link>
+              <CaretRight size={12} color="var(--color-line-dim)" />
+              <Link to="/hizmetler" style={{ color: "var(--color-line-dim)", textDecoration: "none" }}>Hizmetlerimiz</Link>
+              <CaretRight size={12} color="var(--color-line-dim)" />
+              <span style={{ color: cAccent, fontWeight: 700 }}>{service.title}</span>
             </div>
-          </ScrollReveal>
 
-          {/* Zemin Seçenekleri */}
-          <ScrollReveal delay={0.1}>
-            <div>
-              <h2 style={{ fontSize: 28, marginBottom: 24 }}>ZEMİN SEÇENEKLERİ</h2>
-              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                {floors.map((f) => (
-                  <div
-                    key={f.name}
-                    style={{
-                      background: "var(--color-card)",
-                      border: "1px solid var(--color-border)",
-                      borderRadius: "var(--radius)",
-                      padding: 24,
-                      boxShadow: "var(--shadow-card)",
-                    }}
-                  >
-                    {f.image && (
-                      <img
-                        src={f.image}
-                        alt={f.name}
-                        style={{
-                          width: "100%",
-                          height: 180,
-                          objectFit: "cover",
-                          borderRadius: "var(--radius)",
-                          marginBottom: 16,
-                          border: "1px solid var(--color-border)",
-                        }}
-                      />
-                    )}
-                    <div
-                      style={{
-                        fontWeight: 600,
-                        fontSize: 16,
-                        marginBottom: 16,
-                        color: badgeColor,
-                      }}
-                    >
-                      {f.name}
-                    </div>
-                    <div
-                      style={{
-                        display: "grid",
-                        gridTemplateColumns: "1fr 1fr",
-                        gap: 20,
-                        fontSize: 14,
-                        color: "var(--color-line-dim)",
-                      }}
-                      className="grid-responsive"
-                    >
-                      <div>
-                        <div style={{ color: "var(--color-success)", fontSize: 12, marginBottom: 6, fontFamily: "var(--font-mono)", fontWeight: 600 }}>
-                          ARTILARI
-                        </div>
-                        <div style={{ lineHeight: 1.6 }}>{f.pros}</div>
-                      </div>
-                      <div>
-                        <div style={{ color: "var(--color-danger)", fontSize: 12, marginBottom: 6, fontFamily: "var(--font-mono)", fontWeight: 600 }}>
-                          EKSİLERİ
-                        </div>
-                        <div style={{ lineHeight: 1.6 }}>{f.cons}</div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* DETAYLI İÇERİK (SEO) */}
-      {detailedSections?.length > 0 && (
-        <section
-          style={{
-            padding: "80px 32px",
-          }}
-        >
-          <div style={{ maxWidth: 1080, margin: "0 auto" }}>
-            <ScrollReveal>
-              <div style={{ marginBottom: 40, display: "flex", alignItems: "center", gap: 16 }}>
-                <div
-                  style={{
-                    width: 48,
-                    height: 48,
-                    borderRadius: "var(--radius-sm)",
-                    background: "var(--color-bg-soft)",
-                    border: "1px solid var(--color-border)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                  }}
-                >
-                  <BookOpen size={24} color={badgeColor} weight="fill" />
-                </div>
-                <div>
-                  <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: badgeColor, letterSpacing: "0.1em", marginBottom: 4, fontWeight: 600 }}>DETAYLI BİLGİ</div>
-                  <h2 style={{ fontSize: 32, margin: 0, lineHeight: 1 }}>TEKNİK DOKÜMAN</h2>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
-              {detailedSections.map((sec, idx) => (
-                <ScrollReveal key={idx} delay={0.05}>
-                  <DetailSection sec={sec} color={badgeColor} />
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* FİYATI ETKİLEYEN FAKTÖRLER */}
-      <section
-        style={{
-          background: "var(--color-bg-soft)",
-          padding: "80px 32px",
-          borderTop: "1px solid var(--color-border)",
-          borderBottom: "1px solid var(--color-border)",
-        }}
-      >
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <ScrollReveal>
-            <h2 style={{ fontSize: 32, marginBottom: 16 }}>FİYATI ETKİLEYEN FAKTÖRLER</h2>
-            <p
+            <div
               style={{
-                color: "var(--color-line-dim)",
-                fontSize: 16,
-                marginBottom: 40,
-                maxWidth: 600,
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                gap: "clamp(32px, 5vw, 64px)",
+                alignItems: "center",
               }}
             >
-              Net maliyet, aşağıdaki değişkenlere göre şekillenir. Kesin fiyat
-              için ücretsiz keşif talebinde bulunabilirsiniz.
-            </p>
-          </ScrollReveal>
-          
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: 16,
-            }}
-          >
-            {factors.map((f, i) => (
-              <ScrollReveal key={i} delay={i * 0.05}>
+              {/* Sol: Metinler & Aksiyonlar */}
+              <div>
                 <div
                   style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
+                    padding: "4px 12px",
                     background: "var(--color-card)",
                     border: "1px solid var(--color-border)",
-                    borderRadius: "var(--radius)",
-                    padding: "16px 20px",
-                    display: "flex",
-                    gap: 12,
-                    alignItems: "center",
-                    boxShadow: "var(--shadow-card)"
+                    marginBottom: 16,
+                    fontSize: 12,
+                    fontWeight: 700,
+                    color: cAccent,
                   }}
                 >
-                  <CheckCircle
-                    size={20}
-                    color={badgeColor}
-                    weight="fill"
-                    style={{ flexShrink: 0 }}
-                  />
-                  <span style={{ fontSize: 15, color: "var(--color-line)" }}>{f}</span>
+                  <SealCheck size={16} weight="fill" />
+                  <span>1988'DEN BUGÜNE • {federation} Standartlarında Uygulama</span>
                 </div>
-              </ScrollReveal>
-            ))}
-          </div>
+
+                <h1
+                  style={{
+                    fontFamily: "'General Sans', sans-serif",
+                    fontSize: "clamp(32px, 4.5vw, 54px)",
+                    fontWeight: 700,
+                    color: "var(--color-line)",
+                    lineHeight: 1.1,
+                    letterSpacing: "-0.02em",
+                    margin: "0 0 20px",
+                  }}
+                >
+                  {service.title} Yapımı ve Anahtar Teslim Çözümler
+                </h1>
+
+                <p style={{ fontSize: "1.05rem", color: "var(--color-line-dim)", lineHeight: 1.7, margin: "0 0 20px" }}>
+                  {service.desc} {service.detail}
+                </p>
+
+                {/* Açık / Kapalı Saha Tipleri Ayrımı */}
+                {service.courtTypes && service.courtTypes.length > 0 && (
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 24 }}>
+                    {service.courtTypes.map((ct, idx) => (
+                      <span
+                        key={idx}
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 6,
+                          padding: "6px 12px",
+                          background: "var(--color-card)",
+                          border: "1px solid var(--color-border)",
+                          fontSize: 13,
+                          fontWeight: 600,
+                          color: "var(--color-line)",
+                          borderRadius: 2,
+                        }}
+                      >
+                        <span style={{ width: 6, height: 6, borderRadius: "50%", background: cAccent }} />
+                        {ct}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                {/* Hedef Kitle Cümlesi */}
+                <div
+                  style={{
+                    padding: "12px 16px",
+                    background: "var(--color-card)",
+                    border: "1px solid var(--color-border)",
+                    marginBottom: 32,
+                    fontSize: 14,
+                    color: "var(--color-line-dim)",
+                    lineHeight: 1.5,
+                  }}
+                >
+                  <strong style={{ color: "var(--color-line)" }}>İdeal Projeler: </strong>
+                  {naturalForWho} için zemin etüdünden ekipman montajına kadar anahtar teslim inşa edilir.
+                </div>
+
+                {/* Aksiyon Butonları */}
+                <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+                  <button
+                    onClick={() => document.getElementById("teklif-formu")?.scrollIntoView({ behavior: "smooth" })}
+                    className="btn-primary"
+                    style={{ gap: 8 }}
+                  >
+                    Ücretsiz Keşif & Fiyat Teklifi Al
+                    <ArrowRight size={15} weight="bold" />
+                  </button>
+
+                  <a
+                    href="tel:+902163110994"
+                    style={{
+                      background: "var(--color-card)",
+                      color: "var(--color-line)",
+                      border: "1px solid var(--color-border)",
+                      padding: "14px 24px",
+                      fontSize: 14,
+                      fontWeight: 600,
+                      textDecoration: "none",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
+                    }}
+                  >
+                    <PhoneCall size={18} color={cAccent} weight="fill" />
+                    0 (216) 311 09 94
+                  </a>
+                </div>
+              </div>
+
+              {/* Sağ: Gerçek Saha Görseli */}
+              <div style={{ position: "relative" }}>
+                <div
+                  style={{
+                    position: "relative",
+                    aspectRatio: "4/3",
+                    border: "1px solid var(--color-border)",
+                    background: "var(--color-card)",
+                    overflow: "hidden",
+                    boxShadow: "var(--shadow-md)",
+                  }}
+                >
+                  <img
+                    src={service.image}
+                    alt={service.imageAlt || service.title}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: 14,
+                      left: 14,
+                      background: "rgba(26, 29, 32, 0.88)",
+                      backdropFilter: "blur(6px)",
+                      color: "#FFFFFF",
+                      padding: "8px 14px",
+                      fontSize: 12,
+                      fontWeight: 600,
+                    }}
+                  >
+                    Nizami {service.spec} • Açık & Kapalı Çelik Konstrüksiyon Saha
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* SSS */}
-      <section className="page-wrap" style={{ paddingTop: 80, paddingBottom: 80 }}>
-        <ScrollReveal>
-          <h2 style={{ fontSize: 32, marginBottom: 40 }}>SIK SORULAN SORULAR</h2>
-        </ScrollReveal>
-        
-        <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 800 }}>
-          {faqs.map((faq, i) => (
-            <ScrollReveal key={i} delay={i * 0.05}>
+      {/* ── 2. STANDART ÖLÇÜLER & TEKNİK ŞEMA (BRANŞA ÖZEL ÖLÇEKLİ ÇİZİM) ───── */}
+      <section style={{ padding: "clamp(60px, 8vw, 90px) 0", background: "var(--color-bg)" }}>
+        <div className="page-wrap">
+          <ScrollReveal>
+            <div style={{ maxWidth: 740, marginBottom: 36 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: cAccent, marginBottom: 8 }}>
+                Mühendislik & Şartname Normları
+              </div>
+              <h2
+                style={{
+                  fontFamily: "'General Sans', sans-serif",
+                  fontSize: "clamp(26px, 3.2vw, 38px)",
+                  fontWeight: 700,
+                  margin: "0 0 14px",
+                  color: "var(--color-line)",
+                }}
+              >
+                Standart {service.title} Ölçüleri ve Altyapı Bileşenleri
+              </h2>
+              <p style={{ fontSize: 16, lineHeight: 1.7, color: "var(--color-line-dim)", margin: 0 }}>
+                {diagramIntro}
+              </p>
+            </div>
+
+            {/* Branşa Özel Ölçekli Saha Çizimi */}
+            <SportCourtDiagram service={service} />
+
+            {/* Dahil Olan Hizmetler (Kapsam) */}
+            {service.includes && service.includes.length > 0 && (
               <div
                 style={{
                   background: "var(--color-card)",
-                  border: `1px solid ${openFaq === i ? badgeColor : "var(--color-border)"}`,
-                  borderRadius: "var(--radius)",
-                  overflow: "hidden",
-                  transition: "border-color 0.2s, box-shadow 0.2s",
-                  boxShadow: openFaq === i ? "var(--shadow-md)" : "var(--shadow-card)",
+                  border: "1px solid var(--color-border)",
+                  padding: "clamp(20px, 3vw, 32px)",
+                  marginTop: 32,
                 }}
               >
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                <h4
                   style={{
-                    width: "100%",
-                    background: "transparent",
-                    padding: "20px 24px",
-                    textAlign: "left",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    gap: 16,
+                    fontFamily: "'General Sans', sans-serif",
+                    fontSize: 17,
+                    fontWeight: 700,
+                    color: "var(--color-line)",
+                    margin: "0 0 18px",
                   }}
                 >
-                  <span style={{ fontSize: 15, fontWeight: 600, color: "var(--color-line)" }}>
-                    {faq.q}
-                  </span>
-                  {openFaq === i ? (
-                    <CaretUp size={18} color={badgeColor} style={{ flexShrink: 0 }} />
-                  ) : (
-                    <CaretDown size={18} color="var(--color-line-dim)" style={{ flexShrink: 0 }} />
-                  )}
-                </button>
-                {openFaq === i && (
-                  <div
-                    style={{
-                      padding: "0 24px 24px",
-                      fontSize: 15,
-                      color: "var(--color-line-dim)",
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    {faq.a}
-                  </div>
-                )}
+                  Anahtar Teslim Hizmet Kapsamına Dahil Olanlar
+                </h4>
+
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+                    gap: 14,
+                  }}
+                >
+                  {service.includes.map((inc, i) => (
+                    <div key={i} style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                      <CheckCircle size={18} color={cAccent} weight="fill" style={{ flexShrink: 0 }} />
+                      <span style={{ fontSize: 14, color: "var(--color-line)", fontWeight: 500 }}>{inc}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </ScrollReveal>
-          ))}
+            )}
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* İLGİLİ HİZMETLER */}
-      {relatedServices?.length > 0 && (
+      {/* ── 3. ZEMİN SEÇENEKLERİ (HİYERARŞİK SUNUM) ───────────────────────── */}
+      {service.floors && service.floors.length > 0 && (
         <section
           style={{
-            background: "var(--color-bg-soft)",
-            padding: "60px 32px",
+            padding: "clamp(60px, 8vw, 90px) 0",
+            background: "var(--color-card)",
             borderTop: "1px solid var(--color-border)",
             borderBottom: "1px solid var(--color-border)",
           }}
         >
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div className="page-wrap">
             <ScrollReveal>
-              <p
+              <div style={{ maxWidth: 740, marginBottom: 40 }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: cAccent, marginBottom: 8 }}>
+                  Zemin Mühendisliği
+                </div>
+                <h2
+                  style={{
+                    fontFamily: "'General Sans', sans-serif",
+                    fontSize: "clamp(26px, 3.2vw, 38px)",
+                    fontWeight: 700,
+                    margin: "0 0 14px",
+                    color: "var(--color-line)",
+                  }}
+                >
+                  Kullanım Amacına Göre Zemin Seçenekleri
+                </h2>
+                <p style={{ fontSize: 16, lineHeight: 1.7, color: "var(--color-line-dim)", margin: 0 }}>
+                  Top sekme performansı, oyuncu güvenliği ve bütçenize göre sertifikalı zemin sistemlerimizi
+                  uluslararası federasyon normlarında uyguluyoruz.
+                </p>
+              </div>
+
+              {/* Zemin Kartları */}
+              <FloorComparisonCards floors={service.floors} color={cAccent} />
+            </ScrollReveal>
+          </div>
+        </section>
+      )}
+
+      {/* ── AÇIK / KAPALI TEKNİK ÖZELLİK TABLOSU ─────────────────────────── */}
+      {comparisonTable && (
+        <section
+          style={{
+            padding: "clamp(60px, 8vw, 90px) 0",
+            background: "var(--color-bg)",
+            borderBottom: "1px solid var(--color-border)",
+          }}
+        >
+          <div className="page-wrap">
+            <ScrollReveal>
+              <div style={{ maxWidth: 740, marginBottom: 36 }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: cAccent, marginBottom: 8 }}>
+                  {comparisonTable.badge || "Mühendislik & Şartname Karşılaştırması"}
+                </div>
+                <h2
+                  style={{
+                    fontFamily: "'General Sans', sans-serif",
+                    fontSize: "clamp(26px, 3.2vw, 38px)",
+                    fontWeight: 700,
+                    margin: "0 0 14px",
+                    color: "var(--color-line)",
+                  }}
+                >
+                  {comparisonTable.title || "Açık ve Kapalı Kort Teknik Karşılaştırması"}
+                </h2>
+                <p style={{ fontSize: 16, lineHeight: 1.7, color: "var(--color-line-dim)", margin: 0 }}>
+                  {comparisonTable.subtitle ||
+                    "Kullanım amacı, iklim şartları ve bütçenize göre açık tel örgülü veya kapalı çelik konstrüksiyon kort teknik spesifikasyonları."}
+                </p>
+              </div>
+
+              {/* Tablo Konteyneri */}
+              <div
                 style={{
-                  fontSize: 12,
-                  color: "var(--color-line-dim)",
-                  marginBottom: 16,
-                  fontFamily: "var(--font-mono)",
-                  fontWeight: 600,
-                  letterSpacing: "0.05em",
-                  textTransform: "uppercase"
+                  background: "var(--color-card)",
+                  border: "1px solid var(--color-border)",
+                  borderRadius: "var(--radius)",
+                  overflowX: "auto",
+                  boxShadow: "var(--shadow-card)",
                 }}
               >
-                İLGİLİ HİZMETLER
+                <table
+                  style={{
+                    width: "100%",
+                    borderCollapse: "collapse",
+                    textAlign: "left",
+                    minWidth: 640,
+                  }}
+                >
+                  <thead>
+                    <tr style={{ background: "var(--color-bg-soft)", borderBottom: "2px solid var(--color-border)" }}>
+                      <th
+                        style={{
+                          padding: "18px 24px",
+                          fontSize: 14,
+                          fontWeight: 700,
+                          color: "var(--color-line)",
+                          width: "22%",
+                          borderRight: "1px solid var(--color-border)",
+                        }}
+                      >
+                        Teknik Kriter
+                      </th>
+                      <th
+                        style={{
+                          padding: "18px 24px",
+                          fontSize: 14,
+                          fontWeight: 700,
+                          color: cAccent,
+                          width: "39%",
+                          borderRight: "1px solid var(--color-border)",
+                        }}
+                      >
+                        <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+                          <span>Açık Tenis Kortu</span>
+                          <span
+                            style={{
+                              fontSize: 11,
+                              padding: "2px 8px",
+                              background: "var(--color-bg)",
+                              border: "1px solid var(--color-border)",
+                              color: "var(--color-line-dim)",
+                              borderRadius: 2,
+                            }}
+                          >
+                            Tel Örgülü Açık Saha
+                          </span>
+                        </div>
+                      </th>
+                      <th
+                        style={{
+                          padding: "18px 24px",
+                          fontSize: 14,
+                          fontWeight: 700,
+                          color: cAccent,
+                          width: "39%",
+                        }}
+                      >
+                        <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+                          <span>Kapalı Tenis Kortu</span>
+                          <span
+                            style={{
+                              fontSize: 11,
+                              padding: "2px 8px",
+                              background: "var(--color-bg)",
+                              border: "1px solid var(--color-border)",
+                              color: "var(--color-line-dim)",
+                              borderRadius: 2,
+                            }}
+                          >
+                            Çelik Konstrüksiyon
+                          </span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {comparisonTable.rows.map((row, idx) => (
+                      <tr
+                        key={idx}
+                        style={{
+                          borderBottom: idx === comparisonTable.rows.length - 1 ? "none" : "1px solid var(--color-border)",
+                          background: idx % 2 === 0 ? "transparent" : "var(--color-bg-soft)",
+                          transition: "background 0.15s ease",
+                        }}
+                      >
+                        <td
+                          style={{
+                            padding: "18px 24px",
+                            fontSize: 14,
+                            fontWeight: 700,
+                            color: "var(--color-line)",
+                            verticalAlign: "top",
+                            borderRight: "1px solid var(--color-border)",
+                          }}
+                        >
+                          {row.feature}
+                        </td>
+                        <td
+                          style={{
+                            padding: "18px 24px",
+                            fontSize: 14,
+                            color: "var(--color-line)",
+                            lineHeight: 1.6,
+                            verticalAlign: "top",
+                            borderRight: "1px solid var(--color-border)",
+                          }}
+                        >
+                          {row.openCourt}
+                        </td>
+                        <td
+                          style={{
+                            padding: "18px 24px",
+                            fontSize: 14,
+                            color: "var(--color-line)",
+                            lineHeight: 1.6,
+                            verticalAlign: "top",
+                          }}
+                        >
+                          {row.indoorCourt}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+      )}
+
+      {/* ── 4. SAHA YAPIM AŞAMALARI (GERÇEK ZAMAN ÇİZELGESİ) ───────────────── */}
+      <section style={{ padding: "clamp(60px, 8vw, 90px) 0", background: comparisonTable ? "var(--color-card)" : "var(--color-bg)" }}>
+        <div className="page-wrap">
+          <ScrollReveal>
+            <div style={{ maxWidth: 740, marginBottom: 44 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: cAccent, marginBottom: 8 }}>
+                İş Akışı & Proje Takvimi
+              </div>
+              <h2
+                style={{
+                  fontFamily: "'General Sans', sans-serif",
+                  fontSize: "clamp(26px, 3.2vw, 38px)",
+                  fontWeight: 700,
+                  margin: "0 0 14px",
+                  color: "var(--color-line)",
+                }}
+              >
+                Saha Yapım Süreci ve Katman Aşamaları
+              </h2>
+              <p style={{ fontSize: 16, lineHeight: 1.7, color: "var(--color-line-dim)", margin: 0 }}>
+                Hafriyattan anahtar teslim devreye almaya kadar her aşama inşaat mühendislerimiz ve şantiye şeflerimizin
+                kontrolünde yürütülür.
               </p>
-              <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                {relatedServices.map((s) => (
-                  <Link
-                    key={s.to}
-                    to={s.to}
+            </div>
+
+            {/* Zaman Çizelgesi */}
+            <ProcessTimeline
+              items={detailedSections.find((s) => s.type === "steps")?.items}
+              color={cAccent}
+              serviceTitle={service.title}
+              federation={federation}
+            />
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── 5. MALİYET VE KALİTE FAKTÖRLERİ (FARKLILAŞMIŞ GÖRSEL DİL) ──────── */}
+      <section
+        style={{
+          padding: "clamp(60px, 8vw, 90px) 0",
+          background: "var(--color-card)",
+          borderTop: "1px solid var(--color-border)",
+          borderBottom: "1px solid var(--color-border)",
+        }}
+      >
+        <div className="page-wrap">
+          <ScrollReveal>
+            <div style={{ maxWidth: 740, marginBottom: 40 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: cAccent, marginBottom: 8 }}>
+                Fiyatlandırma & Dayanıklılık Kriterleri
+              </div>
+              <h2
+                style={{
+                  fontFamily: "'General Sans', sans-serif",
+                  fontSize: "clamp(26px, 3.2vw, 38px)",
+                  fontWeight: 700,
+                  margin: "0 0 14px",
+                  color: "var(--color-line)",
+                }}
+              >
+                Maliyet ve Kaliteyi Belirleyen 5 Temel Unsur
+              </h2>
+              <p style={{ fontSize: 16, lineHeight: 1.7, color: "var(--color-line-dim)", margin: 0 }}>
+                Bir spor sahasının uzun yıllar çatlamadan ve su tutmadan hizmet vermesini sağlayan kritik teknik kriterler:
+              </p>
+            </div>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                gap: 20,
+              }}
+            >
+              {factorItems.map((f, i) => {
+                const IconComponent = f.Icon;
+                return (
+                  <div
+                    key={i}
                     style={{
-                      background: "var(--color-card)",
+                      background: "var(--color-bg)",
+                      padding: 24,
                       border: "1px solid var(--color-border)",
-                      borderRadius: "var(--radius-sm)",
-                      padding: "10px 18px",
-                      fontSize: 14,
-                      color: "var(--color-line)",
-                      fontWeight: 500,
-                      textDecoration: "none",
                       display: "flex",
-                      alignItems: "center",
-                      gap: 8,
-                      transition: "all 0.2s",
-                      boxShadow: "var(--shadow-sm)"
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = badgeColor;
-                      e.currentTarget.style.color = badgeColor;
-                      e.currentTarget.style.transform = "translateY(-2px)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = "var(--color-border)";
-                      e.currentTarget.style.color = "var(--color-line)";
-                      e.currentTarget.style.transform = "translateY(0)";
+                      flexDirection: "column",
+                      justifyContent: "space-between",
                     }}
                   >
-                    {s.label} <CaretRight size={14} weight="bold" />
+                    <div>
+                      <div
+                        style={{
+                          width: 40,
+                          height: 40,
+                          background: "var(--color-card)",
+                          border: "1px solid var(--color-border)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          marginBottom: 16,
+                          color: cAccent,
+                        }}
+                      >
+                        <IconComponent size={22} weight="bold" />
+                      </div>
+                      <h4
+                        style={{
+                          fontFamily: "'General Sans', sans-serif",
+                          fontSize: 17,
+                          fontWeight: 700,
+                          color: "var(--color-line)",
+                          margin: "0 0 8px",
+                        }}
+                      >
+                        {f.title}
+                      </h4>
+                      <p style={{ fontSize: 14, color: "var(--color-line-dim)", lineHeight: 1.6, margin: 0 }}>
+                        {f.desc}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── 6. SSS (NUMARASIZ, SADE VE ŞIK ACCORDION) ──────────────────────── */}
+      {faq && faq.length > 0 && (
+        <section style={{ padding: "clamp(60px, 8vw, 90px) 0", background: "var(--color-bg)" }}>
+          <div className="page-wrap" style={{ maxWidth: 860 }}>
+            <ScrollReveal>
+              <div style={{ textAlign: "center", marginBottom: 40 }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: cAccent, marginBottom: 8 }}>
+                  Merak Edilenler
+                </div>
+                <h2
+                  style={{
+                    fontFamily: "'General Sans', sans-serif",
+                    fontSize: "clamp(26px, 3.2vw, 36px)",
+                    fontWeight: 700,
+                    margin: 0,
+                    color: "var(--color-line)",
+                  }}
+                >
+                  Sıkça Sorulan Sorular
+                </h2>
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                {faq.map((item, i) => {
+                  const isOpen = openFaq === i;
+                  return (
+                    <div
+                      key={i}
+                      style={{
+                        border: `1px solid ${isOpen ? cAccent : "var(--color-border)"}`,
+                        background: "var(--color-card)",
+                        overflow: "hidden",
+                        transition: "border-color 0.2s",
+                      }}
+                    >
+                      <button
+                        onClick={() => setOpenFaq(isOpen ? -1 : i)}
+                        style={{
+                          width: "100%",
+                          padding: "20px 24px",
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          background: isOpen ? "var(--color-bg-soft)" : "transparent",
+                          border: "none",
+                          cursor: "pointer",
+                          textAlign: "left",
+                          gap: 16,
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontFamily: "'General Sans', sans-serif",
+                            fontSize: "1.05rem",
+                            fontWeight: 600,
+                            color: isOpen ? cAccent : "var(--color-line)",
+                          }}
+                        >
+                          {item.q}
+                        </span>
+                        {isOpen ? (
+                          <CaretUp size={18} color={cAccent} weight="bold" />
+                        ) : (
+                          <CaretDown size={18} color="var(--color-line-dim)" weight="bold" />
+                        )}
+                      </button>
+
+                      {isOpen && (
+                        <div
+                          style={{
+                            padding: "16px 24px 24px",
+                            color: "var(--color-line-dim)",
+                            fontSize: 15,
+                            lineHeight: 1.7,
+                            borderTop: "1px solid var(--color-border)",
+                          }}
+                        >
+                          {item.a}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+      )}
+
+      {/* ── 7. TEKLİF FORMU & GÜVEN (KOYU YEŞİL ZEMİN ÜZERİNE GÜÇLENDİRİLMİŞ) ── */}
+      <section
+        id="teklif-formu"
+        style={{
+          background: "var(--color-accent-dark, #154D35)",
+          color: "#FFFFFF",
+          padding: "clamp(70px, 9vw, 100px) 0",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            opacity: 0.08,
+            backgroundImage: `
+              radial-gradient(circle at 10% 30%, #FFFFFF 0%, transparent 60%),
+              linear-gradient(to right, #FFFFFF 1px, transparent 1px),
+              linear-gradient(to bottom, #FFFFFF 1px, transparent 1px)
+            `,
+            backgroundSize: "100% 100%, 36px 36px, 36px 36px",
+          }}
+        />
+
+        <div className="page-wrap" style={{ position: "relative", zIndex: 2 }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+              gap: "clamp(40px, 6vw, 70px)",
+              alignItems: "center",
+            }}
+          >
+            {/* Sol: Güven Maddeleri ve Keşif Mesajı */}
+            <ScrollReveal>
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "4px 14px",
+                  background: "rgba(255, 255, 255, 0.12)",
+                  fontSize: 12,
+                  fontWeight: 600,
+                  color: "#A7F3D0",
+                  marginBottom: 20,
+                }}
+              >
+                <ShieldCheck size={16} weight="fill" />
+                <span>38 Yıllık Taahhüt Güvencesi</span>
+              </div>
+
+              <h2
+                style={{
+                  fontFamily: "'General Sans', sans-serif",
+                  fontSize: "clamp(28px, 4vw, 44px)",
+                  fontWeight: 700,
+                  color: "#FFFFFF",
+                  lineHeight: 1.15,
+                  margin: "0 0 20px",
+                }}
+              >
+                {service.title} Projeniz İçin <br /> Ücretsiz Keşif ve Teklif Alın
+              </h2>
+
+              <p
+                style={{
+                  color: "rgba(255, 255, 255, 0.85)",
+                  fontSize: "1.05rem",
+                  lineHeight: 1.7,
+                  margin: "0 0 32px",
+                  maxWidth: 520,
+                }}
+              >
+                Saha alanınızın ölçülerini, konumunu ve tercih ettiğiniz zemin tipini iletin; mühendislerimiz
+                24 saat içinde detaylı maliyet analizini ve yapım takvimini hazırlasın.
+              </p>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+                  <MapPin size={24} weight="fill" color="#A7F3D0" style={{ marginTop: 2, flexShrink: 0 }} />
+                  <div>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: "#FFFFFF" }}>Ücretsiz Yerinde Keşif</div>
+                    <div style={{ fontSize: 13, color: "rgba(255, 255, 255, 0.75)" }}>
+                      İstanbul ve çevre illerde teknik ekibimizle kot ve drenaj analizi.
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+                  <Clock size={24} weight="fill" color="#A7F3D0" style={{ marginTop: 2, flexShrink: 0 }} />
+                  <div>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: "#FFFFFF" }}>24 Saat İçinde Fiyat Teklifi</div>
+                    <div style={{ fontSize: 13, color: "rgba(255, 255, 255, 0.75)" }}>
+                      Malzeme cinsi, katman detayları ve teslimat takvimi net olarak sunulur.
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+                  <ShieldCheck size={24} weight="fill" color="#A7F3D0" style={{ marginTop: 2, flexShrink: 0 }} />
+                  <div>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: "#FFFFFF" }}>Yazılı Garanti Taahhüdü</div>
+                    <div style={{ fontSize: 13, color: "rgba(255, 255, 255, 0.75)" }}>
+                      Zemin kaplama, çit ve aydınlatma montajında kurumsal garanti.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Sağ: Beyaz Form Kartı (Öne Çıkarılmış) */}
+            <ScrollReveal delay={0.15}>
+              <div
+                style={{
+                  background: "#FFFFFF",
+                  padding: "clamp(28px, 4vw, 44px)",
+                  borderRadius: 2,
+                  boxShadow: "0 12px 36px rgba(0,0,0,0.35)",
+                  color: "var(--color-line)",
+                }}
+              >
+                <div style={{ marginBottom: 20 }}>
+                  <h3
+                    style={{
+                      fontFamily: "'General Sans', sans-serif",
+                      fontSize: 22,
+                      fontWeight: 700,
+                      margin: "0 0 6px",
+                    }}
+                  >
+                    Hemen Teklif İsteyin
+                  </h3>
+                  <div style={{ fontSize: 13, color: "var(--color-line-dim)" }}>
+                    {service.title} projeniz için bilgilerinizi bırakın, hemen arayalım.
+                  </div>
+                </div>
+                <QuoteForm serviceName={service.title} />
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 8. DİĞER HİZMETLER (GÖRSELLİ YÖNLENDİRİCİ KARTLAR) ─────────────── */}
+      {relatedServices && relatedServices.length > 0 && (
+        <section
+          style={{
+            padding: "clamp(60px, 8vw, 90px) 0",
+            background: "var(--color-card)",
+            borderTop: "1px solid var(--color-border)",
+          }}
+        >
+          <div className="page-wrap">
+            <ScrollReveal>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-end",
+                  marginBottom: 32,
+                  flexWrap: "wrap",
+                  gap: 16,
+                }}
+              >
+                <div>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: cAccent, marginBottom: 6 }}>
+                    Diğer Spor Branşları
+                  </div>
+                  <h3
+                    style={{
+                      fontFamily: "'General Sans', sans-serif",
+                      fontSize: "clamp(22px, 2.8vw, 30px)",
+                      fontWeight: 700,
+                      margin: 0,
+                    }}
+                  >
+                    İnceleyebileceğiniz Diğer Saha Çözümlerimiz
+                  </h3>
+                </div>
+
+                <Link
+                  to="/hizmetler"
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 600,
+                    color: cAccent,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 6,
+                  }}
+                >
+                  Tüm Hizmetlerimizi Gör
+                  <ArrowRight size={14} weight="bold" />
+                </Link>
+              </div>
+
+              {/* Görselli Yönlendirici Kartlar */}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+                  gap: 24,
+                }}
+              >
+                {relatedServices.map((rs, idx) => (
+                  <Link
+                    key={idx}
+                    to={rs.to}
+                    style={{
+                      textDecoration: "none",
+                      color: "inherit",
+                      background: "var(--color-bg)",
+                      border: "1px solid var(--color-border)",
+                      display: "flex",
+                      flexDirection: "column",
+                      transition: "transform 0.2s, box-shadow 0.2s, border-color 0.2s",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "translateY(-4px)";
+                      e.currentTarget.style.borderColor = cAccent;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.borderColor = "var(--color-border)";
+                    }}
+                  >
+                    {/* Görsel */}
+                    <div style={{ aspectRatio: "16/10", overflow: "hidden", background: "var(--color-bg-soft)" }}>
+                      <img
+                        src={rs.image || `${import.meta.env.BASE_URL}images/hizmetler/sahalar.jpg`}
+                        alt={rs.name}
+                        loading="lazy"
+                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                      />
+                    </div>
+
+                    <div style={{ padding: "20px", display: "flex", flexDirection: "column", flexGrow: 1 }}>
+                      <div style={{ fontSize: 11, fontWeight: 700, color: cAccent, marginBottom: 4 }}>
+                        {rs.spec || "Anahtar Teslim"}
+                      </div>
+                      <h4
+                        style={{
+                          fontFamily: "'General Sans', sans-serif",
+                          fontSize: "1.15rem",
+                          fontWeight: 700,
+                          color: "var(--color-line)",
+                          margin: "0 0 8px",
+                        }}
+                      >
+                        {rs.name}
+                      </h4>
+                      <p
+                        style={{
+                          fontSize: 13,
+                          color: "var(--color-line-dim)",
+                          lineHeight: 1.5,
+                          margin: "0 0 16px",
+                          flexGrow: 1,
+                        }}
+                      >
+                        {rs.desc || "Açık ve kapalı saha altyapısı, zemin kaplama ve aydınlatma montajı."}
+                      </p>
+                      <span
+                        style={{
+                          fontSize: 13,
+                          fontWeight: 700,
+                          color: cAccent,
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 6,
+                        }}
+                      >
+                        Saha Detaylarını İncele
+                        <ArrowRight size={13} weight="bold" />
+                      </span>
+                    </div>
                   </Link>
                 ))}
               </div>
@@ -596,57 +1212,6 @@ export default function ServicePage({
           </div>
         </section>
       )}
-
-      {/* TEKLIF FORMU */}
-      <section className="page-wrap" style={{ paddingTop: 100, paddingBottom: 120 }}>
-        <ScrollReveal>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1.2fr",
-              gap: 60,
-              alignItems: "flex-start",
-            }}
-            className="grid-responsive"
-          >
-            <div>
-              <Badge color={badgeColor}>Ücretsiz Keşif</Badge>
-              <h2
-                style={{
-                  fontSize: "clamp(32px, 4vw, 44px)",
-                  margin: "24px 0 16px",
-                  lineHeight: 1.1,
-                }}
-              >
-                ÜCRETSİZ
-                <br />
-                TEKLİF AL
-              </h2>
-              <p
-                style={{
-                  color: "var(--color-line-dim)",
-                  fontSize: 16,
-                  lineHeight: 1.8,
-                  maxWidth: 400,
-                }}
-              >
-                Bilgilerinizi bırakın, uzman ekibimiz en geç 24 saat içinde detaylı bilgi ve ücretsiz keşif için sizi arasın.
-              </p>
-            </div>
-            <div
-              style={{
-                background: "var(--color-card)",
-                border: "1px solid var(--color-border)",
-                borderRadius: "var(--radius)",
-                padding: 40,
-                boxShadow: "var(--shadow-lg)"
-              }}
-            >
-              <QuoteForm />
-            </div>
-          </div>
-        </ScrollReveal>
-      </section>
-    </>
+    </div>
   );
 }

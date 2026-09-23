@@ -1,129 +1,74 @@
-import { COLORS } from "../theme";
+import { SERVICES } from "../data/content";
 import ServicePage from "../components/ServicePage";
 
 export default function BasketbolSahasi() {
+  const service = SERVICES.find((s) => s.tag === "Basketbol");
+
+  if (!service) return null;
+
   return (
     <ServicePage
-      meta={{
-        title: "Basketbol Sahası Yapımı ve Fiyatları | Gözde İnşaat",
-        description:
-          "28x15m FIBA standart ölçüde akrilik, suni çim ve tartan zeminli basketbol sahası yapımı. 500+ tamamlanmış proje, anahtar teslim hizmet. Ücretsiz keşif.",
-        canonical: "https://www.gozdeinsaat.com/basketbol-sahasi-yapimi",
-      }}
-      badge="Basketbol Sahası"
-      badgeColor={COLORS.orange}
-      h1="BASKETBOL SAHASI YAPIMI"
-      intro="Gözde İnşaat; FIBA standartlarında basketbol sahası yapımında 1988'den bu yana 500'ü
-      aşkın projeye imza atmıştır. Açık sahalardan profesyonel spor salonlarına, okullardan
-      özel sitelere kadar farklı bütçe ve ihtiyaçlara uygun çözümler sunuyoruz. Zemin
-      hazırlığı, kaplama, çizgi çalışması ve pota montajı dahil anahtar teslim hizmet."
-      forWhom={[
-        "İlk ve ortaokullar",
-        "Üniversite kampüsleri",
-        "Belediye spor alanları",
-        "Özel siteler & toplu konutlar",
-        "Spor kulüpleri",
-        "Fabrika & kurumsal tesisler",
-      ]}
-      dimensions={[
-        { label: "Uzunluk (FIBA standardı)", value: "28 m" },
-        { label: "Genişlik (FIBA standardı)", value: "15 m" },
-        { label: "3 sayılık çizgi mesafesi", value: "6.75 m" },
-        { label: "Serbest atış mesafesi", value: "4.60 m" },
-        { label: "Potaların karşılıklı mesafesi", value: "28 m" },
-        { label: "Pota yüksekliği", value: "3.05 m" },
-        { label: "Çevre serbest alan (minimum)", value: "2 m" },
-      ]}
-      floors={[
-        {
-          name: "Akrilik Zemin",
-          pros: "Dayanıklı, kayma direnci yüksek, bakım kolaylığı, çeşitli renk seçenekleri.",
-          cons: "Sert zeminin uzun vadede eklem üzerinde etkisi olabilir.",
-          image: `${import.meta.env.BASE_URL}images/hizmetler/akrilikZeminTenisKortu.jpeg`,
-        },
-        {
-          name: "Suni Çim",
-          pros: "Yumuşak yüzey, estetik görünüm, çocuk tesisleri için güvenli.",
-          cons: "Profesyonel kullanımda akriliğe kıyasla daha fazla bakım gerektirir.",
-          image: `${import.meta.env.BASE_URL}images/hizmetler/sentetikCimTenisKortu.jpg`,
-        },
-        {
-          name: "Tartan (EPDM / SBR)",
-          pros: "Amortisörlü yapı, sporcuların eklem sağlığını korur, uzun ömürlü.",
-          cons: "Diğer zemin tiplerine göre ilk yatırım maliyeti biraz daha yüksektir.",
-          image: `${import.meta.env.BASE_URL}images/hizmetler/tartanZeminTenisKortu.jpg`,
-        },
-        {
-          name: "Parke (Kapalı Salon)",
-          pros: "Profesyonel kullanım için ideal, FIBA A sertifikalı seçenekler mevcut.",
-          cons: "Yalnızca kapalı alanlarda uygulanabilir, açık hava kullanımına uygun değil.",
-          image: `${import.meta.env.BASE_URL}images/hizmetler/zemin.jpg`,
-        },
-      ]}
-      factors={[
-        "Zemin tipi (akrilik, tartan, suni çim, parke)",
-        "Açık / kapalı saha (spor salonu veya çelik konstrüksiyon)",
-        "Alt zemin durumu ve hazırlık ihtiyacı",
-        "LED aydınlatma sistemi dahil mi?",
-        "Çevre tel örgü sistemi yüksekliği ve tipi",
-        "Pota sayısı ve tipi (seyyar / sabit)",
-        "Yapım yapılacak ilin uzaklığı",
-      ]}
-      faqs={[
-        {
-          q: "Basketbol sahası ölçüleri kaç metredir?",
-          a: "FIBA standardına göre resmi basketbol sahası 28 m × 15 m'dir. Okul ve amatör kullanım için bazen 26 m × 14 m ölçüsünde yapım da yapılmaktadır.",
-        },
-        {
-          q: "Basketbol sahası yapımı ne kadar sürer?",
-          a: "Zemin hazırlığı da dahil olmak üzere tek bir açık basketbol sahası ortalama 2-4 haftada tamamlanır. Kapalı salonlarda süre çelik konstrüksiyon nedeniyle uzar.",
-        },
-        {
-          q: "Basketbol sahası zemini için akrilik mi poliüretan mı daha iyi?",
-          a: "Açık saha için akrilik zemin daha uzun ömürlü ve ekonomiktir. Kapalı salon için poliüretan veya parke zemin tercih edilmeli; eklem sağlığını daha iyi korur.",
-        },
-        {
-          q: "Kapalı basketbol sahası maliyeti neye göre değişir?",
-          a: "Çelik konstrüksiyon boyutu, zemin tipi, aydınlatma sistemi ve klima ihtiyacı maliyetin başlıca belirleyicileridir. Kesin fiyat için ücretsiz keşif talebinde bulunabilirsiniz.",
-        },
-      ]}
+      service={service}
       relatedServices={[
-        { label: "Tenis Kortu Yapımı", to: "/tenis-kortu-yapimi" },
-        { label: "Voleybol Sahası Yapımı", to: "/voleybol-sahasi-yapimi" },
-        { label: "Çok Amaçlı Saha Yapımı", to: "/cok-amacli-saha-yapimi" },
+        {
+          name: "Tenis Kortu",
+          to: "/hizmetler/tenis-kortu-yapimi",
+          image: `${import.meta.env.BASE_URL}images/hizmetler/tenisKortuYapimi.jpg`,
+          spec: "18 × 36 m (ITF Normu)",
+          desc: "Akrilik ve EPDM zeminli açık ve çelik konstrüksiyon kapalı tenis kortları.",
+        },
+        {
+          name: "Çok Amaçlı Saha",
+          to: "/hizmetler/cok-amacli-saha-yapimi",
+          image: `${import.meta.env.BASE_URL}images/hizmetler/tenisKortuSahaZemin.jpeg`,
+          spec: "Kombine Branşlar",
+          desc: "Tenis, basketbol ve voleybol çizgilerini tek alanda birleştiren yüksek verimli saha.",
+        },
+        {
+          name: "Voleybol Sahası",
+          to: "/hizmetler/voleybol-sahasi-yapimi",
+          image: `${import.meta.env.BASE_URL}images/projeler/ankaraincekdogakoleji.jpg`,
+          spec: "18 × 9 m (FIVB Normu)",
+          desc: "Teleskopik yüksekliği ayarlanabilir direkler ve elastik zeminli voleybol kortları.",
+        },
+        {
+          name: "Halı Saha",
+          to: "/hizmetler/hali-saha-yapimi",
+          image: `${import.meta.env.BASE_URL}images/hizmetler/haliSaha.jpg`,
+          spec: "55 mm Sentetik Çim",
+          desc: "FIFA kalite standartlarında açık ve çelik konstrüksiyon kapalı ticari halı sahalar.",
+        },
       ]}
       detailedSections={[
         {
-          type: "highlight",
-          title: "Basketbol Sahası Çeşitleri",
+          type: "steps",
+          title: "Basketbol Sahası Yapım Aşamaları",
           items: [
-            "Açık Basketbol Sahası (Tel örgü ile çevrilmiş)",
-            "Kapalı Basketbol Sahası (Beton yapı)",
-            "Kapalı Basketbol Sahası (Çelik konstrüksiyon)",
+            "Hafriyat ve Altyapı Tesviyesi: Arazi kotlarının lazerli nivo ile alınması, zemin sıkıştırması ve yağmur suyu meyilinin oluşturulması.",
+            "Hatıl Beton ve Drenaj Kanalları: Saha çevresine 30×50 cm demir donatılı çevre hatılı dökülmesi ve su tahliye künklerinin döşenmesi.",
+            "Taşıyıcı Beton / Asfalt Taban: Çatlamalara karşı çelik hasırlı C25/30 perdahlı helikopterli beton veya aşınma asfaltı taban serimi.",
+            "Zemin Kaplama ve Katmanlar: Akrilik dolgu ve renk katmanları veya şok emici EPDM kauçuk granül tabakasının tatbik edilmesi.",
+            "Çevre Tel Çit ve Projektör Aydınlatma: 4.00 m yüksekliğinde daldırma galvaniz boru konstrüksiyonu, PVC tel örgü ve LED aydınlatma.",
+            "FIBA Çizgileri ve Profesyonel Pota Montajı: 3.05 m nizami çember yüksekliğine sahip hidrolik veya sabit cam panyalı potaların montajı ve teslimat.",
           ],
         },
+      ]}
+      faq={[
         {
-          type: "intro",
-          title: "Akrilik Zemin Basketbol Sahası",
-          body: "Akrilik Zemin, açık ve kapalı basketbol sahası uygulamaları için çabuk kuruyan, UV ışınlarına dayanıklı ve her türlü hava koşullarına uygun bir sistemdir. Akrilik zemin 2mm veya 3mm olarak uygulanabilmektedir. Asfalt veya beton zeminler üzerine uygulanan yüzey dolguları ve akrilik kaplama malzemeleri ile son kat akrilik boyadan oluşmaktadır. Sert zeminlere esneklik kazandırmak için Cushion Akrilik System da tercih edilebilir; bu sistemde akrilik kauçuk tozu dolgulu ara katman eklenir.",
+          q: "Nizami bir basketbol sahasının ölçüleri nedir?",
+          a: "FIBA (Uluslararası Basketbol Federasyonu) resmi standartlarına göre basketbol sahası oyun alanı 28.00 × 15.00 m (420 m²)'dir. Çevresindeki en az 2.00 metrelik emniyet payıyla birlikte toplam proje alanı yaklaşık 32 × 19 m (608 m²) olmalıdır.",
         },
         {
-          type: "intro",
-          title: "Tartan Zeminli Basketbol Sahası",
-          body: "Tartan zemin sistem iki tabakadan oluşup, su geçirgen özelliğe sahiptir. EPDM tabaka üstte, SBR granül tabaka alttadır. Granül tabakalar binder denen madde ile sıcak olarak karıştırılır. Tartan zemin genellikle 8mm SBR + 5mm EPDM olarak tatbik edilir. Finişer denilen makine ile yerinde döküm sıcak olarak uygulanır.",
+          q: "Açık basketbol sahaları için hangi zemin tercih edilmelidir?",
+          a: "Açık sahalar için en yaygın ve ekonomik çözüm UV dayanımlı akrilik kaplamadır. Oyuncu güvenliğini ve eklem sağlığını ön planda tutan okullar ve siteler için ise darbe emici EPDM tartan kauçuk zemin önerilmektedir.",
         },
         {
-          type: "grid",
-          title: "Parke & Poliüretan Zemin Özellikleri",
-          items: [
-            "Yenilikçi tasarım ve enerji geri kazanımı",
-            "Mükemmel kayma direnci ve çizilme mukavemeti",
-            "Topun sekme özelliği sporcuların ergonomik ihtiyaçlarına yanıt verir",
-            "Düzenli kalite testlerinden geçen güvenilir zemin",
-            "Poliüretan zemin iç ve dış mekanlarda tercih edilebilir",
-            "Çok amaçlı kullanım için de uygun seçenekler mevcuttur",
-          ],
-          cols: 2,
+          q: "Basketbol potası montajı nasıl yapılır?",
+          a: "Potalar, hatıl beton aşamasında zemine gömülen ankraj flanşlarına çelik cıvatalarla sabitlenir. 10–12 mm temperli cam panya ve yaylı esnek çemberler kullanılarak resmi standartlara tam uyum sağlanır.",
+        },
+        {
+          q: "Basketbol sahası yapımı kaç günde tamamlanır?",
+          a: "Hava şartlarına ve altyapı hazırlığına bağlı olarak standart bir açık basketbol sahası ortalama 2–4 hafta içinde anahtar teslim olarak teslim edilir.",
         },
       ]}
     />

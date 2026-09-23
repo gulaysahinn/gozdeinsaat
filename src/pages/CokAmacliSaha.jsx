@@ -1,145 +1,74 @@
-import { COLORS } from "../theme";
+import { SERVICES } from "../data/content";
 import ServicePage from "../components/ServicePage";
 
 export default function CokAmacliSaha() {
+  const service = SERVICES.find((s) => s.tag === "Çok amaçlı");
+
+  if (!service) return null;
+
   return (
     <ServicePage
-      meta={{
-        title: "Çok Amaçlı Spor Sahası Yapımı | Gözde İnşaat",
-        description:
-          "Tek sahada tenis, basketbol ve voleybol çizgileriyle çok amaçlı spor sahası yapımı. Okul, site ve tesisler için anahtar teslim çözüm. Ücretsiz keşif.",
-        canonical: "https://www.gozdeinsaat.com/cok-amacli-saha-yapimi",
-      }}
-      badge="Çok Amaçlı Saha"
-      badgeColor={COLORS.lineDim}
-      h1="ÇOK AMAÇLI SPOR SAHASI YAPIMI"
-      intro="Tek bir saha yatırımıyla birden fazla spor dalına hizmet verin. Gözde İnşaat olarak
-      tenis, basketbol, voleybol ve badminton çizgilerinin birlikte uygulandığı çok amaçlı
-      spor sahaları yapıyoruz. Okul bahçelerinden özel sitelere, tatil köylerinden
-      belediye parklarına kadar geniş bir uygulama yelpazesine sahibiz."
-      forWhom={[
-        "İlköğretim & ortaöğretim okulları",
-        "Üniversite kampüsleri",
-        "Belediye spor parkları",
-        "Özel konut siteleri",
-        "Tatil köyleri & oteller",
-        "Fabrika & kurumsal tesisler",
-      ]}
-      dimensions={[
-        { label: "Yaygın uygulama boyutu", value: "18 × 36 m" },
-        { label: "Küçük alan uygulaması", value: "15 × 28 m" },
-        { label: "Basketbol çizgisi (FIBA)", value: "28 × 15 m" },
-        { label: "Voleybol çizgisi (FIVB)", value: "18 × 9 m" },
-        { label: "Tenis çizgisi (ITF)", value: "23.77 × 10.97 m" },
-        { label: "Çevre güvenlik tampon alanı", value: "Min. 2 m" },
-      ]}
-      floors={[
-        {
-          name: "Akrilik Zemin",
-          pros: "En yaygın tercih, farklı renk kombinasyonlarıyla çizgiler net ayrılır, dayanıklı.",
-          cons: "Güneşte ısınma olabilir; açık alanlarda hafif renkler tercih edilebilir.",
-          image: `${import.meta.env.BASE_URL}images/hizmetler/akrilikZeminTenisKortu.jpeg`,
-        },
-        {
-          name: "Suni Çim",
-          pros: "Estetik ve yeşil görünüm, özellikle futbol çizgisi de eklenecekse ideal.",
-          cons: "Voleybol ve tenis için resmi turnuva standardı gerektirmeyen tesisler için uygundur.",
-          image: `${import.meta.env.BASE_URL}images/hizmetler/sentetikCimTenisKortu.jpg`,
-        },
-        {
-          name: "Tartan (EPDM)",
-          pros: "Amortisörlü yapı, farklı sporlar için uygun zemin sertliği.",
-          cons: "Diğer seçeneklere kıyasla biraz daha yüksek başlangıç maliyeti.",
-          image: `${import.meta.env.BASE_URL}images/hizmetler/tartanZeminTenisKortu.jpg`,
-        },
-      ]}
-      factors={[
-        "Kaç spor branşının çizgisi uygulanacak",
-        "Zemin tipi seçimi",
-        "Alan boyutu (m²)",
-        "Aydınlatma sistemi dahil mi?",
-        "File direkleri ve pota sistemi",
-        "Çevre tel örgü yüksekliği",
-        "Alt zemin hazırlık durumu",
-      ]}
-      faqs={[
-        {
-          q: "Çok amaçlı sahada hangi sporlar oynanabilir?",
-          a: "Zemin ve çizgi planlamasına göre tenis, basketbol, voleybol, badminton ve hatta mini futbol bir arada oynayacak şekilde tasarlanabilir. En yaygın kombinasyon tenis + basketbol + voleybol'dur.",
-        },
-        {
-          q: "Çok amaçlı saha en yaygın hangi ölçüde yapılır?",
-          a: "18 × 36 m en yaygın boyuttur; bu ölçüde hem tenis hem de basketbol ve voleybol çizgileri birlikte uygulanabilir. Daha küçük alanlarda 15 × 28 m de tercih edilmektedir.",
-        },
-        {
-          q: "Çizgiler birbirine karışmıyor mu?",
-          a: "Farklı sporlar için farklı renkler kullanılır; örneğin tenis çizgileri beyaz, basketbol çizgileri sarı, voleybol çizgileri kırmızı olabilir. Böylece oyuncular kolayca ayırt edebilir.",
-        },
-        {
-          q: "Okul bahçesi için çok amaçlı saha MEB uyumlu mu?",
-          a: "Evet. Milli Eğitim Bakanlığı mevzuatına uygun ölçüler ve güvenlik standartları (köşe koruma, file yüksekliği) uygulanarak okul projeleri hazırlanır.",
-        },
-      ]}
+      service={service}
       relatedServices={[
-        { label: "Tenis Kortu Yapımı", to: "/tenis-kortu-yapimi" },
-        { label: "Basketbol Sahası Yapımı", to: "/basketbol-sahasi-yapimi" },
-        { label: "Voleybol Sahası Yapımı", to: "/voleybol-sahasi-yapimi" },
-        { label: "Halı Saha Yapımı", to: "/hali-saha-yapimi" },
+        {
+          name: "Tenis Kortu",
+          to: "/hizmetler/tenis-kortu-yapimi",
+          image: `${import.meta.env.BASE_URL}images/hizmetler/tenisKortuYapimi.jpg`,
+          spec: "18 × 36 m (ITF Normu)",
+          desc: "Akrilik ve EPDM zeminli açık ve çelik konstrüksiyon kapalı tenis kortları.",
+        },
+        {
+          name: "Basketbol Sahası",
+          to: "/hizmetler/basketbol-sahasi-yapimi",
+          image: `${import.meta.env.BASE_URL}images/hizmetler/basketbolSahasi.jpg`,
+          spec: "28 × 15 m (FIBA Normu)",
+          desc: "Akrilik ve EPDM kauçuk zeminli, hidrolik potalı açık ve kapalı basketbol sahaları.",
+        },
+        {
+          name: "Voleybol Sahası",
+          to: "/hizmetler/voleybol-sahasi-yapimi",
+          image: `${import.meta.env.BASE_URL}images/projeler/ankaraincekdogakoleji.jpg`,
+          spec: "18 × 9 m (FIVB Normu)",
+          desc: "Teleskopik yüksekliği ayarlanabilir direkler ve elastik zeminli voleybol kortları.",
+        },
+        {
+          name: "Halı Saha",
+          to: "/hizmetler/hali-saha-yapimi",
+          image: `${import.meta.env.BASE_URL}images/hizmetler/haliSaha.jpg`,
+          spec: "55 mm Sentetik Çim",
+          desc: "FIFA kalite standartlarında açık ve çelik konstrüksiyon kapalı ticari halı sahalar.",
+        },
       ]}
       detailedSections={[
         {
-          type: "intro",
-          title: "Suni Çim Zemin Çok Amaçlı Saha",
-          body: "Sentetik suni çim zeminli çok amaçlı saha yapımı genellikle okullar, toplu konutlar ve siteler için uygundur. Çok amaçlı suni çim saha yaparak halı saha, basketbol sahası ve tenis kortu gibi bir çok farklı spor dalının bir arada icra edilmesine olanak sağlayabilirsiniz. Suni çim çok amaçlı saha ölçüleri genellikle 18m×36m olarak kabul edilmiştir. Ancak site ve okul bahçesi gibi alanlara uygun olarak küçültülebilmektedir. Çok amaçlı sahalarda genellikle 20mm suni çim halı modelimiz tercih edilmektedir.",
-        },
-        {
           type: "steps",
-          title: "Altyapı İşleri",
+          title: "Çok Amaçlı Saha Yapım Aşamaları",
           items: [
-            "Hafriyat: Çok amaçlı saha yapılacak zemin hafriyatı alınarak sıfır kodlu hale getirilir. Saha etrafına çevre hatıl kalıbı için temel kazılır.",
-            "Çevre Hatıl Betonu: Saha etrafına belli ölçülerde kalıplar bağlanır. İçerisine Q8″ ve Q12″ lik demirden yapılan donatılar hatıl içine yerleştirilir ve betonlanır.",
-            "Çevreleme hatıl üzerine uygun aralıklarla demir plakalar epoksi kimyasal dübeller ile zemine montajları yapılır.",
-            "Tüm alana ince mıcır tabakası serilerek eğimlere uygun kalınlıkta Çesan demir donatılı C-25 Hazır beton dökülür.",
-            "Mevcut zemin üzerine uygun sentetik suni çim serilerek kum ve granül dolguları yapılır.",
+            "Lazerli Kotlama ve Zemin Tesviyesi: Kombine branşlar için tek yöne meyil ve altyapı drenaj hesabı yapılması.",
+            "Hatıl Beton ve Çok Fonksiyonlu Kovanlar: Çevre hatılı ve hem voleybol filesi hem tenis filesi takılabilecek kovanların ankrajı.",
+            "Taşıyıcı Asfalt veya Donatılı Beton: Çatlamaz, pürüzsüz C25/30 helikopterli beton tabanı veya aşınma asfaltı serimi.",
+            "Kombine Zemin Kaplama: 20-26 mm kum dolgulu sentetik çim veya darbe sönümleyici EPDM kauçuk zemin tatbiki.",
+            "4.00 m Galvaniz Tel Çit ve LED Aydınlatma: Yüksek mukavemetli çevre tel örgüsü ve gece maçları için projektör montajı.",
+            "Renk Kodlu Çizgiler ve Ekipman Montajı: Tenis (Beyaz), Basketbol (Sarı), Voleybol (Mavi) çizgileri ve kombine pota/file montajı.",
           ],
         },
+      ]}
+      faq={[
         {
-          type: "steps",
-          title: "Çevreleme Direkleri ve Tel Çit Uygulaması",
-          items: [
-            "Çevre hatıl içerisine yerleştirilen demir plakalar üzerine dikey borular uygun yükseklik verilerek kaynak yapılacaktır.",
-            "Spor sahaların dört köşesine yatay borulara paralel diyagonal takviye borular yapılacaktır.",
-            "Aydınlatma Direkleri için Saha uzun kenarlarına uygun aralıklarla dikey borular son 3m merdivenli olarak imal edilecektir.",
-            "Saha etrafı 50×50×3,5mm göz aralığında, daldırma galvanizli ve PVC kaplı tel örgü uygun yükseklikte gerdirilerek montaj yapılacaktır.",
-            "Tel örgü etrafına çelik halatlar gerdirilerek bağlantı aparatları ile bağlanacaktır.",
-            "İmal edilmiş olan aydınlatma direklerine Led projektörlerin montajları yapılacak; Panodan projektörlere kadar Elektrik Tesisatı döşenip çalışır vaziyette teslim edilecektir.",
-          ],
+          q: "Çok amaçlı sahada hangi sporlar bir arada oynanabilir?",
+          a: "Çok amaçlı sahalar; halı saha, basketbol sahası, voleybol sahası ve tenis kortu gibi farklı spor dallarının bir arada icra edilmesine olanak sağlar. Standart 18×36 m ölçülerinde veya alana uygun ebatlarda kombine çizgilerle anahtar teslim kurulur.",
         },
         {
-          type: "grid",
-          title: "Suni Çim Zemin Uygulaması",
-          items: [
-            "Beton veya asfalt zemin üzerine çim halı uygulaması yapılır.",
-            "Serilen çim halının ek yerlerine tutkallanan helmetin bezi yerleştirilerek ek yerlerinin iyice yapışması sağlanır.",
-            "Yapıştırıcı çift kompenantlı Poliüretan olacaktır.",
-            "Saha çizgileri, isteğe bağlı beyaz veya sarı olarak kesilerek ölçülere uygun olarak yerleştirilir.",
-            "Halı içine elenmiş, yıkanmış, fırınlanmış silis kumu özel kum dökme ve fırçalama makinesiyle yedirilerek oyun oynamaya hazır hale getirilir.",
-          ],
-          cols: 2,
+          q: "Farklı branşların çizgileri karışıklığa yol açar mı?",
+          a: "Hayır. Resmi standartlara uygun şekilde tenis çizgileri beyaz, basketbol çizgileri sarı, voleybol çizgileri ise mavi renkle uygulanır. Oyuncular branş çizgilerini kolayca ayırt eder.",
         },
         {
-          type: "intro",
-          title: "Tartan Zemin Çok Amaçlı Saha",
-          body: "Tartan zeminli çok amaçlı sahalar Epdm granülden yapılan esnek kauçuk spor alanlarıdır. Tartan zemin genellikle 8mm kalınlığında Sbr granül üzerine 5mm kalınlığında Epdm granüller katman olacak şekilde yerinde çok renkli döküm olarak yapılmaktadır. Tartan zeminli çok amaçlı sahalar okullar, siteler tarafından tercih edildiği gibi aynı zamanda kapalı spor salonlarında da tercih edilebilir.",
+          q: "Çok amaçlı saha için hangi zemin türü daha uygundur?",
+          a: "En çok tercih edilen zeminler 11mm–30mm hav boyu aralığındaki (genellikle 20mm model) silis kum dolgulu sentetik çim halı ve 13 mm (8mm SBR + 5mm EPDM) kauçuk tartan zeminlerdir. Her iki sistem de farklı spor dallarının yoğun kullanımına karşı yüksek dayanıklılık sunar.",
         },
         {
-          type: "steps",
-          title: "Tartan Zemin Uygulama Adımları",
-          items: [
-            "Beton veya asfalt zemin üzerine önce Astar tabaka oluşturulur.",
-            "Astarın üzerine önce SBR zemin sonra EPDM tartan zemin oluşturulur.",
-            "Oluşturulan Tartan Zemine ölçülerine uygun Tenis kortu, Basketbol sahası ve Voleybol sahası oyun çizgileri çizilir.",
-          ],
+          q: "Çok amaçlı saha yaptırmanın maliyet avantajı nedir?",
+          a: "Ayrı ayrı 3 saha inşa etmek 3 kat altyapı, çit ve aydınlatma maliyeti getirirken; tek sahada bu fonksiyonların birleştirilmesi %60'a varan maliyet ve %50'den fazla alan tasarrufu sağlar.",
         },
       ]}
     />

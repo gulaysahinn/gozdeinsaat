@@ -1,285 +1,236 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle, Buildings, } from "@phosphor-icons/react";
+import { Sparkle, Users } from "@phosphor-icons/react";
 
-// Badge renk eşleşmesi — tema token'larına bağlı
-const BADGE_STYLES = {
-  neutral: {
-    bg: "var(--color-bg-soft)",
-    color: "var(--color-line-dim)",
-    border: "var(--color-border)",
-  },
-  accent: {
-    bg: "var(--color-accent-light, #E8F5EE)",
-    color: "var(--color-accent, #1A6B4C)",
-    border: "var(--color-accent, #1A6B4C)",
-  },
-};
-
-function Badge({ label, colorKey = "neutral" }) {
-  const style = BADGE_STYLES[colorKey] || BADGE_STYLES.neutral;
-  return (
-    <span
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 4,
-        padding: "3px 10px",
-        fontSize: 10,
-        fontWeight: 600,
-        fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
-        letterSpacing: "0.06em",
-        textTransform: "uppercase",
-        background: style.bg,
-        color: style.color,
-        border: `1px solid ${style.border}`,
-        borderRadius: 2,
-        whiteSpace: "nowrap",
-      }}
-    >
-      <CheckCircle size={10} weight="fill" aria-hidden="true" />
-      {label}
-    </span>
-  );
-}
-
-function FloorCard({ floor, index }) {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <article
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        background: "var(--color-card, #fff)",
-        border: "1px solid var(--color-border, #E4E2DD)",
-        overflow: "hidden",
-        transition: "box-shadow 0.25s ease, transform 0.25s ease",
-        boxShadow: hovered
-          ? "0 8px 32px rgba(26, 107, 76, 0.12)"
-          : "0 1px 4px rgba(0,0,0,0.04)",
-        transform: hovered ? "translateY(-3px)" : "none",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      {/* Sıra numarası - Görsel dışına taşındı */}
-      <div
-        style={{
-          fontFamily: "var(--font-mono)",
-          fontSize: 10,
-          fontWeight: 700,
-          color: "var(--color-line-dim)",
-          background: "var(--color-bg-soft)",
-          borderBottom: "1px solid var(--color-border)",
-          padding: "6px 12px",
-          letterSpacing: "0.1em",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <span>ZEM·0{index + 1}</span>
-      </div>
-
-      {/* Zemin fotoğrafı */}
-      <div
-        style={{
-          position: "relative",
-          aspectRatio: "16/9",
-          overflow: "hidden",
-          background: "var(--color-bg-soft, #F2F1ED)",
-        }}
-      >
-        <img
-          src={floor.image}
-          alt={`${floor.name} zemin örneği`}
-          loading="lazy"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            transition: "transform 0.4s ease",
-            transform: hovered ? "scale(1.04)" : "scale(1)",
-            filter: "grayscale(10%)",
-          }}
-        />
-      </div>
-
-      {/* Kart içeriği */}
-      <div style={{ padding: "20px 24px 24px", display: "flex", flexDirection: "column", gap: 12, flex: 1 }}>
-        {/* Zemin adı */}
-        <h4
-          style={{
-            fontSize: 17,
-            fontWeight: 700,
-            margin: 0,
-            textTransform: "uppercase",
-            letterSpacing: "-0.01em",
-            color: "var(--color-line)",
-          }}
-        >
-          {floor.name}
-        </h4>
-
-        {/* Badge'ler */}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-          {floor.badges.map((badge) => (
-            <Badge
-              key={badge}
-              label={badge}
-              colorKey={
-                badge.toLowerCase().includes("profesyonel") ||
-                badge.toLowerCase().includes("fiba")
-                  ? "accent"
-                  : "neutral"
-              }
-            />
-          ))}
-        </div>
-
-        {/* Kısa açıklama */}
-        <p
-          style={{
-            fontSize: 14,
-            color: "var(--color-line-dim, #6B7280)",
-            margin: 0,
-            lineHeight: 1.65,
-            flex: 1,
-          }}
-        >
-          {floor.desc}
-        </p>
-
-        {/* Kim için */}
-        <div
-          style={{
-            borderTop: "1px solid var(--color-border)",
-            paddingTop: 12,
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-          }}
-        >
-          <Buildings
-            size={14}
-            weight="duotone"
-            color="var(--color-line-dim)"
-            aria-hidden="true"
-          />
-          <span
-            style={{
-              fontSize: 12,
-              fontFamily: "var(--font-mono)",
-              color: "var(--color-line-dim)",
-              letterSpacing: "0.04em",
-            }}
-          >
-            {floor.forWho}
-          </span>
-        </div>
-      </div>
-    </article>
-  );
-}
-
-/**
- * FloorComparisonCards
- * Bir hizmetin zemin seçeneklerini görsel kart grid'iyle gösterir.
- * Props:
- *   floors   — SERVICES[i].floors dizisi
- *   to       — detay sayfası linki (CTA için)
- *   columns  — grid sütun sayısı (default: auto, max 3)
- */
-export default function FloorComparisonCards({ floors = [], to, columns }) {
+export default function FloorComparisonCards({ floors, color = "var(--color-accent)" }) {
   if (!floors || floors.length === 0) return null;
 
-  const colCount = columns || Math.min(floors.length, 3);
+  // Üst Kategori Tespiti (Örn: "Suni Tenis Kortu Zemini" ve "Doğal Tenis Kortu Zemini")
+  const availableCategories = Array.from(
+    new Set(floors.map((f) => f.category).filter(Boolean))
+  );
+  const hasCategories = availableCategories.length > 1;
+
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  const displayedFloors =
+    hasCategories && selectedCategory !== "all"
+      ? floors.filter((f) => f.category === selectedCategory)
+      : floors;
 
   return (
     <div>
-      {/* Başlık satırı */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: 20,
-          flexWrap: "wrap",
-          gap: 8,
-        }}
-      >
+      {/* Üst Kategori Sekmeleri / Grup Başlıkları */}
+      {hasCategories && (
         <div
           style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: 11,
-            fontWeight: 600,
-            color: "var(--color-accent)",
-            textTransform: "uppercase",
-            letterSpacing: "0.12em",
             display: "flex",
+            gap: 10,
+            marginBottom: 28,
+            flexWrap: "wrap",
             alignItems: "center",
-            gap: 8,
           }}
         >
-          <div
+          <button
+            type="button"
+            onClick={() => setSelectedCategory("all")}
             style={{
-              width: 20,
-              height: 1,
-              background: "var(--color-accent)",
-            }}
-          />
-          Zemin Seçenekleri
-        </div>
-        {to && (
-          <Link
-            to={to}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
+              padding: "9px 20px",
               fontSize: 13,
-              fontWeight: 600,
-              color: "var(--color-accent)",
-              textDecoration: "none",
-              fontFamily: "var(--font-mono)",
-              letterSpacing: "0.04em",
+              fontWeight: 700,
+              cursor: "pointer",
+              borderRadius: 2,
+              border: selectedCategory === "all" ? `1.5px solid ${color}` : "1px solid var(--color-border)",
+              background: selectedCategory === "all" ? color : "var(--color-card)",
+              color: selectedCategory === "all" ? "#FFFFFF" : "var(--color-line)",
+              boxShadow: selectedCategory === "all" ? "var(--shadow-sm)" : "none",
+              transition: "all 0.15s ease",
             }}
-            aria-label="Detaylı bilgi için hizmet sayfasına git"
           >
-            Detaylı bilgi
-            <ArrowRight size={13} weight="bold" aria-hidden="true" />
-          </Link>
-        )}
-      </div>
+            Tüm Zemin Çeşitleri ({floors.length})
+          </button>
 
-      {/* Kart grid */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: `repeat(${colCount}, 1fr)`,
-          gap: 20,
-        }}
-        className="floor-cards-grid"
-      >
-        {floors.map((floor, i) => (
-          <FloorCard key={floor.name} floor={floor} index={i} serviceLink={to} />
-        ))}
-      </div>
+          {availableCategories.map((cat) => {
+            const count = floors.filter((f) => f.category === cat).length;
+            const isSelected = selectedCategory === cat;
+            return (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setSelectedCategory(cat)}
+                style={{
+                  padding: "9px 20px",
+                  fontSize: 13,
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  borderRadius: 2,
+                  border: isSelected ? `1.5px solid ${color}` : "1px solid var(--color-border)",
+                  background: isSelected ? color : "var(--color-card)",
+                  color: isSelected ? "#FFFFFF" : "var(--color-line)",
+                  boxShadow: isSelected ? "var(--shadow-sm)" : "none",
+                  transition: "all 0.15s ease",
+                }}
+              >
+                {cat} ({count})
+              </button>
+            );
+          })}
+        </div>
+      )}
 
-      {/* Responsive stil */}
-      <style>{`
-        @media (max-width: 900px) {
-          .floor-cards-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-        }
-        @media (max-width: 560px) {
-          .floor-cards-grid {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
+      <div className="floor-cards-responsive">
+        {displayedFloors.map((floor, i) => {
+          const isFeatured = i === 0 || floor.featured;
+
+          // "Kulüp · Otel · Okul" gibi nokta ayracını doğal Türkçe metne çevir
+          const naturalForWho = floor.forWho
+            ? floor.forWho.replace(/\s*·\s*/g, ", ")
+            : null;
+
+          return (
+            <div
+              key={i}
+              style={{
+                background: "var(--color-card)",
+                border: isFeatured ? `2px solid ${color}` : "1px solid var(--color-border)",
+                borderRadius: "var(--radius)",
+                overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+                boxShadow: isFeatured ? "var(--shadow-md)" : "var(--shadow-card)",
+                position: "relative",
+                transition: "transform 0.2s, box-shadow 0.2s",
+              }}
+            >
+              {/* Öne Çıkan Rozeti (Hiyerarşi) */}
+              {isFeatured && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 14,
+                    left: 14,
+                    zIndex: 2,
+                    background: color,
+                    color: "#FFFFFF",
+                    padding: "4px 10px",
+                    fontSize: 11,
+                    fontWeight: 700,
+                    borderRadius: 2,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 5,
+                    boxShadow: "0 2px 6px rgba(0,0,0,0.25)",
+                  }}
+                >
+                  <Sparkle size={13} weight="fill" />
+                  <span>En Çok Tercih Edilen</span>
+                </div>
+              )}
+
+              {/* Görsel Alanı (4:3) */}
+              <div
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  aspectRatio: "4/3",
+                  backgroundColor: "var(--color-bg-soft)",
+                  overflow: "hidden",
+                }}
+              >
+                <img
+                  src={floor.image}
+                  alt={floor.name}
+                  loading="lazy"
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              </div>
+
+              <div style={{ padding: "24px", display: "flex", flexDirection: "column", flexGrow: 1 }}>
+                {/* Başlık ve Hiyerarşik Etiketler */}
+                <div style={{ marginBottom: 16 }}>
+                  {floor.category && (
+                    <div
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 700,
+                        color: color,
+                        letterSpacing: "0.04em",
+                        textTransform: "uppercase",
+                        marginBottom: 6,
+                      }}
+                    >
+                      {floor.category}
+                    </div>
+                  )}
+
+                  <h4
+                    style={{
+                      fontFamily: "'General Sans', sans-serif",
+                      fontSize: "1.25rem",
+                      fontWeight: 700,
+                      color: "var(--color-line)",
+                      margin: "0 0 12px",
+                    }}
+                  >
+                    {floor.name}
+                  </h4>
+
+                  {/* Hiyerarşik Rozetler: İlk özellik belirgin, sonrakiler sessiz teknik parametre */}
+                  {floor.badges && floor.badges.length > 0 && (
+                    <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                      {floor.badges.map((b, idx) => {
+                        const isPrimaryBadge = idx === 0;
+                        return (
+                          <span
+                            key={idx}
+                            style={{
+                              fontSize: 12,
+                              fontWeight: isPrimaryBadge ? 700 : 500,
+                              padding: "3px 9px",
+                              borderRadius: 2,
+                              background: isPrimaryBadge ? "var(--color-bg-soft)" : "transparent",
+                              border: `1px solid ${isPrimaryBadge ? color : "var(--color-border)"}`,
+                              color: isPrimaryBadge ? color : "var(--color-line-dim)",
+                            }}
+                          >
+                            {b}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+
+                {/* Açıklama */}
+                <p style={{ color: "var(--color-line-dim)", fontSize: "0.95rem", lineHeight: 1.65, marginBottom: 18, flexGrow: 1 }}>
+                  {floor.desc}
+                </p>
+
+                {/* Kimler İçin Uygun (Doğal Cümle & İkon) */}
+                {naturalForWho && (
+                  <div
+                    style={{
+                      marginTop: "auto",
+                      paddingTop: 14,
+                      borderTop: "1px solid var(--color-border)",
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: 8,
+                      fontSize: "0.85rem",
+                      color: "var(--color-line-dim)",
+                      lineHeight: 1.45,
+                    }}
+                  >
+                    <Users size={16} color={color} style={{ flexShrink: 0, marginTop: 2 }} />
+                    <span>
+                      <strong style={{ color: "var(--color-line)" }}>Uygun Alanlar:</strong> {naturalForWho}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

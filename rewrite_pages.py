@@ -1,8 +1,20 @@
-import { SERVICES, PROCESS } from "../data/content";
+import os
+
+pages = {
+    'src/pages/TenisKortu.jsx': ('Tenis', 'Tenis Kortu'),
+    'src/pages/TartanTenisKortu.jsx': ('Tenis', 'Tartan Tenis Kortu'),
+    'src/pages/SentetikCimTenisKortu.jsx': ('Tenis', 'Sentetik Çim Tenis Kortu'),
+    'src/pages/BasketbolSahasi.jsx': ('Basketbol', 'Basketbol Sahası'),
+    'src/pages/VoleybolSahasi.jsx': ('Voleybol', 'Voleybol Sahası'),
+    'src/pages/CokAmacliSaha.jsx': ('Çok amaçlı', 'Çok Amaçlı Saha'),
+    'src/pages/HaliSaha.jsx': ('Halı Saha', 'Halı Saha')
+}
+
+template = """import { SERVICES, PROCESS } from "../data/content";
 import ServicePage from "../components/ServicePage";
 
-export default function TartanTenisKortu() {
-  const service = SERVICES.find(s => s.tag === "Tenis");
+export default function __COMPONENT_NAME__() {
+  const service = SERVICES.find(s => s.tag === "__TAG__");
   
   if (!service) return null;
 
@@ -14,7 +26,7 @@ export default function TartanTenisKortu() {
         { name: "Basketbol Sahası", to: "/hizmetler/basketbol-sahasi-yapimi" },
         { name: "Voleybol Sahası", to: "/hizmetler/voleybol-sahasi-yapimi" },
         { name: "Halı Saha", to: "/hizmetler/hali-saha-yapimi" }
-      ].filter(s => s.name !== "Tartan Tenis Kortu")}
+      ].filter(s => s.name !== "__TITLE__")}
       detailedSections={[
         {
           type: "steps",
@@ -36,3 +48,12 @@ export default function TartanTenisKortu() {
     />
   );
 }
+"""
+
+for filepath, (tag, title) in pages.items():
+    filename = os.path.basename(filepath)
+    component_name = filename.replace('.jsx', '')
+    content = template.replace("__COMPONENT_NAME__", component_name).replace("__TAG__", tag).replace("__TITLE__", title)
+    with open(filepath, 'w', encoding='utf-8') as f:
+        f.write(content)
+    print(f'Rewrote {filepath}')

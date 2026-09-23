@@ -69,7 +69,7 @@ export default function About() {
         <title>Hakkımızda | 1988'den Bu Yana Spor Sahası İnşaatı | Gözde İnşaat</title>
         <meta
           name="description"
-          content="Gözde İnşaat, 1988'den bu yana tenis kortu, basketbol, voleybol ve çok amaçlı spor sahası yapımında faaliyet göstermektedir. TSE ve uluslararası federasyon standartlarında hizmet."
+          content="Gözde İnşaat, 1988'den bu yana tenis kortu, basketbol, voleybol, halı saha ve çok amaçlı spor sahası yapımında faaliyet göstermektedir. TSE ve uluslararası federasyon standartlarında hizmet."
         />
         <link rel="canonical" href="https://www.gozdeinsaat.com/hakkimizda" />
       </Helmet>

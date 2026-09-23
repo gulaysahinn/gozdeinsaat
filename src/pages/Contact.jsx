@@ -63,7 +63,7 @@ export default function Contact() {
         <title>Ücretsiz Teklif Al | Gözde İnşaat</title>
         <meta
           name="description"
-          content="Tenis kortu, basketbol sahası veya voleybol sahası yaptırmak ister misiniz? Ücretsiz keşif ve teklif için irtibata geçin. 0 (216) 311 09 94 — Sancaktepe / İstanbul."
+          content="Tenis kortu, basketbol sahası, voleybol sahası, halı saha veya çok amaçlı saha yaptırmak ister misiniz? Ücretsiz keşif ve teklif için irtibata geçin. 0 (216) 311 09 94 — Sancaktepe / İstanbul."
         />
         <link rel="canonical" href="https://www.gozdeinsaat.com/iletisim" />
       </Helmet>
