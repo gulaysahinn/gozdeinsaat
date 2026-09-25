@@ -1,5 +1,6 @@
 import { SERVICES } from "../data/content";
 import ServicePage from "../components/ServicePage";
+import { Stack, Drop, Lightbulb, ShieldCheck, Trophy } from "@phosphor-icons/react";
 
 const tennisComparisonTable = {
   badge: "Mühendislik & Şartname Karşılaştırması",
@@ -35,6 +36,63 @@ const tennisComparisonTable = {
   ],
 };
 
+
+const costFactors = [
+  {
+    title: "Zemin Tipi & Katman Kalınlığı",
+    desc: "Akrilik sert kaplama, 13mm EPDM kauçuk tartan veya 15-30mm (genellikle 26mm) sentetik çim sistem seçimi.",
+    Icon: Stack,
+  },
+  {
+    title: "Altyapı Drenajı",
+    desc: "Yağmur suyunun hızla tahliyesi için yüzey eğimi ve çevre hatıl drenajı sağlanır.",
+    Icon: Drop,
+  },
+  {
+    title: "LED Aydınlatma Sistemi",
+    desc: "Gece maçlarında göz kamaşmasını önleyen, 150-200W LED projektör aydınlatma sistemi.",
+    Icon: Lightbulb,
+  },
+  {
+    title: "Çevre Tel Çit & Koruma",
+    desc: "Asgari 4m yüksekliğinde PVC kaplı, daldırma galvaniz tel örgü konstrüksiyonu.",
+    Icon: ShieldCheck,
+  },
+  {
+    title: "Uluslararası ITF Standart Uyumu",
+    desc: "ITF resmi federasyon normlarına, nizami kaçış paylarına ve sertifikalı zemin kriterlerine tam uygunluk.",
+    Icon: Trophy,
+  },
+];
+
+
+const buildSteps = [
+  {
+    title: "Hafriyat, Tesviye & Zemin Etüdü",
+    desc: "Arazi kotları alınır, bitkisel toprak sıyrılır ve yağmur suyu tahliyesi için yüzey meyli verilir.",
+  },
+  {
+    title: "Çevre Hatıl Betonu & Drenaj",
+    desc: "Saha çevresine demir donatılı çevre hatıl betonu dökülür ve su tahliyesi için drenaj boruları döşenir.",
+  },
+  {
+    title: "Mıcır Sıkıştırma & Asfalt / Beton",
+    desc: "Mekanik mıcır tabakası sıkıştırılır. Üzerine asfalt veya perdahlı beton tabanı serilir.",
+  },
+  {
+    title: "Sertifikalı Zemin Kaplama",
+    desc: "Tenis branşına uygun akrilik, tartan veya sentetik çim (15-30mm) zemin katmanları uygulanır.",
+  },
+  {
+    title: "Çevre Tel Çit & Aydınlatma",
+    desc: "Asgari 4m galvaniz boru konstrüksiyonu, PVC kaplı örgü tel ve 150-200W LED projektörler bağlanır.",
+  },
+  {
+    title: "Nizami Çizgiler & Devreye Alma",
+    desc: "ITF normlarında oyun çizgileri çizilir, tenis filesi ve direkleri monte edilerek anahtar teslim devreye alınır.",
+  },
+];
+
 export default function TenisKortu() {
   const service = SERVICES.find((s) => s.tag === "Tenis");
 
@@ -43,6 +101,8 @@ export default function TenisKortu() {
   return (
     <ServicePage
       service={service}
+      costFactors={costFactors}
+      buildSteps={buildSteps}
       comparisonTable={tennisComparisonTable}
       relatedServices={[
         {

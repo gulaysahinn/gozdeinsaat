@@ -1,5 +1,63 @@
 import { SERVICES } from "../data/content";
 import ServicePage from "../components/ServicePage";
+import { Stack, Drop, Lightbulb, ShieldCheck, Trophy } from "@phosphor-icons/react";
+
+
+const costFactors = [
+  {
+    title: "Zemin Tipi & Katman Kalınlığı",
+    desc: "Elastik ve şok emici özelliklere sahip akrilik, tartan, poliüretan veya parke zemin sistem seçimi.",
+    Icon: Stack,
+  },
+  {
+    title: "Altyapı Drenajı",
+    desc: "Yağmur suyunun hızla tahliyesi için yüzey eğimi ve çevre hatıl drenajı sağlanır.",
+    Icon: Drop,
+  },
+  {
+    title: "LED Aydınlatma Sistemi",
+    desc: "Gece maçlarında topun net görülmesini sağlayan homojen LED projektör aydınlatma sistemi.",
+    Icon: Lightbulb,
+  },
+  {
+    title: "Çevre Tel Çit & Koruma",
+    desc: "Top kaçışlarını önleyen uygun yükseklikte PVC kaplı tel örgü veya kapalı saha konstrüksiyonu.",
+    Icon: ShieldCheck,
+  },
+  {
+    title: "Uluslararası FIVB Standart Uyumu",
+    desc: "FIVB standartlarında 18x9m oyun alanı, nizami kaçış payları ve voleybol file (2.43m/2.24m) uygunluğu.",
+    Icon: Trophy,
+  },
+];
+
+
+const buildSteps = [
+  {
+    title: "Hafriyat, Tesviye & Zemin Etüdü",
+    desc: "Arazi kotları alınır, zemin tesviyesi yapılır ve açık sahalar için su tahliye meyli verilir.",
+  },
+  {
+    title: "Çevre Hatıl Betonu & Ankrajlar",
+    desc: "Saha çevresine hatıl betonu dökülür ve voleybol direkleri için ankraj yuvaları hazırlanır.",
+  },
+  {
+    title: "Mıcır Sıkıştırma & Asfalt / Beton",
+    desc: "Mekanik mıcır tabakası sıkıştırılır. Üzerine asfalt veya pürüzsüz helikopter perdahlı beton serilir.",
+  },
+  {
+    title: "Sertifikalı Zemin Kaplama",
+    desc: "Sıçrama ve düşme güvenliğini sağlayan akrilik, tartan veya poliüretan zemin katmanları uygulanır.",
+  },
+  {
+    title: "Aydınlatma & Güvenlik Ağı",
+    desc: "Homojen LED projektörler ve top kaçışlarını önleyen çevre file veya tel örgü montajı yapılır.",
+  },
+  {
+    title: "Nizami Çizgiler & Devreye Alma",
+    desc: "FIVB normlarında oyun çizgileri (18x9m) çizilir, teleskopik voleybol direkleri ve file gerilerek teslim edilir.",
+  },
+];
 
 export default function VoleybolSahasi() {
   const service = SERVICES.find((s) => s.tag === "Voleybol");
@@ -9,6 +67,8 @@ export default function VoleybolSahasi() {
   return (
     <ServicePage
       service={service}
+      costFactors={costFactors}
+      buildSteps={buildSteps}
       relatedServices={[
         {
           name: "Tenis Kortu",

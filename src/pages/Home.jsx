@@ -4,7 +4,6 @@ import { Helmet } from "react-helmet-async";
 import {
   ArrowRight,
   MapPin,
-  Ruler,
   Buildings,
   GraduationCap,
   Bank,
@@ -17,7 +16,6 @@ import {
   CheckCircle,
   Tree,
   PhoneCall,
-  Sparkle,
   Compass,
   Trophy,
 } from "@phosphor-icons/react";
@@ -112,7 +110,7 @@ export default function Home() {
         <title>Spor Sahası ve Kort İnşaatı | Gözde İnşaat</title>
         <meta
           name="description"
-          content="Tenis kortu, basketbol sahası, voleybol sahası ve halı saha yapımında anahtar teslim mühendislik çözümleri. 1988'den beri İstanbul ve Türkiye genelinde 500+ tamamlanmış proje."
+          content="Tenis kortu, basketbol sahası, voleybol sahası ve halı saha yapımında anahtar teslim mühendislik çözümleri. 1988'den beri İstanbul ve Türkiye genelinde yüzlerce tamamlanmış proje."
         />
         <meta
           name="keywords"
@@ -221,7 +219,7 @@ export default function Home() {
             >
               <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
                 <CheckCircle size={15} color="var(--color-accent)" weight="bold" />
-                500+ Tamamlanmış Saha
+                Yüzlerce Tamamlanmış Saha
               </span>
               <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
                 <CheckCircle size={15} color="var(--color-accent)" weight="bold" />
@@ -1090,7 +1088,7 @@ export default function Home() {
                       <MapPin size={14} color="var(--color-accent)" /> {p.city}
                     </span>
                     <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                      <Ruler size={14} color="var(--color-accent)" /> {p.size}
+                      <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--color-accent)", display: "inline-block" }} /> {p.surfaceType || p.type}
                     </span>
                   </div>
                 </div>

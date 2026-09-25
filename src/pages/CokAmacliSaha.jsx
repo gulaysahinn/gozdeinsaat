@@ -1,5 +1,63 @@
 import { SERVICES } from "../data/content";
 import ServicePage from "../components/ServicePage";
+import { Stack, Drop, Lightbulb, ShieldCheck, Trophy } from "@phosphor-icons/react";
+
+
+const costFactors = [
+  {
+    title: "Zemin Tipi & Katman Kalınlığı",
+    desc: "11mm-30mm (genellikle 20mm) suni çim veya esnek tartan zemin sistem seçimi.",
+    Icon: Stack,
+  },
+  {
+    title: "Altyapı Drenajı",
+    desc: "Yağmur suyunun hızla tahliyesi için yüzey eğimi ve çevre hatıl drenajı sağlanır.",
+    Icon: Drop,
+  },
+  {
+    title: "LED Aydınlatma Sistemi",
+    desc: "Gece kullanımında kör nokta bırakmayan genel LED projektör aydınlatma sistemi.",
+    Icon: Lightbulb,
+  },
+  {
+    title: "Çevre Tel Çit & Koruma",
+    desc: "Çoklu kullanıma uygun, dayanıklı PVC kaplı galvaniz tel örgü konstrüksiyonu.",
+    Icon: ShieldCheck,
+  },
+  {
+    title: "Kombine Standart Uyumu",
+    desc: "Birden fazla branşın (Tenis, Basketbol, Voleybol) renk kodlu nizami çizgilerine ve ekipmanlarına tam uygunluk.",
+    Icon: Trophy,
+  },
+];
+
+
+const buildSteps = [
+  {
+    title: "Hafriyat, Tesviye & Zemin Etüdü",
+    desc: "Arazi kotları alınır, bitkisel toprak sıyrılır ve yağmur suyu tahliyesi için yüzey meyli verilir.",
+  },
+  {
+    title: "Çevre Hatıl Betonu & Drenaj",
+    desc: "Saha çevresine demir donatılı çevre hatıl betonu dökülür ve su tahliyesi için drenaj boruları döşenir.",
+  },
+  {
+    title: "Altyapı Zemin Hazırlığı",
+    desc: "Mekanik mıcır tabakası sıkıştırılır. Üzerine asfalt veya perdahlı beton tabanı serilir.",
+  },
+  {
+    title: "Çok Amaçlı Zemin Kaplama",
+    desc: "Kombine sporlara uygun 11mm-30mm sentetik çim veya tartan zemin katmanları uygulanır.",
+  },
+  {
+    title: "Çevre Tel Çit & Aydınlatma",
+    desc: "Saha güvenliğini sağlayan tel örgü konstrüksiyonu ve aydınlatma projektörleri bağlanır.",
+  },
+  {
+    title: "Kombine Çizgiler & Devreye Alma",
+    desc: "Farklı renklerde branş çizgileri çizilir, çok amaçlı ekipmanlar (pota, direk) monte edilerek teslim edilir.",
+  },
+];
 
 export default function CokAmacliSaha() {
   const service = SERVICES.find((s) => s.tag === "Çok amaçlı");
@@ -9,6 +67,8 @@ export default function CokAmacliSaha() {
   return (
     <ServicePage
       service={service}
+      costFactors={costFactors}
+      buildSteps={buildSteps}
       relatedServices={[
         {
           name: "Tenis Kortu",

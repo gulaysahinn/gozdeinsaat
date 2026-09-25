@@ -34,6 +34,11 @@ export default function Footer() {
         background: "var(--color-bg-soft)",
         borderTop: "1px solid var(--color-border)",
         marginTop: "auto",
+        position: "relative",
+        isolation: "isolate",
+        zIndex: 10,
+        width: "100%",
+        clear: "both",
       }}
     >
       {/* Main grid */}
@@ -42,11 +47,8 @@ export default function Footer() {
           maxWidth: 1200,
           margin: "0 auto",
           padding: "56px 32px 40px",
-          display: "grid",
-          gridTemplateColumns: "1.6fr 1fr 1fr 1.4fr",
-          gap: 40,
         }}
-        className="grid-responsive"
+        className="footer-grid-responsive"
       >
         {/* Brand column */}
         <div>

@@ -9,7 +9,6 @@ import {
   Buildings,
   Trophy,
   GraduationCap,
-  Sparkle,
   PhoneCall,
   SealCheck,
   Users,
@@ -258,7 +257,7 @@ export default function Services() {
                       letterSpacing: "-0.03em",
                     }}
                   >
-                    500+ Saha
+                    Yüzlerce Saha
                   </div>
                   <div style={{ fontSize: 14, fontWeight: 600, color: "var(--color-line)", marginBottom: 4 }}>
                     Eksiksiz Teslimat
@@ -448,259 +447,19 @@ export default function Services() {
                 </div>
               </div>
             </div>
-
-            {/* Zemin Seçenekleri: Hiyerarşik Sunum (Suni ve Doğal Tenis Kortu Zeminleri) */}
-            <div style={{ borderTop: "1px solid var(--color-border)", paddingTop: 40 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12, marginBottom: 20 }}>
-                <div style={{ fontSize: 13, fontWeight: 700, color: "var(--color-line-dim)" }}>
-                  Tenis Kortu İçin Sertifikalı Zemin Alternatifleri (5 Resmi Zemin Sistemi)
-                </div>
-                <div style={{ display: "flex", gap: 8, fontSize: 12, fontWeight: 600 }}>
-                  <span style={{ padding: "3px 8px", background: "var(--color-card)", border: "1px solid var(--color-border)", color: "var(--color-accent)" }}>
-                    Suni Tenis Kortu Zeminleri (3)
-                  </span>
-                  <span style={{ padding: "3px 8px", background: "var(--color-card)", border: "1px solid var(--color-border)", color: "var(--color-accent)" }}>
-                    Doğal Tenis Kortu Zeminleri (2)
-                  </span>
-                </div>
+            {/* Zemin Seçenekleri Özeti ve Link */}
+            <div style={{ borderTop: "1px solid var(--color-border)", paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
+              <div style={{ fontSize: 15, fontWeight: 500, color: "var(--color-line-dim)" }}>
+                Tenis kortu için <strong style={{color: "var(--color-line)"}}> 5 farklı sertifikalı zemin seçeneği </strong> mevcuttur.
               </div>
-
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-                  gap: 20,
-                  alignItems: "stretch",
-                }}
+              <Link
+                to="/hizmetler/tenis-kortu-yapimi"
+                className="btn-primary"
+                style={{ padding: "10px 20px", fontSize: 14, gap: 8 }}
               >
-                {/* 1. Suni Zemin: Akrilik Sert Kort (Öne Çıkan) */}
-                <div
-                  style={{
-                    background: "var(--color-bg)",
-                    border: "2px solid var(--color-accent)",
-                    padding: 24,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    position: "relative",
-                  }}
-                >
-                  <div>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
-                      <span
-                        style={{
-                          display: "inline-flex",
-                          alignItems: "center",
-                          gap: 6,
-                          background: "var(--color-accent)",
-                          color: "#FFFFFF",
-                          fontSize: 11,
-                          fontWeight: 700,
-                          padding: "4px 10px",
-                        }}
-                      >
-                        <Sparkle size={13} weight="fill" /> En Çok Tercih Edilen
-                      </span>
-                      <span style={{ fontSize: 11, fontWeight: 600, color: "var(--color-accent)" }}>Suni Zemin</span>
-                    </div>
-
-                    <h3 style={{ fontFamily: "'General Sans', sans-serif", fontSize: 19, fontWeight: 700, margin: "0 0 10px", color: "var(--color-line)" }}>
-                      Akrilik Zemin Kaplama
-                    </h3>
-                    <p style={{ fontSize: 14, lineHeight: 1.65, color: "var(--color-line-dim)", margin: "0 0 18px" }}>
-                      Asfalt veya beton üzerine uygulanan, UV ışınlarına ve zorlu hava koşullarına tam dayanıklı, çabuk kuruyan profesyonel turnuva zemini. Standart ve darbe emici Cushion modelleri mevcuttur.
-                    </p>
-
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20 }}>
-                      <span style={{ fontSize: 12, padding: "4px 8px", background: "var(--color-card)", border: "1px solid var(--color-border)", color: "var(--color-line)" }}>
-                        Ekonomik
-                      </span>
-                      <span style={{ fontSize: 12, padding: "4px 8px", background: "var(--color-card)", border: "1px solid var(--color-border)", color: "var(--color-line)" }}>
-                        Kolay Bakım
-                      </span>
-                      <span style={{ fontSize: 12, padding: "4px 8px", background: "var(--color-card)", border: "1px solid var(--color-border)", color: "var(--color-line)" }}>
-                        UV Dayanıklı
-                      </span>
-                    </div>
-                  </div>
-
-                  <div style={{ borderTop: "1px solid var(--color-border)", paddingTop: 12, fontSize: 13, color: "var(--color-line-dim)" }}>
-                    <strong style={{ color: "var(--color-line)" }}>Kimler İçin:</strong> Okul, belediye, açık kort
-                  </div>
-                </div>
-
-                {/* 2. Suni Zemin: Tartan (EPDM) Kauçuk Zemin */}
-                <div
-                  style={{
-                    background: "var(--color-card)",
-                    border: "1px solid var(--color-border)",
-                    padding: 24,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <div>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
-                      <span style={{ fontSize: 12, fontWeight: 600, color: "var(--color-accent)" }}>
-                        Elastik & Eklem Koruyucu
-                      </span>
-                      <span style={{ fontSize: 11, fontWeight: 600, color: "var(--color-accent)" }}>Suni Zemin</span>
-                    </div>
-                    <h3 style={{ fontFamily: "'General Sans', sans-serif", fontSize: 19, fontWeight: 700, margin: "0 0 10px", color: "var(--color-line)" }}>
-                      Tartan (EPDM) Kauçuk Zemin
-                    </h3>
-                    <p style={{ fontSize: 14, lineHeight: 1.65, color: "var(--color-line-dim)", margin: "0 0 18px" }}>
-                      8 mm SBR + 5 mm renkli EPDM granül katmanlardan oluşan, yüksek esneklikte sentetik zemin. Renk çeşitliliği ve dayanıklılığıyla tercih edilen premium seçenek.
-                    </p>
-
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20 }}>
-                      <span style={{ fontSize: 12, padding: "4px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                        Uzun Ömürlü
-                      </span>
-                      <span style={{ fontSize: 12, padding: "4px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                        Esnek
-                      </span>
-                      <span style={{ fontSize: 12, padding: "4px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                        Profesyonel
-                      </span>
-                    </div>
-                  </div>
-
-                  <div style={{ borderTop: "1px solid var(--color-border)", paddingTop: 12, fontSize: 13, color: "var(--color-line-dim)" }}>
-                    <strong style={{ color: "var(--color-line)" }}>Kimler İçin:</strong> Kulüp, otel, kapalı salon
-                  </div>
-                </div>
-
-                {/* 3. Suni Zemin: Sentetik Çim Zemin */}
-                <div
-                  style={{
-                    background: "var(--color-card)",
-                    border: "1px solid var(--color-border)",
-                    padding: 24,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <div>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
-                      <span style={{ fontSize: 12, fontWeight: 600, color: "var(--color-line-dim)" }}>
-                        Çok Yönlü & Dayanıklı
-                      </span>
-                      <span style={{ fontSize: 11, fontWeight: 600, color: "var(--color-accent)" }}>Suni Zemin</span>
-                    </div>
-                    <h3 style={{ fontFamily: "'General Sans', sans-serif", fontSize: 19, fontWeight: 700, margin: "0 0 10px", color: "var(--color-line)" }}>
-                      Sentetik Çim Zemin
-                    </h3>
-                    <p style={{ fontSize: 14, lineHeight: 1.65, color: "var(--color-line-dim)", margin: "0 0 18px" }}>
-                      15 mm–30 mm hav boyunda silis kum dolgulu suni çim halı. Tenis kortunda genellikle 26 mm model tercih edilir. Hem açık hem kapalı alanlarda uygulanabilir.
-                    </p>
-
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20 }}>
-                      <span style={{ fontSize: 12, padding: "4px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                        Çok Amaçlı
-                      </span>
-                      <span style={{ fontSize: 12, padding: "4px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                        Uygun Maliyet
-                      </span>
-                      <span style={{ fontSize: 12, padding: "4px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                        Kolay Bakım
-                      </span>
-                    </div>
-                  </div>
-
-                  <div style={{ borderTop: "1px solid var(--color-border)", paddingTop: 12, fontSize: 13, color: "var(--color-line-dim)" }}>
-                    <strong style={{ color: "var(--color-line)" }}>Kimler İçin:</strong> Okul, site, amatör kullanım
-                  </div>
-                </div>
-
-                {/* 4. Doğal Zemin: Toprak Zemin Kaplama */}
-                <div
-                  style={{
-                    background: "var(--color-card)",
-                    border: "1px solid var(--color-border)",
-                    padding: 24,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <div>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
-                      <span style={{ fontSize: 12, fontWeight: 600, color: "var(--color-accent)" }}>
-                        Geleneksel Turnuva Zemini
-                      </span>
-                      <span style={{ fontSize: 11, fontWeight: 600, color: "var(--color-accent)" }}>Doğal Zemin</span>
-                    </div>
-                    <h3 style={{ fontFamily: "'General Sans', sans-serif", fontSize: 19, fontWeight: 700, margin: "0 0 10px", color: "var(--color-line)" }}>
-                      Toprak Zemin Kaplama
-                    </h3>
-                    <p style={{ fontSize: 14, lineHeight: 1.65, color: "var(--color-line-dim)", margin: "0 0 18px" }}>
-                      Profesyonel tenis müsabakalarında tercih edilen toprak zemin, çakıl taşları üzerine serilen kiremit tozunun silindirle düzleştirilip sıkıştırılmasıyla oluşturulur. Yumuşak yapısı sayesinde top yavaş ve az sıçrar, bu da sporcu sakatlanma riskini azaltır. Bakım ihtiyacı yüksek olduğundan maliyeti diğer zeminlere göre daha fazladır.
-                    </p>
-
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20 }}>
-                      <span style={{ fontSize: 12, padding: "4px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                        Profesyonel
-                      </span>
-                      <span style={{ fontSize: 12, padding: "4px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                        Düşük Sakatlanma Riski
-                      </span>
-                      <span style={{ fontSize: 12, padding: "4px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                        Yüksek Bakım
-                      </span>
-                    </div>
-                  </div>
-
-                  <div style={{ borderTop: "1px solid var(--color-border)", paddingTop: 12, fontSize: 13, color: "var(--color-line-dim)" }}>
-                    <strong style={{ color: "var(--color-line)" }}>Kimler İçin:</strong> Profesyonel müsabakalar, tenis kulüpleri
-                  </div>
-                </div>
-
-                {/* 5. Doğal Zemin: Doğal Çim Zemin Kaplama */}
-                <div
-                  style={{
-                    background: "var(--color-card)",
-                    border: "1px solid var(--color-border)",
-                    padding: 24,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <div>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
-                      <span style={{ fontSize: 12, fontWeight: 600, color: "var(--color-accent)" }}>
-                        Prestijli Turnuva Standardı
-                      </span>
-                      <span style={{ fontSize: 11, fontWeight: 600, color: "var(--color-accent)" }}>Doğal Zemin</span>
-                    </div>
-                    <h3 style={{ fontFamily: "'General Sans', sans-serif", fontSize: 19, fontWeight: 700, margin: "0 0 10px", color: "var(--color-line)" }}>
-                      Doğal Çim Zemin Kaplama
-                    </h3>
-                    <p style={{ fontSize: 14, lineHeight: 1.65, color: "var(--color-line-dim)", margin: "0 0 18px" }}>
-                      Toprak zemin gibi bakımı ve maliyeti yüksek olan doğal çim, profesyonel müsabakalarda sporcu sağlığı açısından tercih edilir. Zeminin yumuşaklığı sayesinde top yavaş ve az sıçrar, sporcular daha esnek ve çevik hareket edebilir.
-                    </p>
-
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20 }}>
-                      <span style={{ fontSize: 12, padding: "4px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                        Profesyonel
-                      </span>
-                      <span style={{ fontSize: 12, padding: "4px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                        Sporcu Sağlığı
-                      </span>
-                      <span style={{ fontSize: 12, padding: "4px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                        Yüksek Bakım
-                      </span>
-                    </div>
-                  </div>
-
-                  <div style={{ borderTop: "1px solid var(--color-border)", paddingTop: 12, fontSize: 13, color: "var(--color-line-dim)" }}>
-                    <strong style={{ color: "var(--color-line)" }}>Kimler İçin:</strong> Profesyonel oyuncular, üst düzey kulüpler
-                  </div>
-                </div>
-              </div>
+                Zemin Seçeneklerini İncele
+                <ArrowRight size={15} weight="bold" />
+              </Link>
             </div>
           </ScrollReveal>
         </div>
@@ -851,218 +610,19 @@ export default function Services() {
                 </div>
               </div>
             </div>
-
-            {/* Basketbol Zemin Seçenekleri (4 Zemin Çeşidi - Görsel + Başlık + Rozetler + Açıklama + Kimler İçin) */}
-            <div style={{ borderTop: "1px solid var(--color-border)", paddingTop: 40 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12, marginBottom: 20 }}>
-                <div style={{ fontSize: 13, fontWeight: 700, color: "var(--color-line-dim)" }}>
-                  Basketbol Sahası İçin Resmi 4 Zemin Sistemi
-                </div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: "var(--color-accent)" }}>
-                  Açık Hava & Kapalı Salon Standartları
-                </div>
+            {/* Zemin Seçenekleri Özeti ve Link */}
+            <div style={{ borderTop: "1px solid var(--color-border)", paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
+              <div style={{ fontSize: 15, fontWeight: 500, color: "var(--color-line-dim)" }}>
+                Basketbol sahası için <strong style={{color: "var(--color-line)"}}> 4 farklı zemin sistemi (Akrilik, Tartan, Parke, Poliüretan) </strong> mevcuttur.
               </div>
-
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-                  gap: 20,
-                  alignItems: "stretch",
-                }}
+              <Link
+                to="/hizmetler/basketbol-sahasi-yapimi"
+                className="btn-primary"
+                style={{ padding: "10px 20px", fontSize: 14, gap: 8 }}
               >
-                {/* 1. Akrilik Zemin */}
-                <div
-                  style={{
-                    background: "var(--color-card)",
-                    border: "1px solid var(--color-border)",
-                    display: "flex",
-                    flexDirection: "column",
-                    boxShadow: "var(--shadow-card)",
-                    overflow: "hidden",
-                  }}
-                >
-                  <div style={{ position: "relative", width: "100%", aspectRatio: "16/10", overflow: "hidden", background: "var(--color-bg-soft)" }}>
-                    <img
-                      src={`${import.meta.env.BASE_URL}images/hizmetler/akrilikZeminTenisKortu.jpeg`}
-                      alt="Akrilik Zemin Basketbol Sahası"
-                      loading="lazy"
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    />
-                  </div>
-                  <div style={{ padding: 22, display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "space-between" }}>
-                    <div>
-                      <div style={{ fontSize: 11, fontWeight: 700, color: "var(--color-accent)", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 6 }}>
-                        Açık Hava İçin Standart
-                      </div>
-                      <h4 style={{ fontFamily: "'General Sans', sans-serif", fontSize: 18, fontWeight: 700, margin: "0 0 10px", color: "var(--color-line)" }}>
-                        Akrilik Zemin Basketbol Sahası
-                      </h4>
-                      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 14 }}>
-                        <span style={{ fontSize: 11, fontWeight: 600, padding: "3px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-accent)" }}>
-                          Ekonomik
-                        </span>
-                        <span style={{ fontSize: 11, fontWeight: 600, padding: "3px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                          UV Dayanıklı
-                        </span>
-                        <span style={{ fontSize: 11, fontWeight: 600, padding: "3px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                          Hızlı Kurulum
-                        </span>
-                      </div>
-                      <p style={{ fontSize: 14, color: "var(--color-line-dim)", lineHeight: 1.6, margin: "0 0 16px" }}>
-                        Açık basketbol sahaları için en ekonomik ve yaygın tercih. 2mm veya 3mm kalınlıkta, çabuk kuruyan, her hava koşuluna dayanıklı akrilik kaplama.
-                      </p>
-                    </div>
-                    <div style={{ borderTop: "1px solid var(--color-border)", paddingTop: 12, fontSize: 13, color: "var(--color-line-dim)" }}>
-                      <strong style={{ color: "var(--color-line)" }}>Kimler İçin:</strong> Açık sahalar, okul ve site
-                    </div>
-                  </div>
-                </div>
-
-                {/* 2. Tartan (EPDM) Kauçuk Zemin */}
-                <div
-                  style={{
-                    background: "var(--color-card)",
-                    border: "1px solid var(--color-border)",
-                    display: "flex",
-                    flexDirection: "column",
-                    boxShadow: "var(--shadow-card)",
-                    overflow: "hidden",
-                  }}
-                >
-                  <div style={{ position: "relative", width: "100%", aspectRatio: "16/10", overflow: "hidden", background: "var(--color-bg-soft)" }}>
-                    <img
-                      src={`${import.meta.env.BASE_URL}images/hizmetler/tartanZeminTenisKortu.jpg`}
-                      alt="Tartan EPDM Kauçuk Zemin Basketbol Sahası"
-                      loading="lazy"
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    />
-                  </div>
-                  <div style={{ padding: 22, display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "space-between" }}>
-                    <div>
-                      <div style={{ fontSize: 11, fontWeight: 700, color: "var(--color-accent)", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 6 }}>
-                        Yüksek Güvenlik & Konfor
-                      </div>
-                      <h4 style={{ fontFamily: "'General Sans', sans-serif", fontSize: 18, fontWeight: 700, margin: "0 0 10px", color: "var(--color-line)" }}>
-                        Tartan (EPDM) Zemin Basketbol Sahası
-                      </h4>
-                      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 14 }}>
-                        <span style={{ fontSize: 11, fontWeight: 600, padding: "3px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-accent)" }}>
-                          Şok Emici
-                        </span>
-                        <span style={{ fontSize: 11, fontWeight: 600, padding: "3px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                          Uzun Ömürlü
-                        </span>
-                        <span style={{ fontSize: 11, fontWeight: 600, padding: "3px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                          Profesyonel
-                        </span>
-                      </div>
-                      <p style={{ fontSize: 14, color: "var(--color-line-dim)", lineHeight: 1.6, margin: "0 0 16px" }}>
-                        SBR + EPDM kauçuk katmanlardan oluşan şok emici zemin. Sporcu sakatlanmalarını azaltır. Okullar ve kulüpler için tercih edilen güvenli seçenek.
-                      </p>
-                    </div>
-                    <div style={{ borderTop: "1px solid var(--color-border)", paddingTop: 12, fontSize: 13, color: "var(--color-line-dim)" }}>
-                      <strong style={{ color: "var(--color-line)" }}>Kimler İçin:</strong> Kulüp, kapalı ve açık saha
-                    </div>
-                  </div>
-                </div>
-
-                {/* 3. Parke (Ahşap) Zemin Basketbol Sahası */}
-                <div
-                  style={{
-                    background: "var(--color-card)",
-                    border: "1px solid var(--color-border)",
-                    display: "flex",
-                    flexDirection: "column",
-                    boxShadow: "var(--shadow-card)",
-                    overflow: "hidden",
-                  }}
-                >
-                  <div style={{ position: "relative", width: "100%", aspectRatio: "16/10", overflow: "hidden", background: "var(--color-bg-soft)" }}>
-                    <img
-                      src={`${import.meta.env.BASE_URL}images/hizmetler/zemin.JPG`}
-                      alt="Parke Ahşap Zemin Basketbol Sahası"
-                      loading="lazy"
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    />
-                  </div>
-                  <div style={{ padding: 22, display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "space-between" }}>
-                    <div>
-                      <div style={{ fontSize: 11, fontWeight: 700, color: "var(--color-accent)", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 6 }}>
-                        Kapalı Spor Salonları
-                      </div>
-                      <h4 style={{ fontFamily: "'General Sans', sans-serif", fontSize: 18, fontWeight: 700, margin: "0 0 10px", color: "var(--color-line)" }}>
-                        Parke (Ahşap) Zemin Basketbol Sahası
-                      </h4>
-                      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 14 }}>
-                        <span style={{ fontSize: 11, fontWeight: 600, padding: "3px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-accent)" }}>
-                          Profesyonel
-                        </span>
-                        <span style={{ fontSize: 11, fontWeight: 600, padding: "3px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                          FIBA Standartlı
-                        </span>
-                        <span style={{ fontSize: 11, fontWeight: 600, padding: "3px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                          Uzun Ömürlü
-                        </span>
-                      </div>
-                      <p style={{ fontSize: 14, color: "var(--color-line-dim)", lineHeight: 1.6, margin: "0 0 16px" }}>
-                        Spor parke zeminleri, yenilikçi tasarımı, enerji geri kazanımı, güç sarfiyatının azaltılması ve topun sekme özelliği sayesinde sporcuların ergonomik ihtiyaçlarına cevap verir. Mükemmel kayma direnci, çizilme mukavemeti ve dayanıklılığı sağlamak için düzenli kalite testlerinden geçer.
-                      </p>
-                    </div>
-                    <div style={{ borderTop: "1px solid var(--color-border)", paddingTop: 12, fontSize: 13, color: "var(--color-line-dim)" }}>
-                      <strong style={{ color: "var(--color-line)" }}>Kimler İçin:</strong> Kapalı spor salonları
-                    </div>
-                  </div>
-                </div>
-
-                {/* 4. Poliüretan Zemin Basketbol Sahası */}
-                <div
-                  style={{
-                    background: "var(--color-card)",
-                    border: "1px solid var(--color-border)",
-                    display: "flex",
-                    flexDirection: "column",
-                    boxShadow: "var(--shadow-card)",
-                    overflow: "hidden",
-                  }}
-                >
-                  <div style={{ position: "relative", width: "100%", aspectRatio: "16/10", overflow: "hidden", background: "var(--color-bg-soft)" }}>
-                    <img
-                      src={`${import.meta.env.BASE_URL}images/hizmetler/poliuretanZeminBasketbol.jpg`}
-                      alt="Poliüretan Zemin Basketbol Sahası"
-                      loading="lazy"
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    />
-                  </div>
-                  <div style={{ padding: 22, display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "space-between" }}>
-                    <div>
-                      <div style={{ fontSize: 11, fontWeight: 700, color: "var(--color-accent)", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 6 }}>
-                        İç Mekan & Çok Amaçlı
-                      </div>
-                      <h4 style={{ fontFamily: "'General Sans', sans-serif", fontSize: 18, fontWeight: 700, margin: "0 0 10px", color: "var(--color-line)" }}>
-                        Poliüretan Zemin Basketbol Sahası
-                      </h4>
-                      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 14 }}>
-                        <span style={{ fontSize: 11, fontWeight: 600, padding: "3px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-accent)" }}>
-                          Esnek
-                        </span>
-                        <span style={{ fontSize: 11, fontWeight: 600, padding: "3px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                          Renk Seçenekleri
-                        </span>
-                        <span style={{ fontSize: 11, fontWeight: 600, padding: "3px 8px", background: "var(--color-bg)", border: "1px solid var(--color-border)", color: "var(--color-line-dim)" }}>
-                          Çok Amaçlı
-                        </span>
-                      </div>
-                      <p style={{ fontSize: 14, color: "var(--color-line-dim)", lineHeight: 1.6, margin: "0 0 16px" }}>
-                        İç mekan basketbol sahası zeminleri, yenilikçi tasarımı, enerji geri kazanımı, esnekliği, çeşitli renk seçenekleri ve topun sekme özelliği sayesinde sporcuların ergonomik ihtiyaçlarına cevap verir. İç mekan ve dış mekanlarda sıkça tercih edilir, çok amaçlı sahalar için uygundur.
-                      </p>
-                    </div>
-                    <div style={{ borderTop: "1px solid var(--color-border)", paddingTop: 12, fontSize: 13, color: "var(--color-line-dim)" }}>
-                      <strong style={{ color: "var(--color-line)" }}>Kimler İçin:</strong> İç mekan salonları, çok amaçlı sahalar
-                    </div>
-                  </div>
-                </div>
-              </div>
+                Zemin Seçeneklerini İncele
+                <ArrowRight size={15} weight="bold" />
+              </Link>
             </div>
           </ScrollReveal>
         </div>
@@ -1236,21 +796,18 @@ export default function Services() {
                 </div>
               </div>
             </div>
-
-            {/* İkincil Bağlantı */}
-            <div style={{ textAlign: "right" }}>
+            {/* Zemin Seçenekleri Özeti ve Link */}
+            <div style={{ borderTop: "1px solid var(--color-border)", paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16, marginTop: 40 }}>
+              <div style={{ fontSize: 15, fontWeight: 500, color: "var(--color-line-dim)" }}>
+                Çok amaçlı sahalar için <strong style={{color: "var(--color-line)"}}> farklı branşlara uygun esnek zemin seçenekleri </strong> mevcuttur.
+              </div>
               <Link
                 to="/hizmetler/cok-amacli-saha-yapimi"
-                style={{
-                  fontSize: 14,
-                  fontWeight: 600,
-                  color: "var(--color-accent)",
-                  borderBottom: "1.5px solid var(--color-accent)",
-                  paddingBottom: 2,
-                  textDecoration: "none",
-                }}
+                className="btn-primary"
+                style={{ padding: "10px 20px", fontSize: 14, gap: 8 }}
               >
-                Çok amaçlı saha teknik şartnamesini görüntüle
+                Zemin Seçeneklerini İncele
+                <ArrowRight size={15} weight="bold" />
               </Link>
             </div>
           </ScrollReveal>
@@ -1404,63 +961,19 @@ export default function Services() {
             </div>
 
             {/* Halı Saha Yapı Çeşitleri (Açık vs Kapalı vs EPDM Granüllü) */}
-            <div style={{ borderTop: "1px solid var(--color-border)", paddingTop: 40 }}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--color-line-dim)", marginBottom: 20 }}>
-                Halı Saha Konstrüksiyon ve Zemin Çözümleri
+            {/* Zemin Seçenekleri Özeti ve Link */}
+            <div style={{ borderTop: "1px solid var(--color-border)", paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
+              <div style={{ fontSize: 15, fontWeight: 500, color: "var(--color-line-dim)" }}>
+                Halı saha için <strong style={{color: "var(--color-line)"}}> FIFA standartlarında sentetik çim alternatifleri </strong> mevcuttur.
               </div>
-
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-                  gap: 20,
-                }}
+              <Link
+                to="/hizmetler/hali-saha-yapimi"
+                className="btn-primary"
+                style={{ padding: "10px 20px", fontSize: 14, gap: 8 }}
               >
-                <div style={{ background: "var(--color-card)", border: "1px solid var(--color-border)", padding: 24 }}>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: "var(--color-accent)", marginBottom: 6 }}>
-                    Açık Tesisler
-                  </div>
-                  <h4 style={{ fontFamily: "'General Sans', sans-serif", fontSize: 18, fontWeight: 700, margin: "0 0 10px" }}>
-                    Açık Halı Saha Sistemi
-                  </h4>
-                  <p style={{ fontSize: 14, color: "var(--color-line-dim)", lineHeight: 1.6, margin: "0 0 16px" }}>
-                    6-7 metre yüksekliğinde daldırma galvanizli tel örgü, tavan filesi ve gece maçları için 400W halide projektör veya 150–200W LED aydınlatma ile donatılır.
-                  </p>
-                  <span style={{ fontSize: 12, color: "var(--color-line)", background: "var(--color-bg)", padding: "4px 8px", border: "1px solid var(--color-border)" }}>
-                    55 mm Omurgalı Sentetik Çim
-                  </span>
-                </div>
-
-                <div style={{ background: "var(--color-card)", border: "1px solid var(--color-border)", padding: 24 }}>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: "var(--color-accent)", marginBottom: 6 }}>
-                    Dört Mevsim Kesintisiz
-                  </div>
-                  <h4 style={{ fontFamily: "'General Sans', sans-serif", fontSize: 18, fontWeight: 700, margin: "0 0 10px" }}>
-                    Kapalı Halı Saha (Brandalı / Sac / PVC)
-                  </h4>
-                  <p style={{ fontSize: 14, color: "var(--color-line-dim)", lineHeight: 1.6, margin: "0 0 16px" }}>
-                    Statik hesaplı çelik konstrüksiyon üzerine brandalı, sac kaplama veya PVC kaplama seçenekleri. Karlı bölgelerde mukavemet için sac kaplama önerilir.
-                  </p>
-                  <span style={{ fontSize: 12, color: "var(--color-line)", background: "var(--color-bg)", padding: "4px 8px", border: "1px solid var(--color-border)" }}>
-                    Rüzgar ve Kar Yükü Dayanımlı
-                  </span>
-                </div>
-
-                <div style={{ background: "var(--color-card)", border: "1px solid var(--color-border)", padding: 24 }}>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: "var(--color-accent)", marginBottom: 6 }}>
-                    FIFA Standartlarında Zemin
-                  </div>
-                  <h4 style={{ fontFamily: "'General Sans', sans-serif", fontSize: 18, fontWeight: 700, margin: "0 0 10px" }}>
-                    EPDM Granül Dolgulu Zemin
-                  </h4>
-                  <p style={{ fontSize: 14, color: "var(--color-line-dim)", lineHeight: 1.6, margin: "0 0 16px" }}>
-                    60mm monofilament omurgalı yapı, 14–15 kg/m² yeşil veya gri EPDM granül dolgusu ve şokped desteğiyle FIFA normlarında en üst düzey profesyonel konfor.
-                  </p>
-                  <span style={{ fontSize: 12, color: "var(--color-line)", background: "var(--color-bg)", padding: "4px 8px", border: "1px solid var(--color-border)" }}>
-                    Premium Kulüp Standardı
-                  </span>
-                </div>
-              </div>
+                Zemin Seçeneklerini İncele
+                <ArrowRight size={15} weight="bold" />
+              </Link>
             </div>
           </ScrollReveal>
         </div>
@@ -1568,19 +1081,19 @@ export default function Services() {
                     color: "var(--color-line)",
                   }}
                 >
-                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, color: "var(--color-line)" }}>
                     <CheckCircle size={16} color="var(--color-accent)" weight="fill" />
                     <span>Akrilik veya EPDM Tartan Zemin</span>
                   </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, color: "var(--color-line)" }}>
                     <CheckCircle size={16} color="var(--color-accent)" weight="fill" />
                     <span>Yüksekliği Ayarlanabilir Direkler</span>
                   </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, color: "var(--color-line)" }}>
                     <CheckCircle size={16} color="var(--color-accent)" weight="fill" />
                     <span>Nizami Çizgi ve Çevre Filesi</span>
                   </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, color: "var(--color-line)" }}>
                     <CheckCircle size={16} color="var(--color-accent)" weight="fill" />
                     <span>2–3 Hafta Teslimat Süresi</span>
                   </div>
@@ -1606,6 +1119,21 @@ export default function Services() {
                   </Link>
                 </div>
               </div>
+            </div>
+          
+            {/* Zemin Seçenekleri Özeti ve Link */}
+            <div style={{ borderTop: "1px solid var(--color-border)", paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16, marginTop: 40 }}>
+              <div style={{ fontSize: 15, fontWeight: 500, color: "var(--color-line-dim)" }}>
+                Voleybol sahası için <strong style={{color: "var(--color-line)"}}> özel şok emici zemin alternatifleri </strong> mevcuttur.
+              </div>
+              <Link
+                to="/hizmetler/voleybol-sahasi-yapimi"
+                className="btn-primary"
+                style={{ padding: "10px 20px", fontSize: 14, gap: 8 }}
+              >
+                Zemin Seçeneklerini İncele
+                <ArrowRight size={15} weight="bold" />
+              </Link>
             </div>
           </ScrollReveal>
         </div>

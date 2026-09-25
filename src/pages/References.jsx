@@ -184,7 +184,7 @@ export default function References() {
                 }}
               >
                 Türkiye'nin önde gelen üniversiteleri, kolejleri, belediyeleri, turizm tesisleri ve
-                prestijli konut projeleri için inşa ettiğimiz 500'ü aşkın tamamlanmış spor sahası referansımız.
+                prestijli konut projeleri için inşa ettiğimiz yüzlerce tamamlanmış spor sahası referansımız.
               </p>
             </div>
           </ScrollReveal>
@@ -215,7 +215,7 @@ export default function References() {
 
                 <div style={{ padding: "24px 28px", borderRight: "1px solid var(--color-border)", borderBottom: "1px solid var(--color-border)" }}>
                   <div style={{ fontFamily: "'General Sans', sans-serif", fontSize: 36, fontWeight: 700, color: "var(--color-accent)", lineHeight: 1, marginBottom: 8 }}>
-                    500+
+                    Yüzlerce
                   </div>
                   <div style={{ fontSize: 14, fontWeight: 700, color: "var(--color-line)", marginBottom: 4 }}>
                     Tamamlanan Saha

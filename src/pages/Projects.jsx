@@ -1,13 +1,11 @@
 import { useState, useMemo, useEffect } from "react";
 import {
-  Ruler,
   ArrowRight,
   PhoneCall,
   CheckCircle,
   Trophy,
   Buildings,
-  Images,
-  Sparkle
+  Images
 } from "@phosphor-icons/react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
@@ -26,161 +24,139 @@ const BRANCH_PREVIEWS = [
   { type: "Çocuk Parkı", label: "Çocuk Oyun Parkı", img: `${import.meta.env.BASE_URL}images/hizmetler/cocukparki5.jpg`, count: "6 Proje" },
 ];
 
-// Her projeye özel teknik veriler ve yönlendirme bağlantıları
+// Her projeye özel genel zemin/tesis bilgileri ve yönlendirme bağlantıları
 const PROJECT_METAS = {
   "Kapalı Halı Saha": {
-    spec: "30.00 × 50.00 m (1.500 m²)",
-    surface: "55 mm Monofilament Suni Çim",
-    structure: "Ağır Çelik Konstrüksiyon & PVC Kaplama",
+    surfaceType: "Sentetik Çim Zemin",
+    facilityType: "Kapalı Spor Tesisi",
     linkTo: "/hizmetler/hali-saha-yapimi",
-    highlightTag: "En Prestijli Tesis",
+    highlightTag: "Kapalı Tesis",
   },
   "Açık Halı Saha": {
-    spec: "20.00 × 40.00 m (800 m²)",
-    surface: "55 mm Omurgalı Sentetik Çim",
-    structure: "6.00 m Galvaniz Tel Çit & Tavan Filesi",
+    surfaceType: "Sentetik Çim Zemin",
+    facilityType: "Açık Halı Saha",
     linkTo: "/hizmetler/hali-saha-yapimi",
-    highlightTag: "Yoğun Kullanım",
+    highlightTag: "Açık Tesis",
   },
   "Profesyonel Basketbol Sahası": {
-    spec: "28.00 × 15.00 m (FIBA Normu)",
-    surface: "Cushion Akrilik Zemin Kaplama",
-    structure: "12mm Cam Panyalı Hidrolik Pota",
+    surfaceType: "Akrilik Zemin Kaplama",
+    facilityType: "Açık Basketbol Sahası",
     linkTo: "/hizmetler/basketbol-sahasi-yapimi",
-    highlightTag: "FIBA Onaylı",
+    highlightTag: "FIBA Normu",
   },
   "Nizami Açık Basketbol Sahası": {
-    spec: "28.00 × 15.00 m (FIBA Standart)",
-    surface: "UV Dayanımlı Çok Katmanlı Akrilik",
-    structure: "4.00 m Galvaniz Tel Örgü & LED Aydınlatma",
+    surfaceType: "Akrilik Zemin Kaplama",
+    facilityType: "Açık Basketbol Sahası",
     linkTo: "/hizmetler/basketbol-sahasi-yapimi",
-    highlightTag: "Turnuva Standardı",
+    highlightTag: "FIBA Normu",
   },
   "Tartan Zemin Basketbol Sahası": {
-    spec: "28.00 × 15.00 m",
-    surface: "13 mm EPDM Kauçuk Zemin",
-    structure: "Şok Emici SBR Altyapı & Sabit Pota",
+    surfaceType: "Tartan (EPDM) Zemin",
+    facilityType: "Açık Basketbol Sahası",
     linkTo: "/hizmetler/basketbol-sahasi-yapimi",
     highlightTag: "Eklem Dostu",
   },
   "Poliüretan Kapalı Spor Salonu": {
-    spec: "32.00 × 19.00 m Kapalı Kompleks",
-    surface: "Ek Yersiz Poliüretan Kaplama",
-    structure: "Duvar Koruma Pedleri, Tavan Ağı & Seyirci Tribünü",
+    surfaceType: "Poliüretan Zemin Kaplama",
+    facilityType: "Kapalı Spor Salonu",
     linkTo: "/hizmetler/basketbol-sahasi-yapimi",
-    highlightTag: "Kapalı Kompleks",
+    highlightTag: "Kapalı Salon",
   },
   "Kapalı Basketbol Sahası": {
-    spec: "Nizami Kapalı Spor Salonu",
-    surface: "Masif Ahşap Spor Parkesi",
-    structure: "Teleskopik Pota & İklimlendirme Altyapısı",
+    surfaceType: "Ahşap Spor Parkesi",
+    facilityType: "Kapalı Spor Salonu",
     linkTo: "/hizmetler/basketbol-sahasi-yapimi",
     highlightTag: "Masif Parke",
   },
   "Profesyonel Açık Voleybol Sahası": {
-    spec: "18.00 × 9.00 m (FIVB Normu)",
-    surface: "Çok Katmanlı Kaymaz Akrilik",
-    structure: "Teleskopik File Direkleri, Hakem Koltuğu & Çit",
+    surfaceType: "Akrilik Zemin Kaplama",
+    facilityType: "Açık Voleybol Sahası",
     linkTo: "/hizmetler/voleybol-sahasi-yapimi",
     highlightTag: "FIVB Standart",
   },
   "Kombine Voleybol & Basketbol Sahası": {
-    spec: "18.00 × 36.00 m",
-    surface: "Akrilik / Tartan Kombine Zemin",
-    structure: "Sökülebilir Kovanlı Direkler & Çift Branş Çizgi",
+    surfaceType: "Kombine Çok Amaçlı Zemin",
+    facilityType: "Çok Amaçlı Açık Saha",
     linkTo: "/hizmetler/voleybol-sahasi-yapimi",
     highlightTag: "Çift Branş",
   },
   "Akrilik Zemin Tenis Kortu": {
-    spec: "18.00 × 36.00 m (ITF Standart)",
-    surface: "5 Katman UV Dayanımlı Akrilik",
-    structure: "Çift Kat Asfalt & 500 Lux Asimetrik LED",
+    surfaceType: "Akrilik Zemin Kaplama",
+    facilityType: "Açık Tenis Kortu",
     linkTo: "/hizmetler/tenis-kortu-yapimi",
-    highlightTag: "Turnuva Standardı",
+    highlightTag: "ITF Standardı",
   },
   "Sentetik Çim Tenis Kortu": {
-    spec: "18.00 × 36.00 m",
-    surface: "26 mm Silis Kum Dolgulu Çim",
-    structure: "Yumuşak Top Sekmesi & Düşük Bakım",
+    surfaceType: "Sentetik Çim Zemin",
+    facilityType: "Açık Tenis Kortu",
     linkTo: "/hizmetler/sentetik-cim-tenis-kortu-yapimi",
     highlightTag: "Konforlu Zemin",
   },
   "Tartan Zemin Tenis Kortu": {
-    spec: "18.00 × 36.00 m",
-    surface: "13 mm EPDM Kauçuk Zemin",
-    structure: "Maksimum Darbe Emme & Eklem Koruma",
+    surfaceType: "Tartan (EPDM) Zemin",
+    facilityType: "Açık Tenis Kortu",
     linkTo: "/hizmetler/tartan-zemin-tenis-kortu-yapimi",
     highlightTag: "Eklem Dostu",
   },
   "Toprak Zemin Tenis Kortu": {
-    spec: "18.00 × 36.00 m Klasik Kort",
-    surface: "Doğal Kiremit Tozu & Çakıl Katman",
-    structure: "Özel Drenaj Sistemi & Dinlenme Alanı",
+    surfaceType: "Toprak Kort (Kiremit Tozu)",
+    facilityType: "Klasik Tenis Kortu",
     linkTo: "/hizmetler/tenis-kortu-yapimi",
     highlightTag: "Doğal Zemin",
   },
   "Çok Amaçlı Okul Sahası": {
-    spec: "18.00 × 36.00 m (648 m²)",
-    surface: "Renkli Akrilik Kombine Çizgi",
-    structure: "Basketbol + Voleybol + Tenis Tek Alanda & Tribün",
+    surfaceType: "Kombine Akrilik Zemin",
+    facilityType: "Çok Amaçlı Spor Alanı",
     linkTo: "/hizmetler/cok-amacli-saha-yapimi",
-    highlightTag: "3 Branş Tek Alanda",
+    highlightTag: "Kombine Saha",
   },
   "Kapsamlı Spor Kompleksi": {
-    spec: "Sosyal Tesis Alanı",
-    surface: "Karma Zemin Sistemleri",
-    structure: "Çoklu Açık Sahalar & Rekreasyon Düzenlemesi",
+    surfaceType: "Çoklu Spor Zeminleri",
+    facilityType: "Açık Spor Kompleksi",
     linkTo: "/hizmetler/cok-amacli-saha-yapimi",
     highlightTag: "Spor Kompleksi",
   },
   "Tribünlü Kampüs Sahası": {
-    spec: "Seyircili Turnuva Sahası",
-    surface: "Akrilik Zemin Kaplama",
-    structure: "Çelik Konstrüksiyon Tribün & Çit",
+    surfaceType: "Akrilik Zemin Kaplama",
+    facilityType: "Tribünlü Kampüs Sahası",
     linkTo: "/hizmetler/cok-amacli-saha-yapimi",
-    highlightTag: "Tribünlü Tesis",
+    highlightTag: "Tribünlü Saha",
   },
   "Panoramik Sahil Parkı EPDM Kauçuk Zemin": {
-    spec: "Büyük Ölçekli Rekreasyon",
-    surface: "Çok Renkli Dalgalı Dökme EPDM Kauçuk",
-    structure: "Ahşap Macera Kuleleri, Çift Kaydırak & Çevre Çiti",
+    surfaceType: "Dökme EPDM Kauçuk Zemin",
+    facilityType: "Çocuk Oyun & Rekreasyon Alanı",
     linkTo: "/iletisim",
-    highlightTag: "Öne Çıkan Park",
+    highlightTag: "Rekreasyon Parkı",
   },
   "Renkli Geometrik Figürlü Çocuk Oyun Parkı": {
-    spec: "Tematik Eğitici Oyun Alanı",
-    surface: "Figürlü & Renkli Dökme EPDM Kauçuk",
-    structure: "Seksek, Satranç Deseni, Ahşap Kale & Güvenlik Bariyeri",
+    surfaceType: "Figürlü EPDM Kauçuk Zemin",
+    facilityType: "Tematik Oyun Alanı",
     linkTo: "/iletisim",
-    highlightTag: "Çoklu Galeri",
+    highlightTag: "Tematik Park",
   },
   "Site İçi Karo Kauçuk Oyun & Rekreasyon Alanı": {
-    spec: "Site İçi Güvenli Alan",
-    surface: "Modüler 40×40 cm Karo Kauçuk",
-    structure: "Çift Kuleli Kaydırak & Tahterevalli Seti",
+    surfaceType: "Modüler Karo Kauçuk Zemin",
+    facilityType: "Site İçi Oyun Alanı",
     linkTo: "/iletisim",
     highlightTag: "Modüler Zemin",
   },
   "Doğal Çevre Uyumlu Dökme Kauçuk Park": {
-    spec: "Özel Tasarım Park",
-    surface: "Yeşil Monolitik Dökme Kauçuk",
-    structure: "Masif Ahşap Oyun Evleri & Güvenlik Salıncağı",
+    surfaceType: "Monolitik Kauçuk Zemin",
+    facilityType: "Ahşap Oyun Parkı",
     linkTo: "/iletisim",
     highlightTag: "Doğal Tasarım",
   },
   "Modern Geometrik Zemin & Oyun Elemanları": {
-    spec: "Şehir Parkı Standartları",
-    surface: "Kırmızı & Siyah Dökme Kauçuk",
-    structure: "Spiral Kaydırak & Yaylı Zıpzıp Grupları",
+    surfaceType: "Dökme Kauçuk Zemin",
+    facilityType: "Şehir Oyun Alanı",
     linkTo: "/iletisim",
     highlightTag: "Dinamik Park",
   },
   "Modüler Karo Kauçuk Çok Fonksiyonlu Oyun Kompleksi": {
-    spec: "Kapsamlı Oyun Kompleksi",
-    surface: "Şok Emici Karo Kauçuk Zemin",
-    structure: "Tüp Kaydırak, Asma Tünel & Tırmanma Parkuru",
+    surfaceType: "Karo Kauçuk Zemin",
+    facilityType: "Oyun Kompleksi",
     linkTo: "/iletisim",
-    highlightTag: "Mega Parkur",
+    highlightTag: "Oyun Kompleksi",
   },
 };
 
@@ -235,7 +211,7 @@ function ShowcaseCard({ project }) {
             fontWeight: 600,
           }}
         >
-          365 Gün Kesintisiz Futbol • Ağır Çelik Makas Konstrüksiyon
+          Dört Mevsim Spor Tesisi • Kapalı Halı Saha
         </div>
       </div>
 
@@ -262,29 +238,25 @@ function ShowcaseCard({ project }) {
         </h2>
 
         <p style={{ fontSize: 15, lineHeight: 1.7, color: "rgba(255, 255, 255, 0.85)", margin: "0 0 24px" }}>
-          {project.desc} Ağır kış şartlarına dayanıklı statik onaylı çelik çatı sistemi, 55mm monofilament sentetik çim ve gece maçları için homojen LED aydınlatma ile anahtar teslim tamamlanmıştır.
+          {project.desc} Dört mevsim kullanıma uygun kapalı çatı yapısı, sentetik çim zemini ve profesyonel LED aydınlatması ile anahtar teslim tamamlanmıştır.
         </p>
 
-        {/* 3 Spesifik Metrik */}
+        {/* Genel Kategori & Zemin Bilgisi */}
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+            display: "flex",
             gap: 12,
+            flexWrap: "wrap",
             marginBottom: 28,
           }}
         >
-          <div style={{ background: "rgba(255, 255, 255, 0.08)", padding: "12px 14px", border: "1px solid rgba(255, 255, 255, 0.15)" }}>
-            <div style={{ fontSize: 11, color: "rgba(255, 255, 255, 0.65)" }}>Nizami Ölçüler</div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: "#FFFFFF" }}>{meta.spec}</div>
+          <div style={{ background: "rgba(255, 255, 255, 0.08)", padding: "10px 16px", border: "1px solid rgba(255, 255, 255, 0.15)", borderRadius: "var(--radius)" }}>
+            <div style={{ fontSize: 11, color: "rgba(255, 255, 255, 0.65)" }}>Zemin Tipi</div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: "#FFFFFF" }}>{meta.surfaceType || project.surfaceType || "Sentetik Çim Zemin"}</div>
           </div>
-          <div style={{ background: "rgba(255, 255, 255, 0.08)", padding: "12px 14px", border: "1px solid rgba(255, 255, 255, 0.15)" }}>
-            <div style={{ fontSize: 11, color: "rgba(255, 255, 255, 0.65)" }}>Zemin Kaplaması</div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: "#FFFFFF" }}>{meta.surface}</div>
-          </div>
-          <div style={{ background: "rgba(255, 255, 255, 0.08)", padding: "12px 14px", border: "1px solid rgba(255, 255, 255, 0.15)" }}>
-            <div style={{ fontSize: 11, color: "rgba(255, 255, 255, 0.65)" }}>Yapı Sistemi</div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: "#FFFFFF" }}>{meta.structure}</div>
+          <div style={{ background: "rgba(255, 255, 255, 0.08)", padding: "10px 16px", border: "1px solid rgba(255, 255, 255, 0.15)", borderRadius: "var(--radius)" }}>
+            <div style={{ fontSize: 11, color: "rgba(255, 255, 255, 0.65)" }}>Tesis Yapısı</div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: "#FFFFFF" }}>{meta.facilityType || "Kapalı Spor Tesisi"}</div>
           </div>
         </div>
 
@@ -490,16 +462,24 @@ function WideProjectCard({ project }) {
             {project.desc}
           </p>
 
-          {/* Spesifik Metrikler */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20, fontSize: 13 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 8, color: "var(--color-line)" }}>
-              <Ruler size={16} color="var(--color-accent)" style={{ flexShrink: 0 }} />
-              <span>{meta.spec || project.size}</span>
-            </div>
-            <div style={{ display: "flex", alignItems: "center", gap: 8, color: "var(--color-line-dim)" }}>
-              <Trophy size={16} color="var(--color-accent)" style={{ flexShrink: 0 }} />
-              <span>{meta.surface || meta.structure}</span>
-            </div>
+          {/* Genel Zemin Tipi */}
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 20 }}>
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                padding: "5px 12px",
+                background: "var(--color-bg-soft)",
+                borderRadius: "var(--radius)",
+                fontSize: 12,
+                fontWeight: 600,
+                color: "var(--color-line)",
+              }}
+            >
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--color-accent)", display: "inline-block" }} />
+              <span>{meta.surfaceType || project.surfaceType || project.type}</span>
+            </span>
           </div>
         </div>
 
@@ -668,16 +648,24 @@ function CompactProjectCard({ project }) {
             {project.desc}
           </p>
 
-          {/* Anlamlı Teknik Metadatalar */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 16, fontSize: 12, color: "var(--color-line)" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <Ruler size={15} color="var(--color-accent)" />
-              <span>{meta.spec || project.size}</span>
-            </div>
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <Trophy size={15} color="var(--color-accent)" />
-              <span>{meta.surface || meta.structure}</span>
-            </div>
+          {/* Genel Zemin Tipi */}
+          <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 16 }}>
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                padding: "4px 10px",
+                background: "var(--color-bg-soft)",
+                borderRadius: "var(--radius)",
+                fontSize: 11,
+                fontWeight: 600,
+                color: "var(--color-line)",
+              }}
+            >
+              <span style={{ width: 5, height: 5, borderRadius: "50%", background: "var(--color-accent)", display: "inline-block" }} />
+              <span>{meta.surfaceType || project.surfaceType || project.type}</span>
+            </span>
           </div>
         </div>
 
@@ -794,7 +782,7 @@ export default function Projects() {
                     }}
                   />
                   <Buildings size={16} weight="fill" color="#FFFFFF" />
-                  <span>1988'DEN BUGÜNE • 500+ Tamamlanmış Proje</span>
+                  <span>1988'DEN BUGÜNE • Yüzlerce Tamamlanmış Proje</span>
                 </div>
 
                 <h1
@@ -999,7 +987,6 @@ export default function Projects() {
           <div style={{ marginTop: "clamp(36px, 5vw, 50px)" }}>
             <ScrollReveal delay={0.1}>
               <div style={{ marginBottom: 12, display: "flex", alignItems: "center", gap: 8 }}>
-                <Sparkle size={16} weight="fill" color="var(--color-accent)" />
                 <span style={{ fontSize: 13, fontWeight: 700, color: "var(--color-line)", textTransform: "uppercase", letterSpacing: "0.04em" }}>
                   Hızlı Branş Seçimi & Fotoğraf Galerisi
                 </span>

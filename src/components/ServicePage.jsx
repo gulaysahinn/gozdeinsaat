@@ -22,51 +22,14 @@ import FloorComparisonCards from "./FloorComparisonCards";
 import SportCourtDiagram from "./SportCourtDiagram";
 import ScrollReveal from "./ScrollReveal";
 
-// Mimari Süreç / Zaman Çizelgesi (Saha Yapım Aşamaları)
-function ProcessTimeline({ items, color, serviceTitle = "Spor Sahası", federation = "Uluslararası" }) {
-  const stepsData = [
-    {
-      stage: "01. Aşama",
-      title: "Hafriyat, Tesviye & Zemin Etüdü",
-      desc: "Arazi kotları lazerli nivo ile alınır, bitkisel toprak sıyrılır ve yağmur suyu tahliyesi için %0.5–%0.8 tek yöne meyil verilir.",
-    },
-    {
-      stage: "02. Aşama",
-      title: "Çevre Hatıl Betonu & Drenaj",
-      desc: "Saha çevresine 30×50 cm ebadında demir donatılı çevre hatıl betonu dökülür ve su tahliyesi için künk drenaj boruları döşenir.",
-    },
-    {
-      stage: "03. Aşama",
-      title: "Mıcır Sıkıştırma & Asfalt / Beton",
-      desc: "Silindir ile mekanik mıcır tabakası sıkıştırılır. Üzerine çift kat sıcak asfalt veya C25/30 perdahlı helikopterli beton tabanı serilir.",
-    },
-    {
-      stage: "04. Aşama",
-      title: "Sertifikalı Zemin Kaplama Uygulaması",
-      desc: "Primer astar, resurfacer dolgu katmanı, talebe göre darbe emici Cushion/EPDM kauçuk ve UV dayanımlı akrilik/çim katmanları uygulanır.",
-    },
-    {
-      stage: "05. Aşama",
-      title: "Çevre Tel Çit & LED Aydınlatma",
-      desc: "4.00 m yüksekliğinde daldırma galvaniz boru konstrüksiyonu, PVC kaplı helezon örgü tel ve asimetrik LED projektörler bağlanır.",
-    },
-    {
-      stage: "06. Aşama",
-      title: `Nizami Çizgiler, Ekipman & Devreye Alma`,
-      desc: `${serviceTitle} için resmi ${federation} normlarında oyun çizgileri çizilir, pota/direk/kale ekipmanları monte edilerek anahtar teslim devreye alınır.`,
-    },
-  ];
+function ProcessTimeline({ items, color }) {
+  if (!items || items.length === 0) return null;
 
-  const effectiveSteps = Array.isArray(items) && items.length > 0
-    ? items.map((it, idx) => {
-        const parts = it.split(":");
-        return {
-          stage: `${idx + 1}. Aşama`,
-          title: parts[0]?.trim() || `Adım ${idx + 1}`,
-          desc: parts[1]?.trim() || it,
-        };
-      })
-    : stepsData;
+  const effectiveSteps = items.map((it, idx) => ({
+    stage: `0${idx + 1}. Aşama`,
+    title: it.title,
+    desc: it.desc,
+  }));
 
   return (
     <div style={{ position: "relative", paddingLeft: "clamp(24px, 4vw, 40px)" }}>
@@ -157,7 +120,8 @@ export default function ServicePage({
   service,
   relatedServices = [],
   detailedSections = [],
-  factors = [],
+  costFactors = [],
+  buildSteps = [],
   comparisonTable = null,
   faq = [],
 }) {
@@ -192,34 +156,7 @@ export default function ServicePage({
     ? service.forWho.replace(/\s*·\s*/g, ", ")
     : "Spor kulüpleri, butik oteller, eğitim kurumları ve prestijli site projeleri";
 
-  // Faktörler için branşa özel ikon ve açıklama listesi
-  const factorItems = [
-    {
-      title: "Zemin Tipi & Katman Kalınlığı",
-      desc: "Akrilik sert kaplama, 13 mm EPDM kauçuk tartan veya 55 mm sentetik çim sistem seçimi.",
-      Icon: Stack,
-    },
-    {
-      title: "Altyapı Drenajı & Lazerli Eğim",
-      desc: "Yağmur suyunun hızla tahliyesi için lazer kontrollü %0.5–%0.8 tek yöne meyil ve çevre hatıl drenajı.",
-      Icon: Drop,
-    },
-    {
-      title: "Asimetrik LED Aydınlatma (Lux)",
-      desc: "Gece maçlarında göz kamaşmasını önleyen, 300–500 Lux homojen dağılımlı spor aydınlatma projektörleri.",
-      Icon: Lightbulb,
-    },
-    {
-      title: "Çevre Tel Çit & Koruma Donanımı",
-      desc: "4.00–6.00 metre yüksekliğinde daldırma galvaniz boru konstrüksiyon ve PVC kaplı örgü tel.",
-      Icon: ShieldCheck,
-    },
-    {
-      title: `Uluslararası ${federation} Standart Uyumu`,
-      desc: `Resmi ${federation} federasyon normlarına, nizami kaçış paylarına ve sertifikalı zemin kriterlerine tam uygunluk.`,
-      Icon: Trophy,
-    },
-  ];
+  // Yalnızca props'dan gelen costFactors'ı kullanacağız.
 
   return (
     <div style={{ background: "var(--color-bg)", color: "var(--color-line)" }}>
@@ -735,12 +672,9 @@ export default function ServicePage({
               </p>
             </div>
 
-            {/* Zaman Çizelgesi */}
             <ProcessTimeline
-              items={detailedSections.find((s) => s.type === "steps")?.items}
+              items={buildSteps}
               color={cAccent}
-              serviceTitle={service.title}
-              federation={federation}
             />
           </ScrollReveal>
         </div>
@@ -784,7 +718,7 @@ export default function ServicePage({
                 gap: 20,
               }}
             >
-              {factorItems.map((f, i) => {
+              {costFactors.map((f, i) => {
                 const IconComponent = f.Icon;
                 return (
                   <div

@@ -1,5 +1,63 @@
 import { SERVICES } from "../data/content";
 import ServicePage from "../components/ServicePage";
+import { Stack, Drop, Lightbulb, ShieldCheck, Trophy } from "@phosphor-icons/react";
+
+
+const costFactors = [
+  {
+    title: "Zemin Tipi & Katman Kalınlığı",
+    desc: "55mm veya 60mm suni çim (FIFA 2 Star uygulamalarında 60mm monofilament, omurgalı yapı) sistem seçimi.",
+    Icon: Stack,
+  },
+  {
+    title: "Altyapı Drenajı",
+    desc: "Yağmur suyunun hızla tahliyesi için yüzey eğimi ve çevre hatıl drenajı sağlanır.",
+    Icon: Drop,
+  },
+  {
+    title: "Aydınlatma Sistemi",
+    desc: "Gece maçlarında göz kamaşmasını önleyen, 400W halide projektör veya 150-200W LED projektör.",
+    Icon: Lightbulb,
+  },
+  {
+    title: "Çevre Tel Çit & Koruma",
+    desc: "6-7m yüksekliğinde, 3.5mm kalınlığında PVC kaplama tel örgü konstrüksiyonu.",
+    Icon: ShieldCheck,
+  },
+  {
+    title: "Uluslararası FIFA Standart Uyumu",
+    desc: "FIFA 1 Star / FIFA 2 Star belgelendirme standartlarına ve sertifikalı zemin kriterlerine tam uygunluk.",
+    Icon: Trophy,
+  },
+];
+
+
+const buildSteps = [
+  {
+    title: "Hafriyat ve Drenaj Altyapısı",
+    desc: "Saha alanının hafriyatı, balıksırtı drenaj kanalları ve künk boru döşemesi yapılır.",
+  },
+  {
+    title: "Hatıl Beton ve Ankrajlar",
+    desc: "Çelik kolon ve tel çit dikmeleri için çevre hatıl betonu dökümü gerçekleştirilir.",
+  },
+  {
+    title: "Mıcır Taban ve Taş Tozu Serimi",
+    desc: "1 ve 2 numara kırmataş mıcır tabakasının silindirle sıkıştırılması ve taş tozu tesviyesi yapılır.",
+  },
+  {
+    title: "Sentetik Çim Halı Serimi",
+    desc: "55mm - 60mm omurgalı monofilament sentetik çimin serilerek ek yerlerinin yapıştırılması sağlanır.",
+  },
+  {
+    title: "Kum ve SBR/EPDM Granül Dolgu",
+    desc: "Fırınlanmış silis kumu ve granül dolgunun özel makinelerle fırçalanması gerçekleştirilir.",
+  },
+  {
+    title: "Çelik Konstrüksiyon & Ekipman",
+    desc: "6-7m tel örgü, tavan ağı, kale direkleri ve aydınlatma montajı ile saha devreye alınır.",
+  },
+];
 
 export default function HaliSaha() {
   const service = SERVICES.find((s) => s.tag === "Halı Saha");
@@ -9,6 +67,8 @@ export default function HaliSaha() {
   return (
     <ServicePage
       service={service}
+      costFactors={costFactors}
+      buildSteps={buildSteps}
       relatedServices={[
         {
           name: "Tenis Kortu",

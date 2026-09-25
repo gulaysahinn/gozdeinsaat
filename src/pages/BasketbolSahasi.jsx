@@ -1,5 +1,63 @@
 import { SERVICES } from "../data/content";
 import ServicePage from "../components/ServicePage";
+import { Stack, Drop, Lightbulb, ShieldCheck, Trophy } from "@phosphor-icons/react";
+
+
+const costFactors = [
+  {
+    title: "Zemin Tipi & Katman Kalınlığı",
+    desc: "Akrilik (2-3mm), Tartan (8mm SBR+5mm EPDM), Parke (ahşap) veya poliüretan zemin sistem seçimi.",
+    Icon: Stack,
+  },
+  {
+    title: "Altyapı Drenajı",
+    desc: "Yağmur suyunun hızla tahliyesi için yüzey eğimi ve çevre hatıl drenajı sağlanır.",
+    Icon: Drop,
+  },
+  {
+    title: "LED Aydınlatma Sistemi",
+    desc: "Gece maçlarında göz kamaşmasını önleyen, genel LED projektör aydınlatma sistemi.",
+    Icon: Lightbulb,
+  },
+  {
+    title: "Çevre Tel Çit & Koruma",
+    desc: "Açık sahalar için uygun yükseklikte PVC kaplı tel örgü ile çevrili saha konstrüksiyonu.",
+    Icon: ShieldCheck,
+  },
+  {
+    title: "Uluslararası FIBA Standart Uyumu",
+    desc: "FIBA resmi ölçü ve zemin standartlarına, nizami oyun çizgilerine tam uygunluk.",
+    Icon: Trophy,
+  },
+];
+
+
+const buildSteps = [
+  {
+    title: "Hafriyat, Tesviye & Zemin Etüdü",
+    desc: "Arazi kotları alınır, bitkisel toprak sıyrılır ve yağmur suyu tahliyesi için yüzey meyli verilir.",
+  },
+  {
+    title: "Çevre Hatıl Betonu & Drenaj",
+    desc: "Saha çevresine demir donatılı çevre hatıl betonu dökülür ve su tahliyesi için drenaj boruları döşenir.",
+  },
+  {
+    title: "Mıcır Sıkıştırma & Asfalt / Beton",
+    desc: "Mekanik mıcır tabakası sıkıştırılır. Üzerine asfalt veya perdahlı beton tabanı serilir.",
+  },
+  {
+    title: "Sertifikalı Zemin Kaplama",
+    desc: "Basketbol branşına uygun akrilik, tartan, parke veya poliüretan zemin katmanları uygulanır.",
+  },
+  {
+    title: "Çevre Tel Çit & Aydınlatma",
+    desc: "Açık sahalarda PVC kaplı örgü tel konstrüksiyonu ve genel LED projektörler bağlanır.",
+  },
+  {
+    title: "Nizami Çizgiler & Devreye Alma",
+    desc: "FIBA normlarında oyun çizgileri çizilir, basketbol potaları monte edilerek anahtar teslim devreye alınır.",
+  },
+];
 
 export default function BasketbolSahasi() {
   const service = SERVICES.find((s) => s.tag === "Basketbol");
@@ -9,6 +67,8 @@ export default function BasketbolSahasi() {
   return (
     <ServicePage
       service={service}
+      costFactors={costFactors}
+      buildSteps={buildSteps}
       relatedServices={[
         {
           name: "Tenis Kortu",

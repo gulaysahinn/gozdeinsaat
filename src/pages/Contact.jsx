@@ -52,7 +52,7 @@ const ILETISIM = [
 const GUVENCELER = [
   { rakam: "1988", aciklama: "Kuruluş yılı" },
   { rakam: "35+", aciklama: "Yıllık deneyim" },
-  { rakam: "500+", aciklama: "Tamamlanan saha" },
+  { rakam: "Yüzlerce", aciklama: "Tamamlanan saha" },
   { rakam: "24s", aciklama: "Geri dönüş süresi" },
 ];
 

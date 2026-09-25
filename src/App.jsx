@@ -24,23 +24,25 @@ export default function App() {
     <div className="app-wrapper" style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <ScrollToTop />
       <Nav />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/hizmetler" element={<Services />} />
-        <Route path="/projeler" element={<Projects />} />
-        <Route path="/hakkimizda" element={<About />} />
-        <Route path="/iletisim" element={<Contact />} />
-        <Route path="/referanslar" element={<References />} />
-        {/* Hizmet alt sayfaları */}
-        <Route path="/hizmetler/tenis-kortu-yapimi" element={<TenisKortu />} />
-        <Route path="/hizmetler/tartan-zemin-tenis-kortu-yapimi" element={<TartanTenisKortu />} />
-        <Route path="/hizmetler/sentetik-cim-tenis-kortu-yapimi" element={<SentetikCimTenisKortu />} />
-        <Route path="/hizmetler/basketbol-sahasi-yapimi" element={<BasketbolSahasi />} />
-        <Route path="/hizmetler/voleybol-sahasi-yapimi" element={<VoleybolSahasi />} />
-        <Route path="/hizmetler/cok-amacli-saha-yapimi" element={<CokAmacliSaha />} />
-        <Route path="/hizmetler/hali-saha-yapimi" element={<HaliSaha />} />
-        <Route path="/hizmetler/gizlilik-politikasi" element={<GizlilikPolitikasi />} />
-      </Routes>
+      <main className="main-content" style={{ flex: "1 0 auto", width: "100%", position: "relative" }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/hizmetler" element={<Services />} />
+          <Route path="/projeler" element={<Projects />} />
+          <Route path="/hakkimizda" element={<About />} />
+          <Route path="/iletisim" element={<Contact />} />
+          <Route path="/referanslar" element={<References />} />
+          {/* Hizmet alt sayfaları */}
+          <Route path="/hizmetler/tenis-kortu-yapimi" element={<TenisKortu />} />
+          <Route path="/hizmetler/tartan-zemin-tenis-kortu-yapimi" element={<TartanTenisKortu />} />
+          <Route path="/hizmetler/sentetik-cim-tenis-kortu-yapimi" element={<SentetikCimTenisKortu />} />
+          <Route path="/hizmetler/basketbol-sahasi-yapimi" element={<BasketbolSahasi />} />
+          <Route path="/hizmetler/voleybol-sahasi-yapimi" element={<VoleybolSahasi />} />
+          <Route path="/hizmetler/cok-amacli-saha-yapimi" element={<CokAmacliSaha />} />
+          <Route path="/hizmetler/hali-saha-yapimi" element={<HaliSaha />} />
+          <Route path="/hizmetler/gizlilik-politikasi" element={<GizlilikPolitikasi />} />
+        </Routes>
+      </main>
       <FloatingContact />
       <Footer />
     </div>
