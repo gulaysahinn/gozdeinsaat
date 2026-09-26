@@ -51,7 +51,6 @@ export const SERVICES = [
       {
         name: "Toprak Zemin Kaplama",
         category: "Doğal Tenis Kortu Zemini",
-        image: `${import.meta.env.BASE_URL}images/hizmetler/toprakZeminTenisKortu.jpg`,
         badges: ["Profesyonel", "Düşük Sakatlanma Riski", "Yüksek Bakım"],
         badgeColors: ["warm", "accent", "blue"],
         forWho: "Profesyonel müsabakalar, tenis kulüpleri",
@@ -60,7 +59,6 @@ export const SERVICES = [
       {
         name: "Doğal Çim Zemin Kaplama",
         category: "Doğal Tenis Kortu Zemini",
-        image: `${import.meta.env.BASE_URL}images/hizmetler/dogalCimTenisKortu.jpg`,
         badges: ["Profesyonel", "Sporcu Sağlığı", "Yüksek Bakım"],
         badgeColors: ["accent", "warm", "blue"],
         forWho: "Profesyonel oyuncular, üst düzey kulüpler",
@@ -118,7 +116,6 @@ export const SERVICES = [
       },
       {
         name: "Poliüretan Zemin Basketbol Sahası",
-        image: `${import.meta.env.BASE_URL}images/hizmetler/poliuretanZeminBasketbol.jpg`,
         badges: ["Esnek", "Renk Seçenekleri", "Çok Amaçlı"],
         badgeColors: ["blue", "accent", "warm"],
         forWho: "İç mekan salonları, çok amaçlı sahalar",
@@ -169,7 +166,7 @@ export const SERVICES = [
     color: COLORS.lineDim,
     title: "Çok Amaçlı Saha",
     spec: "Zemine özel ölçü",
-    image: `${import.meta.env.BASE_URL}images/hizmetler/tenisKortuSahaZemin.jpeg`,
+    image: `${import.meta.env.BASE_URL}images/hizmetler/cokAmacliSaha.jpg`,
     imageAlt: "Çok amaçlı spor sahası — Gözde İnşaat",
     desc: "Suni çim ve tartan zemin üzerine tenis, basketbol, voleybol ve mini futbol gibi farklı spor dallarının bir arada icra edilmesine olanak sağlayan kombine sahalar.",
     detail:
@@ -186,7 +183,7 @@ export const SERVICES = [
     floors: [
       {
         name: "Suni Çim Zemin",
-        image: `${import.meta.env.BASE_URL}images/hizmetler/tenisKortuSahaZemin.jpeg`,
+        image: `${import.meta.env.BASE_URL}images/hizmetler/cokAmacliSaha.jpg`,
         badges: ["Çok Amaçlı", "Uygun Maliyet", "Kolay Bakım"],
         badgeColors: ["blue", "accent", "accent"],
         forWho: "Okul, site, toplu konut",
@@ -249,7 +246,6 @@ export const SERVICES = [
     ],
   },
 ];
-
 export const PROCESS = [
   {
     n: "01",
@@ -272,7 +268,6 @@ export const PROCESS = [
     desc: "Ekipman montajı (file, pota, direk) yapılır, saha garantiyle teslim edilir.",
   },
 ];
-
 // NOT: Aşağıdaki projeler temsili örneklerdir.
 // Gerçek referanslarınızı ekleyecekseniz bu diziyi kendi proje
 // isim / şehir / fotoğraflarınızla güncelleyin.
@@ -285,6 +280,10 @@ export const PROJECTS = [
     surfaceType: "Sentetik Çim Zemin", 
     color: COLORS.orange,
     image: `${import.meta.env.BASE_URL}images/hizmetler/kapalihalisaha.jpg`,
+    gallery: [
+      `${import.meta.env.BASE_URL}images/hizmetler/kapalihalisaha.jpg`,
+      `${import.meta.env.BASE_URL}images/hizmetler/kapalihalisahayapilirken.jpg`
+    ],
     date: "Her Mevsim",
     desc: "Yılın 365 günü hava şartlarından etkilenmeden futbol oynama olanağı sağlayan, kapalı konstrüksiyonlu halı saha tesisi.",
     chips: ["Kapalı Tesis", "Suni Çim Zemin", "LED Aydınlatma"]
@@ -332,17 +331,6 @@ export const PROJECTS = [
     date: "Darbe Sönümleyici",
     desc: "SBR ve EPDM kauçuk granül katmanlı, sporcu eklem sağlığını destekleyen profesyonel tartan basketbol sahası.",
     chips: ["Tartan EPDM", "Eklem Dostu", "UV Dayanıklı"]
-  },
-  { 
-    name: "Poliüretan Kapalı Spor Salonu", 
-    city: "Kapalı Kompleks", 
-    type: "Basketbol", 
-    surfaceType: "Poliüretan Zemin Kaplama", 
-    color: COLORS.lineDim,
-    image: `${import.meta.env.BASE_URL}images/hizmetler/poliuretanZeminBasketbol.jpg`,
-    date: "İç Mekan",
-    desc: "Tribünlü kapalı spor kompleksi; ek yersiz poliüretan zemin, duvar koruma minderleri ve tavan güvenlik ağlarıyla tamamlandı.",
-    chips: ["Poliüretan Zemin", "Tribünlü Salon", "Duvar Koruma Pedi"]
   },
   { 
     name: "Kapalı Basketbol Sahası", 
@@ -411,15 +399,15 @@ export const PROJECTS = [
     chips: ["Tartan Zemin", "EPDM Kauçuk", "Yüksek Tutunma"]
   },
   { 
-    name: "Toprak Zemin Tenis Kortu", 
-    city: "Klasik Turnuva Kortu", 
-    type: "Tenis", 
-    surfaceType: "Toprak Kort (Kiremit Tozu)", 
+    name: "Akrilik/EPDM Zeminli Açık Tenis Kortu", 
+    city: "Eğitim Kampüsü", 
+    type: "Çok Amaçlı", 
+    surfaceType: "EPDM/Akrilik Zemin", 
     color: COLORS.lineDim,
-    image: `${import.meta.env.BASE_URL}images/hizmetler/toprakZeminTenisKortu.jpg`,
-    date: "Doğal Zemin",
-    desc: "Kiremit tozu ve çakıl katmanlarından oluşan, kayma ve top yavaşlatma mekaniğiyle profesyonel oyuncuların tercihi klasik kort.",
-    chips: ["Kiremit Tozu", "Doğal Katman", "Drenaj Sistemi"]
+    image: `${import.meta.env.BASE_URL}images/hizmetler/tenissahasi.JPG`,
+    date: "Açık Saha",
+    desc: "Okul ve kampüs projeleri için yüksek standartlarda hazırlanmış, uzun ömürlü ve güvenli tenis kortu zemin uygulaması.",
+    chips: ["Eğitim Kampüsü", "Uzun Ömürlü", "Açık Saha"]
   },
   { 
     name: "Çok Amaçlı Okul Sahası", 
@@ -443,17 +431,7 @@ export const PROJECTS = [
     desc: "Aynı kampüste yan yana konumlandırılmış açık spor sahaları, rekreasyon yolları ve tel örgü güvenlik sistemleri.",
     chips: ["Çoklu Saha", "Aydınlatma", "Site Tesisleri"]
   },
-  { 
-    name: "Tribünlü Kampüs Sahası", 
-    city: "Seyircili Turnuva", 
-    type: "Çok Amaçlı", 
-    surfaceType: "Akrilik Zemin Kaplama", 
-    color: COLORS.lineDim,
-    image: `${import.meta.env.BASE_URL}images/projeler/istanbulcevrekoleji.jpg`,
-    date: "Eğitim Kampüsü",
-    desc: "Turnuvalar ve okul maçları için seyirci tribünüyle desteklenmiş, akrilik zemin kaplamalı kampüs spor alanı.",
-    chips: ["Tribünlü Tesis", "Turnuva Standardı", "Güvenlik Çiti"]
-  },
+
   { 
     name: "Panoramik Sahil Parkı EPDM Kauçuk Zemin", 
     city: "Özel Rekreasyon Projesi", 
@@ -529,4 +507,25 @@ export const PROJECTS = [
     desc: "Geniş karo kauçuk güvenlik zemini üzerinde tüp kaydıraklar, tırmanma kuleleri ve salıncak gruplarını bir araya getiren çocuk oyun alanı.",
     chips: ["Çok Fonksiyonlu Park", "Karo Kauçuk", "Tüp Kaydırak"]
   },
+
+  {
+    name: "Akrilik Zemin Voleybol Sahası",
+    type: "Voleybol",
+    surfaceType: "Akrilik Zemin Kaplama",
+    color: COLORS.lineDim,
+    image: `${import.meta.env.BASE_URL}images/hizmetler/voleybolzemin.JPG`,
+    date: "Açık Saha",
+    desc: "Uluslararası standartlarda, kaymaz akrilik zeminli ve dış mekan koşullarına tam dayanıklı profesyonel voleybol kortu uygulaması.",
+    chips: ["Akrilik Zemin", "Dış Mekan", "Uluslararası Standart"]
+  },
+  {
+    name: "Tartan Zemin Voleybol Sahası",
+    type: "Voleybol",
+    surfaceType: "Tartan (EPDM) Zemin",
+    color: COLORS.lineDim,
+    image: `${import.meta.env.BASE_URL}images/hizmetler/saharesimleri.jpg`,
+    date: "Darbe Emici",
+    desc: "Sporcu eklem sağlığını maksimum düzeyde koruyan, SBR ve EPDM katmanlı yüksek performanslı voleybol sahası.",
+    chips: ["Tartan Zemin", "Eklem Dostu", "Yüksek Performans"]
+  }
 ];

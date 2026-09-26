@@ -160,146 +160,8 @@ const PROJECT_METAS = {
   },
 };
 
-/* ─── 1. AMİRAL GEMİSİ SHOWCASE (ÖNE ÇIKAN PROJE) ─────────────────────────── */
-function ShowcaseCard({ project }) {
-  const meta = PROJECT_METAS[project.name] || {};
-
-  return (
-    <div
-      style={{
-        background: "var(--color-accent-dark, #154D35)",
-        color: "#FFFFFF",
-        border: "1px solid var(--color-border)",
-        borderRadius: "var(--radius)",
-        overflow: "hidden",
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-        boxShadow: "var(--shadow-lg)",
-        position: "relative",
-      }}
-    >
-      {/* Sol / Üst Görsel: Sabit 16:10 oranlı veya min. 320px kilitli görsel alanı */}
-      <div style={{ position: "relative", minHeight: 320, height: "100%", overflow: "hidden", background: "#0d3524" }}>
-        <img
-          src={project.image}
-          alt={project.name}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            objectPosition: "center",
-            display: "block",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(to top, rgba(21,77,53,0.88) 0%, transparent 50%)",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: 20,
-            left: 20,
-            background: "rgba(26,29,32,0.85)",
-            backdropFilter: "blur(6px)",
-            color: "#FFFFFF",
-            padding: "8px 16px",
-            fontSize: 12,
-            fontWeight: 600,
-          }}
-        >
-          Dört Mevsim Spor Tesisi • Kapalı Halı Saha
-        </div>
-      </div>
-
-      {/* Sağ İçerik */}
-      <div
-        style={{
-          padding: "clamp(32px, 4vw, 48px)",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-        }}
-      >
-        <h2
-          style={{
-            fontFamily: "'General Sans', sans-serif",
-            fontSize: "clamp(24px, 3vw, 34px)",
-            fontWeight: 700,
-            color: "#FFFFFF",
-            lineHeight: 1.2,
-            margin: "0 0 16px",
-          }}
-        >
-          {project.name} Tesis Uygulaması
-        </h2>
-
-        <p style={{ fontSize: 15, lineHeight: 1.7, color: "rgba(255, 255, 255, 0.85)", margin: "0 0 24px" }}>
-          {project.desc} Dört mevsim kullanıma uygun kapalı çatı yapısı, sentetik çim zemini ve profesyonel LED aydınlatması ile anahtar teslim tamamlanmıştır.
-        </p>
-
-        {/* Genel Kategori & Zemin Bilgisi */}
-        <div
-          style={{
-            display: "flex",
-            gap: 12,
-            flexWrap: "wrap",
-            marginBottom: 28,
-          }}
-        >
-          <div style={{ background: "rgba(255, 255, 255, 0.08)", padding: "10px 16px", border: "1px solid rgba(255, 255, 255, 0.15)", borderRadius: "var(--radius)" }}>
-            <div style={{ fontSize: 11, color: "rgba(255, 255, 255, 0.65)" }}>Zemin Tipi</div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: "#FFFFFF" }}>{meta.surfaceType || project.surfaceType || "Sentetik Çim Zemin"}</div>
-          </div>
-          <div style={{ background: "rgba(255, 255, 255, 0.08)", padding: "10px 16px", border: "1px solid rgba(255, 255, 255, 0.15)", borderRadius: "var(--radius)" }}>
-            <div style={{ fontSize: 11, color: "rgba(255, 255, 255, 0.65)" }}>Tesis Yapısı</div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: "#FFFFFF" }}>{meta.facilityType || "Kapalı Spor Tesisi"}</div>
-          </div>
-        </div>
-
-        {/* Aksiyon */}
-        <div style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
-          <Link
-            to={meta.linkTo || "/hizmetler/hali-saha-yapimi"}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              background: "#FFFFFF",
-              color: "var(--color-accent-dark, #154D35)",
-              padding: "12px 24px",
-              fontWeight: 700,
-              fontSize: 14,
-              textDecoration: "none",
-            }}
-          >
-            Saha Detaylarını ve Yapım Sürecini Gör
-            <ArrowRight size={15} weight="bold" />
-          </Link>
-          <Link
-            to="/iletisim"
-            style={{
-              color: "#FFFFFF",
-              fontSize: 14,
-              fontWeight: 600,
-              textDecoration: "none",
-              borderBottom: "1px solid rgba(255,255,255,0.4)",
-              paddingBottom: 2,
-            }}
-          >
-            Benzer Proje İçin Teklif İste
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 /* ─── 2. GENİŞ EDİTORYAL KART (2-SÜTUNLU YAN YANA / 16:10 SABİT ORAN) ──────── */
-function WideProjectCard({ project }) {
+function WideProjectCard({ project, onImageClick }) {
   const [hovered, setHovered] = useState(false);
   const [activeImg, setActiveImg] = useState(project.image);
   const meta = PROJECT_METAS[project.name] || {};
@@ -345,12 +207,14 @@ function WideProjectCard({ project }) {
           src={activeImg}
           alt={project.name}
           loading="lazy"
+          onClick={() => onImageClick?.(activeImg)}
           style={{
             width: "100%",
             height: "100%",
             objectFit: "cover",
             objectPosition: "center",
             display: "block",
+            cursor: "pointer",
             transition: "transform 0.5s ease",
             transform: hovered ? "scale(1.04)" : "scale(1)",
           }}
@@ -376,24 +240,35 @@ function WideProjectCard({ project }) {
 
         {hasGallery && (
           <div
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onImageClick?.(activeImg);
+            }}
             style={{
               position: "absolute",
               top: 14,
               right: 14,
-              background: "rgba(21, 77, 53, 0.92)",
+              background: "rgba(21, 77, 53, 0.95)",
               backdropFilter: "blur(6px)",
               color: "#FFFFFF",
-              padding: "4px 8px",
-              fontSize: 11,
+              padding: "6px 10px",
+              fontSize: 12,
               fontWeight: 700,
-              borderRadius: 3,
+              borderRadius: 4,
               display: "flex",
               alignItems: "center",
-              gap: 4,
+              gap: 6,
+              cursor: "pointer",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+              transition: "transform 0.2s",
             }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+            onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
           >
-            <Images size={14} weight="bold" />
+            <Images size={16} weight="bold" />
             <span>{gallery.length} Açı</span>
+            <span style={{ fontSize: 10, opacity: 0.8, marginLeft: 2, fontWeight: 500 }}>(Büyüt)</span>
           </div>
         )}
 
@@ -402,15 +277,15 @@ function WideProjectCard({ project }) {
           <div
             style={{
               position: "absolute",
-              bottom: 10,
-              left: 10,
-              right: 10,
+              bottom: 0,
+              left: 0,
+              right: 0,
               display: "flex",
-              gap: 6,
-              background: "rgba(0,0,0,0.55)",
-              backdropFilter: "blur(4px)",
-              padding: "5px",
-              borderRadius: 4,
+              justifyContent: "flex-end",
+              gap: 10,
+              zIndex: 2,
+              background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
+              padding: "24px 16px 12px 16px",
             }}
           >
             {gallery.map((imgUrl, i) => (
@@ -422,19 +297,32 @@ function WideProjectCard({ project }) {
                   e.stopPropagation();
                   setActiveImg(imgUrl);
                 }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.opacity = "1";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.boxShadow = "0 6px 16px rgba(0,0,0,0.5)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.opacity = activeImg === imgUrl ? "1" : "0.6";
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.3)";
+                }}
                 style={{
-                  width: 42,
-                  height: 30,
+                  width: 56,
+                  height: 42,
+                  flexShrink: 0,
+                  position: "relative",
                   padding: 0,
-                  border: activeImg === imgUrl ? "2px solid #FFFFFF" : "1px solid rgba(255,255,255,0.4)",
-                  borderRadius: 2,
+                  border: activeImg === imgUrl ? "2px solid #FFFFFF" : "2px solid transparent",
+                  borderRadius: 4,
                   overflow: "hidden",
                   cursor: "pointer",
-                  opacity: activeImg === imgUrl ? 1 : 0.65,
-                  transition: "opacity 0.2s, border-color 0.2s",
+                  opacity: activeImg === imgUrl ? 1 : 0.6,
+                  transition: "all 0.2s ease",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
                 }}
               >
-                <img src={imgUrl} alt={`Fotoğraf ${i + 1}`} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
+                <img src={imgUrl} alt={`Fotoğraf ${i + 1}`} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
               </button>
             ))}
           </div>
@@ -514,7 +402,7 @@ function WideProjectCard({ project }) {
 }
 
 /* ─── 3. KOMPAKT KART (3-SÜTUNLU STANDART / 4:3 SABİT ORAN) ───────────────── */
-function CompactProjectCard({ project }) {
+function CompactProjectCard({ project, onImageClick }) {
   const [hovered, setHovered] = useState(false);
   const [activeImg, setActiveImg] = useState(project.image);
   const meta = PROJECT_METAS[project.name] || {};
@@ -592,15 +480,15 @@ function CompactProjectCard({ project }) {
           <div
             style={{
               position: "absolute",
-              bottom: 8,
-              left: 8,
-              right: 8,
+              bottom: 0,
+              left: 0,
+              right: 0,
               display: "flex",
-              gap: 4,
-              background: "rgba(0,0,0,0.55)",
-              backdropFilter: "blur(4px)",
-              padding: "4px",
-              borderRadius: 3,
+              justifyContent: "flex-end",
+              gap: 8,
+              zIndex: 2,
+              background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%)",
+              padding: "16px 12px 10px 12px",
             }}
           >
             {gallery.map((imgUrl, i) => (
@@ -612,18 +500,31 @@ function CompactProjectCard({ project }) {
                   e.stopPropagation();
                   setActiveImg(imgUrl);
                 }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.opacity = "1";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.4)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.opacity = activeImg === imgUrl ? "1" : "0.6";
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
                 style={{
-                  width: 32,
-                  height: 24,
+                  width: 44,
+                  height: 33,
+                  flexShrink: 0,
+                  position: "relative",
                   padding: 0,
-                  border: activeImg === imgUrl ? "2px solid #FFFFFF" : "1px solid rgba(255,255,255,0.4)",
-                  borderRadius: 2,
+                  border: activeImg === imgUrl ? "2px solid #FFFFFF" : "2px solid transparent",
+                  borderRadius: 3,
                   overflow: "hidden",
                   cursor: "pointer",
                   opacity: activeImg === imgUrl ? 1 : 0.6,
+                  transition: "all 0.2s ease",
                 }}
               >
-                <img src={imgUrl} alt={`Fotoğraf ${i + 1}`} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
+                <img src={imgUrl} alt={`Fotoğraf ${i + 1}`} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
               </button>
             ))}
           </div>
@@ -701,6 +602,7 @@ function CompactProjectCard({ project }) {
 /* ─── ANA PROJELER SAYFASI ─────────────────────────────────────────────────── */
 export default function Projects() {
   const [filter, setFilter] = useState("Tümü");
+  const [lightboxImg, setLightboxImg] = useState(null);
 
   const filtered = useMemo(() => {
     if (filter === "Tümü") return PROJECTS;
@@ -1136,12 +1038,43 @@ export default function Projects() {
         {isAll ? (
           /* TÜMÜ GÖRÜNÜMÜ: ZENGİN HİKAYE AKIŞI */
           <div style={{ display: "flex", flexDirection: "column", gap: "clamp(52px, 7vw, 80px)" }}>
-            {/* 1. Öne Çıkan Vitrin: Kapalı Halı Saha Tesis Projesi */}
-            {showcaseProject && (
+            {/* 1. Futbol Sahaları & Spor Kompleksleri */}
+            <div>
               <ScrollReveal>
-                <ShowcaseCard project={showcaseProject} />
+                <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 24 }}>
+                  <h2
+                    style={{
+                      fontFamily: "'General Sans', sans-serif",
+                      fontSize: "clamp(22px, 2.5vw, 28px)",
+                      fontWeight: 700,
+                      margin: 0,
+                    }}
+                  >
+                    Futbol Sahaları & Spor Kompleksleri
+                  </h2>
+                  <span style={{ fontSize: 13, color: "var(--color-line-dim)" }}>Kapalı ve Açık Halı Saha Tesisleri</span>
+                </div>
               </ScrollReveal>
-            )}
+
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                  gap: 28,
+                }}
+              >
+                {showcaseProject && (
+                  <ScrollReveal delay={0.05}>
+                    <WideProjectCard project={showcaseProject} onImageClick={setLightboxImg} />
+                  </ScrollReveal>
+                )}
+                {openFootball && (
+                  <ScrollReveal delay={0.1}>
+                    <WideProjectCard project={openFootball} onImageClick={setLightboxImg} />
+                  </ScrollReveal>
+                )}
+              </div>
+            </div>
 
             {/* 2. Turnuva ve Kulüp Standartlarında Açık Sahalar: Tenis & Basketbol */}
             <div>
@@ -1170,12 +1103,17 @@ export default function Projects() {
               >
                 {tennisProjects[0] && (
                   <ScrollReveal delay={0.05}>
-                    <WideProjectCard project={tennisProjects[0]} />
+                    <WideProjectCard project={tennisProjects[0]} onImageClick={setLightboxImg} />
+                  </ScrollReveal>
+                )}
+                {tennisProjects[3] && (
+                  <ScrollReveal delay={0.1}>
+                    <WideProjectCard project={tennisProjects[3]} onImageClick={setLightboxImg} />
                   </ScrollReveal>
                 )}
                 {basketballProjects[1] && (
-                  <ScrollReveal delay={0.1}>
-                    <WideProjectCard project={basketballProjects[1]} />
+                  <ScrollReveal delay={0.15}>
+                    <WideProjectCard project={basketballProjects[1]} onImageClick={setLightboxImg} />
                   </ScrollReveal>
                 )}
               </div>
@@ -1208,12 +1146,17 @@ export default function Projects() {
               >
                 {volleyballProjects[0] && (
                   <ScrollReveal delay={0.05}>
-                    <WideProjectCard project={volleyballProjects[0]} />
+                    <WideProjectCard project={volleyballProjects[0]} onImageClick={setLightboxImg} />
                   </ScrollReveal>
                 )}
-                {basketballProjects[3] && (
+                {volleyballProjects[2] && (
                   <ScrollReveal delay={0.1}>
-                    <WideProjectCard project={basketballProjects[3]} />
+                    <WideProjectCard project={volleyballProjects[2]} onImageClick={setLightboxImg} />
+                  </ScrollReveal>
+                )}
+                {volleyballProjects[3] && (
+                  <ScrollReveal delay={0.15}>
+                    <WideProjectCard project={volleyballProjects[3]} onImageClick={setLightboxImg} />
                   </ScrollReveal>
                 )}
               </div>
@@ -1244,44 +1187,36 @@ export default function Projects() {
                   gap: 24,
                 }}
               >
-                {tennisProjects[3] && (
-                  <ScrollReveal delay={0.05}>
-                    <CompactProjectCard project={tennisProjects[3]} />
-                  </ScrollReveal>
-                )}
+
                 {tennisProjects[1] && (
                   <ScrollReveal delay={0.08}>
-                    <CompactProjectCard project={tennisProjects[1]} />
+                    <CompactProjectCard project={tennisProjects[1]} onImageClick={setLightboxImg} />
                   </ScrollReveal>
                 )}
                 {tennisProjects[2] && (
                   <ScrollReveal delay={0.11}>
-                    <CompactProjectCard project={tennisProjects[2]} />
+                    <CompactProjectCard project={tennisProjects[2]} onImageClick={setLightboxImg} />
                   </ScrollReveal>
                 )}
                 {basketballProjects[2] && (
                   <ScrollReveal delay={0.14}>
-                    <CompactProjectCard project={basketballProjects[2]} />
+                    <CompactProjectCard project={basketballProjects[2]} onImageClick={setLightboxImg} />
                   </ScrollReveal>
                 )}
                 {basketballProjects[4] && (
                   <ScrollReveal delay={0.17}>
-                    <CompactProjectCard project={basketballProjects[4]} />
+                    <CompactProjectCard project={basketballProjects[4]} onImageClick={setLightboxImg} />
                   </ScrollReveal>
                 )}
                 {volleyballProjects[1] && (
                   <ScrollReveal delay={0.2}>
-                    <CompactProjectCard project={volleyballProjects[1]} />
+                    <CompactProjectCard project={volleyballProjects[1]} onImageClick={setLightboxImg} />
                   </ScrollReveal>
                 )}
-                {openFootball && (
-                  <ScrollReveal delay={0.23}>
-                    <CompactProjectCard project={openFootball} />
-                  </ScrollReveal>
-                )}
+
                 {basketballProjects[0] && (
                   <ScrollReveal delay={0.26}>
-                    <CompactProjectCard project={basketballProjects[0]} />
+                    <CompactProjectCard project={basketballProjects[0]} onImageClick={setLightboxImg} />
                   </ScrollReveal>
                 )}
               </div>
@@ -1314,23 +1249,21 @@ export default function Projects() {
               >
                 {multiProjects[0] && (
                   <ScrollReveal delay={0.05}>
-                    <WideProjectCard project={multiProjects[0]} />
+                    <WideProjectCard project={multiProjects[0]} onImageClick={setLightboxImg} />
                   </ScrollReveal>
                 )}
                 {multiProjects[1] && (
                   <ScrollReveal delay={0.1}>
-                    <WideProjectCard project={multiProjects[1]} />
+                    <WideProjectCard project={multiProjects[1]} onImageClick={setLightboxImg} />
                   </ScrollReveal>
                 )}
-              </div>
-
-              {multiProjects[2] && (
-                <div style={{ marginTop: 24 }}>
+                {multiProjects[2] && (
                   <ScrollReveal delay={0.15}>
-                    <CompactProjectCard project={multiProjects[2]} />
+                    <WideProjectCard project={multiProjects[2]} onImageClick={setLightboxImg} />
                   </ScrollReveal>
-                </div>
-              )}
+                )}
+
+              </div>
             </div>
 
             {/* 6. Güvenli Rekreasyon & Çocuk Oyun Alanları (GENİŞLETİLMİŞ & GALERİLİ) */}
@@ -1364,12 +1297,12 @@ export default function Projects() {
               >
                 {kidsProjects[0] && (
                   <ScrollReveal delay={0.05}>
-                    <WideProjectCard project={kidsProjects[0]} />
+                    <WideProjectCard project={kidsProjects[0]} onImageClick={setLightboxImg} />
                   </ScrollReveal>
                 )}
                 {kidsProjects[1] && (
                   <ScrollReveal delay={0.1}>
-                    <WideProjectCard project={kidsProjects[1]} />
+                    <WideProjectCard project={kidsProjects[1]} onImageClick={setLightboxImg} />
                   </ScrollReveal>
                 )}
               </div>
@@ -1384,7 +1317,7 @@ export default function Projects() {
               >
                 {kidsProjects.slice(2).map((p, idx) => (
                   <ScrollReveal key={p.name} delay={idx * 0.08}>
-                    <CompactProjectCard project={p} />
+                    <CompactProjectCard project={p} onImageClick={setLightboxImg} />
                   </ScrollReveal>
                 ))}
               </div>
@@ -1429,7 +1362,7 @@ export default function Projects() {
                 }
                 return (
                   <ScrollReveal key={p.name} delay={i * 0.08}>
-                    <WideProjectCard project={p} />
+                    <WideProjectCard project={p} onImageClick={setLightboxImg} />
                   </ScrollReveal>
                 );
               })}
@@ -1497,6 +1430,37 @@ export default function Projects() {
           </div>
         </section>
       </main>
+
+      {/* Lightbox Modal */}
+      {lightboxImg && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 9999,
+            background: "rgba(0,0,0,0.9)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "zoom-out",
+            padding: 20
+          }}
+          onClick={() => setLightboxImg(null)}
+        >
+          <img
+            src={lightboxImg}
+            style={{
+              maxWidth: "100%",
+              maxHeight: "100%",
+              objectFit: "contain",
+              boxShadow: "0 10px 40px rgba(0,0,0,0.5)",
+              borderRadius: 8
+            }}
+            alt="Büyütülmüş Görsel"
+          />
+          <div style={{ position: "absolute", top: 20, right: 30, color: "white", fontSize: 36, fontWeight: "bold", cursor: "pointer" }}>&times;</div>
+        </div>
+      )}
     </div>
   );
 }

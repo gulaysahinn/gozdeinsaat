@@ -11,9 +11,9 @@ const SERVICES_LINKS = [
 
 const QUICK_LINKS = [
   { label: "Ana Sayfa", to: "/" },
-  { label: "Hizmetler", to: "/hizmetler" },
-  { label: "Projeler", to: "/projeler" },
-  { label: "Referanslar", to: "/referanslar" },
+  { label: "Hizmetlerimiz", to: "/hizmetler" },
+  { label: "Projelerimiz", to: "/projeler" },
+  { label: "Referanslarımız", to: "/referanslar" },
   { label: "Hakkımızda", to: "/hakkimizda" },
   { label: "İletişim", to: "/iletisim" },
 ];
@@ -291,7 +291,7 @@ export default function Footer() {
                     lineHeight: 1.6,
                   }}
                 >
-                  Sancaktepe, İstanbul
+                  Osmangazi Mah. Şeyh Şamil Sok.<br />No:1, 34887 Sancaktepe / İstanbul
                 </div>
               </div>
             </div>

@@ -700,7 +700,7 @@ export default function Services() {
               >
                 <div style={{ position: "relative", height: 260, overflow: "hidden" }}>
                   <img
-                    src={`${import.meta.env.BASE_URL}images/hizmetler/tenisKortuSahaZemin.jpeg`}
+                    src={`${import.meta.env.BASE_URL}images/hizmetler/cokAmacliSaha.jpg`}
                     alt="Çok amaçlı spor sahası yapımı — Gözde İnşaat"
                     loading="lazy"
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}

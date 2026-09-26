@@ -14,6 +14,7 @@
   --color-line-dim: #4A5568;
   --color-accent: #1F6B4A;
   --color-accent-dark: #154D35;
+  --color-primary: #154D35;
   --color-accent-light: #E3EFEB;
   --color-warm: #C4552E;
   --color-warm-dark: #A34524;
@@ -174,15 +175,26 @@ input, select, textarea {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
-  padding: 12px 14px;
+  padding: 12px 16px;
   width: 100%;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234A5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+  padding-right: 40px;
+  cursor: pointer;
 }
 
 input:focus, select:focus, textarea:focus {
+  background: #FFFFFF;
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(26, 107, 76, 0.12);
+  box-shadow: 0 0 0 3px rgba(31, 107, 74, 0.15);
 }
 
 input::placeholder, textarea::placeholder {
@@ -193,8 +205,8 @@ input::placeholder, textarea::placeholder {
 label {
   display: block;
   font-size: 13px;
-  font-weight: 500;
-  color: var(--color-line-dim);
+  font-weight: 600;
+  color: var(--color-line);
   margin-bottom: 6px;
 }
 
@@ -441,6 +453,17 @@ img {
   .process-timeline-layout {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+}
+
+.process-sticky {
+  position: sticky;
+  top: 100px;
+}
+@media (max-width: 960px) {
+  .process-sticky {
+    position: relative;
+    top: 0;
   }
 }
 

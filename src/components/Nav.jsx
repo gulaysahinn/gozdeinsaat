@@ -4,9 +4,9 @@ import { List, X, BoundingBox } from "@phosphor-icons/react";
 
 const links = [
   { to: "/", label: "Ana Sayfa" },
-  { to: "/hizmetler", label: "Hizmetler" },
-  { to: "/projeler", label: "Projeler" },
-  { to: "/referanslar", label: "Referanslar" },
+  { to: "/hizmetler", label: "Hizmetlerimiz" },
+  { to: "/projeler", label: "Projelerimiz" },
+  { to: "/referanslar", label: "Referanslarımız" },
   { to: "/hakkimizda", label: "Hakkımızda" },
   { to: "/iletisim", label: "İletişim" },
 ];

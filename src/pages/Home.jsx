@@ -540,12 +540,12 @@ export default function Home() {
 
             {/* Sağ: 4 Tamamlayıcı Branş (2x2 Alt Izgara) */}
             <div className="services-subgrid">
-              {otherServices.map((s) => {
+              {otherServices.map((s, idx) => {
                 const IconComponent = SPORT_ICONS[s.tag] || Trophy;
 
                 return (
                   <Link
-                    key={s.title}
+                    key={s.to || s.title || s.tag || idx}
                     to={s.to || "/hizmetler"}
                     style={{
                       background: "var(--color-card)",
@@ -676,7 +676,7 @@ export default function Home() {
         <div className="page-wrap">
           <div className="process-timeline-layout">
             {/* Sol Kolon: Başlık ve Mühendislik Taahhüdü */}
-            <div style={{ position: "sticky", top: 100 }}>
+            <div className="process-sticky">
               <div
                 style={{
                   fontSize: 12,
@@ -733,208 +733,223 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Sağ Kolon: Numaralı Dikey Zaman Çizgisi Akışı */}
-            <div style={{ position: "relative" }}>
+                        {/* Sağ Kolon: Numaralı Dikey Zaman Çizgisi Akışı */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "48px 1fr",
+                columnGap: "clamp(16px, 4vw, 24px)",
+                rowGap: "clamp(24px, 5vw, 36px)",
+                position: "relative"
+              }}
+            >
               {/* Dikey Çizgi */}
               <div
                 style={{
-                  position: "absolute",
-                  left: 23,
-                  top: 24,
-                  bottom: 40,
+                  gridColumn: 1,
+                  gridRow: "1 / -1",
+                  justifySelf: "center",
                   width: 2,
                   background: "var(--color-border)",
+                  marginTop: 24,
+                  marginBottom: 40,
                   zIndex: 0,
                 }}
               />
 
-              <div style={{ display: "flex", flexDirection: "column", gap: 36, position: "relative", zIndex: 1 }}>
-                {/* Adım 01 */}
-                <div style={{ display: "flex", gap: 24, alignItems: "flex-start" }}>
-                  <div
-                    style={{
-                      width: 48,
-                      height: 48,
-                      flexShrink: 0,
-                      background: "var(--color-card)",
-                      border: "2px solid var(--color-accent)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: 16,
-                      fontWeight: 700,
-                      color: "var(--color-accent)",
-                      boxShadow: "var(--shadow-sm)",
-                    }}
-                  >
-                    01
-                  </div>
-                  <div
-                    style={{
-                      background: "var(--color-card)",
-                      border: "1px solid var(--color-border)",
-                      padding: "24px 28px",
-                      flexGrow: 1,
-                      boxShadow: "var(--shadow-sm)",
-                    }}
-                  >
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6, flexWrap: "wrap", gap: 8 }}>
-                      <h3 style={{ fontSize: 18, fontWeight: 700, margin: 0, color: "var(--color-line)" }}>
-                        Keşif, Kot & Lazerli Zemin Analizi
-                      </h3>
-                      <span style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--color-accent)", fontWeight: 700, background: "var(--color-bg)", padding: "2px 8px", border: "1px solid var(--color-border)" }}>
-                        AŞAMA 1
-                      </span>
-                    </div>
-                    <p style={{ fontSize: 14, color: "var(--color-line-dim)", lineHeight: 1.6, margin: "0 0 12px" }}>
-                      Arazi yapısı, drenaj eğimleri, rüzgar koridoru ve zemin mukavemeti sahada uzman mühendislerce test edilir; ölçümler lazerli cihazlarla kayıt altına alınır.
-                    </p>
-                    <div style={{ fontSize: 12, fontWeight: 600, color: "var(--color-line)" }}>
-                      📌 Çıktı: <span style={{ color: "var(--color-line-dim)" }}>Lazerli Kot Analizi & Ayrıntılı Keşif Raporu</span>
-                    </div>
-                  </div>
+              {/* Adım 01 */}
+              <div
+                style={{
+                  gridColumn: 1,
+                  gridRow: 1,
+                  width: 48,
+                  height: 48,
+                  background: "var(--color-card)",
+                  border: "2px solid var(--color-accent)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 16,
+                  fontWeight: 700,
+                  color: "var(--color-accent)",
+                  boxShadow: "var(--shadow-sm)",
+                  zIndex: 1,
+                }}
+              >
+                01
+              </div>
+              <div
+                style={{
+                  gridColumn: 2,
+                  gridRow: 1,
+                  background: "var(--color-card)",
+                  border: "1px solid var(--color-border)",
+                  padding: "clamp(16px, 4vw, 24px) clamp(16px, 4vw, 28px)",
+                  boxShadow: "var(--shadow-sm)",
+                  minWidth: 0,
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6, flexWrap: "wrap", gap: 12 }}>
+                  <h3 style={{ fontSize: "clamp(16px, 4vw, 18px)", fontWeight: 700, margin: 0, color: "var(--color-line)", flex: "1 1 auto" }}>
+                    Keşif, Kot & Lazerli Zemin Analizi
+                  </h3>
+                  <span style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--color-accent)", fontWeight: 700, background: "var(--color-bg)", padding: "2px 8px", border: "1px solid var(--color-border)", whiteSpace: "nowrap" }}>
+                    AŞAMA 1
+                  </span>
                 </div>
-
-                {/* Adım 02 */}
-                <div style={{ display: "flex", gap: 24, alignItems: "flex-start" }}>
-                  <div
-                    style={{
-                      width: 48,
-                      height: 48,
-                      flexShrink: 0,
-                      background: "var(--color-card)",
-                      border: "2px solid var(--color-accent)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: 16,
-                      fontWeight: 700,
-                      color: "var(--color-accent)",
-                      boxShadow: "var(--shadow-sm)",
-                    }}
-                  >
-                    02
-                  </div>
-                  <div
-                    style={{
-                      background: "var(--color-card)",
-                      border: "1px solid var(--color-border)",
-                      padding: "24px 28px",
-                      flexGrow: 1,
-                      boxShadow: "var(--shadow-sm)",
-                    }}
-                  >
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6, flexWrap: "wrap", gap: 8 }}>
-                      <h3 style={{ fontSize: 18, fontWeight: 700, margin: 0, color: "var(--color-line)" }}>
-                        Altyapı, Hatıl Beton & Asfalt Sıkıştırma
-                      </h3>
-                      <span style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--color-accent)", fontWeight: 700, background: "var(--color-bg)", padding: "2px 8px", border: "1px solid var(--color-border)" }}>
-                        AŞAMA 2
-                      </span>
-                    </div>
-                    <p style={{ fontSize: 14, color: "var(--color-line-dim)", lineHeight: 1.6, margin: "0 0 12px" }}>
-                      Çevre hatıl betonu dökülür, kırma taş mıcır dolgusu silindirle sıkıştırılır ve eğimli sıcak asfalt serilerek çatlamayan pürüzsüz taşıyıcı gövde inşa edilir.
-                    </p>
-                    <div style={{ fontSize: 12, fontWeight: 600, color: "var(--color-line)" }}>
-                      📌 Çıktı: <span style={{ color: "var(--color-line-dim)" }}>Drenaj Kanallı & Çatlamaz Taşıyıcı Gövde</span>
-                    </div>
-                  </div>
+                <p style={{ fontSize: 14, color: "var(--color-line-dim)", lineHeight: 1.6, margin: "0 0 12px" }}>
+                  Arazi yapısı, drenaj eğimleri, rüzgar koridoru ve zemin mukavemeti sahada uzman mühendislerce test edilir; ölçümler lazerli cihazlarla kayıt altına alınır.
+                </p>
+                <div style={{ fontSize: 12, fontWeight: 600, color: "var(--color-line)" }}>
+                  📌 Çıktı: <span style={{ color: "var(--color-line-dim)" }}>Lazerli Kot Analizi & Ayrıntılı Keşif Raporu</span>
                 </div>
+              </div>
 
-                {/* Adım 03 */}
-                <div style={{ display: "flex", gap: 24, alignItems: "flex-start" }}>
-                  <div
-                    style={{
-                      width: 48,
-                      height: 48,
-                      flexShrink: 0,
-                      background: "var(--color-card)",
-                      border: "2px solid var(--color-accent)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: 16,
-                      fontWeight: 700,
-                      color: "var(--color-accent)",
-                      boxShadow: "var(--shadow-sm)",
-                    }}
-                  >
-                    03
-                  </div>
-                  <div
-                    style={{
-                      background: "var(--color-card)",
-                      border: "1px solid var(--color-border)",
-                      padding: "24px 28px",
-                      flexGrow: 1,
-                      boxShadow: "var(--shadow-sm)",
-                    }}
-                  >
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6, flexWrap: "wrap", gap: 8 }}>
-                      <h3 style={{ fontSize: 18, fontWeight: 700, margin: 0, color: "var(--color-line)" }}>
-                        Zemin Kaplama & Milimetrik Çizgi Uygulaması
-                      </h3>
-                      <span style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--color-accent)", fontWeight: 700, background: "var(--color-bg)", padding: "2px 8px", border: "1px solid var(--color-border)" }}>
-                        AŞAMA 3
-                      </span>
-                    </div>
-                    <p style={{ fontSize: 14, color: "var(--color-line-dim)", lineHeight: 1.6, margin: "0 0 12px" }}>
-                      Seçilen zemin (akrilik, EPDM tartan veya sentetik çim) katman katman uygulanır; uluslararası federasyon normlarında hatasız ve milimetrik saha çizgileri çekilir.
-                    </p>
-                    <div style={{ fontSize: 12, fontWeight: 600, color: "var(--color-line)" }}>
-                      📌 Çıktı: <span style={{ color: "var(--color-line-dim)" }}>ITF / FIBA / FIFA Onaylı Kaymaz Spor Yüzeyi</span>
-                    </div>
-                  </div>
+              {/* Adım 02 */}
+              <div
+                style={{
+                  gridColumn: 1,
+                  gridRow: 2,
+                  width: 48,
+                  height: 48,
+                  background: "var(--color-card)",
+                  border: "2px solid var(--color-accent)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 16,
+                  fontWeight: 700,
+                  color: "var(--color-accent)",
+                  boxShadow: "var(--shadow-sm)",
+                  zIndex: 1,
+                }}
+              >
+                02
+              </div>
+              <div
+                style={{
+                  gridColumn: 2,
+                  gridRow: 2,
+                  background: "var(--color-card)",
+                  border: "1px solid var(--color-border)",
+                  padding: "clamp(16px, 4vw, 24px) clamp(16px, 4vw, 28px)",
+                  boxShadow: "var(--shadow-sm)",
+                  minWidth: 0,
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6, flexWrap: "wrap", gap: 12 }}>
+                  <h3 style={{ fontSize: "clamp(16px, 4vw, 18px)", fontWeight: 700, margin: 0, color: "var(--color-line)", flex: "1 1 auto" }}>
+                    Altyapı, Hatıl Beton & Asfalt Sıkıştırma
+                  </h3>
+                  <span style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--color-accent)", fontWeight: 700, background: "var(--color-bg)", padding: "2px 8px", border: "1px solid var(--color-border)", whiteSpace: "nowrap" }}>
+                    AŞAMA 2
+                  </span>
                 </div>
+                <p style={{ fontSize: 14, color: "var(--color-line-dim)", lineHeight: 1.6, margin: "0 0 12px" }}>
+                  Çevre hatıl betonu dökülür, kırma taş mıcır dolgusu silindirle sıkıştırılır ve eğimli sıcak asfalt serilerek çatlamayan pürüzsüz taşıyıcı gövde inşa edilir.
+                </p>
+                <div style={{ fontSize: 12, fontWeight: 600, color: "var(--color-line)" }}>
+                  📌 Çıktı: <span style={{ color: "var(--color-line-dim)" }}>Drenaj Kanallı & Çatlamaz Taşıyıcı Gövde</span>
+                </div>
+              </div>
 
-                {/* Adım 04 */}
-                <div style={{ display: "flex", gap: 24, alignItems: "flex-start" }}>
-                  <div
-                    style={{
-                      width: 48,
-                      height: 48,
-                      flexShrink: 0,
-                      background: "var(--color-card)",
-                      border: "2px solid var(--color-accent)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: 16,
-                      fontWeight: 700,
-                      color: "var(--color-accent)",
-                      boxShadow: "var(--shadow-sm)",
-                    }}
-                  >
-                    04
-                  </div>
-                  <div
-                    style={{
-                      background: "var(--color-card)",
-                      border: "1px solid var(--color-border)",
-                      padding: "24px 28px",
-                      flexGrow: 1,
-                      boxShadow: "var(--shadow-sm)",
-                    }}
-                  >
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6, flexWrap: "wrap", gap: 8 }}>
-                      <h3 style={{ fontSize: 18, fontWeight: 700, margin: 0, color: "var(--color-line)" }}>
-                        Çevre Çit, Donatı Montajı & Garantili Teslim
-                      </h3>
-                      <span style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--color-accent)", fontWeight: 700, background: "var(--color-bg)", padding: "2px 8px", border: "1px solid var(--color-border)" }}>
-                        AŞAMA 4
-                      </span>
-                    </div>
-                    <p style={{ fontSize: 14, color: "var(--color-line-dim)", lineHeight: 1.6, margin: "0 0 12px" }}>
-                      4–6m galvaniz tel örgü, tavan filesi, LED projektörler, direk, pota veya kale montajları tamamlanır; saha test edilerek resmi garanti belgesiyle teslim edilir.
-                    </p>
-                    <div style={{ fontSize: 12, fontWeight: 600, color: "var(--color-line)" }}>
-                      📌 Çıktı: <span style={{ color: "var(--color-line-dim)" }}>Kullanıma Hazır Anahtar Teslim Saha & Kurumsal Garanti</span>
-                    </div>
-                  </div>
+              {/* Adım 03 */}
+              <div
+                style={{
+                  gridColumn: 1,
+                  gridRow: 3,
+                  width: 48,
+                  height: 48,
+                  background: "var(--color-card)",
+                  border: "2px solid var(--color-accent)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 16,
+                  fontWeight: 700,
+                  color: "var(--color-accent)",
+                  boxShadow: "var(--shadow-sm)",
+                  zIndex: 1,
+                }}
+              >
+                03
+              </div>
+              <div
+                style={{
+                  gridColumn: 2,
+                  gridRow: 3,
+                  background: "var(--color-card)",
+                  border: "1px solid var(--color-border)",
+                  padding: "clamp(16px, 4vw, 24px) clamp(16px, 4vw, 28px)",
+                  boxShadow: "var(--shadow-sm)",
+                  minWidth: 0,
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6, flexWrap: "wrap", gap: 12 }}>
+                  <h3 style={{ fontSize: "clamp(16px, 4vw, 18px)", fontWeight: 700, margin: 0, color: "var(--color-line)", flex: "1 1 auto" }}>
+                    Zemin Kaplama & Milimetrik Çizgi Uygulaması
+                  </h3>
+                  <span style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--color-accent)", fontWeight: 700, background: "var(--color-bg)", padding: "2px 8px", border: "1px solid var(--color-border)", whiteSpace: "nowrap" }}>
+                    AŞAMA 3
+                  </span>
+                </div>
+                <p style={{ fontSize: 14, color: "var(--color-line-dim)", lineHeight: 1.6, margin: "0 0 12px" }}>
+                  Seçilen zemin (akrilik, EPDM tartan veya sentetik çim) katman katman uygulanır; uluslararası federasyon normlarında hatasız ve milimetrik saha çizgileri çekilir.
+                </p>
+                <div style={{ fontSize: 12, fontWeight: 600, color: "var(--color-line)" }}>
+                  📌 Çıktı: <span style={{ color: "var(--color-line-dim)" }}>ITF / FIBA / FIFA Onaylı Kaymaz Spor Yüzeyi</span>
+                </div>
+              </div>
+
+              {/* Adım 04 */}
+              <div
+                style={{
+                  gridColumn: 1,
+                  gridRow: 4,
+                  width: 48,
+                  height: 48,
+                  background: "var(--color-card)",
+                  border: "2px solid var(--color-accent)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 16,
+                  fontWeight: 700,
+                  color: "var(--color-accent)",
+                  boxShadow: "var(--shadow-sm)",
+                  zIndex: 1,
+                }}
+              >
+                04
+              </div>
+              <div
+                style={{
+                  gridColumn: 2,
+                  gridRow: 4,
+                  background: "var(--color-card)",
+                  border: "1px solid var(--color-border)",
+                  padding: "clamp(16px, 4vw, 24px) clamp(16px, 4vw, 28px)",
+                  boxShadow: "var(--shadow-sm)",
+                  minWidth: 0,
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6, flexWrap: "wrap", gap: 12 }}>
+                  <h3 style={{ fontSize: "clamp(16px, 4vw, 18px)", fontWeight: 700, margin: 0, color: "var(--color-line)", flex: "1 1 auto" }}>
+                    Çevre Çit, Donatı Montajı & Garantili Teslim
+                  </h3>
+                  <span style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--color-accent)", fontWeight: 700, background: "var(--color-bg)", padding: "2px 8px", border: "1px solid var(--color-border)", whiteSpace: "nowrap" }}>
+                    AŞAMA 4
+                  </span>
+                </div>
+                <p style={{ fontSize: 14, color: "var(--color-line-dim)", lineHeight: 1.6, margin: "0 0 12px" }}>
+                  4–6m galvaniz tel örgü, tavan filesi, LED projektörler, direk, pota veya kale montajları tamamlanır; saha test edilerek resmi garanti belgesiyle teslim edilir.
+                </p>
+                <div style={{ fontSize: 12, fontWeight: 600, color: "var(--color-line)" }}>
+                  📌 Çıktı: <span style={{ color: "var(--color-line-dim)" }}>Kullanıma Hazır Anahtar Teslim Saha & Kurumsal Garanti</span>
                 </div>
               </div>
             </div>

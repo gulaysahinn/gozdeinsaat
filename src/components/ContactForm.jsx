@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckCircle, WarningCircle } from "@phosphor-icons/react";
+import { CheckCircle, WarningCircle, PaperPlaneTilt } from "@phosphor-icons/react";
 
 export default function ContactForm() {
   const [status, setStatus] = useState("idle");
@@ -54,8 +54,8 @@ export default function ContactForm() {
       )}
 
       <div>
-        <label htmlFor="name">Adınız Soyadınız</label>
-        <input type="text" id="name" name="name" required placeholder="Örn. Ahmet Yılmaz" />
+        <label htmlFor="name">Adınız Soyadınız / Kurum Adı</label>
+        <input type="text" id="name" name="name" required placeholder="Örn. Ahmet Yılmaz / ABC Spor Kulübü" />
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }} className="grid-responsive">
@@ -70,19 +70,23 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="subject">Konu</label>
-        <select id="subject" name="subject" required style={{ appearance: "none" }}>
+        <label htmlFor="subject">Talep Ettiğiniz Saha & Hizmet Türü</label>
+        <select id="subject" name="subject" required>
           <option value="" disabled defaultValue>Lütfen bir konu seçin</option>
-          <option value="fiyat_teklifi">Fiyat Teklifi Almak İstiyorum</option>
-          <option value="kesif">Ücretsiz Keşif Talebi</option>
-          <option value="bilgi">Hizmetleriniz Hakkında Bilgi</option>
-          <option value="diger">Diğer</option>
+          <option value="fiyat_teklifi">Anahtar Teslim Fiyat Teklifi Almak İstiyorum</option>
+          <option value="kesif">Ücretsiz Yerinde Keşif & Kot Analizi Talebi</option>
+          <option value="tenis">Tenis Kortu Yapımı / Zemin Yenileme</option>
+          <option value="basketbol">Basketbol Sahası Yapımı</option>
+          <option value="voleybol">Voleybol Sahası Yapımı</option>
+          <option value="halisaha">Açık / Kapalı Halı Saha İnşaatı</option>
+          <option value="cokamacli">Çok Amaçlı Spor Sahası (Kombine Saha)</option>
+          <option value="diger">Diğer / Teknik Danışmanlık</option>
         </select>
       </div>
 
       <div>
-        <label htmlFor="message">Mesajınız</label>
-        <textarea id="message" name="message" rows={4} required placeholder="Projenizle ilgili detayları buraya yazabilirsiniz..."></textarea>
+        <label htmlFor="message">Proje Detayları & Saha Ölçüleri</label>
+        <textarea id="message" name="message" rows={4} required placeholder="Sahanın yapılacağı şehir/ilçe, yaklaşık metrekare, tercih ettiğiniz zemin tipi ve özel isteklerinizi belirtebilirsiniz..."></textarea>
       </div>
 
       <button 
@@ -90,13 +94,25 @@ export default function ContactForm() {
         className="btn-primary" 
         disabled={status === "loading"}
         style={{ 
-          marginTop: 8, 
+          marginTop: 6, 
           justifyContent: "center",
+          display: "flex",
+          alignItems: "center",
+          gap: 10,
+          fontSize: 15,
+          fontWeight: 700,
           opacity: status === "loading" ? 0.7 : 1,
           cursor: status === "loading" ? "not-allowed" : "pointer"
         }}
       >
-        {status === "loading" ? "Gönderiliyor..." : "Mesajı Gönder"}
+        {status === "loading" ? (
+          "Gönderiliyor..."
+        ) : (
+          <>
+            <span>Mesajı ve Teklif Talebini Gönder</span>
+            <PaperPlaneTilt size={18} weight="bold" />
+          </>
+        )}
       </button>
     </form>
   );

@@ -115,7 +115,7 @@ export default function TenisKortu() {
         {
           name: "Çok Amaçlı Saha",
           to: "/hizmetler/cok-amacli-saha-yapimi",
-          image: `${import.meta.env.BASE_URL}images/hizmetler/tenisKortuSahaZemin.jpeg`,
+          image: `${import.meta.env.BASE_URL}images/hizmetler/cokAmacliSaha.jpg`,
           spec: "Kombine Branşlar",
           desc: "Tenis, basketbol ve voleybol çizgilerini tek alanda birleştiren yüksek verimli saha.",
         },
