@@ -108,7 +108,7 @@ export const SERVICES = [
       },
       {
         name: "Parke (Ahşap) Zemin Basketbol Sahası",
-        image: `${import.meta.env.BASE_URL}images/hizmetler/zemin.JPG`,
+        image: `${import.meta.env.BASE_URL}images/hizmetler/zemin.jpg`,
         badges: ["Profesyonel", "FIBA Standartlı", "Uzun Ömürlü"],
         badgeColors: ["warm", "blue", "accent"],
         forWho: "Kapalı spor salonları",

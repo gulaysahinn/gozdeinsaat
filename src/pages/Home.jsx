@@ -23,6 +23,7 @@ import { SERVICES, PROCESS, PROJECTS } from "../data/content";
 import ContactForm from "../components/ContactForm";
 import { REFERENCES } from "../data/references";
 import { useInView } from "../hooks/useInView";
+import PictureImage from "../components/PictureImage";
 
 /* ─── Spor Branşı İkon Eşleştirmesi ────────────────────────────────────────── */
 const SPORT_ICONS = {
@@ -268,9 +269,11 @@ export default function Home() {
 
             {/* Gerçek Proje Fotoğrafı */}
             <div style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden" }}>
-              <img
+              <PictureImage
                 src={`${import.meta.env.BASE_URL}images/hizmetler/tenisKortuYapimi.jpg`}
                 alt="Gözde İnşaat tamamlanmış açık tenis kortu inşaatı projesi"
+                fetchPriority="high"
+                loading="eager"
                 style={{
                   width: "100%",
                   height: "100%",
@@ -418,7 +421,7 @@ export default function Home() {
             >
               {/* Büyük Görsel */}
               <div style={{ position: "relative", height: 280, overflow: "hidden", background: "var(--color-bg)" }}>
-                <img
+                <PictureImage
                   src={featuredService.image}
                   alt={featuredService.imageAlt || featuredService.title}
                   loading="lazy"
@@ -570,7 +573,7 @@ export default function Home() {
                   >
                     {/* Görsel */}
                     <div style={{ position: "relative", height: 140, overflow: "hidden", background: "var(--color-bg)" }}>
-                      <img
+                      <PictureImage
                         src={s.image}
                         alt={s.imageAlt || s.title}
                         loading="lazy"
@@ -1038,7 +1041,7 @@ export default function Home() {
               >
                 {/* Görsel Çerçevesi */}
                 <div style={{ height: 230, position: "relative", overflow: "hidden", background: "var(--color-bg-soft)" }}>
-                  <img
+                  <PictureImage
                     src={p.image}
                     alt={`${p.name} projesi sahadan uygulama görüntüsü`}
                     loading="lazy"

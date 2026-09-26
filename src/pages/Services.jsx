@@ -14,6 +14,7 @@ import {
   Users,
 } from "@phosphor-icons/react";
 import ScrollReveal from "../components/ScrollReveal";
+import PictureImage from "../components/PictureImage";
 
 export default function Services() {
   return (
@@ -74,9 +75,10 @@ export default function Services() {
             WebkitMaskImage: "linear-gradient(to left, rgba(0,0,0,1) 15%, transparent 90%)",
           }}
         >
-          <img
+          <PictureImage
             src={`${import.meta.env.BASE_URL}images/hizmetler/sahalar.jpg`}
             alt=""
+            loading="lazy"
             style={{ width: "100%", height: "100%", objectFit: "cover", filter: "contrast(115%) grayscale(25%)" }}
           />
         </div>
@@ -422,7 +424,7 @@ export default function Services() {
                     boxShadow: "var(--shadow-md)",
                   }}
                 >
-                  <img
+                  <PictureImage
                     src={`${import.meta.env.BASE_URL}images/hizmetler/tenisKortuYapimi.jpg`}
                     alt="İstanbul profesyonel tenis kortu yapımı — Gözde İnşaat"
                     loading="lazy"
@@ -498,7 +500,7 @@ export default function Services() {
                     boxShadow: "var(--shadow-md)",
                   }}
                 >
-                  <img
+                  <PictureImage
                     src={`${import.meta.env.BASE_URL}images/hizmetler/basketbolSahasi.jpg`}
                     alt="Açık ve kapalı basketbol sahası yapımı — Gözde İnşaat"
                     loading="lazy"
@@ -699,7 +701,7 @@ export default function Services() {
                 className="bento-card-large"
               >
                 <div style={{ position: "relative", height: 260, overflow: "hidden" }}>
-                  <img
+                  <PictureImage
                     src={`${import.meta.env.BASE_URL}images/hizmetler/cokAmacliSaha.jpg`}
                     alt="Çok amaçlı spor sahası yapımı — Gözde İnşaat"
                     loading="lazy"
@@ -935,7 +937,7 @@ export default function Services() {
                     boxShadow: "var(--shadow-md)",
                   }}
                 >
-                  <img
+                  <PictureImage
                     src={`${import.meta.env.BASE_URL}images/hizmetler/haliSaha.jpg`}
                     alt="Anahtar teslim halı saha yapımı sentetik çim — Gözde İnşaat"
                     loading="lazy"
@@ -1011,7 +1013,7 @@ export default function Services() {
                     boxShadow: "var(--shadow-md)",
                   }}
                 >
-                  <img
+                  <PictureImage
                     src={`${import.meta.env.BASE_URL}images/projeler/ankaraincekdogakoleji.jpg`}
                     alt="Voleybol sahası yapımı Ankara Doğa Koleji — Gözde İnşaat"
                     loading="lazy"
@@ -1160,7 +1162,7 @@ export default function Services() {
               }}
             >
               <div style={{ position: "relative", aspectRatio: "16/10", border: "1px solid var(--color-border)", overflow: "hidden" }}>
-                <img
+                <PictureImage
                   src={`${import.meta.env.BASE_URL}images/hizmetler/cocukparki1.jpg`}
                   alt="Çocuk oyun parkı dökme kauçuk zemin kaplama — Gözde İnşaat"
                   loading="lazy"

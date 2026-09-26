@@ -21,6 +21,7 @@ import QuoteForm from "./QuoteForm";
 import FloorComparisonCards from "./FloorComparisonCards";
 import SportCourtDiagram from "./SportCourtDiagram";
 import ScrollReveal from "./ScrollReveal";
+import PictureImage from "./PictureImage";
 
 function ProcessTimeline({ items, color }) {
   if (!items || items.length === 0) return null;
@@ -339,9 +340,10 @@ export default function ServicePage({
                     boxShadow: "var(--shadow-md)",
                   }}
                 >
-                  <img
+                  <PictureImage
                     src={service.image}
                     alt={service.imageAlt || service.title}
+                    loading="lazy"
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
                   <div
@@ -1091,7 +1093,7 @@ export default function ServicePage({
                   >
                     {/* Görsel */}
                     <div style={{ aspectRatio: "16/10", overflow: "hidden", background: "var(--color-bg-soft)" }}>
-                      <img
+                      <PictureImage
                         src={rs.image || `${import.meta.env.BASE_URL}images/hizmetler/sahalar.jpg`}
                         alt={rs.name}
                         loading="lazy"

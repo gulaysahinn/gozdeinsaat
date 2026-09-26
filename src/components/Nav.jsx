@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { List, X, BoundingBox } from "@phosphor-icons/react";
+import { List, X } from "@phosphor-icons/react";
 
 const links = [
   { to: "/", label: "Ana Sayfa" },
@@ -28,7 +28,7 @@ export default function Nav() {
           position: "sticky",
           top: 0,
           zIndex: 50,
-          height: 64,
+          height: 76,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
@@ -51,20 +51,23 @@ export default function Nav() {
         <Link
           to="/"
           style={{
-            fontSize: 20,
-            fontWeight: 800,
-            letterSpacing: "-0.01em",
-            color: "var(--color-line)",
-            textDecoration: "none",
             display: "flex",
             alignItems: "center",
-            gap: 8,
+            textDecoration: "none",
+            flexShrink: 0,
           }}
+          aria-label="Gözde İnşaat — Spor Sahaları Yapımı ve Yenileme"
         >
-          <BoundingBox size={24} weight="bold" color="var(--color-accent)" />
-          <span>
-            GÖZDE <span style={{ color: "var(--color-accent)" }}>İNŞAAT</span>
-          </span>
+          <img
+            src={`${import.meta.env.BASE_URL}images/logo.png`}
+            alt="Gözde İnşaat — Spor Sahaları Yapımı ve Yenileme"
+            style={{
+              height: 52,
+              width: "auto",
+              display: "block",
+              objectFit: "contain",
+            }}
+          />
         </Link>
 
         {/* Desktop Nav */}
@@ -133,7 +136,7 @@ export default function Nav() {
         <div
           style={{
             position: "fixed",
-            top: 64,
+            top: 76,
             left: 0,
             right: 0,
             bottom: 0,

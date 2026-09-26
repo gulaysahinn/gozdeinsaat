@@ -55,16 +55,22 @@ export default function Footer() {
           <Link
             to="/"
             style={{
-              fontSize: 22,
-              fontWeight: 800,
-              color: "var(--color-line)",
-              textDecoration: "none",
               display: "inline-block",
-              marginBottom: 14,
-              letterSpacing: "-0.01em",
+              marginBottom: 16,
+              textDecoration: "none",
             }}
+            aria-label="Gözde İnşaat Ana Sayfa"
           >
-            GÖZDE <span style={{ color: "var(--color-accent)" }}>İNŞAAT</span>
+            <img
+              src={`${import.meta.env.BASE_URL}images/logo.png`}
+              alt="Gözde İnşaat — Spor Sahaları Yapımı ve Yenileme"
+              style={{
+                height: 42,
+                width: "auto",
+                display: "block",
+                objectFit: "contain",
+              }}
+            />
           </Link>
           <p
             style={{

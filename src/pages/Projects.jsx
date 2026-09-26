@@ -10,6 +10,7 @@ import {
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import ScrollReveal from "../components/ScrollReveal";
+import PictureImage from "../components/PictureImage";
 import { PROJECTS } from "../data/content";
 
 const ALL_FILTERS = ["Tümü", "Futbol", "Basketbol", "Voleybol", "Tenis", "Çok Amaçlı", "Çocuk Parkı"];
@@ -203,7 +204,7 @@ function WideProjectCard({ project, onImageClick }) {
           background: "var(--color-bg-soft)",
         }}
       >
-        <img
+        <PictureImage
           src={activeImg}
           alt={project.name}
           loading="lazy"
@@ -322,7 +323,7 @@ function WideProjectCard({ project, onImageClick }) {
                   boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
                 }}
               >
-                <img src={imgUrl} alt={`Fotoğraf ${i + 1}`} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
+                <PictureImage loading="lazy" src={imgUrl} alt={`Fotoğraf ${i + 1}`} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
               </button>
             ))}
           </div>
@@ -444,7 +445,7 @@ function CompactProjectCard({ project, onImageClick }) {
           background: "var(--color-bg-soft)",
         }}
       >
-        <img
+        <PictureImage
           src={activeImg}
           alt={project.name}
           loading="lazy"
@@ -524,7 +525,7 @@ function CompactProjectCard({ project, onImageClick }) {
                   transition: "all 0.2s ease",
                 }}
               >
-                <img src={imgUrl} alt={`Fotoğraf ${i + 1}`} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
+                <PictureImage loading="lazy" src={imgUrl} alt={`Fotoğraf ${i + 1}`} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
               </button>
             ))}
           </div>
@@ -779,9 +780,10 @@ export default function Projects() {
                     background: "var(--color-bg-soft)",
                   }}
                 >
-                  <img
+                  <PictureImage
                     src={`${import.meta.env.BASE_URL}images/hizmetler/basketbol2.jpg`}
                     alt="Nizami Açık Basketbol Sahası Drone Çekimi"
+                    loading="lazy"
                     style={{
                       width: "100%",
                       height: "100%",
@@ -839,9 +841,10 @@ export default function Projects() {
                     background: "var(--color-bg-soft)",
                   }}
                 >
-                  <img
+                  <PictureImage
                     src={`${import.meta.env.BASE_URL}images/hizmetler/cocukparki5.jpg`}
                     alt="Sahil Rekreasyon ve EPDM Kauçuk Zemin"
+                    loading="lazy"
                     style={{
                       width: "100%",
                       height: "100%",
@@ -924,9 +927,10 @@ export default function Projects() {
                       }}
                     >
                       <div style={{ height: 80, position: "relative", overflow: "hidden" }}>
-                        <img
+                        <PictureImage
                           src={b.img}
                           alt={b.label}
+                          loading="lazy"
                           style={{
                             width: "100%",
                             height: "100%",

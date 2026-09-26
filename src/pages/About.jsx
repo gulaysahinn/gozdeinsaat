@@ -14,6 +14,7 @@ import {
 import { Helmet } from "react-helmet-async";
 import Badge from "../components/Badge";
 import ScrollReveal from "../components/ScrollReveal";
+import PictureImage from "../components/PictureImage";
 
 const STATS_DATA = [
   { 
@@ -285,9 +286,10 @@ export default function About() {
                 }}
               >
                 <div style={{ position: "relative", paddingBottom: "72%", width: "100%", overflow: "hidden" }}>
-                  <img 
+                  <PictureImage 
                     src={`${import.meta.env.BASE_URL}images/hizmetler/tenisKortuYapimi.jpg`} 
                     alt="Gözde İnşaat Spor Sahası İmalatı"
+                    loading="lazy"
                     style={{
                       position: "absolute",
                       top: 0,
