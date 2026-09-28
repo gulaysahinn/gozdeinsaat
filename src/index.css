@@ -99,6 +99,129 @@ a:hover {
   color: var(--color-accent);
 }
 
+/* ── Navigation Menu & Tabs ────────────────────────────────────────── */
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #374151;
+  text-decoration: none;
+  border-radius: 6px;
+  background-color: transparent;
+  transition: color 180ms ease, background-color 180ms ease;
+  white-space: nowrap;
+}
+
+/* Hover: Metin rengi koyu yeşile (#1a5c3a) döner, hafif hit-area zemin rengi belirir */
+.nav-link:hover {
+  color: #1a5c3a;
+  background-color: rgba(26, 92, 58, 0.06);
+}
+
+/* Aktif Sayfa: Her zaman koyu yeşil (#1a5c3a), kalın metin ve hafif zemin */
+.nav-link.active {
+  color: #1a5c3a;
+  font-weight: 600;
+  background-color: rgba(26, 92, 58, 0.07);
+}
+
+/* Soldan sağa doğru yumuşakça beliren alt çizgi (underline slide-in) */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  left: 10px;
+  right: 10px;
+  height: 2.5px;
+  background-color: #1a5c3a;
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 180ms cubic-bezier(0.25, 1, 0.5, 1), opacity 150ms ease;
+  opacity: 0;
+}
+
+/* Hover durumunda alt çizgi soldan sağa kayarak tam genişliğe ulaşır */
+.nav-link:hover::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+/* Aktif sayfada alt çizgi her zaman sabittir */
+.nav-link.active::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+@media (max-width: 1160px) {
+  .desktop-nav {
+    gap: 3px;
+  }
+  .nav-link {
+    padding: 7px 10px;
+    font-size: 14px;
+  }
+  .nav-link::after {
+    left: 8px;
+    right: 8px;
+  }
+}
+
+/* Mobile Nav Link */
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-line);
+  text-decoration: none;
+  border-radius: 8px;
+  border-left: 4px solid transparent;
+  background-color: transparent;
+  transition: all 180ms ease;
+}
+
+.mobile-nav-link .mobile-nav-arrow {
+  color: var(--color-line-dim);
+  font-size: 18px;
+  transition: transform 180ms ease, color 180ms ease;
+}
+
+.mobile-nav-link:hover {
+  background-color: rgba(26, 92, 58, 0.06);
+  color: #1a5c3a;
+  border-left-color: #1a5c3a;
+}
+
+.mobile-nav-link:hover .mobile-nav-arrow {
+  transform: translateX(4px);
+  color: #1a5c3a;
+}
+
+.mobile-nav-link.active {
+  background-color: rgba(26, 92, 58, 0.08);
+  color: #1a5c3a;
+  font-weight: 600;
+  border-left-color: #1a5c3a;
+}
+
+.mobile-nav-link.active .mobile-nav-arrow {
+  color: #1a5c3a;
+}
+
 /* ── Buttons ───────────────────────────────────────────────────────── */
 button {
   font-family: inherit;

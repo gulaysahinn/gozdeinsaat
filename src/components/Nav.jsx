@@ -71,28 +71,15 @@ export default function Nav() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav
-          style={{
-            display: "flex",
-            gap: 28,
-            fontSize: 14,
-            fontWeight: 500,
-            alignItems: "center",
-          }}
-          className="hide-mobile"
-        >
+        <nav className="desktop-nav hide-mobile" aria-label="Ana Menü">
           {links.map((l) => (
             <NavLink
               key={l.to}
               to={l.to}
-              style={({ isActive }) => ({
-                color: isActive
-                  ? "var(--color-accent)"
-                  : "var(--color-line-dim)",
-                textDecoration: "none",
-                transition: "color 0.2s",
-                position: "relative",
-              })}
+              end={l.to === "/"}
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "active" : ""}`
+              }
             >
               {l.label}
             </NavLink>
@@ -145,31 +132,23 @@ export default function Nav() {
             padding: "24px 20px",
             display: "flex",
             flexDirection: "column",
-            gap: 4,
+            gap: 8,
           }}
         >
           {links.map((l) => (
             <NavLink
               key={l.to}
               to={l.to}
+              end={l.to === "/"}
               onClick={() => setMobileOpen(false)}
-              style={({ isActive }) => ({
-                display: "block",
-                padding: "14px 16px",
-                fontSize: 16,
-                fontWeight: 600,
-                color: isActive
-                  ? "var(--color-accent)"
-                  : "var(--color-line)",
-                textDecoration: "none",
-                borderRadius: 12,
-                background: isActive
-                  ? "var(--color-accent-light)"
-                  : "transparent",
-                transition: "background 0.2s",
-              })}
+              className={({ isActive }) =>
+                `mobile-nav-link ${isActive ? "active" : ""}`
+              }
             >
-              {l.label}
+              <span>{l.label}</span>
+              <span className="mobile-nav-arrow" aria-hidden="true">
+                →
+              </span>
             </NavLink>
           ))}
           <div style={{ marginTop: 16 }}>
