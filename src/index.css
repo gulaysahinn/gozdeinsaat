@@ -25,7 +25,7 @@
   --radius: 0px;
   --radius-sm: 0px;
   --radius-pill: 0px;
-  --nav-height: 76px;
+  --nav-height: 84px;
   --max-width: 1200px;
 
   --shadow-sm: 0 1px 2px rgba(20, 22, 26, 0.05);
@@ -99,11 +99,114 @@ a:hover {
   color: var(--color-accent);
 }
 
-/* ── Navigation Menu & Tabs ────────────────────────────────────────── */
+/* ── Header & Navigation (Gözde İnşaat) ────────────────────────────── */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  background: rgba(240, 237, 230, 0.95);
+  backdrop-filter: blur(14px) saturate(1.15);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+  border-bottom: 1px solid rgba(26, 29, 32, 0.09);
+  box-shadow: 0 1px 3px rgba(26, 29, 32, 0.03);
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.site-header.scrolled {
+  background: rgba(240, 237, 230, 0.98);
+  border-bottom: 1px solid rgba(26, 29, 32, 0.14);
+  box-shadow: 0 4px 20px rgba(26, 29, 32, 0.06);
+}
+
+.site-header-inner {
+  max-width: 1360px;
+  margin: 0 auto;
+  min-height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 36px;
+  gap: 32px;
+}
+
+/* 1) Logo: Elmas Amblem + Gözdeİnşaat Dikey Hizalama & Okunabilir Slogan */
+.header-logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+  user-select: none;
+  margin-right: clamp(16px, 3.5vw, 48px);
+}
+
+.logo-lockup {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.logo-emblem-img {
+  height: 48px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: none !important;
+  transition: transform 0.25s ease;
+}
+
+.header-logo:hover .logo-emblem-img {
+  transform: scale(1.03);
+}
+
+.logo-text-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1;
+}
+
+.logo-title-row {
+  display: flex;
+  align-items: baseline;
+  font-family: 'General Sans', sans-serif;
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+.logo-brand-gozde {
+  color: #1a1d20;
+}
+
+.logo-brand-insaat {
+  color: #1a5c3a;
+  margin-left: 2px;
+}
+
+.logo-slogan {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  color: #1a5c3a;
+  margin-top: 4px;
+  white-space: nowrap;
+}
+
+/* 2 & 4) Masaüstü Navigasyon & Teklif Al Butonu Grubu */
+.site-header-right {
+  display: flex;
+  align-items: center;
+}
+
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .nav-link {
@@ -111,70 +214,243 @@ a:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 14px;
+  padding: 10px 18px;
   font-size: 15px;
   font-weight: 500;
   letter-spacing: -0.01em;
   color: #374151;
   text-decoration: none;
-  border-radius: 6px;
-  background-color: transparent;
-  transition: color 180ms ease, background-color 180ms ease;
+  background-color: transparent !important;
+  border-radius: 0;
+  transition: color 200ms ease;
   white-space: nowrap;
 }
 
-/* Hover: Metin rengi koyu yeşile (#1a5c3a) döner, hafif hit-area zemin rengi belirir */
+/* Hover: Sadece metin rengi koyu yeşile (#1a5c3a) döner, arka plan kutusu ASLA yok */
 .nav-link:hover {
   color: #1a5c3a;
-  background-color: rgba(26, 92, 58, 0.06);
+  background-color: transparent !important;
 }
 
-/* Aktif Sayfa: Her zaman koyu yeşil (#1a5c3a), kalın metin ve hafif zemin */
+/* Aktif Sayfa: Tek ve net gösterge. Sadece koyu yeşil metin ve alt çizgi, kutu yok */
 .nav-link.active {
   color: #1a5c3a;
   font-weight: 600;
-  background-color: rgba(26, 92, 58, 0.07);
+  background-color: transparent !important;
 }
 
-/* Soldan sağa doğru yumuşakça beliren alt çizgi (underline slide-in) */
+/* SADECE ALT ÇİZGİ: Yeşil (#1a5c3a), ince (2px), menü metninin genişliğinde */
 .nav-link::after {
   content: "";
   position: absolute;
   bottom: 0px;
-  left: 10px;
-  right: 10px;
-  height: 2.5px;
+  left: 18px;
+  right: 18px;
+  height: 2px;
   background-color: #1a5c3a;
-  border-radius: 2px;
+  border-radius: 1px;
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform 180ms cubic-bezier(0.25, 1, 0.5, 1), opacity 150ms ease;
+  transition: transform 220ms cubic-bezier(0.25, 1, 0.5, 1), opacity 180ms ease;
   opacity: 0;
 }
 
-/* Hover durumunda alt çizgi soldan sağa kayarak tam genişliğe ulaşır */
+/* Hover durumunda alt çizgi soldan sağa kayarak yumuşakça belirir */
 .nav-link:hover::after {
   transform: scaleX(1);
   opacity: 1;
 }
 
-/* Aktif sayfada alt çizgi her zaman sabittir */
+/* Aktif sayfada alt çizgi her zaman sabittir ve tam geniştir */
 .nav-link.active::after {
   transform: scaleX(1);
   opacity: 1;
 }
 
-@media (max-width: 1160px) {
+/* 4) "Teklif Al" Butonu: Köşe yuvarlaklığı sitenin birincil butonlarıyla (var(--radius)) birebir tutarlı */
+.nav-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 22px;
+  background: var(--color-accent);
+  color: #FFFFFF;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  white-space: nowrap;
+  margin-left: 28px;
+}
+
+.nav-cta-btn:hover {
+  background: var(--color-accent-dark);
+  color: #FFFFFF;
+  transform: translate(2px, 2px);
+  box-shadow: -2px -2px 0px rgba(0, 0, 0, 0.1) inset;
+}
+
+.nav-cta-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: -4px -4px 0px rgba(0, 0, 0, 0.15) inset;
+}
+
+/* 5) Responsive Hamburger ve Mobil Perde Kontrolleri */
+.site-header-mobile-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.mobile-hamburger-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-border);
+  color: var(--color-line);
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.mobile-hamburger-btn:hover {
+  background: #FFFFFF;
+  border-color: var(--color-accent);
+}
+
+.mobile-quick-cta {
+  padding: 10px 18px !important;
+  font-size: 12.5px !important;
+  letter-spacing: 0.04em !important;
+}
+
+/* Mobil Menü Perdesi */
+.mobile-nav-overlay {
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color-bg);
+  z-index: 49;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto;
+  border-top: 1px solid var(--color-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.mobile-nav-links-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mobile-nav-cta-wrap {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Breakpoint düzenlemeleri: 1024px - 1240px arası ferah kalmasını sağlar */
+@media (min-width: 1024px) and (max-width: 1240px) {
+  .site-header-inner {
+    padding: 10px 24px;
+    gap: 16px;
+  }
+  .header-logo {
+    margin-right: 12px;
+  }
+  .logo-title-row {
+    font-size: 20px;
+  }
+  .logo-slogan {
+    font-size: 10px;
+  }
   .desktop-nav {
-    gap: 3px;
+    gap: 4px;
   }
   .nav-link {
-    padding: 7px 10px;
+    padding: 8px 12px;
     font-size: 14px;
   }
   .nav-link::after {
-    left: 8px;
-    right: 8px;
+    left: 12px;
+    right: 12px;
+  }
+  .nav-cta-btn {
+    margin-left: 16px;
+    padding: 9px 16px;
+    font-size: 12.5px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hide-mobile-tablet {
+    display: none !important;
+  }
+  .site-header-inner {
+    min-height: 76px;
+    padding: 10px 24px;
+    gap: 16px;
+  }
+  .mobile-nav-overlay {
+    top: 76px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-header-mobile-controls {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .site-header-inner {
+    min-height: 70px;
+    padding: 8px 16px;
+    gap: 8px;
+  }
+  .header-logo {
+    margin-right: 0 !important;
+    min-width: 0;
+  }
+  .mobile-quick-cta {
+    display: none !important;
+  }
+  .mobile-nav-overlay {
+    top: 70px;
+  }
+  .logo-emblem-img {
+    height: 36px;
+  }
+  .logo-title-row {
+    font-size: 17px;
+  }
+  .logo-slogan {
+    font-size: 8.5px;
+    letter-spacing: 0.01em;
+  }
+  .logo-lockup {
+    gap: 8px;
+  }
+  .site-header-mobile-controls {
+    gap: 0;
+    flex-shrink: 0;
+  }
+  .mobile-hamburger-btn {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
   }
 }
 

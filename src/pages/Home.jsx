@@ -20,7 +20,6 @@ import {
   Trophy,
 } from "@phosphor-icons/react";
 import { SERVICES, PROCESS, PROJECTS } from "../data/content";
-import ContactForm from "../components/ContactForm";
 import { REFERENCES } from "../data/references";
 import { useInView } from "../hooks/useInView";
 import PictureImage from "../components/PictureImage";
@@ -1312,9 +1311,9 @@ export default function Home() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1.15fr",
-            gap: "clamp(40px, 6vw, 72px)",
-            alignItems: "flex-start",
+            gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1.05fr)",
+            gap: "clamp(36px, 5vw, 64px)",
+            alignItems: "center",
           }}
           className="grid-responsive"
         >
@@ -1335,9 +1334,9 @@ export default function Home() {
 
             <h2
               style={{
-                fontSize: "clamp(34px, 4.8vw, 50px)",
-                margin: "0 0 20px",
-                lineHeight: 1.05,
+                fontSize: "clamp(30px, 4vw, 44px)",
+                margin: "0 0 16px",
+                lineHeight: 1.1,
                 textTransform: "uppercase",
                 letterSpacing: "-0.02em",
               }}
@@ -1346,12 +1345,12 @@ export default function Home() {
               <span style={{ color: "var(--color-accent)" }}>Fiyat Teklifi Alın</span>
             </h2>
 
-            <p style={{ color: "var(--color-line-dim)", fontSize: 16, lineHeight: 1.7, maxWidth: "42ch", marginBottom: 32 }}>
+            <p style={{ color: "var(--color-line-dim)", fontSize: 15, lineHeight: 1.65, maxWidth: "44ch", marginBottom: 22 }}>
               Saha ölçümleri, zemin analizleri ve projenize özel anahtar teslim maliyet planı için uzman mühendis ekibimiz en geç 24 saat içinde sizinle iletişime geçer.
             </p>
 
             {/* Güven Güvenceleri */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 36 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, fontWeight: 600, color: "var(--color-line)" }}>
                 <CheckCircle size={18} color="var(--color-accent)" weight="fill" />
                 <span>Ücretsiz Yerinde Keşif & Lazerli Kot Ölçümü</span>
@@ -1365,57 +1364,89 @@ export default function Home() {
                 <span>1988'den Beri Aynı Adreste Kesintisiz Kurumsal Garanti</span>
               </div>
             </div>
-
-            {/* Doğrudan İletişim Kutusu */}
-            <div
-              style={{
-                padding: "18px 20px",
-                background: "var(--color-bg-soft)",
-                border: "1px solid var(--color-border)",
-                display: "inline-flex",
-                flexDirection: "column",
-                gap: 4,
-              }}
-            >
-              <span style={{ fontSize: 12, color: "var(--color-line-dim)", fontWeight: 600 }}>
-                Doğrudan Mühendislik Hattı
-              </span>
-              <a
-                href="tel:02163998770"
-                style={{
-                  fontSize: 18,
-                  fontWeight: 700,
-                  color: "var(--color-accent)",
-                  textDecoration: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 8,
-                }}
-              >
-                <PhoneCall size={18} weight="bold" />
-                +90 (216) 399 87 70
-              </a>
-            </div>
           </div>
 
-          {/* Sağ: İletişim & Teklif Formu */}
+          {/* Sağ: Güçlü Çağrı Kartı */}
           <div
             style={{
               background: "var(--color-card)",
               border: "1px solid var(--color-border)",
-              padding: "clamp(24px, 4vw, 40px)",
+              padding: "clamp(32px, 4vw, 44px)",
               boxShadow: "var(--shadow-card)",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
             }}
           >
-            <div style={{ marginBottom: 20 }}>
-              <div style={{ fontSize: 18, fontWeight: 700, color: "var(--color-line)", marginBottom: 4 }}>
-                Hızlı Keşif Formu
-              </div>
-              <div style={{ fontSize: 13, color: "var(--color-line-dim)" }}>
-                İletişim ve saha detaylarınızı iletin, projenizi birlikte planlayalım.
-              </div>
+            <h3
+              style={{
+                fontFamily: "'General Sans', sans-serif",
+                fontSize: "clamp(22px, 2.5vw, 26px)",
+                fontWeight: 700,
+                color: "var(--color-line)",
+                margin: "0 0 12px",
+                letterSpacing: "-0.01em",
+              }}
+            >
+              Projenizi Birlikte Planlayalım
+            </h3>
+
+            <p
+              style={{
+                fontSize: 15,
+                lineHeight: 1.6,
+                color: "var(--color-line-dim)",
+                margin: "0 0 24px",
+              }}
+            >
+              Formu doldurun ya da doğrudan arayın, en geç 24 saat içinde dönüş yapalım.
+            </p>
+
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 12,
+              }}
+            >
+              <Link
+                to="/iletisim"
+                className="btn-primary"
+                style={{
+                  width: "100%",
+                  justifyContent: "center",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                  fontSize: 14,
+                  fontWeight: 700,
+                  padding: "16px 24px",
+                  textAlign: "center",
+                }}
+              >
+                <span>Ücretsiz Teklif Al</span>
+                <ArrowRight size={18} weight="bold" />
+              </Link>
+
+              <a
+                href="tel:+902163110994"
+                className="btn-secondary"
+                style={{
+                  width: "100%",
+                  justifyContent: "center",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                  fontSize: 14,
+                  fontWeight: 700,
+                  padding: "16px 24px",
+                  textAlign: "center",
+                }}
+              >
+                <PhoneCall size={18} weight="bold" color="var(--color-accent)" />
+                <span>0 (216) 311 09 94</span>
+              </a>
             </div>
-            <ContactForm />
           </div>
         </div>
       </section>

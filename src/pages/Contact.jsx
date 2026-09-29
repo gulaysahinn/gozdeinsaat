@@ -634,7 +634,7 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  <ContactForm />
+                  <ContactForm variant="full" source="İletişim Sayfası" />
                 </div>
               </ScrollReveal>
 

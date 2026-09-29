@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { List, X } from "@phosphor-icons/react";
 
 const links = [
@@ -14,6 +14,7 @@ const links = [
 export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -21,137 +22,124 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close mobile drawer on route navigation
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location.pathname]);
+
+  // Lock body scroll and listen for Escape key when mobile menu is open
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    if (mobileOpen) {
+      window.addEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
   return (
     <>
-      <header
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 50,
-          height: 76,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "0 32px",
-          background: scrolled
-            ? "rgba(250, 250, 248, 0.88)"
-            : "rgba(250, 250, 248, 0.96)",
-          backdropFilter: scrolled ? "blur(12px) saturate(1.2)" : "blur(4px)",
-          WebkitBackdropFilter: scrolled
-            ? "blur(12px) saturate(1.2)"
-            : "blur(4px)",
-          borderBottom: `1px solid ${
-            scrolled ? "var(--color-border)" : "transparent"
-          }`,
-          transition:
-            "background 0.3s, border-color 0.3s, backdrop-filter 0.3s",
-        }}
-      >
-        {/* Logo */}
-        <Link
-          to="/"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            textDecoration: "none",
-            flexShrink: 0,
-          }}
-          aria-label="Gözde İnşaat — Spor Sahaları Yapımı ve Yenileme"
-        >
-          <img
-            src={`${import.meta.env.BASE_URL}images/logo.png`}
-            alt="Gözde İnşaat — Spor Sahaları Yapımı ve Yenileme"
-            style={{
-              height: 52,
-              width: "auto",
-              display: "block",
-              objectFit: "contain",
-            }}
-          />
-        </Link>
-
-        {/* Desktop Nav */}
-        <nav className="desktop-nav hide-mobile" aria-label="Ana Menü">
-          {links.map((l) => (
-            <NavLink
-              key={l.to}
-              to={l.to}
-              end={l.to === "/"}
-              className={({ isActive }) =>
-                `nav-link ${isActive ? "active" : ""}`
-              }
-            >
-              {l.label}
-            </NavLink>
-          ))}
-        </nav>
-
-        {/* Right side: dark toggle + CTA + hamburger */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-
-          <Link to="/iletisim" className="btn-primary hide-mobile">
-            Teklif Al
+      <header className={`site-header ${scrolled ? "scrolled" : ""}`}>
+        <div className="site-header-inner">
+          {/* 1) Logo: Amblem + Gözdeİnşaat Dikey Hizalama & Okunabilir Slogan */}
+          <Link
+            to="/"
+            className="header-logo"
+            aria-label="Gözde İnşaat — Spor Sahaları Yapımı ve Yenileme"
+          >
+            <div className="logo-lockup">
+              <img
+                src={`${import.meta.env.BASE_URL}images/logo-emblem.png`}
+                alt="Gözde İnşaat Amblem"
+                className="logo-emblem-img"
+              />
+              <div className="logo-text-col">
+                <div className="logo-title-row">
+                  <span className="logo-brand-gozde">Gözde</span>
+                  <span className="logo-brand-insaat">İnşaat</span>
+                </div>
+                <span className="logo-slogan">
+                  Spor Sahaları Yapımı ve Yenileme
+                </span>
+              </div>
+            </div>
           </Link>
 
-          {/* Hamburger */}
-          <button
-            className="hide-desktop hide-tablet"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Menüyü aç"
-            style={{
-              width: 36,
-              height: 36,
-              borderRadius: 10,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              background: "var(--color-bg-soft)",
-              border: "1px solid var(--color-border)",
-            }}
-          >
-            {mobileOpen ? (
-              <X size={20} weight="bold" color="var(--color-line)" />
-            ) : (
-              <List size={20} weight="bold" color="var(--color-line)" />
-            )}
-          </button>
+          {/* 2 & 4) Masaüstü Menü ve Ayrıştırılmış 'Teklif Al' Butonu */}
+          <div className="site-header-right hide-mobile-tablet">
+            <nav className="desktop-nav" aria-label="Ana Menü">
+              {links.map((l) => (
+                <NavLink
+                  key={l.to}
+                  to={l.to}
+                  end={l.to === "/"}
+                  className={({ isActive }) =>
+                    `nav-link ${isActive ? "active" : ""}`
+                  }
+                >
+                  {l.label}
+                </NavLink>
+              ))}
+            </nav>
+
+            <Link to="/iletisim" className="nav-cta-btn">
+              Teklif Al
+            </Link>
+          </div>
+
+          {/* 5) Tablet ve Mobil Kontrolleri (Hamburger + Tablet CTA) */}
+          <div className="site-header-mobile-controls hide-desktop">
+            <Link
+              to="/iletisim"
+              className="btn-primary mobile-quick-cta hide-mobile"
+            >
+              Teklif Al
+            </Link>
+            <button
+              className="mobile-hamburger-btn"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? "Menüyü kapat" : "Menüyü aç"}
+              aria-expanded={mobileOpen}
+            >
+              {mobileOpen ? (
+                <X size={22} weight="bold" />
+              ) : (
+                <List size={22} weight="bold" />
+              )}
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobil Menü Perdesi */}
       {mobileOpen && (
-        <div
-          style={{
-            position: "fixed",
-            top: 76,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: "var(--color-bg)",
-            zIndex: 49,
-            padding: "24px 20px",
-            display: "flex",
-            flexDirection: "column",
-            gap: 8,
-          }}
-        >
-          {links.map((l) => (
-            <NavLink
-              key={l.to}
-              to={l.to}
-              end={l.to === "/"}
-              onClick={() => setMobileOpen(false)}
-              className={({ isActive }) =>
-                `mobile-nav-link ${isActive ? "active" : ""}`
-              }
-            >
-              <span>{l.label}</span>
-              <span className="mobile-nav-arrow" aria-hidden="true">
-                →
-              </span>
-            </NavLink>
-          ))}
-          <div style={{ marginTop: 16 }}>
+        <div className="mobile-nav-overlay">
+          <div className="mobile-nav-links-wrap">
+            {links.map((l) => (
+              <NavLink
+                key={l.to}
+                to={l.to}
+                end={l.to === "/"}
+                onClick={() => setMobileOpen(false)}
+                className={({ isActive }) =>
+                  `mobile-nav-link ${isActive ? "active" : ""}`
+                }
+              >
+                <span>{l.label}</span>
+                <span className="mobile-nav-arrow" aria-hidden="true">
+                  →
+                </span>
+              </NavLink>
+            ))}
+          </div>
+          <div className="mobile-nav-cta-wrap">
             <Link
               to="/iletisim"
               onClick={() => setMobileOpen(false)}
