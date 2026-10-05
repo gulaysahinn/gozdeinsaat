@@ -323,7 +323,7 @@ function WideProjectCard({ project, onImageClick }) {
                   boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
                 }}
               >
-                <PictureImage loading="lazy" src={imgUrl} alt={`Fotoğraf ${i + 1}`} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
+                <PictureImage loading="lazy" src={imgUrl} alt={`${project.name || project.title || "Gözde İnşaat spor sahası"} projesi detay fotoğrafı ${i + 1}`} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
               </button>
             ))}
           </div>
@@ -525,7 +525,7 @@ function CompactProjectCard({ project, onImageClick }) {
                   transition: "all 0.2s ease",
                 }}
               >
-                <PictureImage loading="lazy" src={imgUrl} alt={`Fotoğraf ${i + 1}`} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
+                <PictureImage loading="lazy" src={imgUrl} alt={`${project.name || project.title || "Gözde İnşaat spor sahası"} projesi detay fotoğrafı ${i + 1}`} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
               </button>
             ))}
           </div>
@@ -1460,7 +1460,7 @@ export default function Projects() {
               boxShadow: "0 10px 40px rgba(0,0,0,0.5)",
               borderRadius: 8
             }}
-            alt="Büyütülmüş Görsel"
+            alt="Gözde İnşaat spor sahası projesi detay fotoğrafı"
           />
           <div style={{ position: "absolute", top: 20, right: 30, color: "white", fontSize: 36, fontWeight: "bold", cursor: "pointer" }}>&times;</div>
         </div>

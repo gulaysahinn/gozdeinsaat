@@ -18,6 +18,9 @@ import {
   PhoneCall,
   Compass,
   Trophy,
+  CaretDown,
+  CaretUp,
+  Question,
 } from "@phosphor-icons/react";
 import { SERVICES, PROCESS, PROJECTS } from "../data/content";
 import { REFERENCES } from "../data/references";
@@ -91,8 +94,36 @@ const HOME_FEATURED_REFS = [
   },
 ];
 
+const HOME_FAQS = [
+  {
+    q: "Bir spor sahasının anahtar teslim yapımı ortalama ne kadar sürer?",
+    a: "Açık tenis kortu, basketbol veya voleybol sahalarının hafriyat, drenaj, hatıl betonu, tel çit ve zemin kaplama süreci hava şartlarına bağlı olarak ortalama 2 ila 4 hafta arasında tamamlanır. Kapalı çelik konstrüksiyonlu sahalarda ise bu süre 4 ila 6 haftadır.",
+  },
+  {
+    q: "Saha inşaatında hangi zemin türünü tercih etmeliyim?",
+    a: "Kullanım amacına ve bütçeye göre belirlenir: Tenis için ITF onaylı Akrilik veya Tartan (EPDM); basketbol ve voleybol için darbe emici cushion akrilik veya poliüretan; halı saha için FIFA normlarında sentetik çim; çok amaçlı sahalar için ise hem dayanıklı hem renkli çizgi uygulamasına uygun akrilik veya EPDM tartan zemin önerilir.",
+  },
+  {
+    q: "Ücretsiz yerinde keşif hizmetiniz neleri kapsar?",
+    a: "Uzman mühendis ekibimiz İstanbul ve çevre illerde sahanın yapılacağı alanı ziyaret ederek zemin tesviyesi, kot farkları, yağmur suyu drenaj eğimi, rüzgâr yönü, çevre emniyeti ve elektrik altyapısını yerinde inceler. Ardından projenize özel mimari plan ve detaylı birim fiyatlı keşif raporu sunulur.",
+  },
+  {
+    q: "Yapılan sahalar uluslararası federasyon standartlarına uygun mudur?",
+    a: "Evet. Tüm sahalarımız ITF (Uluslararası Tenis Federasyonu), FIBA (Basketbol) ve FIFA (Futbol) standartlarına ve nizami oyun alanı kaçış mesafelerine harfiyen uygun olarak projelendirilir ve inşa edilir.",
+  },
+  {
+    q: "Mevcut yıpranmış veya çatlak zeminler için yenileme yapıyor musunuz?",
+    a: "Evet. Yıpranmış, çatlaklı veya kayganlaşmış sahalarda yüzey frezeleme ve taşlama, poliüretan mastik çatlak tamiri, astar ve yeni akrilik / EPDM kaplama yapılarak saha ilk günkü performansına kavuşturulur.",
+  },
+  {
+    q: "Anahtar teslim spor sahası paketinde neler yer alır?",
+    a: "Altyapı drenajı, çevre hatıl betonu, asfalt/beton taşıyıcı zemin, 4m yüksekliğinde PVC kaplı galvaniz tel çit, profesyonel LED projektör aydınlatma, zemin kaplaması, nizami çizgiler ve tüm spor ekipmanları (direk, file, pota, kale vb.) eksiksiz teslim edilir.",
+  },
+];
+
 export default function Home() {
   const [heroLoaded, setHeroLoaded] = useState(false);
+  const [openFaq, setOpenFaq] = useState(null);
   const [processRef, processInView] = useInView({ threshold: 0.2 });
 
   useEffect(() => {
@@ -103,6 +134,19 @@ export default function Home() {
   // Hizmetleri ayrıştır: Tenis Kortu öne çıkan hizmet, diğer 4 hizmet tamamlayıcı
   const featuredService = SERVICES[0]; // Tenis Kortu
   const otherServices = SERVICES.slice(1); // Basketbol, Voleybol, Çok Amaçlı, Halı Saha
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: HOME_FAQS.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
 
   return (
     <div style={{ background: "var(--color-bg)", color: "var(--color-line)" }}>
@@ -117,6 +161,22 @@ export default function Home() {
           content="tenis kortu yapımı, basketbol sahası yapımı, voleybol sahası yapımı, spor sahası yapımı, halı saha yapımı, kort inşaatı, İstanbul spor sahası"
         />
         <link rel="canonical" href="https://www.gozdeinsaat.com/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Spor Sahası ve Kort İnşaatı | Gözde İnşaat" />
+        <meta
+          property="og:description"
+          content="Tenis kortu, basketbol sahası, voleybol sahası ve halı saha yapımında anahtar teslim mühendislik çözümleri. 1988'den beri 500+ proje."
+        />
+        <meta property="og:url" content="https://www.gozdeinsaat.com/" />
+        <meta property="og:image" content="https://www.gozdeinsaat.com/images/hizmetler/tenisKortuYapimi.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Spor Sahası ve Kort İnşaatı | Gözde İnşaat" />
+        <meta
+          name="twitter:description"
+          content="Tenis kortu, basketbol sahası, voleybol sahası ve halı saha yapımında anahtar teslim mühendislik."
+        />
+        <meta name="twitter:image" content="https://www.gozdeinsaat.com/images/hizmetler/tenisKortuYapimi.jpg" />
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
 
       {/* ── 1. HERO SECTION ────────────────────────────────────────────── */}
@@ -1296,6 +1356,132 @@ export default function Home() {
             >
               110 Kurumun Listesi <ArrowRight size={14} weight="bold" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5.5. SIKÇA SORULAN SORULAR (SSS) ────────────────────────────── */}
+      <section
+        style={{
+          background: "var(--color-bg-soft)",
+          borderTop: "1px solid var(--color-border)",
+          borderBottom: "1px solid var(--color-border)",
+          paddingTop: "clamp(60px, 8vw, 96px)",
+          paddingBottom: "clamp(60px, 8vw, 96px)",
+        }}
+      >
+        <div className="page-wrap" style={{ maxWidth: 960 }}>
+          <div style={{ textAlign: "center", marginBottom: "clamp(36px, 5vw, 52px)" }}>
+            <div
+              style={{
+                fontSize: 12,
+                fontWeight: 700,
+                color: "var(--color-accent)",
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+                marginBottom: 8,
+              }}
+            >
+              MERAK EDİLENLER
+            </div>
+            <h2
+              style={{
+                fontSize: "clamp(28px, 3.8vw, 42px)",
+                margin: "0 0 14px",
+                lineHeight: 1.15,
+                textTransform: "uppercase",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              Sıkça Sorulan Sorular
+            </h2>
+            <p style={{ margin: "0 auto", color: "var(--color-line-dim)", fontSize: 15, maxWidth: "56ch" }}>
+              Spor sahası inşaatı, zemin seçimleri, keşif süreci ve maliyetler hakkında en sık karşılaştığımız soruları yanıtladık.
+            </p>
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {HOME_FAQS.map((item, i) => {
+              const isOpen = openFaq === i;
+              return (
+                <div
+                  key={i}
+                  style={{
+                    border: `1px solid ${isOpen ? "var(--color-accent)" : "var(--color-border)"}`,
+                    background: "var(--color-card)",
+                    borderRadius: "var(--radius, 8px)",
+                    overflow: "hidden",
+                    transition: "border-color 0.2s ease, box-shadow 0.2s ease",
+                    boxShadow: isOpen ? "var(--shadow-md)" : "var(--shadow-sm)",
+                  }}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaq(isOpen ? null : i)}
+                    aria-expanded={isOpen}
+                    style={{
+                      width: "100%",
+                      padding: "18px 22px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      background: isOpen ? "var(--color-bg)" : "transparent",
+                      border: "none",
+                      cursor: "pointer",
+                      textAlign: "left",
+                      gap: 16,
+                      color: "inherit",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: "'General Sans', sans-serif",
+                        fontSize: "clamp(15px, 1.8vw, 17px)",
+                        fontWeight: 600,
+                        color: isOpen ? "var(--color-accent)" : "var(--color-line)",
+                        letterSpacing: "-0.01em",
+                      }}
+                    >
+                      {item.q}
+                    </span>
+                    <span
+                      style={{
+                        width: 28,
+                        height: 28,
+                        borderRadius: "50%",
+                        background: isOpen ? "var(--color-accent)" : "var(--color-bg-soft)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                        transition: "background 0.2s",
+                      }}
+                    >
+                      {isOpen ? (
+                        <CaretUp size={16} color="#ffffff" weight="bold" />
+                      ) : (
+                        <CaretDown size={16} color="var(--color-line-dim)" weight="bold" />
+                      )}
+                    </span>
+                  </button>
+
+                  {isOpen && (
+                    <div
+                      style={{
+                        padding: "16px 22px 22px",
+                        color: "var(--color-line-dim)",
+                        fontSize: 14.5,
+                        lineHeight: 1.75,
+                        borderTop: "1px solid var(--color-border)",
+                        background: "var(--color-card)",
+                      }}
+                    >
+                      {item.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

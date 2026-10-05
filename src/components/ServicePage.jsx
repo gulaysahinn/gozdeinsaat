@@ -157,7 +157,31 @@ export default function ServicePage({
     ? service.forWho.replace(/\s*·\s*/g, ", ")
     : "Spor kulüpleri, butik oteller, eğitim kurumları ve prestijli site projeleri";
 
-  // Yalnızca props'dan gelen costFactors'ı kullanacağız.
+  const canonicalUrl = service.to
+    ? `https://www.gozdeinsaat.com${service.to}`
+    : "https://www.gozdeinsaat.com/hizmetler";
+
+  const ogImageUrl = service.image
+    ? service.image.startsWith("http")
+      ? service.image
+      : `https://www.gozdeinsaat.com${service.image.startsWith("/") ? "" : "/"}${service.image}`
+    : "https://www.gozdeinsaat.com/images/hizmetler/tenisKortuYapimi.jpg";
+
+  const faqSchema =
+    faq && faq.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faq.map((item) => ({
+            "@type": "Question",
+            name: item.q,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.a,
+            },
+          })),
+        }
+      : null;
 
   return (
     <div style={{ background: "var(--color-bg)", color: "var(--color-line)" }}>
@@ -167,6 +191,28 @@ export default function ServicePage({
           name="description"
           content={`${service.title} yapımında 1988'den beri anahtar teslim mühendislik. ${service.desc}`}
         />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={canonicalUrl} />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={`${service.title} Yapımı ve Fiyatları | Gözde İnşaat`} />
+        <meta property="og:description" content={`${service.title} yapımında 1988'den beri anahtar teslim mühendislik. ${service.desc}`} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={ogImageUrl} />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${service.title} Yapımı ve Fiyatları | Gözde İnşaat`} />
+        <meta name="twitter:description" content={`${service.title} yapımında 1988'den beri anahtar teslim mühendislik. ${service.desc}`} />
+        <meta name="twitter:image" content={ogImageUrl} />
+
+        {/* FAQPage JSON-LD Structured Data */}
+        {faqSchema && (
+          <script type="application/ld+json">
+            {JSON.stringify(faqSchema)}
+          </script>
+        )}
       </Helmet>
 
       {/* ── 1. HERO BÖLÜMÜ ──────────────────────────────────────────────── */}

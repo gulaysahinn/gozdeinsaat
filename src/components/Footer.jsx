@@ -325,17 +325,51 @@ export default function Footer() {
           justifyContent: "space-between",
           alignItems: "center",
           flexWrap: "wrap",
-          gap: 8,
+          gap: 12,
           fontSize: 12,
           color: "var(--color-line-dim)",
         }}
       >
-        <span>
-          © {new Date().getFullYear()} Gözde İnşaat. Tüm hakları saklıdır. {" | "}
-          <Link to="/hizmetler/gizlilik-politikasi" style={{ color: "var(--color-line-dim)", textDecoration: "none" }}>
+        <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: 10 }}>
+          <span>© {new Date().getFullYear()} Gözde İnşaat. Tüm hakları saklıdır.</span>
+          <span>•</span>
+          <Link
+            to="/gizlilik-politikasi"
+            style={{ color: "var(--color-line-dim)", textDecoration: "none" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-accent)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-line-dim)")}
+          >
             Gizlilik Politikası (KVKK)
           </Link>
-        </span>
+          <span>•</span>
+          <Link
+            to="/kullanim-sartlari"
+            style={{ color: "var(--color-line-dim)", textDecoration: "none" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-accent)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-line-dim)")}
+          >
+            Kullanım Şartları
+          </Link>
+          <span>•</span>
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent("gozde:open-cookie-settings"))}
+            style={{
+              background: "none",
+              border: "none",
+              padding: 0,
+              font: "inherit",
+              fontSize: 12,
+              color: "var(--color-line-dim)",
+              cursor: "pointer",
+              textDecoration: "underline",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-accent)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-line-dim)")}
+          >
+            Çerez Tercihleri
+          </button>
+        </div>
         <span style={{ fontSize: 11, fontWeight: 500 }}>
           Tenis Kortu | Basketbol Sahası | Voleybol Sahası | Halı Saha | Çok Amaçlı Saha
         </span>

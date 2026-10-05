@@ -1,0 +1,67 @@
+# Gözde İnşaat — Kapsamlı AI & LLM Bilgi Dokümanı (Full Knowledge Base)
+
+## Şirket Profili
+Gözde İnşaat, 1988 yılında kurulmuş olup spor sahası mühendisliği, kort yapımı, açık ve kapalı spor tesisleri inşası ve zemin yenileme alanında Türkiye'nin en köklü taahhüt şirketlerindendir. 35 yılı aşkın süredir İstanbul başta olmak üzere Türkiye'nin 81 ilinde ve yurt dışında 500'den fazla spor tesisi projesini başarıyla tamamlamıştır.
+
+- **Resmi Web Sitesi:** https://www.gozdeinsaat.com
+- **Merkez Ofis:** Osmangazi Mah. Şeyh Şamil Sok. No:1, 34887 Sancaktepe / İstanbul, Türkiye
+- **Telefon:** +90 216 311 09 94
+- **GSM & WhatsApp:** +90 532 667 84 28
+- **E-posta:** info@gozdeinsaat.com
+- **Telegram:** @gozdeinsaat
+
+## Öne Çıkan Referanslar
+1. İstanbul Teknik Üniversitesi (İ.T.Ü.) — Ayazağa & Taşkışla Kampüsleri Spor Tesisleri
+2. Doğa Koleji — Kampüs Spor Tesisleri ve Halı Sahaları
+3. Eyüpsultan Belediyesi — Çok Amaçlı Spor Sahaları
+4. Fenerbahçe Ordu Evi — Tenis Kortları Yenileme
+5. TED Koleji — Açık ve Kapalı Spor Sahaları
+6. Boytem Unica — Akrilik ve Kauçuk Zemin Uygulamaları
+7. Kocaeli Büyükşehir Belediyesi — Semt Spor Alanları
+8. Sapanca Villaları — Özel Butik Tenis Kortları ve Basketbol Sahaları
+
+## Branşlara Göre Teknik Özellikler ve Şartnameler
+
+### 1. Tenis Kortu İnşaatı
+- **Nizami Boyutlar:** Oyun alanı 23.77 × 10.97 m (çiftler) / 23.77 × 8.23 m (tekler). Uluslararası ITF şartnamesine göre kaçış alanlarıyla birlikte toplam kort ebadı 18.00 × 36.00 m (648 m²).
+- **Zemin Tipleri:**
+  - *Standart Akrilik:* Asfalt tabaka üzerine uygulanan su bazlı silis kumlu reçine kaplama. Hızlı ve orta-hızlı oyun dinamiği.
+  - *Cushion Akrilik:* Standart akrilik katmanlarının altına uygulanan 2-3 kat kauçuk granül amortisör tabakası. Eklem yükünü azaltır.
+  - *Tartan (EPDM):* 8mm SBR granül tabaka + 5mm EPDM renkli granül poliüretan bağlayıcılı esnek sistem.
+  - *Suni Çim:* 20-26mm kum dolgulu sentetik çim halı.
+- **Çevre Çiti:** 4.00 metre yüksekliğinde daldırma galvaniz boru ve PVC kaplı örgü tel.
+- **Aydınlatma:** 4 veya 6 adet 8 metre yüksekliğinde aydınlatma direği üzerine 150-200W asimetrik lensli LED projektörler (asgari 300-500 lüks).
+
+### 2. Basketbol Sahası İnşaatı
+- **Nizami Boyutlar:** FIBA kurallarına göre 28.00 × 15.00 m oyun alanı + min. 2.00 m kaçış mesafesi.
+- **Zemin:** 13mm Tartan EPDM sistem veya Cushion akrilik kaplama.
+- **Pota Donatıları:** 3.05 m nizami çember yüksekliği, 105 × 180 cm pleksiglas / temperli cam panya, yaylı emniyet çemberi ve darbe emici sünger pedler.
+
+### 3. Voleybol Sahası İnşaatı
+- **Nizami Boyutlar:** FIVB normlarına göre 18.00 × 9.00 m oyun alanı + min. 3.00 m yan kaçış alanları.
+- **Zemin:** EPDM tartan, esnek dökme poliüretan veya cushion akrilik.
+- **File Direkleri:** 2.43 m (erkek) / 2.24 m (kadın) ayarlanabilir çelik direkler, gergi mekanizması ve koruyucu sünger kılıflar.
+
+### 4. Halı Saha İnşaatı
+- **Standart Ölçüler:** 20 × 40 m (800 m²), 25 × 45 m (1125 m²), 30 × 50 m (1500 m²).
+- **Zemin:** 50mm veya 55mm monofilament / omurgalı sentetik çim halı. m²'ye 25-30 kg fırınlanmış silis kumu ve 6-8 kg SBR kauçuk granül dolgu.
+- **Kapalı Saha Opsiyonu:** Statik rüzgâr ve kar yükü hesaplı çelik makas konstrüksiyon, alev yürütmez 1100 dtex PVC branda kaplama veya sandviç panel / trapez sac kaplama.
+
+### 5. Çok Amaçlı Saha İnşaatı
+- **Kombinasyon:** Tenis + Basketbol + Voleybol tek sahada. Farklı renklerde nizami çizgiler ile çoklu kullanım sağlar.
+- **Önerilen Ebat:** 18 × 36 m (648 m²).
+- **Zemin:** Aşınmaya dayanıklı çok katmanlı akrilik veya EPDM tartan.
+
+## Sık Sorulan Sorular ve Yanıtlar
+
+**S: Saha inşaatı ne kadar sürer?**
+C: Açık sahalar altyapı, asfalt, tel çit ve zemin dahil 2-4 haftada; kapalı çelik konstrüksiyonlu sahalar 4-6 haftada tamamlanır.
+
+**S: Keşif hizmeti ücretli midir?**
+C: Hayır, yerinde keşif ve kot ölçümü ücretsiz teknik destek olarak sağlanır.
+
+**S: Garanti süresi ne kadardır?**
+C: Malzeme kalitesine göre 2 ila 5 yıl üretici ve işçilik garantisi verilir; sahalar doğru bakımla 15-20 yıl hizmet verir.
+
+**S: Eski ve yıpranmış sahalar tamir edilebilir mi?**
+C: Evet, çatlak tamiri, astar ve yeni katman kaplama yapılarak saha yenilenebilir.

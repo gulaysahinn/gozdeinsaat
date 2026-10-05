@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ChatCircleDots, X, WhatsappLogo, TelegramLogo } from "@phosphor-icons/react";
+import { ChatCircleDots, X, WhatsappLogo, TelegramLogo, Phone } from "@phosphor-icons/react";
 
 export default function FloatingContact() {
   const [isOpen, setIsOpen] = useState(false);
@@ -142,16 +142,14 @@ export default function FloatingContact() {
       >
         <div className="sub-btn-container">
           <a
-            href="https://t.me/gozdeinsaat"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="tel:+902163110994"
             className="sub-btn"
-            style={{ background: "#0088cc" }}
-            aria-label="Telegram"
+            style={{ background: "#C85A32" }}
+            aria-label="Telefonla Arayın"
           >
-            <TelegramLogo size={24} weight="fill" />
+            <Phone size={24} weight="fill" />
           </a>
-          <div className="sub-btn-tooltip">Telegram'dan Yazın</div>
+          <div className="sub-btn-tooltip">Hemen Arayın: 0 (216) 311 09 94</div>
         </div>
 
         <div className="sub-btn-container">
@@ -166,6 +164,20 @@ export default function FloatingContact() {
             <WhatsappLogo size={24} weight="fill" />
           </a>
           <div className="sub-btn-tooltip">WhatsApp'tan Yazın</div>
+        </div>
+
+        <div className="sub-btn-container">
+          <a
+            href="https://t.me/gozdeinsaat"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="sub-btn"
+            style={{ background: "#0088cc" }}
+            aria-label="Telegram"
+          >
+            <TelegramLogo size={24} weight="fill" />
+          </a>
+          <div className="sub-btn-tooltip">Telegram'dan Yazın</div>
         </div>
       </div>
 

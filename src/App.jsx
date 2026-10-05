@@ -1,9 +1,11 @@
-import { lazy, Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import FloatingContact from "./components/FloatingContact";
+import PrivacyNotice from "./components/PrivacyNotice";
+import { initAnalytics, trackPageView } from "./services/siteMetrics";
 
 // Sayfa bazlı code-splitting (Lazy loading)
 const Home = lazy(() => import("./pages/Home"));
@@ -20,6 +22,8 @@ const VoleybolSahasi = lazy(() => import("./pages/VoleybolSahasi"));
 const CokAmacliSaha = lazy(() => import("./pages/CokAmacliSaha"));
 const HaliSaha = lazy(() => import("./pages/HaliSaha"));
 const GizlilikPolitikasi = lazy(() => import("./pages/GizlilikPolitikasi"));
+const KullanimSartlari = lazy(() => import("./pages/KullanimSartlari"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 function PageLoader() {
   return (
@@ -40,11 +44,25 @@ function PageLoader() {
 }
 
 export default function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    initAnalytics();
+  }, []);
+
+  useEffect(() => {
+    trackPageView(location.pathname);
+  }, [location.pathname]);
+
   return (
     <div className="app-wrapper" style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      {/* Erişilebilirlik (A11y) Skip Link */}
+      <a href="#main-content" className="skip-link">
+        Ana İçeriğe Atla
+      </a>
       <ScrollToTop />
       <Nav />
-      <main className="main-content" style={{ flex: "1 0 auto", width: "100%", position: "relative" }}>
+      <main id="main-content" className="main-content" style={{ flex: "1 0 auto", width: "100%", position: "relative" }}>
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -53,7 +71,8 @@ export default function App() {
             <Route path="/hakkimizda" element={<About />} />
             <Route path="/iletisim" element={<Contact />} />
             <Route path="/referanslar" element={<References />} />
-            {/* Hizmet alt sayfaları */}
+
+            {/* Hizmet detay sayfaları */}
             <Route path="/hizmetler/tenis-kortu-yapimi" element={<TenisKortu />} />
             <Route path="/hizmetler/tartan-zemin-tenis-kortu-yapimi" element={<TartanTenisKortu />} />
             <Route path="/hizmetler/sentetik-cim-tenis-kortu-yapimi" element={<SentetikCimTenisKortu />} />
@@ -61,12 +80,30 @@ export default function App() {
             <Route path="/hizmetler/voleybol-sahasi-yapimi" element={<VoleybolSahasi />} />
             <Route path="/hizmetler/cok-amacli-saha-yapimi" element={<CokAmacliSaha />} />
             <Route path="/hizmetler/hali-saha-yapimi" element={<HaliSaha />} />
-            <Route path="/hizmetler/gizlilik-politikasi" element={<GizlilikPolitikasi />} />
+
+            {/* URL Yönlendirmeleri (Eski sitemap ve dış bağlantı koruması) */}
+            <Route path="/tenis-kortu-yapimi" element={<Navigate to="/hizmetler/tenis-kortu-yapimi" replace />} />
+            <Route path="/basketbol-sahasi-yapimi" element={<Navigate to="/hizmetler/basketbol-sahasi-yapimi" replace />} />
+            <Route path="/voleybol-sahasi-yapimi" element={<Navigate to="/hizmetler/voleybol-sahasi-yapimi" replace />} />
+            <Route path="/cok-amacli-saha-yapimi" element={<Navigate to="/hizmetler/cok-amacli-saha-yapimi" replace />} />
+            <Route path="/hali-saha-yapimi" element={<Navigate to="/hizmetler/hali-saha-yapimi" replace />} />
+            <Route path="/tartan-zemin-tenis-kortu-yapimi" element={<Navigate to="/hizmetler/tartan-zemin-tenis-kortu-yapimi" replace />} />
+            <Route path="/sentetik-cim-tenis-kortu-yapimi" element={<Navigate to="/hizmetler/sentetik-cim-tenis-kortu-yapimi" replace />} />
+
+            {/* Yasal Sayfalar */}
+            <Route path="/gizlilik-politikasi" element={<GizlilikPolitikasi />} />
+            <Route path="/hizmetler/gizlilik-politikasi" element={<Navigate to="/gizlilik-politikasi" replace />} />
+            <Route path="/kullanim-sartlari" element={<KullanimSartlari />} />
+            <Route path="/hizmetler/kullanim-sartlari" element={<Navigate to="/kullanim-sartlari" replace />} />
+
+            {/* Özel 404 Sayfası */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </main>
       <FloatingContact />
       <Footer />
+      <PrivacyNotice />
     </div>
   );
 }

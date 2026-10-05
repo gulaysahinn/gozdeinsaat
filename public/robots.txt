@@ -1,4 +1,6 @@
+# Robots.txt for Gözde İnşaat (https://www.gozdeinsaat.com)
 User-agent: *
 Allow: /
 
+# Sitemap
 Sitemap: https://www.gozdeinsaat.com/sitemap.xml
