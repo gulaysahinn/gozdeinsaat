@@ -2,8 +2,9 @@ import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
-export default defineConfig({
-  base: '/',
+export default defineConfig(({ mode }) => ({
+  // GitHub Pages için '/gozdeinsaat/', canlı kök alan adı (gozdeinsaat.com) için '/'
+  base: process.env.VITE_BASE || '/gozdeinsaat/',
   plugins: [react()],
   build: {
     rollupOptions: {
@@ -15,4 +16,4 @@ export default defineConfig({
       }
     }
   }
-})
+}))
