@@ -21,6 +21,8 @@ export default function ContactForm({
     email: "",
     subject: "",
     message: "",
+    kvkkAccepted: false,
+    honeypot: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -28,8 +30,8 @@ export default function ContactForm({
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    let finalValue = value;
+    const { name, value, type, checked } = e.target;
+    let finalValue = type === "checkbox" ? checked : value;
 
     if (name === "phone") {
       finalValue = formatPhoneNumber(value);
@@ -50,7 +52,18 @@ export default function ContactForm({
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Spam bot koruması (Honeypot)
+    if (formData.honeypot) {
+      console.warn("Spam submission blocked.");
+      setStatus("success");
+      return;
+    }
+
     const validationErrors = validateForm(formData, isCompact);
+    if (!formData.kvkkAccepted) {
+      validationErrors.kvkkAccepted = "Lütfen devam etmek için KVKK metnini onaylayınız.";
+    }
+
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       // Focus first error field
@@ -385,6 +398,73 @@ export default function ContactForm({
           )}
         </div>
       )}
+
+      {/* KVKK Onay Kutusu */}
+      <div style={{ marginTop: 4 }}>
+        <div style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+          <input
+            type="checkbox"
+            id={`${idPrefix}-kvkk`}
+            name="kvkkAccepted"
+            checked={formData.kvkkAccepted}
+            onChange={handleChange}
+            style={{
+              marginTop: 3,
+              cursor: "pointer",
+              width: 16,
+              height: 16,
+              accentColor: "var(--color-accent)",
+              flexShrink: 0,
+            }}
+            aria-invalid={errors.kvkkAccepted ? "true" : "false"}
+            aria-describedby={errors.kvkkAccepted ? `${idPrefix}-kvkk-error` : undefined}
+          />
+          <label
+            htmlFor={`${idPrefix}-kvkk`}
+            style={{
+              fontSize: 12,
+              lineHeight: 1.5,
+              color: "var(--color-line-dim)",
+              cursor: "pointer",
+              margin: 0,
+            }}
+          >
+            <Link
+              to="/gizlilik-politikasi"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: "var(--color-accent)",
+                textDecoration: "underline",
+                fontWeight: 600,
+              }}
+            >
+              KVKK Aydınlatma Metni
+            </Link>
+            'ni okudum, kişisel verilerimin bu kapsamda işlenmesini onaylıyorum. <span style={{ color: "var(--color-warm)" }}>*</span>
+          </label>
+        </div>
+        {errors.kvkkAccepted && (
+          <div
+            id={`${idPrefix}-kvkk-error`}
+            style={{ color: "var(--color-danger)", fontSize: 12, marginTop: 4, fontWeight: 500 }}
+          >
+            {errors.kvkkAccepted}
+          </div>
+        )}
+      </div>
+
+      {/* Honeypot Spam Tuzağı */}
+      <div style={{ display: "none" }} aria-hidden="true">
+        <input
+          type="text"
+          name="honeypot"
+          tabIndex="-1"
+          autoComplete="off"
+          value={formData.honeypot}
+          onChange={handleChange}
+        />
+      </div>
 
       {/* Gönder Butonu */}
       <button

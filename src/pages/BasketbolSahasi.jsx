@@ -74,7 +74,7 @@ export default function BasketbolSahasi() {
           name: "Tenis Kortu",
           to: "/hizmetler/tenis-kortu-yapimi",
           image: `${import.meta.env.BASE_URL}images/hizmetler/tenisKortuYapimi.jpg`,
-          spec: "18 × 36 m (ITF Normu)",
+          spec: "Nizami & Projeye Özel Ebatlar",
           desc: "Akrilik ve EPDM zeminli açık ve çelik konstrüksiyon kapalı tenis kortları.",
         },
         {
@@ -88,7 +88,7 @@ export default function BasketbolSahasi() {
           name: "Voleybol Sahası",
           to: "/hizmetler/voleybol-sahasi-yapimi",
           image: `${import.meta.env.BASE_URL}images/projeler/ankaraincekdogakoleji.jpg`,
-          spec: "18 × 9 m (FIVB Normu)",
+          spec: "Nizami & Projeye Özel Ebatlar",
           desc: "Teleskopik yüksekliği ayarlanabilir direkler ve elastik zeminli voleybol kortları.",
         },
         {
@@ -127,8 +127,8 @@ export default function BasketbolSahasi() {
           a: "Potalar, hatıl beton aşamasında zemine gömülen ankraj flanşlarına çelik cıvatalarla sabitlenir. 10–12 mm temperli cam panya ve yaylı esnek çemberler kullanılarak resmi standartlara tam uyum sağlanır.",
         },
         {
-          q: "Basketbol sahası yapımı kaç günde tamamlanır?",
-          a: "Hava şartlarına ve altyapı hazırlığına bağlı olarak standart bir açık basketbol sahası ortalama 2–4 hafta içinde anahtar teslim olarak teslim edilir.",
+          q: "Basketbol sahası yapımı ne kadar sürer?",
+          a: "Hava şartlarına, arazinin zemin durumuna ve proje kapsamına bağlı olarak keşif sonrası hazırlanan takvim doğrultusunda planlı ve en hızlı şekilde anahtar teslim edilir.",
         },
       ]}
     />

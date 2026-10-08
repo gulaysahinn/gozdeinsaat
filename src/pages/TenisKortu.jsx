@@ -109,7 +109,7 @@ export default function TenisKortu() {
           name: "Basketbol Sahası",
           to: "/hizmetler/basketbol-sahasi-yapimi",
           image: `${import.meta.env.BASE_URL}images/hizmetler/basketbolSahasi.jpg`,
-          spec: "28 × 15 m (FIBA Normu)",
+          spec: "FIBA Standartları & Projeye Özel",
           desc: "Akrilik ve EPDM kauçuk zeminli, hidrolik potalı açık ve kapalı basketbol sahaları.",
         },
         {
@@ -123,14 +123,14 @@ export default function TenisKortu() {
           name: "Voleybol Sahası",
           to: "/hizmetler/voleybol-sahasi-yapimi",
           image: `${import.meta.env.BASE_URL}images/projeler/ankaraincekdogakoleji.jpg`,
-          spec: "18 × 9 m (FIVB Normu)",
+          spec: "FIVB Standartları & Projeye Özel",
           desc: "Teleskopik yüksekliği ayarlanabilir direkler ve elastik zeminli voleybol kortları.",
         },
         {
           name: "Halı Saha",
           to: "/hizmetler/hali-saha-yapimi",
           image: `${import.meta.env.BASE_URL}images/hizmetler/haliSaha.jpg`,
-          spec: "55 mm Sentetik Çim",
+          spec: "FIFA Kalite Standartları",
           desc: "FIFA kalite standartlarında açık ve çelik konstrüksiyon kapalı ticari halı sahalar.",
         },
       ]}
@@ -159,7 +159,7 @@ export default function TenisKortu() {
         },
         {
           q: "Standart bir tenis kortu yapımı ortalama ne kadar sürer?",
-          a: "Hava şartlarına ve arazi altyapı durumuna bağlı olarak standart 18×36 m ebadındaki tenis kortu projeleri hafriyattan çizgi boyasına kadar ortalama 3–4 hafta içinde anahtar teslim olarak tamamlanmaktadır.",
+          a: "Hava şartlarına ve arazi altyapı durumuna bağlı olarak tenis kortu projeleri, hafriyattan çizgi boyasına kadar yerinde keşif sonrası hazırlanan takvime uygun olarak en kısa sürede anahtar teslim tamamlanmaktadır.",
         },
         {
           q: "Akrilik zemin ile Tartan (EPDM) zemin arasındaki temel fark nedir?",

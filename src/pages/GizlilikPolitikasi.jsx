@@ -62,7 +62,7 @@ export default function GizlilikPolitikasi() {
               aşağıda açıklanan kapsam ve şartlarda işlenmektedir.
             </p>
             <ul style={{ marginTop: 10, paddingLeft: 20, display: "flex", flexDirection: "column", gap: 6 }}>
-              <li><strong>Firma Unvanı:</strong> Gözde İnşaat Spor Sahaları Yapımı</li>
+              <li><strong>Firma Unvanı:</strong> Gözde İnşaat Spor Sahaları Yapımı ve Yenileme Hizmetleri</li>
               <li><strong>Adres:</strong> Osmangazi Mah. Şeyh Şamil Sok. No:1, 34887 Sancaktepe / İstanbul</li>
               <li><strong>E-posta:</strong> info@gozdeinsaat.com</li>
               <li><strong>Telefon:</strong> 0 (216) 311 09 94 / 0 (532) 667 84 28</li>

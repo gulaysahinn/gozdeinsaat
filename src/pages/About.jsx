@@ -20,7 +20,7 @@ const STATS_DATA = [
   { 
     value: "1988", 
     label: "Kuruluş Yılı", 
-    note: "35+ Yıllık Kesintisiz Tecrübe",
+    note: "38 Yıllık Kesintisiz Tecrübe",
     icon: CalendarCheck
   },
   { 
@@ -92,6 +92,10 @@ const CORE_STANDARDS = [
     title: "Zamanında ve Eksiksiz Teslim",
     desc: "İş sözleşmesinde taahhüt edilen imalat takvimine sadık kalarak projeleri zamanında ve eksiksiz anahtar teslim sonlandırmak.",
   },
+  {
+    title: "Eksiksiz Müşteri Memnuniyeti",
+    desc: "İş bitiminde koşulsuz müşteri memnuniyetini sağlamış olmak ve güvenilir marka imajını korumak.",
+  },
 ];
 
 export default function About() {
@@ -101,7 +105,7 @@ export default function About() {
         <title>Hakkımızda | 1988'den Bu Yana Spor Sahası İnşaatı | Gözde İnşaat</title>
         <meta
           name="description"
-          content="Gözde İnşaat, 1988'den bu yana açık ve kapalı spor tesisi yapımında faaliyet göstermektedir. 35+ yıllık deneyim, yüzlerce tamamlanan saha, TSE ve uluslararası federasyon standartlarında anahtar teslim mühendislik."
+          content="Gözde İnşaat, 1988'den bu yana açık ve kapalı spor tesisi yapımında faaliyet göstermektedir. 38 yıllık deneyim, yüzlerce tamamlanan saha, TSE ve uluslararası federasyon standartlarında anahtar teslim mühendislik."
         />
         <link rel="canonical" href="https://www.gozdeinsaat.com/hakkimizda" />
       </Helmet>

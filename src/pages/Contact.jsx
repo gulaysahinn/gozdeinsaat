@@ -69,7 +69,7 @@ const GUVENCELER = [
     Icon: CalendarCheck,
   },
   {
-    rakam: "35+",
+    rakam: "38",
     baslik: "Yıllık Tecrübe",
     aciklama: "Uzman mühendis, tekniker ve sertifikalı uygulama kadrosu",
     Icon: ShieldCheck,

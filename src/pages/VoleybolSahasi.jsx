@@ -74,14 +74,14 @@ export default function VoleybolSahasi() {
           name: "Tenis Kortu",
           to: "/hizmetler/tenis-kortu-yapimi",
           image: `${import.meta.env.BASE_URL}images/hizmetler/tenisKortuYapimi.jpg`,
-          spec: "18 × 36 m (ITF Normu)",
+          spec: "Nizami & Projeye Özel Ebatlar",
           desc: "Akrilik ve EPDM zeminli açık ve çelik konstrüksiyon kapalı tenis kortları.",
         },
         {
           name: "Basketbol Sahası",
           to: "/hizmetler/basketbol-sahasi-yapimi",
           image: `${import.meta.env.BASE_URL}images/hizmetler/basketbolSahasi.jpg`,
-          spec: "28 × 15 m (FIBA Normu)",
+          spec: "Nizami & Projeye Özel Ebatlar",
           desc: "Akrilik ve EPDM kauçuk zeminli, hidrolik potalı açık ve kapalı basketbol sahaları.",
         },
         {
@@ -128,7 +128,7 @@ export default function VoleybolSahasi() {
         },
         {
           q: "Voleybol sahası yapımı ne kadar sürer?",
-          a: "Altyapı hazırlandıktan sonra zemin kaplaması ve ekipman montajı ortalama 2–3 hafta içinde anahtar teslim tamamlanır.",
+          a: "Altyapı hazırlığı, zemin kaplaması ve ekipman montajı hava şartlarına ve arazi yapısına bağlı olarak keşif sonrası hazırlanan iş programına göre planlı ve en hızlı şekilde anahtar teslim tamamlanır.",
         },
       ]}
     />

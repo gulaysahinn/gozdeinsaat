@@ -82,6 +82,22 @@ export default function App() {
             <Route path="/hizmetler/hali-saha-yapimi" element={<HaliSaha />} />
 
             {/* URL Yönlendirmeleri (Eski sitemap ve dış bağlantı koruması) */}
+            <Route path="/hizmetlerimiz" element={<Navigate to="/hizmetler" replace />} />
+            <Route path="/referanslarimiz" element={<Navigate to="/referanslar" replace />} />
+            <Route path="/galeri" element={<Navigate to="/projeler" replace />} />
+            <Route path="/gizlilik-politikamiz" element={<Navigate to="/gizlilik-politikasi" replace />} />
+            <Route path="/index.php" element={<Navigate to="/" replace />} />
+
+            {/* Eski WordPress Blog / Hizmet Yazıları */}
+            <Route path="/spor-sahalari/tenis-kortu-yapimi-ve-ozellikleri" element={<Navigate to="/hizmetler/tenis-kortu-yapimi" replace />} />
+            <Route path="/spor-sahalari/tenis-kortu-saha-ve-zemin-cesitleri" element={<Navigate to="/hizmetler/tenis-kortu-yapimi" replace />} />
+            <Route path="/spor-sahalari/akrilik-zemin-tenis-kortu-yapimi" element={<Navigate to="/hizmetler/tenis-kortu-yapimi" replace />} />
+            <Route path="/spor-sahalari/sentetik-cim-tenis-kortu-yapimi" element={<Navigate to="/hizmetler/sentetik-cim-tenis-kortu-yapimi" replace />} />
+            <Route path="/spor-sahalari/tartan-zemin-tenis-kortu-yapimi" element={<Navigate to="/hizmetler/tartan-zemin-tenis-kortu-yapimi" replace />} />
+            <Route path="/spor-sahalari/basketbol-sahasi-yapimi-ve-zemin-cesitleri" element={<Navigate to="/hizmetler/basketbol-sahasi-yapimi" replace />} />
+            <Route path="/spor-sahalari/hali-saha-yapimi-ve-zemin-cesitleri" element={<Navigate to="/hizmetler/hali-saha-yapimi" replace />} />
+            <Route path="/spor-sahalari/cok-amacli-saha-yapimi-ve-zemin-cesitleri" element={<Navigate to="/hizmetler/cok-amacli-saha-yapimi" replace />} />
+
             <Route path="/tenis-kortu-yapimi" element={<Navigate to="/hizmetler/tenis-kortu-yapimi" replace />} />
             <Route path="/basketbol-sahasi-yapimi" element={<Navigate to="/hizmetler/basketbol-sahasi-yapimi" replace />} />
             <Route path="/voleybol-sahasi-yapimi" element={<Navigate to="/hizmetler/voleybol-sahasi-yapimi" replace />} />

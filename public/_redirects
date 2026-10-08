@@ -1,0 +1,33 @@
+# Eski WordPress Sayfa Yönlendirmeleri (301)
+/hizmetlerimiz/ /hizmetler 301
+/hizmetlerimiz /hizmetler 301
+/referanslarimiz/ /referanslar 301
+/referanslarimiz /referanslar 301
+/galeri/ /projeler 301
+/galeri /projeler 301
+/gizlilik-politikamiz/ /gizlilik-politikasi 301
+/gizlilik-politikamiz /gizlilik-politikasi 301
+/index.php / 301
+
+# Eski WordPress Blog / Hizmet Yazıları Yönlendirmeleri (301)
+/spor-sahalari/tenis-kortu-yapimi-ve-ozellikleri/ /hizmetler/tenis-kortu-yapimi 301
+/spor-sahalari/tenis-kortu-yapimi-ve-ozellikleri /hizmetler/tenis-kortu-yapimi 301
+/spor-sahalari/tenis-kortu-saha-ve-zemin-cesitleri/ /hizmetler/tenis-kortu-yapimi 301
+/spor-sahalari/tenis-kortu-saha-ve-zemin-cesitleri /hizmetler/tenis-kortu-yapimi 301
+/spor-sahalari/akrilik-zemin-tenis-kortu-yapimi/ /hizmetler/tenis-kortu-yapimi 301
+/spor-sahalari/akrilik-zemin-tenis-kortu-yapimi /hizmetler/tenis-kortu-yapimi 301
+/spor-sahalari/sentetik-cim-tenis-kortu-yapimi/ /hizmetler/sentetik-cim-tenis-kortu-yapimi 301
+/spor-sahalari/sentetik-cim-tenis-kortu-yapimi /hizmetler/sentetik-cim-tenis-kortu-yapimi 301
+/spor-sahalari/tartan-zemin-tenis-kortu-yapimi/ /hizmetler/tartan-zemin-tenis-kortu-yapimi 301
+/spor-sahalari/tartan-zemin-tenis-kortu-yapimi /hizmetler/tartan-zemin-tenis-kortu-yapimi 301
+/spor-sahalari/basketbol-sahasi-yapimi-ve-zemin-cesitleri/ /hizmetler/basketbol-sahasi-yapimi 301
+/spor-sahalari/basketbol-sahasi-yapimi-ve-zemin-cesitleri /hizmetler/basketbol-sahasi-yapimi 301
+/spor-sahalari/hali-saha-yapimi-ve-zemin-cesitleri/ /hizmetler/hali-saha-yapimi 301
+/spor-sahalari/hali-saha-yapimi-ve-zemin-cesitleri /hizmetler/hali-saha-yapimi 301
+/spor-sahalari/cok-amacli-saha-yapimi-ve-zemin-cesitleri/ /hizmetler/cok-amacli-saha-yapimi 301
+/spor-sahalari/cok-amacli-saha-yapimi-ve-zemin-cesitleri /hizmetler/cok-amacli-saha-yapimi 301
+/spor-sahalari/* /hizmetler 301
+/category/* /hizmetler 301
+
+# SPA Tek Sayfa Uygulaması (Sayfa yenilemede 404 çıkmaması için fallback)
+/* /index.html 200

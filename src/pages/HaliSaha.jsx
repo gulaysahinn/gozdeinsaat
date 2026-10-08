@@ -74,14 +74,14 @@ export default function HaliSaha() {
           name: "Tenis Kortu",
           to: "/hizmetler/tenis-kortu-yapimi",
           image: `${import.meta.env.BASE_URL}images/hizmetler/tenisKortuYapimi.jpg`,
-          spec: "18 × 36 m (ITF Normu)",
+          spec: "Nizami & Projeye Özel Ebatlar",
           desc: "Akrilik ve EPDM zeminli açık ve çelik konstrüksiyon kapalı tenis kortları.",
         },
         {
           name: "Basketbol Sahası",
           to: "/hizmetler/basketbol-sahasi-yapimi",
           image: `${import.meta.env.BASE_URL}images/hizmetler/basketbolSahasi.jpg`,
-          spec: "28 × 15 m (FIBA Normu)",
+          spec: "Nizami & Projeye Özel Ebatlar",
           desc: "Akrilik ve EPDM kauçuk zeminli, hidrolik potalı açık ve kapalı basketbol sahaları.",
         },
         {
@@ -95,7 +95,7 @@ export default function HaliSaha() {
           name: "Voleybol Sahası",
           to: "/hizmetler/voleybol-sahasi-yapimi",
           image: `${import.meta.env.BASE_URL}images/projeler/ankaraincekdogakoleji.jpg`,
-          spec: "18 × 9 m (FIVB Normu)",
+          spec: "Nizami & Projeye Özel Ebatlar",
           desc: "Teleskopik yüksekliği ayarlanabilir direkler ve elastik zeminli voleybol kortları.",
         },
       ]}
@@ -127,8 +127,8 @@ export default function HaliSaha() {
           a: "FIFA 1 Star ve FIFA 2 Star standartlarında en üst düzey sahalarda; 60mm monofilament ve omurgalı halı yapısı, halı altına keçe yerine şokped serimi, metrekare başına 14–15 kg/m² granül dolgusu ve güneş ışınlarına dayanıklı yeşil veya gri EPDM granül kullanımı gerekmektedir.",
         },
         {
-          q: "Sipariş edilen sentetik çim ne kadar sürede teslim edilir?",
-          a: "Gözde İnşaat güvencesiyle sipariş edilen sentetik çim maksimum 2 hafta içinde teslim edilir. Bu süreçte altyapı hazırlığı ve çevre hatıl imalatı tamamlanarak zaman kaybı önlenir.",
+          q: "Halı saha yapımı ve çim montajı ne kadar sürer?",
+          a: "Altyapı hazırlığı, çevre hatıl betonu ve sentetik çim serimi koordineli olarak yürütülür; keşif sonrası hazırlanan iş takvimine uygun şekilde planlı ve en hızlı sürede anahtar teslim tamamlanır.",
         },
         {
           q: "Halı saha sentetik çim bakımı nasıl yapılır?",

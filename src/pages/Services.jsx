@@ -380,11 +380,11 @@ export default function Services() {
                   <div style={{ display: "flex", alignItems: "center", gap: 24, fontSize: 13, color: "var(--color-line-dim)", borderTop: "1px solid var(--color-border)", paddingTop: 10 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
                       <Ruler size={16} color="var(--color-accent)" />
-                      <span>Standart Ölçü: <strong>18 × 36 m (648 m²)</strong></span>
+                      <span>Ölçü: <strong>Nizami & Projeye Özel</strong></span>
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
                       <Clock size={16} color="var(--color-accent)" />
-                      <span>Teslimat Süresi: <strong>3–4 Hafta</strong></span>
+                      <span>Teslimat: <strong>Hızlı & Planlı Teslim</strong></span>
                     </div>
                   </div>
                 </div>
@@ -581,11 +581,11 @@ export default function Services() {
                   <div style={{ display: "flex", alignItems: "center", gap: 24, fontSize: 13, color: "var(--color-line-dim)", borderTop: "1px solid var(--color-border)", paddingTop: 10 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
                       <Ruler size={16} color="var(--color-accent)" />
-                      <span>Standart Ölçü: <strong>28 × 15 m (420 m²)</strong></span>
+                      <span>Ölçü: <strong>Nizami & Projeye Özel</strong></span>
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
                       <Clock size={16} color="var(--color-accent)" />
-                      <span>Teslimat Süresi: <strong>2–4 Hafta</strong></span>
+                      <span>Teslimat: <strong>Hızlı & Planlı Teslim</strong></span>
                     </div>
                   </div>
                 </div>
@@ -869,7 +869,7 @@ export default function Services() {
                 </h2>
 
                 <p style={{ fontSize: 16, lineHeight: 1.75, color: "var(--color-line-dim)", margin: "0 0 24px" }}>
-                  Sipariş edilen sentetik çim maksimum 2 hafta içinde teslim edilir. 55 mm ve 60 mm monofilament sentetik çim teknolojisi, silis kumu ve SBR/EPDM granül dolgusuyla profesyonel maç konforu sunuyoruz. Çelik konstrüksiyon kapalı halı saha çözümlerimizle kış şartlarında dahi kesintisiz ticari işletme imkânı sağlıyoruz.
+                  Altyapı hazırlığı ve hatıl betonu imalatıyla koordineli yürütülen montaj süreciyle sahanızı en kısa sürede anahtar teslim kullanıma sunuyoruz. 55 mm ve 60 mm monofilament sentetik çim teknolojisi, silis kumu ve SBR/EPDM granül dolgusuyla profesyonel maç konforu sunuyoruz. Çelik konstrüksiyon kapalı halı saha çözümlerimizle kış şartlarında dahi kesintisiz ticari işletme imkânı sağlıyoruz.
                 </p>
 
                 {/* Bilgi Kutusu */}
@@ -894,11 +894,11 @@ export default function Services() {
                   <div style={{ display: "flex", alignItems: "center", gap: 24, fontSize: 13, color: "var(--color-line-dim)", borderTop: "1px solid var(--color-border)", paddingTop: 10 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
                       <Ruler size={16} color="var(--color-accent)" />
-                      <span>Formatlar: <strong>5'e 5, 7'ye 7 veya 11'e 11 Nizami</strong></span>
+                      <span>Formatlar: <strong>5'e 5, 7'ye 7 veya 11'e 11 Nizami & Özel</strong></span>
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
                       <Clock size={16} color="var(--color-accent)" />
-                      <span>Teslimat Süresi: <strong>4–6 Hafta</strong></span>
+                      <span>Teslimat: <strong>Hızlı & Planlı Teslim</strong></span>
                     </div>
                   </div>
                 </div>
@@ -1097,7 +1097,7 @@ export default function Services() {
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: 8, color: "var(--color-line)" }}>
                     <CheckCircle size={16} color="var(--color-accent)" weight="fill" />
-                    <span>2–3 Hafta Teslimat Süresi</span>
+                    <span>Hızlı & Planlı Teslimat Süreci</span>
                   </div>
                 </div>
 

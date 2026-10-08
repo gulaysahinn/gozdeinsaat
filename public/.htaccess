@@ -1,0 +1,62 @@
+# ==============================================================================
+# Gözde İnşaat (https://www.gozdeinsaat.com) - Apache / LiteSpeed Web Sunucusu Yapılandırması
+# ==============================================================================
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. HTTPS Yönlendirmesi (SSL Zorunlu)
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 2. www Olmayan Adresleri www'ye Yönlendirme (Kanonik Domain: www.gozdeinsaat.com)
+  RewriteCond %{HTTP_HOST} ^gozdeinsaat\.com$ [NC]
+  RewriteRule ^(.*)$ https://www.gozdeinsaat.com/$1 [L,R=301]
+
+  # 3. Eski WordPress URL'leri için 301 Kalıcı Yönlendirmeler
+  # Sayfalar
+  RewriteRule ^hizmetlerimiz/?$ /hizmetler [R=301,L]
+  RewriteRule ^referanslarimiz/?$ /referanslar [R=301,L]
+  RewriteRule ^galeri/?$ /projeler [R=301,L]
+  RewriteRule ^gizlilik-politikamiz/?$ /gizlilik-politikasi [R=301,L]
+  RewriteRule ^index\.php$ / [R=301,L]
+
+  # Blog / Hizmet Yazıları
+  RewriteRule ^spor-sahalari/tenis-kortu-yapimi-ve-ozellikleri/?$ /hizmetler/tenis-kortu-yapimi [R=301,L]
+  RewriteRule ^spor-sahalari/tenis-kortu-saha-ve-zemin-cesitleri/?$ /hizmetler/tenis-kortu-yapimi [R=301,L]
+  RewriteRule ^spor-sahalari/akrilik-zemin-tenis-kortu-yapimi/?$ /hizmetler/tenis-kortu-yapimi [R=301,L]
+  RewriteRule ^spor-sahalari/sentetik-cim-tenis-kortu-yapimi/?$ /hizmetler/sentetik-cim-tenis-kortu-yapimi [R=301,L]
+  RewriteRule ^spor-sahalari/tartan-zemin-tenis-kortu-yapimi/?$ /hizmetler/tartan-zemin-tenis-kortu-yapimi [R=301,L]
+  RewriteRule ^spor-sahalari/basketbol-sahasi-yapimi-ve-zemin-cesitleri/?$ /hizmetler/basketbol-sahasi-yapimi [R=301,L]
+  RewriteRule ^spor-sahalari/hali-saha-yapimi-ve-zemin-cesitleri/?$ /hizmetler/hali-saha-yapimi [R=301,L]
+  RewriteRule ^spor-sahalari/cok-amacli-saha-yapimi-ve-zemin-cesitleri/?$ /hizmetler/cok-amacli-saha-yapimi [R=301,L]
+  RewriteRule ^category/.*$ /hizmetler [R=301,L]
+
+  # 4. SPA (Single Page Application) Fallback Kuralı - Sayfa yenilemede 404 önleme
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+
+# Güvenlik ve Önbellek Başlıkları
+<IfModule mod_headers.c>
+  # Statik dosyalar için uzun vadeli tarayıcı önbelleği (1 yıl)
+  <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|webp|avif|js|css|swf|woff|woff2|ttf|svg)$">
+    Header set Cache-Control "max-age=31536000, public"
+  </FilesMatch>
+  # HTML ve JSON için dinamik önbellek (her zaman doğrula)
+  <FilesMatch "\.(html|htm|json)$">
+    Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+  </FilesMatch>
+  # Güvenlik Başlıkları
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Gzip / Brotli Sıkıştırma
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml
+</IfModule>

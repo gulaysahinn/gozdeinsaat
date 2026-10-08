@@ -29,7 +29,7 @@ export default function TartanTenisKortu() {
         "Uluslararası standartlara uygunluk (ITF, FIBA, FIFA)"
       ]}
       faq={[
-        { q: "Saha yapımı ortalama ne kadar sürer?", a: "Hava koşullarına ve altyapı durumuna bağlı olarak standart saha projeleri ortalama 3-4 hafta içinde anahtar teslim olarak tamamlanmaktadır." },
+        { q: "Saha yapımı ortalama ne kadar sürer?", a: "Hava koşullarına, zemin durumuna ve proje büyüklüğüne bağlı olarak keşif sonrası hazırlanan takvime uygun şekilde planlı ve en hızlı sürede anahtar teslim tamamlanmaktadır." },
         { q: "Bakım ve onarım hizmeti veriyor musunuz?", a: "Evet, tamamladığımız projelerde garanti süresince ve sonrasında zemin yenileme, periyodik bakım hizmetlerimiz mevcuttur." },
         { q: "Ücretsiz keşif hizmetiniz var mı?", a: "Türkiye genelinde projelendirme aşamasında alan analizi ve ücretsiz keşif desteği sağlıyoruz." }
       ]}

@@ -97,7 +97,7 @@ const HOME_FEATURED_REFS = [
 const HOME_FAQS = [
   {
     q: "Bir spor sahasının anahtar teslim yapımı ortalama ne kadar sürer?",
-    a: "Açık tenis kortu, basketbol veya voleybol sahalarının hafriyat, drenaj, hatıl betonu, tel çit ve zemin kaplama süreci hava şartlarına bağlı olarak ortalama 2 ila 4 hafta arasında tamamlanır. Kapalı çelik konstrüksiyonlu sahalarda ise bu süre 4 ila 6 haftadır.",
+    a: "Açık ve kapalı sahaların hafriyat, drenaj, hatıl betonu, tel çit ve zemin kaplama süreci; arazinin mevcut zemin yapısına, projenin büyüklüğüne ve hava şartlarına göre keşif sonrasında hazırlanan detaylı iş takvimine göre planlanır ve taahhüt edilen sürede en hızlı şekilde anahtar teslim tamamlanır.",
   },
   {
     q: "Saha inşaatında hangi zemin türünü tercih etmeliyim?",
@@ -356,10 +356,10 @@ export default function Home() {
                 }}
               >
                 <div style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "rgba(255,255,255,0.7)", marginBottom: 2 }}>
-                  RESMİ KORT EBATLARI
+                  PROFESYONEL TENİS KORTU
                 </div>
                 <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: "0.02em" }}>
-                  18 × 36 m · Cushion Akrilik Zemin
+                  Nizami Standartlar · Akrilik Zemin Kaplama
                 </div>
               </div>
 
@@ -1072,10 +1072,10 @@ export default function Home() {
           {PROJECTS.slice(0, 3).map((p, idx) => {
             // Anlamlı projeye özgü etiketler
             const meaningfulTags = [
-              { label: "Sentetik Çim · 1.500 m²", badge: "FIFA Normu" },
-              { label: "Sentetik Çim · 800 m²", badge: "Tel Örgü & LED" },
-              { label: "Cushion Akrilik · 420 m²", badge: "FIBA Normu" },
-            ][idx] || { label: "Profesyonel Saha", badge: "Standart Norm" };
+              { label: "Açık Halı Saha · Sentetik Çim", badge: "FIFA Normu" },
+              { label: "Kampüs Spor Sahası · Sentetik Çim", badge: "Tel Örgü & LED" },
+              { label: "Basketbol & Tenis · Akrilik Zemin", badge: "FIBA & ITF Normu" },
+            ][idx] || { label: "Profesyonel Spor Sahası", badge: "TSE Standartlı" };
 
             return (
               <div

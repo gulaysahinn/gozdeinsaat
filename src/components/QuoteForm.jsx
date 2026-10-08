@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { CheckCircle, WarningCircle, PaperPlaneTilt, WhatsappLogo } from "@phosphor-icons/react";
 import { submitInquiry, formatPhoneNumber, isValidTurkishPhone } from "../services/formService";
 
@@ -9,14 +10,16 @@ export default function QuoteForm({ serviceName = "" }) {
     city: "",
     service: serviceName || "",
     details: "",
+    kvkkAccepted: false,
+    honeypot: "",
   });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | loading | success | error
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    let finalValue = value;
+    const { name, value, type, checked } = e.target;
+    let finalValue = type === "checkbox" ? checked : value;
 
     if (name === "phone") {
       finalValue = formatPhoneNumber(value);
@@ -36,6 +39,13 @@ export default function QuoteForm({ serviceName = "" }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Bot koruması (Honeypot)
+    if (formData.honeypot) {
+      console.warn("Spam submission blocked.");
+      setStatus("success");
+      return;
+    }
+
     const newErrors = {};
     if (!formData.name || formData.name.trim().length < 2) {
       newErrors.name = "Lütfen adınızı veya kurum adınızı giriniz.";
@@ -45,6 +55,9 @@ export default function QuoteForm({ serviceName = "" }) {
     }
     if (!formData.service && !serviceName) {
       newErrors.service = "Lütfen ilgilendiğiniz hizmeti seçiniz.";
+    }
+    if (!formData.kvkkAccepted) {
+      newErrors.kvkkAccepted = "Lütfen devam etmek için KVKK metnini onaylayınız.";
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -319,6 +332,73 @@ export default function QuoteForm({ serviceName = "" }) {
           placeholder="Mevcut alan durumu (toprak, beton vb.), yaklaşık ölçüler veya tercih ettiğiniz zemin tipi..."
           style={{ width: "100%", resize: "vertical" }}
         ></textarea>
+      </div>
+
+      {/* KVKK Onay Kutusu */}
+      <div style={{ marginTop: 4 }}>
+        <div style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+          <input
+            type="checkbox"
+            id="quote-kvkk"
+            name="kvkkAccepted"
+            checked={formData.kvkkAccepted}
+            onChange={handleChange}
+            style={{
+              marginTop: 3,
+              cursor: "pointer",
+              width: 16,
+              height: 16,
+              accentColor: "var(--color-accent)",
+              flexShrink: 0,
+            }}
+            aria-invalid={!!errors.kvkkAccepted}
+            aria-describedby={errors.kvkkAccepted ? "quote-kvkk-error" : undefined}
+          />
+          <label
+            htmlFor="quote-kvkk"
+            style={{
+              fontSize: 12,
+              lineHeight: 1.5,
+              color: "var(--color-line-dim)",
+              cursor: "pointer",
+              margin: 0,
+            }}
+          >
+            <Link
+              to="/gizlilik-politikasi"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: "var(--color-accent)",
+                textDecoration: "underline",
+                fontWeight: 600,
+              }}
+            >
+              KVKK Aydınlatma Metni
+            </Link>
+            'ni okudum, kişisel verilerimin bu kapsamda işlenmesini onaylıyorum. <span style={{ color: "var(--color-warm, #C85A32)" }}>*</span>
+          </label>
+        </div>
+        {errors.kvkkAccepted && (
+          <span
+            id="quote-kvkk-error"
+            style={{ color: "var(--color-danger, #e74c3c)", fontSize: 12, marginTop: 4, display: "block" }}
+          >
+            {errors.kvkkAccepted}
+          </span>
+        )}
+      </div>
+
+      {/* Honeypot Spam Tuzağı */}
+      <div style={{ display: "none" }} aria-hidden="true">
+        <input
+          type="text"
+          name="honeypot"
+          tabIndex="-1"
+          autoComplete="off"
+          value={formData.honeypot}
+          onChange={handleChange}
+        />
       </div>
 
       <button
