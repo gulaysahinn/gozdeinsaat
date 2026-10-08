@@ -1,0 +1,32 @@
+{
+  "name": "Gözde İnşaat Spor Sahaları",
+  "short_name": "Gözde İnşaat",
+  "description": "Tenis kortu, basketbol sahası, voleybol sahası ve halı saha yapımında anahtar teslim mühendislik.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F0EDE6",
+  "theme_color": "#1F6B4A",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

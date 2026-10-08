@@ -1,0 +1,1 @@
+import{j as n}from"./index-B5RjZu8a.js";function r({children:i,color:e="var(--color-accent)"}){return n.jsx("span",{style:{display:"inline-block",padding:"4px 12px",fontSize:12,fontWeight:600,letterSpacing:"0.04em",color:e,background:`${e}14`,border:`1px solid ${e}33`,borderRadius:8,lineHeight:1.5},children:i})}export{r as B};
